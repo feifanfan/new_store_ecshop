@@ -1,3 +1,8 @@
+git@github.com:feifanfan/new_store_ecshop.git
+
+
+
+
 
 79.2016-09-22 优化前后台默认浏览方式为极速模式, 避免出现js错误弹窗
 
