@@ -1,18 +1,3 @@
-# HongYuJD-V7.2
-
-鸿宇版小京东
-
-唯一QQ群：90664526
-
-唯一官网：http://hongyuvip.com/
-
-唯一论坛：http://bbs.hongyuvip.com/
-
-淘宝店铺：http://hongyuweb.taobao.com/
-
-#鸿宇版小京东BUG修复列表
-
-特别鸣谢：鸿宇科技 & Shadow & 鸿宇源码 & ...蜘蛛... & 支持鸿宇的朋友
 
 79.2016-09-22 优化前后台默认浏览方式为极速模式, 避免出现js错误弹窗
 
