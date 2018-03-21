@@ -17,10 +17,10 @@ if ($this->_foreach['no']['total'] > 0):
 ?>
       <dl class="col-links <?php if (($this->_foreach['no']['iteration'] <= 1)): ?>col-links-first<?php endif; ?>">
         <dt><?php echo $this->_var['help_cat']['cat_name']; ?></dt>
-        <?php $_from = $this->_var['help_cat']['article']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_27399000_1521425960');if (count($_from)):
-    foreach ($_from AS $this->_var['item_0_27399000_1521425960']):
+        <?php $_from = $this->_var['help_cat']['article']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_18026300_1521593786');if (count($_from)):
+    foreach ($_from AS $this->_var['item_0_18026300_1521593786']):
 ?>
-        <dd><a rel="nofollow" href="help.php?id=<?php echo $this->_var['item_0_27399000_1521425960']['article_id']; ?>" target="_blank"><?php echo $this->_var['item_0_27399000_1521425960']['short_title']; ?></a></dd>
+        <dd><a rel="nofollow" href="help.php?id=<?php echo $this->_var['item_0_18026300_1521593786']['article_id']; ?>" target="_blank"><?php echo $this->_var['item_0_18026300_1521593786']['short_title']; ?></a></dd>
         <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
       </dl>
       <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
@@ -50,12 +50,12 @@ if ($this->_foreach['name']['total'] > 0):
         <?php endif; ?>
         <p class="nav_bottom">
         <?php if ($this->_var['navigator_list']['bottom']): ?>
-      <?php $_from = $this->_var['navigator_list']['bottom']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'nav_0_27499000_1521425960');$this->_foreach['nav_bottom_list'] = array('total' => count($_from), 'iteration' => 0);
+      <?php $_from = $this->_var['navigator_list']['bottom']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'nav_0_18126300_1521593786');$this->_foreach['nav_bottom_list'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['nav_bottom_list']['total'] > 0):
-    foreach ($_from AS $this->_var['nav_0_27499000_1521425960']):
+    foreach ($_from AS $this->_var['nav_0_18126300_1521593786']):
         $this->_foreach['nav_bottom_list']['iteration']++;
 ?>
-      <a href="<?php echo $this->_var['nav_0_27499000_1521425960']['url']; ?>" <?php if ($this->_var['nav_0_27499000_1521425960']['opennew'] == 1): ?>target="_blank"<?php endif; ?>><?php echo $this->_var['nav_0_27499000_1521425960']['name']; ?></a><em <?php if (($this->_foreach['nav_bottom_list']['iteration'] == $this->_foreach['nav_bottom_list']['total'])): ?>style="display:none"<?php endif; ?>>|</em>
+      <a href="<?php echo $this->_var['nav_0_18126300_1521593786']['url']; ?>" <?php if ($this->_var['nav_0_18126300_1521593786']['opennew'] == 1): ?>target="_blank"<?php endif; ?>><?php echo $this->_var['nav_0_18126300_1521593786']['name']; ?></a><em <?php if (($this->_foreach['nav_bottom_list']['iteration'] == $this->_foreach['nav_bottom_list']['total'])): ?>style="display:none"<?php endif; ?>>|</em>
          <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
       <?php endif; ?>
       <?php if ($this->_var['icp_number']): ?>

@@ -154,18 +154,18 @@ document.getElementById('vip2').style.display="none";
             </div>
             <ul id="summary">
               <script type="text/javascript">
-$(document).ready(function(){
-  var a = $("#summary").children("li");
-  var b = $("#summary"); 
-  if($(a).length > 0){ 
-		b.css({"display":"block"});
+                $(document).ready(function(){
+                  var a = $("#summary").children("li");
+                  var b = $("#summary"); 
+                  if($(a).length > 0){ 
+                		b.css({"display":"block"});
 
-	} 
-	else{ 
-		b.css({"display":"none"});
-	} 
-});
-</script> 
+                	} 
+                	else{ 
+                		b.css({"display":"none"});
+                	} 
+                });
+              </script> 
               <!-- {if $promotion} -->
               <li class="padd padd-promotion clearfix"> {foreach from=$promotion item=item key=key name=name} 
                 {if $smarty.foreach.name.first}
