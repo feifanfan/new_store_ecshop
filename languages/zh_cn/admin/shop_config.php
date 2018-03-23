@@ -161,11 +161,6 @@ $_LANG['cfg_name']['help_open'] = '用户帮助是否打开';
 $_LANG['cfg_name']['recom_rank'] = '参与分成的积分下限';
 $_LANG['cfg_name']['shop_opint'] = '地址坐标';
 
-/*edit by ff 3.19*/
-$_LANG['cfg_name']['point'] = '奖金积分参数设置';
-
-
-
 $_LANG['cfg_desc']['smtp'] = '设置邮件服务器基本参数';
 $_LANG['cfg_desc']['market_price_rate'] = '输入商品售价时将自动根据该比例计算市场价格';
 $_LANG['cfg_desc']['rewrite'] = 'URL重写是一种搜索引擎优化技术，可以将动态的地址模拟成静态的HTML文件。需要Apache的支持。';

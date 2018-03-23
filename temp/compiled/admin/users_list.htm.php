@@ -34,25 +34,25 @@
 					<a href="javascript:listTable.sort('user_name'); "><?php echo $this->_var['lang']['username']; ?></a>
 					<?php echo $this->_var['sort_user_name']; ?>
 				</th>
-				<!-- <th>
+				<th>
 					<a href="javascript:listTable.sort('email'); "><?php echo $this->_var['lang']['is_validated']; ?>&nbsp;|&nbsp;<?php echo $this->_var['lang']['email']; ?></a>
 					<?php echo $this->_var['sort_email']; ?>
-				</th> -->
+				</th>
 				<th>
-					<a href="javascript:listTable.sort('mobile_phone'); ">手机号&nbsp;|&nbsp;<?php echo $this->_var['lang']['mobile_phone']; ?></a>
+					<a href="javascript:listTable.sort('mobile_phone'); "><?php echo $this->_var['lang']['is_validated']; ?>&nbsp;|&nbsp;<?php echo $this->_var['lang']['mobile_phone']; ?></a>
 					<?php echo $this->_var['sort_mobile_phone']; ?>
 				</th>
 				<!-- #代码增加2014-12-23 by bbs.hongyuvip.com  _end -->
-				<th>收益</th>
-				<th>重消</th>
-				<th>企业币</th>
-				<!-- <th><?php echo $this->_var['lang']['pay_points']; ?></th> -->
+				<th><?php echo $this->_var['lang']['user_money']; ?></th>
+				<th><?php echo $this->_var['lang']['frozen_money']; ?></th>
+				<th><?php echo $this->_var['lang']['rank_points']; ?></th>
+				<th><?php echo $this->_var['lang']['pay_points']; ?></th>
 				<th>
 					<a href="javascript:listTable.sort('reg_time'); "><?php echo $this->_var['lang']['reg_date']; ?></a>
 					<?php echo $this->_var['sort_reg_time']; ?>
 				</th>
 				<!-- #代码增加2014-12-23 by bbs.hongyuvip.com  _star -->
-				<th>激活状态</th>
+				<th>实名认证</th>
 				<!-- #代码增加2014-12-23 by bbs.hongyuvip.com  _end -->
 				<th><?php echo $this->_var['lang']['handler']; ?></th>
 			<tr><?php $_from = $this->_var['user_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'user');if (count($_from)):
@@ -65,33 +65,42 @@
 				</td>
 				<td class="first-cell">
 					<span style="margin-bottom: 2px; line-height: 14px; display: block;"><?php echo htmlspecialchars($this->_var['user']['user_name']); ?></span>
-					
+					<span style="border: 1px #6DD26A solid; background-color: #6DD26A; padding: 1px 2px 0px 2px; color: white; display: inline; border-radius: 2px;">
+						<!-- <?php if ($this->_var['user']['froms'] == 'pc'): ?> -->
+						PC会员
+						<!-- <?php elseif ($this->_var['user']['froms'] == 'mobile'): ?> -->
+						微商城会员
+						<!-- <?php elseif ($this->_var['user']['froms'] == 'app'): ?> -->
+						APP会员
+						<!-- <?php endif; ?> -->
+					</span>
 					<!-- <?php if ($this->_var['user']['rank_name'] != null): ?> -->
 					<span style="margin-left: 5px; border: 1px #FBB24E solid; background-color: #FBB24E; padding: 1px 2px 0px 2px; color: white; display: inline; border-radius: 2px;"> <?php echo $this->_var['user']['rank_name']; ?> </span>
 					<!-- <?php endif; ?> -->
 				</td>
-				
 				<td>
-
-					<!-- <?php if ($this->_var['user']['mobile_phone'] != null): ?><?php if ($this->_var['user']['validated']): ?>
+					<?php if ($this->_var['user']['email'] != null): ?><?php if ($this->_var['user']['is_validated']): ?>
 					<img src="images/yes.gif">
 					<?php else: ?>
 					<img src="images/no.gif">
-					<?php endif; ?><?php endif; ?> -->
+					<?php endif; ?><?php endif; ?>
+					<span onclick="listTable.edit(this, 'edit_email', <?php echo $this->_var['user']['user_id']; ?>)"><?php echo $this->_var['user']['email']; ?></span>
+				</td>
+				<td>
+					<?php if ($this->_var['user']['mobile_phone'] != null): ?><?php if ($this->_var['user']['validated']): ?>
+					<img src="images/yes.gif">
+					<?php else: ?>
+					<img src="images/no.gif">
+					<?php endif; ?><?php endif; ?>
 					<span onclick="listTable.edit(this, 'edit_mobile_phone', <?php echo $this->_var['user']['user_id']; ?>)"><?php echo $this->_var['user']['mobile_phone']; ?></span>
 				</td>
 				<td><?php echo $this->_var['user']['user_money']; ?></td>
-				<td><?php echo $this->_var['user']['user_cash']; ?></td>
-				<td><?php echo $this->_var['user']['user_point']; ?></td>
-				<!-- <td><?php echo $this->_var['user']['pay_points']; ?></td> -->
+				<td><?php echo $this->_var['user']['frozen_money']; ?></td>
+				<td><?php echo $this->_var['user']['rank_points']; ?></td>
+				<td><?php echo $this->_var['user']['pay_points']; ?></td>
 				<td align="center"><?php echo $this->_var['user']['reg_time']; ?></td>
-				<td id="user_status_<?php echo $this->_var['user']['user_id']; ?>">
-					<?php if ($this->_var['user']['user_status'] != 0): ?>
-					<img src="images/yes.gif">　　<a href="javascript:void(0)" onclick="jihuo(<?php echo $this->_var['user']['user_id']; ?>)">注销</a>
-					<?php else: ?>
-					<img src="images/no.gif">　　<a href="javascript:void(0)" onclick="jihuo(<?php echo $this->_var['user']['user_id']; ?>)">激活</a>
-					<?php endif; ?> 
-				</td>
+				<!-- #代码增加2014-12-23 by bbs.hongyuvip.com  _star -->
+				<td><?php if ($this->_var['user']['status'] == 1): ?>审核通过<?php elseif ($this->_var['user']['status'] == 2): ?>审核中<?php elseif ($this->_var['user']['status'] == 3): ?>审核不通过<?php else: ?>未审核<?php endif; ?></td>
 				<!-- #代码增加2014-12-23 by bbs.hongyuvip.com  _end -->
 				<td align="center">
 					<a href="users.php?act=edit&id=<?php echo $this->_var['user']['user_id']; ?>" title="<?php echo $this->_var['lang']['edit']; ?>">
@@ -115,8 +124,8 @@
 					<a href="sendmail.php?act=sendmail&email=<?php echo $this->_var['user']['email']; ?>">
 						<img src="images/ico_email.png" border="0" height="16" width="16" />
 					</a>
-					<a href="users.php?act=tupu&user_id=<?php echo $this->_var['user']['user_id']; ?>" title="图谱">
-						<img src="images/icon_tupu.png" border="0" height="16" width="16" />
+					<a href="users.php?act=tupu&id=<?php echo $this->_var['user']['user_id']; ?>" title="<?php echo $this->_var['lang']['tupu']; ?>">
+						<img src="images/icon_view.gif" border="0" height="16" width="16" />
 					</a>
 				</td>
 			</tr>
@@ -186,20 +195,6 @@ function confirm_bath()
 
   return confirm(cfm);
 }
-
 //-->
-</script>
-<script type="text/javascript">
-	function jihuo(user_id){
-	 $.post("users.php?act=jihuo",{user_id:user_id},function(result){
-    	var info = JSON.parse(result);
-    	var a = "user_status_"+user_id;
-    	if(info['status']){
-    		document.getElementById(a).innerHTML='<img src="images/yes.gif">　　<a href="javascript:void(0)" onclick="jihuo('+user_id+')">注销</a>';
-    	}else{
-    		document.getElementById(a).innerHTML='<img src="images/no.gif">　　<a href="javascript:void(0)" onclick="jihuo('+user_id+')">激活</a>'
-    	}
-  	});
-}
 </script>
  <?php echo $this->fetch('pagefooter.htm'); ?> <?php endif; ?>

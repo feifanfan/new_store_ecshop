@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base href="http://www.xu.com/" />
+<base href="http://www.thefirst.com/" />
 <meta name="Generator" content="HongYuJD v7_2" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="Keywords" content="<?php echo $this->_var['keywords']; ?>" />
@@ -43,17 +43,17 @@
           <div class="money">
             <ul class="clearfix">
               <li class="first">
-                <div class="title"><span>账号余额</span></div>
+                <div class="title"><span>收益</span></div>
                 <div class="pic"><a href="user.php?act=account_log"><i class="user_bg"></i></a></div>
                 <p><a href="user.php?act=account_log" class="_capitalAccount"><?php echo $this->_var['info']['surplus']; ?></a></p>
               </li>
               <li class="second">
-                <div class="title"><span>红包</span></div>
+                <div class="title"><span>重销</span></div>
                 <div class="pic"><a href="user.php?act=bonus"><i class="user_bg"></i></a></div>
-                <p><a href="user.php?act=bonus" class="_backAccount"><?php echo $this->_var['info']['bonus']; ?></a>张</p>
+                <p><a href="user.php?act=bonus" class="_backAccount"><?php echo $this->_var['info']['bonus']; ?></a></p>
               </li>
               <li class="third">
-                <div class="title"><span>可用积分</span></div>
+                <div class="title"><span>企业币</span></div>
                 <div class="pic"><i class="user_bg"></i></div>
                 <p><span class="_goldAccount"><?php echo $this->_var['info']['integral']; ?></span></p>
               </li>

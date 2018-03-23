@@ -105,7 +105,25 @@ function _register ($username, $password, $email_or_mobile, $other = array(), $r
 			}
 		}
 	}
-
+	else
+	{
+		
+		$email = $email_or_mobile;
+		
+		/* 检查email */
+		if(empty($email))
+		{
+			$GLOBALS['err']->add($GLOBALS['_LANG']['email_empty']);
+		}
+		else
+		{
+			if(! is_email($email))
+			{
+				$GLOBALS['err']->add(sprintf($GLOBALS['_LANG']['email_invalid'], htmlspecialchars($email)));
+			}
+		}
+	}
+	
 	if($GLOBALS['err']->error_no > 0)
 	{
 		return false;
@@ -122,7 +140,10 @@ function _register ($username, $password, $email_or_mobile, $other = array(), $r
 	{
 		$result = $GLOBALS['user']->add_user_by_mobile($username, $password, $mobile);
 	}
-	
+	else if($register_type == 'email')
+	{
+		$result = $GLOBALS['user']->add_user_by_email($username, $password, $email);
+	}
 	else
 	{
 		$GLOBALS['err']->error = ERR_INVALID_REGISTER_TYPE;
@@ -183,10 +204,46 @@ function _register ($username, $password, $email_or_mobile, $other = array(), $r
 		/* 设置成登录状态 */
 		$GLOBALS['user']->set_session($username);
 		$GLOBALS['user']->set_cookie($username);
-
 		
+		/* 注册送积分 */
+		if(! empty($GLOBALS['_CFG']['register_points']))
+		{
+			log_account_change($_SESSION['user_id'], 0, 0, $GLOBALS['_CFG']['register_points'], $GLOBALS['_CFG']['register_points'], $GLOBALS['_LANG']['register_points']);
+		}
 		
-
+		/* 推荐处理 */
+		$affiliate = unserialize($GLOBALS['_CFG']['affiliate']);
+		if(isset($affiliate['on']) && $affiliate['on'] == 1)
+		{
+			// 推荐开关开启
+			$up_uid = get_affiliate();
+			empty($affiliate) && $affiliate = array();
+			$affiliate['config']['level_register_all'] = intval($affiliate['config']['level_register_all']);
+			$affiliate['config']['level_register_up'] = intval($affiliate['config']['level_register_up']);
+			if($up_uid)
+			{
+				if(! empty($affiliate['config']['level_register_all']))
+				{
+					if(! empty($affiliate['config']['level_register_up']))
+					{
+						$rank_points = $GLOBALS['db']->getOne("SELECT rank_points FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = '$up_uid'");
+						if($rank_points + $affiliate['config']['level_register_all'] <= $affiliate['config']['level_register_up'])
+						{
+							log_account_change($up_uid, 0, 0, $affiliate['config']['level_register_all'], 0, sprintf($GLOBALS['_LANG']['register_affiliate'], $_SESSION['user_id'], $username));
+						}
+					}
+					else
+					{
+						log_account_change($up_uid, 0, 0, $affiliate['config']['level_register_all'], 0, $GLOBALS['_LANG']['register_affiliate']);
+					}
+				}
+				
+				// 设置推荐人
+				$sql = 'UPDATE ' . $GLOBALS['ecs']->table('users') . ' SET parent_id = ' . $up_uid . ' WHERE user_id = ' . $_SESSION['user_id'];
+				
+				$GLOBALS['db']->query($sql);
+			}
+		}
 		
 		// 定义other合法的变量数组
 		$other_key_array = array(
@@ -330,38 +387,38 @@ function register ($username, $password, $email, $other = array())
 		}
 		
 		/* 推荐处理 */
-		// $affiliate = unserialize($GLOBALS['_CFG']['affiliate']);
-		// if(isset($affiliate['on']) && $affiliate['on'] == 1)
-		// {
-		// 	// 推荐开关开启
-		// 	$up_uid = get_affiliate();
-		// 	empty($affiliate) && $affiliate = array();
-		// 	$affiliate['config']['level_register_all'] = intval($affiliate['config']['level_register_all']);
-		// 	$affiliate['config']['level_register_up'] = intval($affiliate['config']['level_register_up']);
-		// 	if($up_uid)
-		// 	{
-		// 		if(! empty($affiliate['config']['level_register_all']))
-		// 		{
-		// 			if(! empty($affiliate['config']['level_register_up']))
-		// 			{
-		// 				$rank_points = $GLOBALS['db']->getOne("SELECT rank_points FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = '$up_uid'");
-		// 				if($rank_points + $affiliate['config']['level_register_all'] <= $affiliate['config']['level_register_up'])
-		// 				{
-		// 					log_account_change($up_uid, 0, 0, $affiliate['config']['level_register_all'], 0, sprintf($GLOBALS['_LANG']['register_affiliate'], $_SESSION['user_id'], $username));
-		// 				}
-		// 			}
-		// 			else
-		// 			{
-		// 				log_account_change($up_uid, 0, 0, $affiliate['config']['level_register_all'], 0, $GLOBALS['_LANG']['register_affiliate']);
-		// 			}
-		// 		}
+		$affiliate = unserialize($GLOBALS['_CFG']['affiliate']);
+		if(isset($affiliate['on']) && $affiliate['on'] == 1)
+		{
+			// 推荐开关开启
+			$up_uid = get_affiliate();
+			empty($affiliate) && $affiliate = array();
+			$affiliate['config']['level_register_all'] = intval($affiliate['config']['level_register_all']);
+			$affiliate['config']['level_register_up'] = intval($affiliate['config']['level_register_up']);
+			if($up_uid)
+			{
+				if(! empty($affiliate['config']['level_register_all']))
+				{
+					if(! empty($affiliate['config']['level_register_up']))
+					{
+						$rank_points = $GLOBALS['db']->getOne("SELECT rank_points FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = '$up_uid'");
+						if($rank_points + $affiliate['config']['level_register_all'] <= $affiliate['config']['level_register_up'])
+						{
+							log_account_change($up_uid, 0, 0, $affiliate['config']['level_register_all'], 0, sprintf($GLOBALS['_LANG']['register_affiliate'], $_SESSION['user_id'], $username));
+						}
+					}
+					else
+					{
+						log_account_change($up_uid, 0, 0, $affiliate['config']['level_register_all'], 0, $GLOBALS['_LANG']['register_affiliate']);
+					}
+				}
 				
-		// 		// 设置推荐人
-		// 		$sql = 'UPDATE ' . $GLOBALS['ecs']->table('users') . ' SET parent_id = ' . $up_uid . ' WHERE user_id = ' . $_SESSION['user_id'];
+				// 设置推荐人
+				$sql = 'UPDATE ' . $GLOBALS['ecs']->table('users') . ' SET parent_id = ' . $up_uid . ' WHERE user_id = ' . $_SESSION['user_id'];
 				
-		// 		$GLOBALS['db']->query($sql);
-		// 	}
-		// }
+				$GLOBALS['db']->query($sql);
+			}
+		}
 		
 		// 定义other合法的变量数组
 		$other_key_array = array(

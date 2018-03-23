@@ -280,6 +280,7 @@ elseif ($_REQUEST['act']=='update')
 					"VALUES(".$supplier_old['user_id'].", '".$supplier_old['user_name']."', '".$supplier_old['email']."', '".$supplier_old['password']."', '".$supplier_old['ec_salt']."', ".$supplier_old['last_login'].", ".$supplier_old['last_login'].", '".$supplier_old['last_ip']."', 'all', '', '', 0, ".$supplier_old['supplier_id'].", NULL, NULL, ".intval($_POST['status']).")";
 	  	$db->query($insql);
   }
+	/* 代码增加_end  By  supplier.hongyuvip.com */
 
 	/* 保存供货商信息 */
 	$db->autoExecute($ecs->table('supplier'), $supplier, 'UPDATE', "supplier_id = '" . $supplier_id . "'");

@@ -491,6 +491,28 @@ elseif ($_REQUEST['act'] == 'edit')
 }
 
 /* ------------------------------------------------------ */
+// -- 查看图谱
+/* ------------------------------------------------------ */
+elseif ($_REQUEST['act'] == 'tupu')
+{
+	// 全局变量
+	$user = $GLOBALS['user'];
+	$_CFG = $GLOBALS['_CFG'];
+	$_LANG = $GLOBALS['_LANG'];
+	$smarty = $GLOBALS['smarty'];
+	$db = $GLOBALS['db'];
+	$ecs = $GLOBALS['ecs'];
+	
+	// $sql='SELECT * from ecs_users where user_id=42';
+	// $sql = "select t1.* from ecs_users as t1 inner join ecs_users as t2 on t1.user_id=t2.parent_id inner join ecs_users as t3 on t2.user_id=t3.parent_id where t1.user_id = $_GET[id]";
+	$sql = "select user_name,user_status,user_id,parent_id,parent_side,side_list from ecs_users where id_list like '%$_GET[id],%' limit 0,7";
+	
+	$res = $db->getAll($sql);
+	$smarty->display('user_tupu.htm');
+	
+}
+
+/* ------------------------------------------------------ */
 // -- 更新用户帐号
 /* ------------------------------------------------------ */
 elseif ($_REQUEST['act'] == 'update')
@@ -941,37 +963,7 @@ elseif ($_REQUEST['act'] == 'remove_parent')
 	);
 	sys_msg(sprintf($_LANG['update_success'], $username), 0, $link);
 }
-/*----------------------------------------
-//*激活/注销用户
-----------------------------------------*/
-elseif ($_REQUEST['act'] == 'jihuo') {
-	$user_id = trim($_POST['user_id']);
-	$sql = "SELECT user_status from ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id;
-	$user_status = $GLOBALS['db']->getOne($sql);
-	if($user_status==1){
-		$change_status = 0;
-		$info['desc'] = "注销成功";
-		$info['status'] = 0;
-	}elseif ($user_status==0) {
-		/*激活并按照填写的等级分配相关参数 by ff
-		**分配相应企业币
-		**/
-		$user_rank = $GLOBALS['db']->getOne("select user_rank from " .$GLOBALS['ecs']->table('users') ." where user_id =".$user_id);
-		if($user_rank>0){
-			$str = chr($user_rank+96);
-			$str = $str."_card_point";
-			$point_num =$GLOBALS['db']->getOne("select value from ".$GLOBALS['ecs']->table('shop_config')." where code = '$str'");
-			$GLOBALS['db']->query("update " . $GLOBALS['ecs']->table('users') ." set user_point = user_point+".$point_num." where user_id= ".$user_id);
-			$change_status = 1;
-			$info['desc'] = "激活成功";
-			$info['status'] = 1;
-		}
-	}
-	$update_sql = "UPDATE ".$GLOBALS['ecs']->table('users')." set user_status = ".$change_status." where user_id = ".$user_id;
-	if($GLOBALS['db']->query($update_sql)){
-		echo json_encode($info);
-	}
-}
+
 /* ------------------------------------------------------ */
 // -- 查看用户推荐会员列表
 /* ------------------------------------------------------ */
@@ -1042,31 +1034,7 @@ elseif ($_REQUEST['act'] == 'aff_list')
 	assign_query_info();
 	$smarty->display('affiliate_list.htm');
 }
-elseif ($_REQUEST['act'] == 'tupu')
-{
-	// 全局变量
-	$user = $GLOBALS['user'];
-	$_CFG = $GLOBALS['_CFG'];
-	$_LANG = $GLOBALS['_LANG'];
-	$smarty = $GLOBALS['smarty'];
-	$db = $GLOBALS['db'];
-	$ecs = $GLOBALS['ecs'];
-	$user_id = htmlspecialchars(trim($_GET['user_id']));
-	
-	$user[0] = $GLOBALS['db']->getRow("SELECT * FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
-	$user[1] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 1");
-	$user[2] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 2");
-	if($user[1]){
-		$user[3] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[1]['user_id'] ." and parent_side = 1");
-		$user[4] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[1]['user_id'] ." and parent_side = 2");
-	}
-	if($user[2]){
-		$user[5] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[2]['user_id'] ." and parent_side = 1");
-		$user[6] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[2]['user_id'] ." and parent_side = 2");
-	}
-	$smarty->assign('user',$user);
-	$smarty->display('user_tupu.htm');
-}
+
 /**
  * 返回用户列表数据
  *
@@ -1129,7 +1097,7 @@ function user_list ()
 		// $sql = "SELECT user_id, user_name, email, is_validated,
 		// validated,status,user_money, frozen_money, rank_points, pay_points,
 		// reg_time ".
-		$sql = "SELECT user_id, user_name, email, mobile_phone, is_validated, validated, user_money, user_cash, user_point, pay_points, status, reg_time, froms,user_rank,user_status "." FROM " . $GLOBALS['ecs']->table('users') . $ex_where . " ORDER by " . $filter['sort_by'] . ' ' . $filter['sort_order'] . " LIMIT " . $filter['start'] . ',' . $filter['page_size'];
+		$sql = "SELECT user_id, user_name, email, mobile_phone, is_validated, validated, user_money, frozen_money, rank_points, pay_points, status, reg_time, froms "." FROM " . $GLOBALS['ecs']->table('users') . $ex_where . " ORDER by " . $filter['sort_by'] . ' ' . $filter['sort_order'] . " LIMIT " . $filter['start'] . ',' . $filter['page_size'];
 		
 		$filter['keywords'] = stripslashes($filter['keywords']);
 		set_filter($filter, $sql);

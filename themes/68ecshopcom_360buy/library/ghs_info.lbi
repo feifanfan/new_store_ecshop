@@ -93,7 +93,10 @@
         关注本店
     </a>
 	</div>
-
+    <div id="attention-shop">
+    	<p>扫一扫，手机访问店铺</p>
+	<img src="erweima_supplier.php?sid={$suppid}" width="120" height="120" />
+    </div>
   </div>
 <script>
 function guanzhu(sid){

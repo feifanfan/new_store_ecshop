@@ -58,5 +58,13 @@
     <dd><?php echo $this->_var['shop_address']; ?></dd>
     <dd class="ghs_clear"></dd>
   </dl>
+    
+  
+  
+  <div id="enter-shop"> 
+      <div id="attention-shop" style="border-top: 1px dotted #C6C6C6;margin: 0px 10px;">
+    	<p>扫一扫，手机访问微商城</p>
+	<img src="erweima_supplier.php?sid=0" width="120" height="120" />
+    </div>
  </div>
 </div>

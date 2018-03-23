@@ -205,17 +205,23 @@ $purview['04_shop_category'] = 'supplier_manage';
 $purview['05_shop_street'] = 'supplier_manage';
 $purview['06_supplier_tag'] = 'supplier_tag';
 /* 代码增加_end By supplier.hongyuvip.com */
-// 微信权限 $purview['weixin_config']= 'weixin_config';
-// $purview['weixin_addconfig']= 'weixin_addconfig'; $purview['weixin_menu']=
-// 'weixin_menu'; $purview['weixin_notice']= 'weixin_notice';
-// $purview['weixin_keywords']= 'weixin_keywords'; $purview['weixin_fans']=
-// 'weixin_fans'; $purview['weixin_news']= 'weixin_news';
-// $purview['weixin_addqcode']= 'weixin_addqcode'; $purview['weixin_qcode']=
-// 'weixin_qcode'; $purview['weixin_reg']= 'weixin_reg'; 活动管理
-// $purview['weixin_act']= 'weixin_act'; $purview['weixin_award']=
-// 'weixin_award'; $purview['weixin_oauth']= 'weixin_oauth';
-// $purview['weixin_qiandao']= 'weixin_qiandao'; $purview['weixin_addkey']=
-// 'weixin_addkey';
+// 微信权限
+// $purview['weixin_config']= 'weixin_config';
+// $purview['weixin_addconfig']= 'weixin_addconfig';
+// $purview['weixin_menu']= 'weixin_menu';
+// $purview['weixin_notice']= 'weixin_notice';
+// $purview['weixin_keywords']= 'weixin_keywords';
+// $purview['weixin_fans']= 'weixin_fans';
+// $purview['weixin_news']= 'weixin_news';
+// $purview['weixin_addqcode']= 'weixin_addqcode';
+// $purview['weixin_qcode']= 'weixin_qcode';
+// $purview['weixin_reg']= 'weixin_reg';
+// 活动管理
+// $purview['weixin_act']= 'weixin_act';
+// $purview['weixin_award']= 'weixin_award';
+// $purview['weixin_oauth']= 'weixin_oauth';
+// $purview['weixin_qiandao']= 'weixin_qiandao';
+// $purview['weixin_addkey']= 'weixin_addkey';
 $purview['website'] = 'website';
 /* 代码增加_start By bbs.hongyuvip.com */
 $purview['16_takegoods_list'] = 'takegoods_list';

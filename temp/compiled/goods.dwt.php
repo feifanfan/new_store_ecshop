@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base href="http://www.xu.com/" />
+<base href="http://www.thefirst.com/" />
 <meta name="Generator" content="HongYuJD v7_2" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="Keywords" content="<?php echo $this->_var['keywords']; ?>" />
@@ -64,7 +64,7 @@
                   <?php else: ?> 
                   <span class="price">售价</span><strong class="p-price" id="ECS_GOODS_AMOUNT"></strong> 
                   <?php endif; ?> 
-                   </p>
+                  <span class="depreciate"><a href="javascript:showDiv(<?php echo $this->_var['goods']['goods_id']; ?>);" style="color:#ffffff;text-decoration:none;">降价通知</a></span> </p>
               </div>
               <div class="show_price" style="z-index:101"> 
                 <?php if ($this->_var['cfg']['show_marketprice']): ?>
@@ -75,8 +75,15 @@
                 <?php endif; ?> 
                 <?php if ($this->_var['rank_prices']): ?>
                 <div class="rank_prices">
-                  
-                  
+                  <div id="vip1" onmouseover="hidevip1()"> <span class="rmbPrice">会员等级价格<i></i></span> </div>
+                  <div class="hover" style="display:none;" id="vip2" onmouseover="hidevip1()" onmouseout="showvip1()"> <span class="rmbPrice">会员等级价格<i></i></span> 
+                    <?php $_from = $this->_var['rank_prices']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'rank_price');if (count($_from)):
+    foreach ($_from AS $this->_var['key'] => $this->_var['rank_price']):
+?> 
+                    </br>
+                    <span class="rmbPrice"> <?php echo $this->_var['rank_price']['rank_name']; ?>：<?php echo $this->_var['rank_price']['price']; ?></span> 
+                    <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?> 
+                  </div>
                   <script type="text/javascript">
 function hidevip1()
 { 
@@ -127,21 +134,42 @@ document.getElementById('vip2').style.display="none";
               </li>
               <?php endif; ?>
             </ul>
-
+            <div id="summary-qita" class="clearfix">
+              <ul class="qita">
+                <li>
+                  <p>累积评价<span><a href="<?php echo $this->_var['url']; ?>#os_pinglun"><?php echo $this->_var['review_count']; ?>人评价</a></span></p>
+                </li>
+                <li>
+                  <p>累计销量<span><?php echo $this->_var['goods']['count']; ?></span></p>
+                </li>
+                <?php if ($this->_var['goods']['give_integral_2'] == '-1'): ?>
+                <li style="border:none">
+                  <p>赠送积分<span><font id="ECS_GOODS_AMOUNT_jf"><?php echo $this->_var['goods']['give_integral']; ?></font></span></p>
+                  <?php elseif ($this->_var['goods']['give_integral_2'] > 0): ?>
+                <li style="border:none">
+                  <p>赠送积分<span><?php echo $this->_var['goods']['give_integral']; ?></span></p>
+                </li>
+                <?php else: ?>
+                <li style="border:none">
+                  <p>赠送积分<span>0</span></p>
+                </li>
+                <?php endif; ?>
+              </ul>
+            </div>
             <ul id="summary">
               <script type="text/javascript">
-                $(document).ready(function(){
-                  var a = $("#summary").children("li");
-                  var b = $("#summary"); 
-                  if($(a).length > 0){ 
-                		b.css({"display":"block"});
+$(document).ready(function(){
+  var a = $("#summary").children("li");
+  var b = $("#summary"); 
+  if($(a).length > 0){ 
+		b.css({"display":"block"});
 
-                	} 
-                	else{ 
-                		b.css({"display":"none"});
-                	} 
-                });
-              </script> 
+	} 
+	else{ 
+		b.css({"display":"none"});
+	} 
+});
+</script> 
               <?php if ($this->_var['promotion']): ?>
               <li class="padd padd-promotion clearfix"> <?php $_from = $this->_var['promotion']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('key', 'item');$this->_foreach['name'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['name']['total'] > 0):
@@ -366,7 +394,11 @@ myString[<?php echo $this->_var['pkey']; ?>]="<?php echo $this->_var['prod']; ?>
                 <?php else: ?> 
                 <a onclick="tell_me(<?php echo $this->_var['goods']['goods_id']; ?>)" class="tell_me"/><i></i>到货通知</a>
                 <?php endif; ?> 
-                
+                <a href="javascript:collect(<?php echo $this->_var['goods']['goods_id']; ?>)" class="btn-coll <?php if ($this->_var['goods']['is_collet'] == 1): ?>btn-coll-t<?php endif; ?>"><?php if ($this->_var['goods']['is_collet'] == 1): ?>已<?php endif; ?>收藏</a> <a id="phone" class="btn-phone" style="position:relative;cursor:pointer">去手机购买
+                <div id="phone_tan" style="display:none"> <span class="arr"></span>
+                  <div class="m-qrcode-wrap"> <img src="erweima_png.php?id=<?php echo $this->_var['goods']['goods_id']; ?>" width="100" height="100" /> </div>
+                </div>
+                </a>  
               </div>
               <script type="text/javascript">
 		$("#phone").mouseover( function(){	

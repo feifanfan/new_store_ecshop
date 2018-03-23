@@ -2532,7 +2532,7 @@ elseif ($_REQUEST['step'] == 'done')
 	    {
 	        $order['bonus_id'] = 0;
 	    }
-	    //var_dump($_POST['pickup_point'][0]);die;
+
 	    /* 配送方式 */
 	    if ($order['shipping_id'] > 0)
 	    {
@@ -2541,8 +2541,6 @@ elseif ($_REQUEST['step'] == 'done')
 			//如果是门店自提，订单需要做特殊标识
 	        if($shipping['shipping_code'] == 'pups'){
 	        	$order['is_pickup'] = $order['shipping_id'];
-	        	/*edit by ff 如果是自提的配送方式，订单归属于该店铺*/
-	        	$order['supplier_id'] = $GLOBALS['db']->getOne("SELECT supplier_id from ".$GLOBALS['ecs']->table('pickup_point')." where id = ".$_POST['pickup_point'][0]);
 	        }
 	    }
 	    $order['shipping_fee'] = $total['shipping_fee'];
@@ -2866,7 +2864,7 @@ elseif ($_REQUEST['step'] == 'done')
                     $sqla = "select valid_date,supplier_id from ".$GLOBALS['ecs']->table('goods') ." where goods_id=".$row['goods_id'];
                     $goods_info = $GLOBALS['db']->getRow($sqla);
                     $valid_date = $goods_info['valid_date'];
-                    //$supplier_id = $goods_info['supplier_id'];
+                    $supplier_id = $goods_info['supplier_id'];
                     /* 代码增加_end  By bbs.hongyuvip.com _sunlizhi*/
 	            $virtual_goods[$row['extension_code']][] = array('goods_id' => $row['goods_id'], 'goods_attr_id'=>$row['goods_attr_id'], 'goods_name' => $row['goods_name'], 'num' => $row['num'],'valid_date'=>$valid_date,'supplier_id'=>$supplier_id,'mobile_phone'=>$_REQUEST['mobile_phone']);
 	        }

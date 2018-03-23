@@ -6,19 +6,19 @@
     <div class="mc colList" style="max-height:512px;"> 
       <div class="slider colFrame" id="slider">
         <ul style="left: 0px;">
-          <?php $_from = $this->_var['new_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_16580300_1521682599');$this->_foreach['new_goods'] = array('total' => count($_from), 'iteration' => 0);
+          <?php $_from = $this->_var['new_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_04910100_1521525606');$this->_foreach['new_goods'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['new_goods']['total'] > 0):
-    foreach ($_from AS $this->_var['goods_0_16580300_1521682599']):
+    foreach ($_from AS $this->_var['goods_0_04910100_1521525606']):
         $this->_foreach['new_goods']['iteration']++;
 ?>
            <li  <?php if ($this->_foreach['new_goods']['iteration'] == 1): ?> style="border-top:none;" <?php endif; ?> >
-            <div class="p-img"><a href="<?php echo $this->_var['goods_0_16580300_1521682599']['url']; ?>"><img width="100" height="100" alt="<?php echo $this->_var['goods_0_16580300_1521682599']['name']; ?>"  src="<?php echo $this->_var['goods_0_16580300_1521682599']['thumb']; ?>"/></a></div>
-            <div class="rate"><a href="<?php echo $this->_var['goods_0_16580300_1521682599']['url']; ?>" title="<?php echo $this->_var['goods_0_16580300_1521682599']['name']; ?>"><?php echo sub_str($this->_var['goods_0_16580300_1521682599']['name'],12); ?></a></div>
+            <div class="p-img"><a href="<?php echo $this->_var['goods_0_04910100_1521525606']['url']; ?>"><img width="100" height="100" alt="<?php echo $this->_var['goods_0_04910100_1521525606']['name']; ?>"  src="<?php echo $this->_var['goods_0_04910100_1521525606']['thumb']; ?>"/></a></div>
+            <div class="rate"><a href="<?php echo $this->_var['goods_0_04910100_1521525606']['url']; ?>" title="<?php echo $this->_var['goods_0_04910100_1521525606']['name']; ?>"><?php echo sub_str($this->_var['goods_0_04910100_1521525606']['name'],12); ?></a></div>
             <div class="p-price"><strong> 
-              <?php if ($this->_var['goods_0_16580300_1521682599']['promote_price'] != 0): ?> 
-              <?php echo $this->_var['goods_0_16580300_1521682599']['formated_promote_price']; ?> 
+              <?php if ($this->_var['goods_0_04910100_1521525606']['promote_price'] != 0): ?> 
+              <?php echo $this->_var['goods_0_04910100_1521525606']['formated_promote_price']; ?> 
               <?php else: ?> 
-              <?php echo $this->_var['goods_0_16580300_1521682599']['shop_price']; ?> 
+              <?php echo $this->_var['goods_0_04910100_1521525606']['shop_price']; ?> 
               <?php endif; ?> 
               </strong></div>
             </li>

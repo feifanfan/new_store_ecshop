@@ -1,12 +1,18 @@
-git@github.com:feifanfan/new_store_ecshop.git
+# HongYuJD-V7.2
 
-80：交易规则分配:
-	1.lib_payment:自定义函数 173行调用
-81：企业币+现金购物方式
-	1.
-82.企业币出售大厅
-	
+鸿宇版小京东
 
+唯一QQ群：90664526
+
+唯一官网：http://hongyuvip.com/
+
+唯一论坛：http://bbs.hongyuvip.com/
+
+淘宝店铺：http://hongyuweb.taobao.com/
+
+#鸿宇版小京东BUG修复列表
+
+特别鸣谢：鸿宇科技 & Shadow & 鸿宇源码 & ...蜘蛛... & 支持鸿宇的朋友
 
 79.2016-09-22 优化前后台默认浏览方式为极速模式, 避免出现js错误弹窗
 
