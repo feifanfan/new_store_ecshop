@@ -37,7 +37,7 @@ $not_login_arr = array(
 /* 显示页面的action列表 */
 $ui_arr = array(
 	'login', 'profile', 'order_list', 'order_detail', 'address_list', 'collection_list', 'follow_shop', 'message_list', 'tag_list', 'get_password', 'reset_password', 'booking_list', 'add_booking', 'account_raply', 'account_deposit', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy', 'group_buy_detail', 'affiliate', 'comment_list', 'validate_email', 'track_packages', 'transform_points', 'qpassword_name', 'get_passwd_question', 'check_answer', 'check_register', 'back_order', 'back_list', 'back_order_detail', 'back_order_act', 'back_replay', 'my_comment', 'my_comment_send', 'shaidan_send', 'shaidan_sale', 'account_security', 'act_identity', 'check_phone', 'update_password', 're_binding', 'update_phone', 'update_email', 'act_update_email', 
-	're_binding_email', 'ch_email', 'ck_email', 'step_1', 'forget_password', 'back_order_detail', 'del_back_order', 'back_order_detail_edit', 'add_huan_goods','bd_list','jifen_list',
+	're_binding_email', 'ch_email', 'ck_email', 'step_1', 'forget_password', 'back_order_detail', 'del_back_order', 'back_order_detail_edit', 'add_huan_goods',
 /*余额额支付密码_更改_START_bbs.hongyuvip.com*/
 'act_forget_pass', 're_pass', 'auction_list', 'forget_surplus_password', 'act_forget_surplus_password', 'update_surplus_password', 'act_update_surplus_password', 'verify_reset_surplus_email', 'get_verify_code'
 ); // 代码修改
@@ -1177,90 +1177,6 @@ function action_logout ()
 		$back_act, 'index.php'
 	), 'info');
 }
-
-// 报单中心（显示页面）
-function action_bd_list ()
-{
-	
-	// 获取全局变量
-	$user = $GLOBALS['user'];
-	$_CFG = $GLOBALS['_CFG'];
-	$_LANG = $GLOBALS['_LANG'];
-	$smarty = $GLOBALS['smarty'];
-	$db = $GLOBALS['db'];
-	$ecs = $GLOBALS['ecs'];
-	$action = $GLOBALS['action'];
-	$user_id = $_SESSION['user_id'];
-	
-	$sql = "select COUNT(*) from ecs_users";
-	$record_count = $db->getOne($sql);
-    $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
-	// 分页函数
-	$pager = get_pager('user.php', array( 'act' => $action ), $record_count, $page);
-
-	$sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where user_id=$user_id limit $pager[start],$pager[size]";
-	$data = $db->getAll($sql);
-	$smarty->assign('bdlist', $data);
-	$smarty->assign('pager', $pager);
-	$smarty->display('user_transaction.dwt');
-	
-}
-// 积分变动（显示页面）
-function action_jifen_list ()
-{
-	
-	// 获取全局变量
-	$user = $GLOBALS['user'];
-	$_CFG = $GLOBALS['_CFG'];
-	$_LANG = $GLOBALS['_LANG'];
-	$smarty = $GLOBALS['smarty'];
-	$db = $GLOBALS['db'];
-	$ecs = $GLOBALS['ecs'];
-	$action = $GLOBALS['action'];
-	$user_id = $_SESSION['user_id'];
-	
-	
-	$sql = "select COUNT(*) from ecs_account_log";
-	$record_count = $db->getOne($sql);
-    $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
-	// 分页函数
-	$pager = get_pager('user.php', array( 'act' => $action ), $record_count, $page);
-
-	$sql = "select user_id,user_money,user_point,change_desc,user_cash,change_type,change_time from ecs_account_log where user_id=$user_id limit $pager[start],$pager[size]";
-	$data = $db->getAll($sql);
-	$smarty->assign('jifenlist', $data);
-	$smarty->assign('pager', $pager);
-	$smarty->display('user_transaction.dwt');
-	
-}
-// function action_act_edit_bd_list() 
-// {
-	// // 获取全局变量
-	// $user = $GLOBALS['user'];
-	// $_CFG = $GLOBALS['_CFG'];
-	// $_LANG = $GLOBALS['_LANG'];
-	// $smarty = $GLOBALS['smarty'];
-	// $db = $GLOBALS['db'];
-	// $ecs = $GLOBALS['ecs'];
-	// $user_id = $_SESSION['user_id'];
-	
-	// $user_money = isset($_POST['user_money']) ? trim($_POST['user_money']) : '';
-	// $change_desc = isset($_POST['change_desc']) ? trim($_POST['change_desc']) : '';
-	// $id = isset($_POST['id']) ? trim($_POST['id']) : 0;
-	// // var_dump($id);die;
-	// /* 更新用户扩展字段的数据 */
-	// $sql = 'UPDATE ' . $ecs->table('account_log') . " SET `user_money`='$user_money', `change_desc`='$change_desc'  WHERE `log_id`='" . $id . "'";
-	// $num = $db->query($sql);
-	// if($num > 0)
-	// {
-		// show_message('修改成功', '返回上一页', 'user.php?act=ceshi');
-	// }
-	// else
-	// {
-		// show_message('修改失败', '返回上一页', 'user.php?act=ceshi');
-	// }
-	// // show_message($_LANG['edit_profile_success'], $_LANG['profile_lnk'], 'user.php?act=profile', 'info');
-// }
 
 /* 个人资料页面 */
 function action_profile ()

@@ -9,10 +9,10 @@ if ($this->_foreach['no']['total'] > 0):
 ?>
       <dl class="col-links <?php if (($this->_foreach['no']['iteration'] <= 1)): ?>col-links-first<?php endif; ?>">
         <dt><?php echo $this->_var['help_cat']['cat_name']; ?></dt>
-        <?php $_from = $this->_var['help_cat']['article']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_30759300_1521770390');if (count($_from)):
-    foreach ($_from AS $this->_var['item_0_30759300_1521770390']):
+        <?php $_from = $this->_var['help_cat']['article']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item');if (count($_from)):
+    foreach ($_from AS $this->_var['item']):
 ?>
-        <dd><a rel="nofollow" href="help.php?id=<?php echo $this->_var['item_0_30759300_1521770390']['article_id']; ?>" target="_blank"><?php echo $this->_var['item_0_30759300_1521770390']['short_title']; ?></a></dd>
+        <dd><a rel="nofollow" href="help.php?id=<?php echo $this->_var['item']['article_id']; ?>" target="_blank"><?php echo $this->_var['item']['short_title']; ?></a></dd>
         <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
       </dl>
       <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>

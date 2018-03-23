@@ -182,10 +182,104 @@ function checkEmailExist(email, callback) {
 		}
 	}, 'text');
 }
-
-function checkMobilePhone(mobile, callback) {
+function checkusername(username,callback){
 	var submit_disabled = false;
 
+	var usernameObj = null;
+	if (typeof (username) == 'object') {
+		usernameObj = $(username);
+		username = usernameObj.val();
+	}
+	if(username ==''){
+		document.getElementById('username_notice').innerHTML = '用户名不能为空！';
+		document.getElementById('username_notice').style.color = '#900';
+	}else{
+		$.post('register.php?act=check_username_exist', {
+		username: username
+		}, 
+		function(result) {
+			if(result=='false'){
+				document.getElementById('username_notice').innerHTML = '用户名已存在！';
+				document.getElementById('username_notice').style.color = '#900';
+			}else if(result=='lenfalse'){
+				document.getElementById('username_notice').innerHTML = '用户名长度不得小于6位！';
+				document.getElementById('username_notice').style.color = '#900';
+			}
+			else{
+				document.getElementById('username_notice').innerHTML = '用户名合法';
+				document.getElementById('username_notice').style.color = '#093';
+				submit_disabled = true;
+			}
+		},'text');
+	}
+}
+function checkuser_parent(user_parent,callback){
+	var user_parentObj = null;
+	if(typeof(user_parent)=='object'){
+		user_parentObj = $(user_parent);
+		user_parent = user_parentObj.val();
+	}
+	if(user_parent==''){
+		document.getElementById('user_parent_notice').innerHTML = '请输入推荐人手机号';
+		document.getElementById('user_parent_notice').style.color = '#900';
+	}else{
+		$.post('register.php?act=check_user_parent', {
+		user_parent_mobile: user_parent
+		}, 
+		function(result) {
+			if(result=='false'){
+				document.getElementById('user_parent_notice').innerHTML = '没有找到该推荐人';
+				document.getElementById('user_parent_notice').style.color = '#900';
+			}else{
+				console.log(result);
+				document.getElementById('user_parent_notice').innerHTML = '推荐人用户名为：'+result;
+				document.getElementById('user_parent_notice').style.color = '#093';
+			}
+		});
+	}
+}
+function checkbd_phone(user_parent,callback){
+var user_parentObj = null;
+	if(typeof(user_parent)=='object'){
+		user_parentObj = $(user_parent);
+		user_parent = user_parentObj.val();
+	}
+	if(user_parent==''){
+		document.getElementById('bd_phone_notice').innerHTML = '请输入推荐人手机号';
+		document.getElementById('bd_phone_notice').style.color = '#900';
+	}else{
+		$.post('register.php?act=check_bd_parent', {
+		user_parent_mobile: user_parent
+		},function(result) {
+			if(result=='false'){
+				document.getElementById('bd_phone_notice').innerHTML = '没有找到该报单人';
+				document.getElementById('bd_phone_notice').style.color = '#900';
+			}else{
+				console.log(result);
+				document.getElementById('bd_phone_notice').innerHTML = '报单人用户名为：'+result;
+				document.getElementById('bd_phone_notice').style.color = '#093';
+			}
+		});
+	}
+}
+function check_user_rank(){
+	var user_rank = document.getElementById("user_rank").value;
+	if(user_rank<=0){
+		document.getElementById('rank_notice').innerHTML = '请选择会员级别';
+		document.getElementById('rank_notice').style.color = '#900';
+	}
+	else if(user_rank>4){
+		document.getElementById('rank_notice').innerHTML = '会员级别选择错误';
+		document.getElementById('rank_notice').style.color = '#900';
+	}
+	else if(1<=user_rank<=4)
+	{
+		document.getElementById('rank_notice').innerHTML = '会员级别正确';
+		document.getElementById('rank_notice').style.color = '#093';
+	}
+}
+function checkMobilePhone(mobile, callback) {
+	var submit_disabled = false;
 	var mobileObj = null;
 
 	if (typeof (mobile) == 'object') {
@@ -412,11 +506,14 @@ function reg_by_mobile() {
 	var mobile_code = frm.elements['mobile_code'] ? Utils.trim(frm.elements['mobile_code'].value) : '';
 	// 验证码
 	var captcha = frm.elements['captcha'] ? Utils.trim(frm.elements['captcha'].value) : '';
+	var user_rank = frm.elements['user_rank'] ?  Utils.trim(frm.elements['user_rank'].value) : '';
 
 	var msg = "";
 	// 检查输入
 	var msg = '';
-
+	if(user_rank<=0||user_rank>4){
+		msg +="- 请选择会员等级\n";
+	}
 	if (mobile_phone.length == 0) {
 		msg += msg_mobile_phone_blank + '\n';
 	} else {

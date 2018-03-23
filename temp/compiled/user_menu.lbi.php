@@ -6,7 +6,7 @@
         <!-- 
         <a href="user.php?act=account_security" class="item <?php if ($this->_var['action'] == 'account_security'): ?>curs<?php endif; ?>"><span>账户安全</span><i></i></a>    
          -->
-        <a href="security.php" class="item <?php if ($this->_var['is_security'] == 'true'): ?>curs<?php endif; ?>"><span>账户安全</span><i></i></a>     
+        <a href="security.php" class="item <?php if ($this->_var['is_security'] == 'true'): ?>curs<?php endif; ?>"><span>账户安全</span><i></i></a>    
         <a href="user.php?act=address_list" class="item <?php if ($this->_var['action'] == 'address_list'): ?>curs<?php endif; ?>"><span><?php echo $this->_var['lang']['label_address']; ?></span><i></i></a>
         <a href="user.php?act=account_log" class="item <?php if ($this->_var['action'] == 'account_log'): ?>curs<?php endif; ?>"><span><?php echo $this->_var['lang']['label_user_surplus']; ?></span><i></i></a>
         <a href="user.php?act=bonus" class="item <?php if ($this->_var['action'] == 'bonus'): ?>curs<?php endif; ?>"><span><?php echo $this->_var['lang']['label_bonus']; ?></span><i></i></a>
@@ -25,8 +25,6 @@
         <a href="user.php?act=collection_list" class="item <?php if ($this->_var['action'] == 'collection_list'): ?>curs<?php endif; ?>"><span>商品收藏</span><i></i></a> 
         <a href="user.php?act=follow_shop" class="item <?php if ($this->_var['action'] == 'follow_shop'): ?>curs<?php endif; ?>" title="关注的店铺"><span>店铺关注</span><i></i></a> 
         <a href="user.php?act=auction_list" class="item <?php if ($this->_var['action'] == 'auction_list'): ?>curs<?php endif; ?>"><span>我的竞拍</span><i></i></a> 
-        <a href="user.php?act=bd_list" class="item <?php if ($this->_var['action'] == 'bd_list'): ?>curs<?php endif; ?>"><span>报单中心</span><i></i></a> 
-        <a href="user.php?act=jifen_list" class="item <?php if ($this->_var['action'] == 'jifen_list'): ?>curs<?php endif; ?>"><span>积分变动</span><i></i></a> 
         <a href="user.php?act=tg_login" class="item <?php if ($this->_var['action'] == 'tg_login'): ?>curs<?php endif; ?>"><span><?php echo $this->_var['lang']['takegoods']; ?></span><i></i></a> 
         <a href="user.php?act=tg_order" class="item <?php if ($this->_var['action'] == 'tg_order'): ?>curs<?php endif; ?>"><span><?php echo $this->_var['lang']['takegoods_order']; ?></span><i></i></a>
       </div>
