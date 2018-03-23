@@ -12,7 +12,7 @@
     <td class="label">{$lang.label_change_desc}</td>
     <td><textarea  name="change_desc" cols="60" rows="4"></textarea></td>
   </tr>
-  <tr>
+<!--   <tr>
     <td class="label">{$lang.label_user_money}</td>
     <td><select name="add_sub_user_money" id="add_sub_user_money">
       <option value="1" selected="selected">{$lang.add}</option>
@@ -47,7 +47,38 @@
     </select>
       <input name="pay_points" type="text" id="pay_points" style="text-align:right" value="0" size="10" />
       {$lang.current_value}{$user.pay_points}</td>
+  </tr> -->
+  <!-- new eidt start by ff  -->
+  <tr>
+    <td class="label">收益</td>
+    <td><select name="add_sub_user_money" id="add_sub_user_money">
+      <option value="1" selected="selected">{$lang.add}</option>
+      <option value="-1">{$lang.subtract}</option>
+    </select>
+      <input name="user_money" type="text" id="user_money" style="text-align:right" value="0" size="10" />
+      {$lang.current_value}{$user.user_money}</td>
   </tr>
+
+  <tr>
+    <td class="label">重消</td>
+    <td><select name="add_sub_user_cash" id="add_sub_user_cash">
+      <option value="1" selected="selected">{$lang.add}</option>
+      <option value="-1">{$lang.subtract}</option>
+    </select>
+      <input name="user_cash" type="text" id="user_cash" style="text-align:right" value="0" size="10" />
+      {$lang.current_value}{$user.user_cash}</td>
+  </tr>
+  
+  <tr>
+    <td class="label">企业币</td>
+    <td><select name="add_sub_user_point" id="add_sub_user_point">
+      <option value="1" selected="selected">{$lang.add}</option>
+      <option value="-1">{$lang.subtract}</option>
+    </select>
+      <input name="user_point" type="text" id="user_point" style="text-align:right" value="0" size="10" />
+      {$lang.current_value}{$user.user_point}</td>
+  </tr>
+  <!-- end -->
   <tr>
     <td colspan="2" align="center">
       <input type="submit" class="button" value="{$lang.button_submit}" />
@@ -74,10 +105,10 @@ function validate()
 {
     validator = new Validator("theForm");
     validator.required("change_desc",  no_change_desc);
-	validator.isNumber("user_money", user_money_not_number);
-	validator.isNumber("frozen_money", frozen_money_not_number);
-	validator.isInt("rank_points", rank_points_not_int);
-	validator.isInt("pay_points", pay_points_not_int);
+
+    validator.isNumber("user_money", "收益不是数字");
+    validator.isNumber("user_cash", "重消不是数字");
+    validator.isNumber("user_point", "企业币不是数字");
     return validator.passed();
 }
 

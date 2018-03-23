@@ -62,7 +62,7 @@
                   <!--{else}--> 
                   <span class="price">售价</span><strong class="p-price" id="ECS_GOODS_AMOUNT"></strong> 
                   <!--{/if}--> 
-                  <span class="depreciate"><a href="javascript:showDiv({$goods.goods_id});" style="color:#ffffff;text-decoration:none;">降价通知</a></span> </p>
+                   </p>
               </div>
               <div class="show_price" style="z-index:101"> 
                 <!-- {if $cfg.show_marketprice} 市场价格-->
@@ -73,13 +73,8 @@
                 <!--{/if}--> 
                 <!-- {if $rank_prices} 会员等级价格-->
                 <div class="rank_prices">
-                  <div id="vip1" onmouseover="hidevip1()"> <span class="rmbPrice">会员等级价格<i></i></span> </div>
-                  <div class="hover" style="display:none;" id="vip2" onmouseover="hidevip1()" onmouseout="showvip1()"> <span class="rmbPrice">会员等级价格<i></i></span> 
-                    <!-- {foreach from=$rank_prices item=rank_price key=key}--> 
-                    </br>
-                    <span class="rmbPrice"> {$rank_price.rank_name}：{$rank_price.price}</span> 
-                    <!--{/foreach}--> 
-                  </div>
+                  
+                  
                   <script type="text/javascript">
 function hidevip1()
 { 
@@ -130,28 +125,7 @@ document.getElementById('vip2').style.display="none";
               </li>
               <!-- {/if} -->
             </ul>
-            <div id="summary-qita" class="clearfix">
-              <ul class="qita">
-                <li>
-                  <p>累积评价<span><a href="{$url}#os_pinglun">{$review_count}人评价</a></span></p>
-                </li>
-                <li>
-                  <p>累计销量<span>{$goods.count}</span></p>
-                </li>
-                <!-- {if $goods.give_integral_2 eq '-1'} 购买此商品赠送积分-->
-                <li style="border:none">
-                  <p>赠送积分<span><font id="ECS_GOODS_AMOUNT_jf">{$goods.give_integral}</font></span></p>
-                  <!-- {elseif $goods.give_integral_2 gt 0} -->
-                <li style="border:none">
-                  <p>赠送积分<span>{$goods.give_integral}</span></p>
-                </li>
-                <!-- {else} -->
-                <li style="border:none">
-                  <p>赠送积分<span>0</span></p>
-                </li>
-                <!-- {/if} -->
-              </ul>
-            </div>
+
             <ul id="summary">
               <script type="text/javascript">
                 $(document).ready(function(){
@@ -370,11 +344,7 @@ myString[{$pkey}]="{$prod}";
                 <!-- {else}--> 
                 <a onclick="tell_me({$goods.goods_id})" class="tell_me"/><i></i>到货通知</a>
                 <!-- {/if}--> 
-                <a href="javascript:collect({$goods.goods_id})" class="btn-coll {if $goods.is_collet eq 1}btn-coll-t{/if}">{if $goods.is_collet eq 1}已{/if}收藏</a> <a id="phone" class="btn-phone" style="position:relative;cursor:pointer">去手机购买
-                <div id="phone_tan" style="display:none"> <span class="arr"></span>
-                  <div class="m-qrcode-wrap"> <img src="erweima_png.php?id={$goods.goods_id}" width="100" height="100" /> </div>
-                </div>
-                </a>  
+                
               </div>
               <script type="text/javascript">
 		$("#phone").mouseover( function(){	
