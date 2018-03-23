@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base href="http://www.thefirst.com/" />
+<base href="http://www.xu.com/" />
 <meta name="Generator" content="HongYuJD v7_2" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="Keywords" content="<?php echo $this->_var['keywords']; ?>" />
@@ -913,11 +913,6 @@ menu.className=i==cursel?"active":"";
               }
               
             </script>
-			
-			
-			
-			
-			
               <form name="formIdentity" action="user.php" method="post" onsubmit="return identity()" enctype="multipart/form-data">
                 <table width="100%" border="0"  cellpadding="10" cellspacing="1"  bgcolor="#E6E6E6">
                   <?php if ($this->_var['profile']['status'] > 0): ?>
@@ -996,101 +991,6 @@ menu.className=i==cursel?"active":"";
             </div>
           </div>
           <?php endif; ?> 
-		  
-		  
-		  
-			<?php if ($this->_var['action'] == 'bd_list'): ?>
-				<div class="tabmenu">
-					<ul class="tab pngFix">
-					<li class="active">报单中心</li>
-					</ul>
-				</div>
-				<div class="blank"></div>
-				<table width="100%" border="0" cellspacing="1" cellpadding="0" class="item_list">
-					<!-- <thead> -->
-					  
-					<!-- </thead> -->
-					<tbody class="close-order">
-						<tr class="col-name">
-							<th width="15%" style="border-left: 1px solid #E6E6E6;">用户ID</th>
-							<th width="15%">父ID</th>
-							<th width="15%">用户名</th>
-							<th width="20%">手机号</th>
-							<th width="20%">会员级别</th>
-							<th width="15%">状态</th>
-							<!-- <th width="13%" style="border-right: 1px solid #E6E6E6;">操作</th> -->
-						</tr>
-						<?php $_from = $this->_var['bdlist']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item');if (count($_from)):
-    foreach ($_from AS $this->_var['item']):
-?>
-							<tr>
-								<td align="center"><?php echo $this->_var['item']['user_id']; ?></td>
-								<td align="center"><?php echo $this->_var['item']['parent_id']; ?></td>
-								<td align="center"><?php echo $this->_var['item']['user_name']; ?></td>
-								<td align="center"><?php echo $this->_var['item']['mobile_phone']; ?></td>
-								<!-- <td align="center"><?php echo $this->_var['item']['user_rank']; ?></td> -->
-								<td align="center">
-									<?php if ($this->_var['item']['user_rank'] == 1): ?>普卡
-									<?php elseif ($this->_var['item']['user_rank'] == 2): ?>银卡
-									<?php elseif ($this->_var['item']['user_rank'] == 3): ?>金卡
-									<?php elseif ($this->_var['item']['user_rank'] == 4): ?>钻卡
-									<?php endif; ?>
-								</td>
-								<td align="center"><?php if ($this->_var['item']['user_status'] == 0): ?>未激活<?php else: ?>已激活<?php endif; ?></td>
-							</tr>
-						<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
-					</tbody>
-				</table>
-			  
-		<?php endif; ?>
-		
-		
-			<?php if ($this->_var['action'] == 'jifen_list'): ?>
-				<div class="tabmenu">
-					<ul class="tab pngFix">
-					<li class="active">积分变动</li>
-					</ul>
-				</div>
-				<div class="blank"></div>
-				<table width="100%" border="0" cellspacing="1" cellpadding="0" class="item_list">
-					<!-- <thead> -->
-					  
-					<!-- </thead> -->
-					<tbody class="close-order">
-						<tr class="col-name">
-							<th width="15%">收益</th>
-							<th width="15%">重销</th>
-							<th width="15%">企业币</th>
-							<th width="15%">类型</th>
-							<th width="20%">时间</th>
-							<th width="20%">理由</th>
-							<!-- <th width="13%" style="border-right: 1px solid #E6E6E6;">操作</th> -->
-						</tr>
-						<?php $_from = $this->_var['jifenlist']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item');if (count($_from)):
-    foreach ($_from AS $this->_var['item']):
-?>
-							<tr>
-								<td align="center"><?php echo $this->_var['item']['user_money']; ?></td>
-								<td align="center"><?php echo $this->_var['item']['user_cash']; ?></td>
-								<td align="center"><?php echo $this->_var['item']['user_point']; ?></td>
-								<td align="center">
-									<?php if ($this->_var['item']['change_type'] == 99): ?>自定义
-									<?php elseif ($this->_var['item']['change_type'] == 2): ?>
-									<?php elseif ($this->_var['item']['change_type'] == 3): ?>
-									<?php elseif ($this->_var['item']['change_type'] == 4): ?>
-									<?php endif; ?>
-								</td>
-								<td align="center"><?php echo $this->_var['item']['change_time']; ?></td>
-								<td align="center"><?php echo $this->_var['item']['change_desc']; ?></td>
-							</tr>
-						<?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
-					</tbody>
-				</table>
-				<?php echo $this->fetch('library/pages.lbi'); ?>
-			  
-		<?php endif; ?>
-		  
-		  
           <?php if ($this->_var['action'] == 'update_password_'): ?>
           
           <h5 class="user-title user-title-t"><span>修改登录密码</span></h5>

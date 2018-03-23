@@ -46,7 +46,6 @@ $_LANG['defaultshow'] = '默认快递';
 $_LANG['list'] = '列表';
 $_LANG['add'] = '添加';
 $_LANG['edit'] = '编辑';
-$_LANG['tupu'] = '查看图谱';
 $_LANG['view'] = '查看';
 $_LANG['remove'] = '移除';
 $_LANG['drop'] = '删除';
@@ -429,6 +428,57 @@ $_LANG['cfg_name']['supplier_privilege'] = '入驻商设置';
 $_LANG['cfg_name']['supplier_addbest'] = '加入推荐权限';
 $_LANG['cfg_name']['supplier_editgoods'] = '更改商品信息权限';
 $_LANG['cfg_name']['supplier_secondadd'] = '审核未通过商品再次提交';
+
+/*point菜单项的语言 edit by ff 3.19*/
+$_LANG['cfg_name']['a_card_buynum'] = '普卡购物金额（元）';
+$_LANG['cfg_name']['a_card_point'] = '普卡赠送企业币（个）';
+$_LANG['cfg_name']['a_card_introduct'] = '普卡20层点奖（%）';
+$_LANG['cfg_name']['a_card_advance'] = '普卡店铺招商奖（%）';
+$_LANG['cfg_name']['a_card_first'] = '普卡首单奖（层碰奖）（%）';
+$_LANG['cfg_name']['a_card_achievement']= '普卡业绩奖（对碰奖)(%)';
+$_LANG['cfg_name']['a_card_top'] = '普卡每日封顶额（元）';
+$_LANG['cfg_name']['a_card_manage_1'] = '普卡1-2代团队管理奖';
+$_LANG['cfg_name']['a_card_manage_2'] = '普卡3-5代团队管理奖（%）';
+$_LANG['cfg_name']['a_card_manage_3'] = '普卡6-8代团队管理奖（%）';
+$_LANG['cfg_name']['a_card_manage_4'] = '普卡9-15代团队管理奖（%）';
+
+$_LANG['cfg_name']['b_card_buynum'] = '银卡购物金额（元）';
+$_LANG['cfg_name']['b_card_point'] = '银卡赠送企业币（个）';
+$_LANG['cfg_name']['b_card_introduct'] = '银卡20层点奖（%）';
+$_LANG['cfg_name']['b_card_advance'] = '银卡店铺招商奖（%）';
+$_LANG['cfg_name']['b_card_first'] = '银卡首单奖（层碰奖）（%）';
+$_LANG['cfg_name']['b_card_achievement'] = '银卡业绩奖（对碰奖）（%）';
+$_LANG['cfg_name']['b_card_top'] = '银卡每日封顶额（元）';
+$_LANG['cfg_name']['b_card_manage_1'] = '银卡1-2代团队管理奖';
+$_LANG['cfg_name']['b_card_manage_2'] = '普卡3-5代团队管理奖（%）';
+$_LANG['cfg_name']['b_card_manage_3'] = '银卡6-8代团队管理奖（%）';
+$_LANG['cfg_name']['b_card_manage_4'] = '银卡9-15代团队管理奖（%）';
+
+$_LANG['cfg_name']['c_card_buynum'] = '金卡购物金额（元）';
+$_LANG['cfg_name']['c_card_point'] = '金卡赠送企业币（个）';
+$_LANG['cfg_name']['c_card_introduct'] = '金卡20层点奖（%）';
+$_LANG['cfg_name']['c_card_advance'] = '金卡店铺招商奖（%）';
+$_LANG['cfg_name']['c_card_first'] = '金卡首单奖（层碰奖）（%）';
+$_LANG['cfg_name']['c_card_achievement'] = '金卡业绩奖（对碰奖）（%）';
+$_LANG['cfg_name']['c_card_top'] = '金卡每日封顶额（元）';
+$_LANG['cfg_name']['c_card_manage_1'] = '金卡1-2代团队管理奖';
+$_LANG['cfg_name']['c_card_manage_2'] = '金卡3-5代团队管理奖（%）';
+$_LANG['cfg_name']['c_card_manage_3'] = '金卡6-8代团队管理奖（%）';
+$_LANG['cfg_name']['c_card_manage_4'] = '金卡9-15代团队管理奖（%）';
+
+$_LANG['cfg_name']['d_card_buynum'] = '钻卡购物金额（元）';
+$_LANG['cfg_name']['d_card_point'] = '钻卡赠送企业币（个）';
+$_LANG['cfg_name']['d_card_introduct'] = '钻卡20层点奖（%）';
+$_LANG['cfg_name']['d_card_advance'] = '钻卡店铺招商奖（%）';
+$_LANG['cfg_name']['d_card_first'] = '钻卡首单奖（层碰奖）（%）';
+$_LANG['cfg_name']['d_card_achievement'] = '钻卡业绩奖（对碰奖）（%）';
+$_LANG['cfg_name']['d_card_top'] = '钻卡每日封顶额（元）';
+$_LANG['cfg_name']['d_card_manage_1'] = '钻卡1-2代团队管理奖';
+$_LANG['cfg_name']['d_card_manage_2'] = '钻卡3-5代团队管理奖（%）';
+$_LANG['cfg_name']['d_card_manage_3'] = '钻卡6-8代团队管理奖（%）';
+$_LANG['cfg_name']['d_card_manage_4'] = '钻卡9-15代团队管理奖（%）';
+$_LANG['cfg_name']['charge'] = '手续费（%）';
+
 // 代码增加
 $_LANG['cfg_name']['supplier_comment'] = '能否控制订单评论';
 $_LANG['cfg_range']['supplier_comment']['1'] = '开启';

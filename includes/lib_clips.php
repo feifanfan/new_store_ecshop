@@ -617,19 +617,18 @@ function get_user_surplus($user_id)
  */
 function get_user_default($user_id)
 {
-    // $user_bonus = get_user_bonus();
+    $user_bonus = get_user_bonus();
 /*代码修改2014-12-23 by bbs.hongyuvip.com  _star */
     $sql = "SELECT * FROM " .$GLOBALS['ecs']->table('users'). " WHERE user_id = '$user_id'";
 /*代码修改2014-12-23 by bbs.hongyuvip.com  _end */
     $row = $GLOBALS['db']->getRow($sql);
     /* 代码增加_start By bbs.hongyuvip.com */
     $_SESSION['user_name'] =$row['user_name'];
-	
     /* 代码增加_end By bbs.hongyuvip.com */
     $info = array();
     $info['username']  = stripslashes($_SESSION['user_name']);
     $info['shop_name'] = $GLOBALS['_CFG']['shop_name'];
-    $info['integral']  = $row['user_point'] . $GLOBALS['_CFG']['integral_name'];
+    $info['integral']  = $row['pay_points'] . $GLOBALS['_CFG']['integral_name'];
     /* 增加是否开启会员邮件验证开关 */
     $info['is_validate'] = ($GLOBALS['_CFG']['member_email_validate'] && !$row['is_validated'])?0:1;
     $info['credit_line'] = $row['credit_line'];
@@ -653,8 +652,7 @@ function get_user_default($user_id)
 
     $info['last_time'] = local_date($GLOBALS['_CFG']['time_format'], $last_time);
     $info['surplus']   = price_format($row['user_money'], false);
-    $info['bonus']   = price_format($row['user_cash'], false);
-    // $info['bonus']     = sprintf($GLOBALS['_LANG']['user_bonus_info'], $user_bonus['bonus_count'], price_format($user_bonus['bonus_value'], false));
+    $info['bonus']     = sprintf($GLOBALS['_LANG']['user_bonus_info'], $user_bonus['bonus_count'], price_format($user_bonus['bonus_value'], false));
 
     $sql = "SELECT COUNT(*) FROM " .$GLOBALS['ecs']->table('order_info').
             " WHERE user_id = '" .$user_id. "' AND add_time > '" .local_strtotime('-1 months'). "'";

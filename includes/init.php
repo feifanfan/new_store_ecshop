@@ -4,7 +4,7 @@
  * 鸿宇多用户商城 前台公用文件
  * ============================================================================
  * 版权所�&#65533; 2005-2010 鸿宇多用户商城科技有限公司，并保留所有权利�&#65533;
- * 网站地址: http://bbs.hongfsyuvip.com�&#65533;
+ * 网站地址: http://bbs.hongyuvip.com�&#65533;
  * ----------------------------------------------------------------------------
  * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改�&#65533;
  * 使用；不允许对程序代码以任何形式任何目的的再发布�&#65533;
@@ -181,7 +181,6 @@ if (!defined('INIT_NO_SMARTY'))
         $smarty->cache_dir      = ROOT_PATH . 'themesmobile/temp/caches';
         $smarty->compile_dir    = ROOT_PATH . 'themesmobile/temp/compiled';
     }else{
-       
         $smarty->template_dir   = ROOT_PATH . 'themes/' . $_CFG['template'];
         $smarty->cache_dir      = ROOT_PATH . 'temp/caches';
         $smarty->compile_dir    = ROOT_PATH . 'temp/compiled';
