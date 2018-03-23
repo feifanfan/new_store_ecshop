@@ -265,70 +265,7 @@ function action_check_email_exist ()
 		echo 'false';
 	}
 }
-function action_check_username_exist ()
-{
-	$_LANG = $GLOBALS['_LANG'];
-	$_CFG = $GLOBALS['_CFG'];
-	$smarty = $GLOBALS['smarty'];
-	$db = $GLOBALS['db'];
-	$ecs = $GLOBALS['ecs'];
-	
-	$username = empty($_POST['username']) ? '' : $_POST['username'];
-	$username = htmlspecialchars($username);
-	if(strlen($username)<6){
-		echo "lenfalse";
-		return;
-	}
-	$sql = "SELECT * FROM ".$ecs->table('users') ." where user_name = '$username'";
-	$result = $db->getOne($sql);
-	if($result!=''){
-		echo "false";
-	}else{
-		echo "true";
-	}
-}
 
-function action_check_user_parent(){
-	$_LANG = $GLOBALS['_LANG'];
-	$_CFG = $GLOBALS['_CFG'];
-	$smarty = $GLOBALS['smarty'];
-	$db = $GLOBALS['db'];
-	$ecs = $GLOBALS['ecs'];
-	$user_parent_mobile = empty($_POST['user_parent_mobile']) ? '' : trim($_POST['user_parent_mobile']);
-	if(is_numeric($user_parent_mobile)){
-		$result = check_mobile($user_parent_mobile);
-		if($result){
-			echo $result['user_name'];
-		}else{
-			echo "false";
-		}
-	}
-}
-function action_check_bd_parent(){
-	$_LANG = $GLOBALS['_LANG'];
-	$_CFG = $GLOBALS['_CFG'];
-	$smarty = $GLOBALS['smarty'];
-	$db = $GLOBALS['db'];
-	$ecs = $GLOBALS['ecs'];
-	$user_parent_mobile = empty($_POST['user_parent_mobile']) ? '' : trim($_POST['user_parent_mobile']);
-	if(is_numeric($user_parent_mobile)){
-		$result = check_mobile($user_parent_mobile);
-		if($result){
-			echo $result['user_name'];
-		}else{
-			echo "false";
-		}
-	}
-}
-function check_mobile($mobile){
-	$sql = "select * from ".$GLOBALS['ecs']->table('users')." where mobile_phone='$mobile'";
-	$result = $GLOBALS['db']->getRow($sql);
-	if(!empty($result)){
-		return $result;
-	}else{
-		return false;
-	}
-}
 function action_check_mobile_exist ()
 {
 	$_LANG = $GLOBALS['_LANG'];
@@ -437,13 +374,7 @@ function action_register ()
 		$other['mobile_phone'] = isset($_POST['extend_field5']) ? $_POST['extend_field5'] : '';
 		$sel_question = empty($_POST['sel_question']) ? '' : compile_str($_POST['sel_question']);
 		$passwd_answer = isset($_POST['passwd_answer']) ? compile_str(trim($_POST['passwd_answer'])) : '';
-		$mobile_phone =isset($_POST['mobile_phone'])?trim($_POST['mobile_phone']):'';
-		$user_parent_phone = isset($_POST['user_parent'])?trim($_POST['user_parent']):'';
-		$bd_phone = isset($_POST['bd_phone'])?trim($_POST['bd_phone']):'';
-		$user_rank = isset($_POST['user_rank'])?trim($_POST['user_rank']):'';
-		if(empty($user_rank)||$user_rank>4||$user_rank<=0){
-			show_message("请选择会员等级");
-		}
+		
 		// 注册类型：email、mobile
 		$register_type = isset($_POST['register_type']) ? trim($_POST['register_type']) : '';
 		
@@ -494,8 +425,50 @@ function action_register ()
 				show_message($_LANG['invalid_captcha'], $_LANG['sign_up'], 'register.php', 'error');
 			}
 		}
+		
+		if($register_type == "email")
+		{
+			/* 邮箱验证码检查 */
+			require_once (ROOT_PATH . 'includes/lib_validate_record.php');
+			
+			if(empty($email))
+			{
+				show_message($_LANG['msg_email_blank'], $_LANG['sign_up'], 'register.php', 'error');
+			}
+			
+			$record = get_validate_record($email);
+			
+			$session_email = $_SESSION[VT_EMAIL_REGISTER];
+			
+			$email_code = ! empty($_POST['email_code']) ? trim($_POST['email_code']) : '';
+			
+			if(empty($email_code))
+			{
+				show_message($_LANG['msg_email_code_blank'], $_LANG['sign_up'], 'register.php', 'error');
+			}
+			else if($session_email != $email)
+			{
+				show_message($_LANG['email_changed'], $_LANG['sign_up'], 'register.php', 'error');
+			}
+			else if($email_code != $record['record_code'])
+			{
+				show_message($_LANG['invalid_email_code'], $_LANG['sign_up'], 'register.php', 'error');
+			}
+			
+			/* 邮箱注册时 */
+//			$username = generate_username();
+            $username = $email;
 
-		if($register_type == "mobile")
+			/* 邮箱注册 */
+			$result = register_by_email($username, $password, $email, $other);
+			
+			if($result)
+			{
+				/* 删除注册的验证记录 */
+				remove_validate_record($email);
+			}
+		}
+		else if($register_type == "mobile")
 		{
 			
 			require_once (ROOT_PATH . 'includes/lib_validate_record.php');
@@ -505,38 +478,34 @@ function action_register ()
 			
 			$record = get_validate_record($mobile_phone);
 			
-			//$session_mobile_phone = $_SESSION[VT_MOBILE_REGISTER];
+			$session_mobile_phone = $_SESSION[VT_MOBILE_REGISTER];
 			
 			/* 手机验证码检查 */
-			/**************delect 验证码
-			// if(empty($mobile_code))
-			// {
-			// 	show_message($_LANG['msg_mobile_phone_blank'], $_LANG['sign_up'], 'register.php', 'error');
-			// }
-			// // 检查发送短信验证码的手机号码和提交的手机号码是否匹配
-			// else if($session_mobile_phone != $mobile_phone)
-			// {
-			// 	show_message($_LANG['mobile_phone_changed'], $_LANG['sign_up'], 'register.php', 'error');
-			// }
-			// // 检查验证码是否正确
-			// else if($record['record_code'] != $mobile_code)
-			// {
-			// 	show_message($_LANG['invalid_mobile_phone_code'], $_LANG['sign_up'], 'register.php', 'error');
-			// }
-			// // 检查过期时间
-			// else if($record['expired_time'] < time())
-			// {
-			// 	show_message($_LANG['invalid_mobile_phone_code'], $_LANG['sign_up'], 'register.php', 'error');
-			// }
-			*////////////////
+			
+			if(empty($mobile_code))
+			{
+				show_message($_LANG['msg_mobile_phone_blank'], $_LANG['sign_up'], 'register.php', 'error');
+			}
+			// 检查发送短信验证码的手机号码和提交的手机号码是否匹配
+			else if($session_mobile_phone != $mobile_phone)
+			{
+				show_message($_LANG['mobile_phone_changed'], $_LANG['sign_up'], 'register.php', 'error');
+			}
+			// 检查验证码是否正确
+			else if($record['record_code'] != $mobile_code)
+			{
+				show_message($_LANG['invalid_mobile_phone_code'], $_LANG['sign_up'], 'register.php', 'error');
+			}
+			// 检查过期时间
+			else if($record['expired_time'] < time())
+			{
+				show_message($_LANG['invalid_mobile_phone_code'], $_LANG['sign_up'], 'register.php', 'error');
+			}
+			
 			/* 手机注册时，用户名默认为u+手机号 */
 //			$username = generate_username_by_mobile($mobile_phone);
-            //$username = $mobile_phone;
-            $parent_id =$GLOBALS['db']->getOne('select * from'.$GLOBALS['ecs']->table('users').' where mobile_phone='.$user_parent_phone);
-			$parent_son = $GLOBALS['db']->getOne("select count(user_id) from ".$GLOBALS['ecs']->table('users').' where parent_id = '.$parent_id);
-			if($parent_son>=2){
-				show_message('该推荐人不满足条件', $_LANG['sign_up'], 'register.php', 'error');
-			}
+            $username = $mobile_phone;
+
 			/* 手机注册 */
 			$result = register_by_mobile($username, $password, $mobile_phone, $other);
 			
@@ -557,33 +526,6 @@ function action_register ()
 		
 		if($result)
 		{
-
-			/*推荐关系*/
-			$parent_sql ='select * from'.$GLOBALS['ecs']->table('users').' where mobile_phone='.$user_parent_phone;
-			$parent = $GLOBALS['db']->getRow($parent_sql);
-			//var_dump($parent);die;
-			$parent_id = $parent['user_id'];
-			if(!empty($parent)){
-				$id_list = $parent['id_list'].",".$_SESSION['user_id'];
-			}else{
-				$id_list=$_SESSION['user_id'];
-			}
-			$parent_son = $GLOBALS['db']->getOne("select count(*) from ".$GLOBALS['ecs']->table('users').'  where parent_id = '.$parent_id);
-			if($parent_son==0){
-				$parent_side = 1;
-			}else if($parent_son==1){
-				$parent_side = 2;
-			}
-			if($parent['parent_side']==''){
-				$side_list = $parent_side;
-			}else{
-				$side_list = $parent['parent_side'].','.$parent_side;
-			}
-			$bd_id =$GLOBALS['db']->getOne('select user_id from'.$GLOBALS['ecs']->table('users').' where mobile_phone='.$bd_phone);
-			$deep = $parent['deep']+1;
-			$sql = "UPDATE " .$GLOBALS['ecs']->table('users')."SET parent_id='$parent_id',id_list='$id_list',parent_side = '$parent_side',side_list = '$side_list',deep = '$deep',user_rank='$user_rank',bd_id='$bd_id' where user_id = ".$_SESSION['user_id'];
-			$GLOBALS['db']->query($sql);
-
 			/* 把新注册用户的扩展信息插入数据库 */
 			$sql = 'SELECT id FROM ' . $ecs->table('reg_fields') . ' WHERE type = 0 AND display = 1 ORDER BY dis_order, id'; // 读出所有自定义扩展字段的id
 			$fields_arr = $db->getAll($sql);
@@ -605,6 +547,46 @@ function action_register ()
 				$sql = 'INSERT INTO ' . $ecs->table('reg_extend_info') . ' (`user_id`, `reg_field_id`, `content`) VALUES' . $extend_field_str;
 				$db->query($sql);
 			}
+			/* 代码增加2014-12-23 by bbs.hongyuvip.com _star */
+			// if($_SESSION['tag'] > 0)
+			// {
+			// $sql = "update " . $GLOBALS['ecs']->table('users') . " set
+			// is_validated = 1 where user_id = '" . $_SESSION['user_id'] . "'";
+			// $GLOBALS['db']->query($sql);
+			// }
+			
+			// if($other['mobile_phone'] != '')
+			// {
+			// if($_CFG['sms_register'] == 1)
+			// {
+			// $sql = "update " . $GLOBALS['ecs']->table('users') . " set
+			// validated = 1 where user_id = '" . $_SESSION['user_id'] . "'";
+			// $GLOBALS['db']->query($sql);
+			// }
+			// }
+			/* 代码增加2014-12-23 by bbs.hongyuvip.com _end */
+			/*
+			 * 代码增加_start By bbs.hongyuvip.com
+			 * include_once(ROOT_PATH . '/includes/cls_image.php');
+			 * $image = new cls_image($_CFG['bgcolor']);
+			 * $headimg_original =
+			 * $GLOBALS['image']->upload_image($_FILES['headimg'], 'headimg/'.
+			 * date('Ym'));
+			 *
+			 * $thumb_path=DATA_DIR. '/headimg/' . date('Ym').'/' ;
+			 * $headimg_thumb = $GLOBALS['image']->make_thumb($headimg_original,
+			 * '80', '50', $thumb_path);
+			 * $headimg_thumb = $headimg_thumb ? $headimg_thumb :
+			 * $headimg_original;
+			 * if ($headimg_thumb)
+			 * {
+			 * $sql = 'UPDATE ' . $ecs->table('users') . " SET
+			 * `headimg`='$headimg_thumb' WHERE `user_id`='" .
+			 * $_SESSION['user_id'] . "'";
+			 * $db->query($sql);
+			 * }
+			 * 代码增加_end By bbs.hongyuvip.com
+			 */
 			
 			/* 写入密码提示问题和答案 */
 			if(! empty($passwd_answer) && ! empty($sel_question))

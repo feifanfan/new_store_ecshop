@@ -3807,8 +3807,7 @@ function is_pups($id){
 */
 function get_pickup_info($cityid,$suppid=0){
 	global $db,$ecs;
-	//$sql = "select pp.*,r.region_name from ".$ecs->table('pickup_point')." as pp left join ".$ecs->table('region')." as r on pp.district_id=r.region_id where pp.city_id=".$cityid." and pp.supplier_id=".$suppid." order by pp.id";
-    $sql = "select pp.*,r.region_name from ".$ecs->table('pickup_point')." as pp left join ".$ecs->table('region')." as r on pp.district_id=r.region_id where pp.city_id=".$cityid." order by pp.id";
+	$sql = "select pp.*,r.region_name from ".$ecs->table('pickup_point')." as pp left join ".$ecs->table('region')." as r on pp.district_id=r.region_id where pp.city_id=".$cityid." and pp.supplier_id=".$suppid." order by pp.id";
 	$info = $db->getAll($sql);
 	return $info;
 }

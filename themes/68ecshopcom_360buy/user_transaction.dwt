@@ -891,6 +891,11 @@ menu.className=i==cursel?"active":"";
               }
               {/literal}
             </script>
+			
+			
+			
+			
+			
               <form name="formIdentity" action="user.php" method="post" onsubmit="return identity()" enctype="multipart/form-data">
                 <table width="100%" border="0"  cellpadding="10" cellspacing="1"  bgcolor="#E6E6E6">
                   {if $profile.status gt 0}
@@ -961,6 +966,97 @@ menu.className=i==cursel?"active":"";
             </div>
           </div>
           <!--{/if}--> 
+		  
+		  
+		  <!-- 报单中心 -->
+			{if $action eq 'bd_list'}
+				<div class="tabmenu">
+					<ul class="tab pngFix">
+					<li class="active">报单中心</li>
+					</ul>
+				</div>
+				<div class="blank"></div>
+				<table width="100%" border="0" cellspacing="1" cellpadding="0" class="item_list">
+					<!-- <thead> -->
+					  
+					<!-- </thead> -->
+					<tbody class="close-order">
+						<tr class="col-name">
+							<th width="15%" style="border-left: 1px solid #E6E6E6;">用户ID</th>
+							<th width="15%">父ID</th>
+							<th width="15%">用户名</th>
+							<th width="20%">手机号</th>
+							<th width="20%">会员级别</th>
+							<th width="15%">状态</th>
+							<!-- <th width="13%" style="border-right: 1px solid #E6E6E6;">操作</th> -->
+						</tr>
+						{foreach from=$bdlist item=item}
+							<tr>
+								<td align="center">{$item.user_id}</td>
+								<td align="center">{$item.parent_id}</td>
+								<td align="center">{$item.user_name}</td>
+								<td align="center">{$item.mobile_phone}</td>
+								<!-- <td align="center">{$item.user_rank}</td> -->
+								<td align="center">
+									{if $item.user_rank eq 1}普卡
+									{elseif $item.user_rank eq 2}银卡
+									{elseif $item.user_rank eq 3}金卡
+									{elseif $item.user_rank eq 4}钻卡
+									{/if}
+								</td>
+								<td align="center">{if $item.user_status eq 0}未激活{else}已激活{/if}</td>
+							</tr>
+						{/foreach}
+					</tbody>
+				</table>
+			  
+		{/if}
+		
+		<!-- 积分变动 -->
+			{if $action eq 'jifen_list'}
+				<div class="tabmenu">
+					<ul class="tab pngFix">
+					<li class="active">积分变动</li>
+					</ul>
+				</div>
+				<div class="blank"></div>
+				<table width="100%" border="0" cellspacing="1" cellpadding="0" class="item_list">
+					<!-- <thead> -->
+					  
+					<!-- </thead> -->
+					<tbody class="close-order">
+						<tr class="col-name">
+							<th width="15%">收益</th>
+							<th width="15%">重销</th>
+							<th width="15%">企业币</th>
+							<th width="15%">类型</th>
+							<th width="20%">时间</th>
+							<th width="20%">理由</th>
+							<!-- <th width="13%" style="border-right: 1px solid #E6E6E6;">操作</th> -->
+						</tr>
+						{foreach from=$jifenlist item=item}
+							<tr>
+								<td align="center">{$item.user_money}</td>
+								<td align="center">{$item.user_cash}</td>
+								<td align="center">{$item.user_point}</td>
+								<td align="center">
+									{if $item.change_type eq 99}自定义
+									{elseif $item.change_type eq 2}
+									{elseif $item.change_type eq 3}
+									{elseif $item.change_type eq 4}
+									{/if}
+								</td>
+								<td align="center">{$item.change_time|time}</td>
+								<td align="center">{$item.change_desc}</td>
+							</tr>
+						{/foreach}
+					</tbody>
+				</table>
+				<!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+			  
+		{/if}
+		  
+		  
           <!--{if $action eq 'update_password_'}-->
           <!-- 老的修改密码方式 -->
           <h5 class="user-title user-title-t"><span>修改登录密码</span></h5>

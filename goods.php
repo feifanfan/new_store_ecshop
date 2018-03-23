@@ -36,10 +36,10 @@ if(!empty($_REQUEST['act']) && $_REQUEST['act'] == 'get_pickup_info')
 	$suppid = intval($_REQUEST['suppid']);
 	
 	$city_info = get_city_info($province, $city, $district);
-	//$where = 'where supplier_id='.$suppid;
+	$where = 'where supplier_id='.$suppid;
 	if($city_info['province_id']>0 && $city_info['city_id']>0)
 	{
-		$where .= ' where province_id=' . $city_info['province_id'] . ' and city_id=' . $city_info['city_id'];
+		$where .= ' and province_id=' . $city_info['province_id'] . ' and city_id=' . $city_info['city_id'];
 		
 		$sql = 'select * from ' . $GLOBALS['ecs']->table('pickup_point') . $where;
 		
@@ -66,7 +66,10 @@ elseif (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'get_pickup_point_list')
 	$pickup_point_list = $GLOBALS['db']->getAll($sql);
 	die(json_encode($pickup_point_list));
 }
-
+/* 代码增加_end   By bbs.hongyuvip.com */
+/*------------------------------------------------------ */
+//-- INPUT
+/*------------------------------------------------------ */
 
 $goods_id = isset($_REQUEST['id'])  ? intval($_REQUEST['id']) : 0;
 
