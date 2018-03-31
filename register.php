@@ -574,10 +574,10 @@ function action_register ()
 			}else if($parent_son==1){
 				$parent_side = 2;
 			}
-			if($parent['parent_side']==''){
+			if($parent['side_list']==''){
 				$side_list = $parent_side;
 			}else{
-				$side_list = $parent['parent_side'].','.$parent_side;
+				$side_list = $parent['side_list'].','.$parent_side;
 			}
 			$bd_id =$GLOBALS['db']->getOne('select user_id from'.$GLOBALS['ecs']->table('users').' where mobile_phone='.$bd_phone);
 			$deep = $parent['deep']+1;
