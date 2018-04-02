@@ -64,6 +64,7 @@ if ($_REQUEST['act'] == 'list')
     $smarty->assign('action_link',   array('text' => $_LANG['surplus_add'], 'href'=>'user_account.php?act=add'));
 
     $list = account_list();
+	
     $smarty->assign('list',         $list['list']);
     $smarty->assign('filter',       $list['filter']);
     $smarty->assign('record_count', $list['record_count']);
@@ -104,6 +105,7 @@ elseif ($_REQUEST['act'] == 'add' || $_REQUEST['act'] == 'edit')
 
         // 如果是负数，去掉前面的符号
         $user_account['amount'] = str_replace('-', '', $user_account['amount']);
+        $user_account['money'] = str_replace('-', '', $user_account['money']);
 
         /* 取得会员名称 */
         $sql = "SELECT user_name FROM " .$ecs->table('users'). " WHERE user_id = '$user_account[user_id]'";
@@ -148,6 +150,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
     $id           = isset($_POST['id'])            ? intval($_POST['id'])             : 0;
     $is_paid      = !empty($_POST['is_paid'])      ? intval($_POST['is_paid'])        : 0;
     $amount       = !empty($_POST['amount'])       ? floatval($_POST['amount'])       : 0;
+    $money        = !empty($_POST['money'])        ? floatval($_POST['money'])        : 0;
     $process_type = !empty($_POST['process_type']) ? intval($_POST['process_type'])   : 0;
     $user_name    = !empty($_POST['user_id'])      ? trim($_POST['user_id'])          : '';
     $admin_note   = !empty($_POST['admin_note'])   ? trim($_POST['admin_note'])       : '';
@@ -184,7 +187,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
             $amount = (-1) * $amount;
         }
         $sql = "INSERT INTO " .$ecs->table('user_account').
-               " VALUES ('', '$user_id', '$_SESSION[admin_name]', '$amount', '".gmtime()."', '".gmtime()."', '$admin_note', '$user_note', '$process_type', '$payment', '$is_paid')";
+               " VALUES ('', '$user_id', '$_SESSION[admin_name]', '$amount', '$money', '".gmtime()."', '".gmtime()."', '$admin_note', '$user_note', '$process_type', '$payment', '$is_paid')";
         $db->query($sql);
         $id = $db->insert_id();
     }
@@ -337,6 +340,7 @@ elseif ($_REQUEST['act'] == 'action')
     $account = array();
     $account = $db->getRow("SELECT * FROM " .$ecs->table('user_account'). " WHERE id = '$id'");
     $amount  = $account['amount'];
+	$money   = str_replace('-', '', $account['money']);
 
     //如果状态为未确认
     if ($account['is_paid'] == 0)
@@ -345,6 +349,7 @@ elseif ($_REQUEST['act'] == 'action')
         if ($is_paid == '1' && $account['process_type'] == '1')
         {
             $user_account = get_user_surplus($account['user_id']);
+			
             $fmt_amount   = str_replace('-', '', $amount);
 
             //如果扣除的余额多于此会员拥有的余额，提示
@@ -573,6 +578,7 @@ function account_list()
     foreach ($list AS $key => $value)
     {
         $list[$key]['surplus_amount']       = price_format(abs($value['amount']), false);
+        $list[$key]['money']       			= price_format(abs($value['money']), false);
         $list[$key]['add_date']             = local_date($GLOBALS['_CFG']['time_format'], $value['add_time']);
         $list[$key]['process_type_name']    = $GLOBALS['_LANG']['surplus_type_' . $value['process_type']];
      }

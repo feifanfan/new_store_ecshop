@@ -57,23 +57,23 @@ function erweima1(obj, sType) { var oDiv = document.getElementById(obj); if (sTy
                 	<form action="register.php" method="post" id="formRegister" name="formRegister">
                         <input type="hidden" id="register_type" name="register_type" value="${register_type}" />
                         <ul class="register_tab">
-                            <li id="li_register_type_mobile" class="tab_item fl" register_type="mobile">注册账号<span class="bg_ff"></span></li>
-                            <!-- <li id="li_register_type_email" class="tab_item cur fl" register_type="email">邮箱注册<span class="bg_ff"></span></li> -->
+                            <li id="li_register_type_mobile" class="tab_item fl" register_type="mobile">手机注册<span class="bg_ff"></span></li>
+                            <li id="li_register_type_email" class="tab_item cur fl" register_type="email">邮箱注册<span class="bg_ff"></span></li>
                             <li class="have_account fr">已有账号！<a href="user.php?act=login">登录</a></li>
                         </ul>
                     </form>
 					<form action="register.php" method="post" id="formUser" name="formUser" >
 						<div class="form">
 						<input type="hidden" name="register_type" value="{$register_type}" />
-						<!-- 用户名 -->
+							<!-- {if $register_type eq 'email'} -->
 							<div class="item">
-								<input name="username" type="text" id="username" placeholder="用户名" onblur="checkusername(this)"  class="text" />
-								<i class="i-phone"></i>
+								<input name="email" type="text" id="email" placeholder="{$lang.label_email}" onblur="checkEmail(this)" class="text email" />
+								<i class="i-email"></i>
 								<div>
-									<span class="label" id="username_notice"></span>
+									<span class="label" id="email_notice"></span>
 								</div>
 							</div>
-							<!-- 手机号 -->
+							<!-- {else} -->
 							<div class="item">
 								<input name="mobile_phone" type="text" id="mobile_phone" placeholder="{$lang.other_mobile_phone}" onblur="checkMobilePhone(this)"  class="text" />
 								<i class="i-phone"></i>
@@ -81,37 +81,7 @@ function erweima1(obj, sType) { var oDiv = document.getElementById(obj); if (sTy
 									<span class="label" id="mobile_phone_notice"></span>
 								</div>
 							</div>
-							<!-- 报单中心手机号 -->
-							<div class="item">
-								<input name="bd_phone" type="text" id="bd_phone" placeholder="请填写报单中心手机号" onblur="checkbd_phone(this)"  class="text" />
-								<i class="i-phone"></i>
-								<div>
-									<span class="label" id="bd_phone_notice"></span>
-								</div>
-							</div>
-							<!-- 推荐人 -->
-							<div class="item">
-								<input name="user_parent" type="text" id="user_parent" placeholder="请填写推荐人手机号" onblur="checkuser_parent(this)"  class="text" />
-								<i class="i-phone"></i>
-								<div>
-									<span class="label" id="user_parent_notice"></span>
-								</div>
-							</div>
-							<!-- 选择会员级别 -->
-							<div class="item">
-								<span style="height: 16px;float: left;padding: 5px 10px;margin-top: -5px;margin-bottom: 20px;font-size: 18px;">会员级别:</span>
-								<SELECT  style="height: 22px;float: left;padding: 0px 10px;margin-top: 0px;font-size: 14px;margin-bottom: 5px;" onchange="check_user_rank()" name="user_rank" id="user_rank">
-									<option value='0'>请选择会员级别</option>
-									<option value='1'>普卡</option>
-									<option value='2'>银卡</option>
-									<option value='3'>金卡</option>
-									<option value='4'>钻卡</option>
-								</SELECT>
-								<div>
-										<span class="label" id="rank_notice" style="float: left"></span>
-								</div>
-							</div>
-							<!-- 密码 -->
+							<!-- {/if} -->
 							<div id="o-password">
 								<div class="item">
 									<input name="password" type="password" id="password" placeholder="{$lang.label_password}" onblur="check_password(this.value);" onkeyup="checkIntensity(this.value)" class="text" />
@@ -166,15 +136,27 @@ function erweima1(obj, sType) { var oDiv = document.getElementById(obj); if (sTy
 							<!-- {/if} -->
 							<!--{/foreach}-->
 							
-							
-							<!-- <div class="item" style="margin-bottom: 30px;">
+							<!-- {if $register_type eq 'email' } -->
+							<!-- 邮箱验证码 -->
+							<div class="item" style="margin-bottom: 30px;">
+								<input id="email_code" class="text text_te" type="text" placeholder="邮箱验证码" name="email_code" maxlength="6">
+								<i class="i-email"></i>
+								<input id="zemail" class="zemail" type="button" value="获取邮箱验证码 ">
+								<div>
+									<span id="extend_field5i" class="label"></span>
+								</div>
+							</div>
+							<!-- {elseif $register_type eq 'mobile'} -->
+							<!-- 手机验证码-->
+							<div class="item" style="margin-bottom: 30px;">
 								<input id="mobile_code" class="text text_te" type="text" placeholder="手机验证码" name="mobile_code">
 								<i class="i-phone"></i>
 								<input id="zphone" class="zphone" type="button" value="获取手机验证码 ">
 								<div>
 									<span id="extend_field5i" class="label"></span>
 								</div>
-							</div> -->
+							</div>
+							<!-- {/if} -->
 							
 							<!-- 判断是否启用验证码{if $enabled_captcha} -->
 							<div class="item">

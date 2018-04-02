@@ -1052,6 +1052,17 @@ elseif ($_REQUEST['act'] == 'tupu')
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
 	$user_id = htmlspecialchars(trim($_GET['user_id']));
+
+		// $res = $GLOBALS['db']->getRow("SELECT user_name,user_rank,user_id,parent_id FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
+		// //查询是否有父级
+		// $data = $GLOBALS['db']->getRow("select user_name,user_rank,user_id,parent_id from ".$GLOBALS['ecs']->table('users') ." where user_id = ".$res['parent_id']);
+		// //如果有
+		// if($data) {
+			// $result = $GLOBALS['db']->getRow("select user_name,user_rank,user_id,parent_id from ".$GLOBALS['ecs']->table('users') ." where user_id = ".$data['parent_id']);
+		// }
+		
+	test($user_id,1000,$order_id);
+	
 	
 	$user[0] = $GLOBALS['db']->getRow("SELECT * FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
 	$user[1] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 1");
@@ -1064,6 +1075,7 @@ elseif ($_REQUEST['act'] == 'tupu')
 		$user[5] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[2]['user_id'] ." and parent_side = 1");
 		$user[6] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[2]['user_id'] ." and parent_side = 2");
 	}
+	// var_dump($user);die;
 	$smarty->assign('user',$user);
 	$smarty->display('user_tupu.htm');
 }

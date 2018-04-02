@@ -409,11 +409,11 @@ function add_booking($booking)
  *
  * @return  int
  */
-function insert_user_account($surplus, $amount)
+function insert_user_account($surplus, $amount, $money)
 {
     $sql = 'INSERT INTO ' .$GLOBALS['ecs']->table('user_account').
-           ' (user_id, admin_user, amount, add_time, paid_time, admin_note, user_note, process_type, payment, is_paid)'.
-            " VALUES ('$surplus[user_id]', '', '$amount', '".gmtime()."', 0, '', '$surplus[user_note]', '$surplus[process_type]', '$surplus[payment]', 0)";
+           ' (user_id, admin_user, amount, money, add_time, paid_time, admin_note, user_note, process_type, payment, is_paid)'.
+            " VALUES ('$surplus[user_id]', '', '$amount', '$money', '".gmtime()."', 0, '', '$surplus[user_note]', '$surplus[process_type]', '$surplus[payment]', 0)";
     $GLOBALS['db']->query($sql);
 
     return $GLOBALS['db']->insert_id();
