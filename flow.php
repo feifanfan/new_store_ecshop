@@ -1284,8 +1284,9 @@ elseif ($_REQUEST['step'] == 'checkout')
         && $_SESSION['user_id'] > 0
         && $user_info['user_money'] > 0)
     {
-        // 能使用余额 edit by ff
-        $smarty->assign('your_surplus', $user_info['user_point']);
+        // 能使用余额
+
+        $smarty->assign('your_surplus', $user_info['user_money']);
     }
 	if($_CFG['use_surplus'] == '1'){
 		$smarty->assign('allow_use_surplus', 1);
@@ -1863,7 +1864,7 @@ elseif ($_REQUEST['step'] == 'change_surplus')
 	//$surplus_info[$suppid] = $surplus;
 
     //if ($user_info['user_money'] + $user_info['credit_line'] < array_sum($surplus_info))
-	if ($user_info['user_point']  < $surplus)
+	if ($user_info['user_money'] + $user_info['credit_line'] < $surplus)
     {
         $result['error'] = $_LANG['surplus_not_enough'];
     }
@@ -1890,7 +1891,7 @@ elseif ($_REQUEST['step'] == 'change_surplus')
 
 
 		    //$order['surplus_info'] = $surplus_info;
-            $order['surplus'] = $surplus;//array_sum($surplus_info);//$surplus;edit b
+            $order['surplus'] = $surplus;//array_sum($surplus_info);//$surplus;
 
             /* 计算订单的费用 */
             $total = order_fee($order, $cart_goods, $consignee);
