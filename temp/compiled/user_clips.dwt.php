@@ -43,17 +43,17 @@
           <div class="money">
             <ul class="clearfix">
               <li class="first">
-                <div class="title"><span>账号余额</span></div>
+                <div class="title"><span>收益</span></div>
                 <div class="pic"><a href="user.php?act=account_log"><i class="user_bg"></i></a></div>
                 <p><a href="user.php?act=account_log" class="_capitalAccount"><?php echo $this->_var['info']['surplus']; ?></a></p>
               </li>
               <li class="second">
-                <div class="title"><span>红包</span></div>
+                <div class="title"><span>重消</span></div>
                 <div class="pic"><a href="user.php?act=bonus"><i class="user_bg"></i></a></div>
-                <p><a href="user.php?act=bonus" class="_backAccount"><?php echo $this->_var['info']['bonus']; ?></a>张</p>
+                <p><a href="user.php?act=bonus" class="_backAccount"><?php echo $this->_var['info']['bonus']; ?></a></p>
               </li>
               <li class="third">
-                <div class="title"><span>可用积分</span></div>
+                <div class="title"><span>企业币</span></div>
                 <div class="pic"><i class="user_bg"></i></div>
                 <p><span class="_goldAccount"><?php echo $this->_var['info']['integral']; ?></span></p>
               </li>
@@ -167,29 +167,7 @@
             <?php endif; ?> 
              
           </div>
-          <div class="middle exchange">
-            <div class="line1 clearfix">
-              <div class="title"><i></i><span>积分兑换</span></div>
-              <a class="more" href="exchange.php" title="进入积分商城">进入积分商城 &gt;</a> </div>
-            <?php if ($this->_var['jifen'] == array ( )): ?> 
-            
-            <div class="emptyFrame_exchange clearfix" > <i class="user_bg"></i><span>没有可兑换的商品呦！随便去逛逛吧！</span> </div>
-             
-            <?php else: ?> 
-            
-            <div class="exchangeList">
-              <div class="colFrame">
-                <ul style="left: 26px;" class="clearfix">
-                  <?php $_from = $this->_var['jifen']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'ji');if (count($_from)):
-    foreach ($_from AS $this->_var['ji']):
-?>
-                  <li class="first"> <a href="exchange.php?id=<?php echo $this->_var['ji']['goods_id']; ?>&act=view" title="<?php echo $this->_var['ji']['goods_name']; ?>" target="_blank" class="img"> <img src="<?php echo $this->_var['ji']['goods_thumb']; ?>" alt="<?php echo $this->_var['ji']['goods_name']; ?>"> <span><?php echo $this->_var['ji']['exchange_integral']; ?>积分</span> </a> <a href="exchange.php?id=<?php echo $this->_var['ji']['goods_id']; ?>&act=view" title="<?php echo $this->_var['ji']['goods_name']; ?>" target="_blank" class="name"><?php echo $this->_var['ji']['goods_name']; ?></a> </li>
-                  <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
-                </ul>
-              </div>
-            </div>
-             
-            <?php endif; ?> </div>
+          
           <div class="middle history">
             <div class="line1 clearfix">
               <div class="title"><i></i><span>我的足迹</span></div>

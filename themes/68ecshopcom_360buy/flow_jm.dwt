@@ -911,7 +911,7 @@ else
         				<span class="surplus_desc"><input name="surplus" type="text" class="surplus" id="ECS_SURPLUS"  value="0" onblur="changeSurplus(this.value);" />&nbsp;&nbsp;元</span>
             			您当前的可用余额为:<span class="your_surplus">{$your_surplus|default:0} </span>
                         <span id="ECS_SURPLUS_NOTICE_{$key}" class="notice"></span>
-            			{if $is_surplus_open eq 0}<span class="open_surplus">点此<a href="security.php" target="_blank">开启余额安全支付</a></span>{/if}
+            			
         			</div>
 				<script type="text/javascript">
 				function checkboxOnclick(checkbox){ 

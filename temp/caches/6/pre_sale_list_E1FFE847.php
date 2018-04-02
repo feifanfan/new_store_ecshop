@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:11:{i:0;s:62:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/pre_sale_list.dwt";i:1;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/page_header.lbi";i:2;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/user_header.lbi";i:3;s:74:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/user_header_right.lbi";i:4;s:67:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/header_tan.lbi";i:5;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/head_nav.lbi";i:6;s:62:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/pages.lbi";i:7;s:61:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/help.lbi";i:8;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/page_footer.lbi";i:9;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/site_bar.lbi";i:10;s:66:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/vote_list.lbi";}s:7:"expires";i:1522463650;s:8:"maketime";i:1522460050;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php exit;?>a:3:{s:8:"template";a:11:{i:0;s:62:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/pre_sale_list.dwt";i:1;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/page_header.lbi";i:2;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/user_header.lbi";i:3;s:74:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/user_header_right.lbi";i:4;s:67:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/header_tan.lbi";i:5;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/head_nav.lbi";i:6;s:62:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/pages.lbi";i:7;s:61:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/help.lbi";i:8;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/page_footer.lbi";i:9;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/site_bar.lbi";i:10;s:66:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/vote_list.lbi";}s:7:"expires";i:1522482958;s:8:"maketime";i:1522479358;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <base href="http://www.xu.com/" />
@@ -2041,8 +2041,7 @@ function selectPage(sel)
   sel.form.submit();
 }
 //-->
-</script>
-				</div>
+</script>				</div>
 			</div>
 		</div>
 		<div style="height: 0px; line-height: 0px; clear: both;"></div>
@@ -2161,39 +2160,17 @@ function collectResponses(result)
       	 	<img src="themes/68ecshopcom_360buy/images/upgrade_ad/user_head.png" />
         </a>
         <div class="dropdown" style="display: none; opacity: 1; margin-right: 0px;"> 
-                  <form name="formLogin" action="user.php" method="post" onSubmit="return userLogin()">
-          <div class="form">
-            <h2><strong>请登录</strong><span>还没有账号？<a href="register.php" class="right_register">立即注册</a></span></h2>
-            <div class="item"> <span class="label">账号</span>
-              <div>
-                <input name="username" type="text" class="text" value="" tabindex="1"/>
-              </div>
+                 <div class="form">
+            <h2 class="username">hmf1143</h2>
+            <div class="login_right">
+            	<ul class="login-item">
+					<li class="member"><i></i><a href="user.php">会员中心</a></li>
+                    <li class="order"><i></i><a href="user.php?act=order_list">订单中心</a></li>
+					<li class="account"><i></i><a href="user.php?act=account_detail">帐户中心</a></li>
+					<li class="message_list"><i></i><a href="user.php?act=message_list">我的留言</a></li>
+				</ul>
             </div>
-            <div class="item"> <span class="label">密码</span>
-              <div>
-                <input type="password" id="password" name="password" class="text" tabindex="2"/>
-              </div>
-            </div>
-            <div class="item " id="o-authcode"> <span class="label_t">验证码</span>
-              <div>
-                <input type="text" id="authcode" name="captcha" class="text text-1" tabindex="3"/>
-                <label class="img"> <img src="captcha.php?is_login=1&" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </label>
-              </div>
-            </div>
-            <div class="item" id="autoentry">
-              <div class="safety">
-                <input type="checkbox" value="1" name="remember" id="remember" class="checkbox"/>
-                <label for="remember" class="mar-b">记住密码</label>
-                <a class="forget_password" href="findPwd.php">忘记密码？</a>
-            </div>
-            </div>
-            <div class="item">
-              <input type="hidden" name="act" value="act_login" />
-              <input type="hidden" name="back_act"  value=''/>
-              <input type="submit" name="submit" class="btn-img" id="loginsubmit" value="立即登录" />
-            </div>
-          </div>
-        </form>
+         </div> 
                   <span class="cart_arrow" style="background:none;border:none"><b class="arrow-1"></b> <b class="arrow-2"></b></span> 
         </div>
       </div>

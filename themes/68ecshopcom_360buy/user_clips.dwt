@@ -41,17 +41,17 @@
           <div class="money">
             <ul class="clearfix">
               <li class="first">
-                <div class="title"><span>账号余额</span></div>
+                <div class="title"><span>收益</span></div>
                 <div class="pic"><a href="user.php?act=account_log"><i class="user_bg"></i></a></div>
                 <p><a href="user.php?act=account_log" class="_capitalAccount">{$info.surplus}</a></p>
               </li>
               <li class="second">
-                <div class="title"><span>红包</span></div>
+                <div class="title"><span>重消</span></div>
                 <div class="pic"><a href="user.php?act=bonus"><i class="user_bg"></i></a></div>
-                <p><a href="user.php?act=bonus" class="_backAccount">{$info.bonus}</a>张</p>
+                <p><a href="user.php?act=bonus" class="_backAccount">{$info.bonus}</a></p>
               </li>
               <li class="third">
-                <div class="title"><span>可用积分</span></div>
+                <div class="title"><span>企业币</span></div>
                 <div class="pic"><i class="user_bg"></i></div>
                 <p><span class="_goldAccount">{$info.integral}</span></p>
               </li>
@@ -161,27 +161,7 @@
             {/if} 
             <!-- *购物车内数量不为0时 end--> 
           </div>
-          <div class="middle exchange">
-            <div class="line1 clearfix">
-              <div class="title"><i></i><span>积分兑换</span></div>
-              <a class="more" href="exchange.php" title="进入积分商城">进入积分商城 &gt;</a> </div>
-            {if $jifen eq array() } 
-            <!-- *积分兑换商品为0时 start-->
-            <div class="emptyFrame_exchange clearfix" > <i class="user_bg"></i><span>没有可兑换的商品呦！随便去逛逛吧！</span> </div>
-            <!-- *积分兑换商品为0时 end--> 
-            {else} 
-            <!-- *积分兑换商品不为0时,限制最多显示4个付款订单 start-->
-            <div class="exchangeList">
-              <div class="colFrame">
-                <ul style="left: 26px;" class="clearfix">
-                  {foreach from=$jifen item=ji}
-                  <li class="first"> <a href="exchange.php?id={$ji.goods_id}&act=view" title="{$ji.goods_name}" target="_blank" class="img"> <img src="{$ji.goods_thumb}" alt="{$ji.goods_name}"> <span>{$ji.exchange_integral}积分</span> </a> <a href="exchange.php?id={$ji.goods_id}&act=view" title="{$ji.goods_name}" target="_blank" class="name">{$ji.goods_name}</a> </li>
-                  {/foreach}
-                </ul>
-              </div>
-            </div>
-            <!-- *积分兑换商品不为0时 end--> 
-            {/if} </div>
+          
           <div class="middle history">
             <div class="line1 clearfix">
               <div class="title"><i></i><span>我的足迹</span></div>

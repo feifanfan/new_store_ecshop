@@ -1,15 +1,15 @@
 <?php if ($this->_var['consignee_list']): ?>
 <ul>
-<?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_84319100_1522460110');if (count($_from)):
-    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_84319100_1522460110']):
+<?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_51332800_1522479365');if (count($_from)):
+    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_51332800_1522479365']):
 ?>
-<li <?php if ($this->_var['consignee_0_84319100_1522460110']['def_addr'] == 1): ?>class="curr"<?php endif; ?>  onmouseover="showAddressEdit(this);" onmouseout="showAddressEdit(this);" >
-<div style="width:100%;height:100%;" onclick="selAddress(this, <?php echo $this->_var['consignee_0_84319100_1522460110']['address_id']; ?>);"  >
+<li <?php if ($this->_var['consignee_0_51332800_1522479365']['def_addr'] == 1): ?>class="curr"<?php endif; ?>  onmouseover="showAddressEdit(this);" onmouseout="showAddressEdit(this);" >
+<div style="width:100%;height:100%;" onclick="selAddress(this, <?php echo $this->_var['consignee_0_51332800_1522479365']['address_id']; ?>);"  >
 <table cellpadding=0 cellspacing=0 width="100%">
-<tr><td><?php echo $this->_var['consignee_0_84319100_1522460110']['address_short_name']; ?></td></tr>
+<tr><td><?php echo $this->_var['consignee_0_51332800_1522479365']['address_short_name']; ?></td></tr>
 </table>
 </div>
-<div  class="edit_addr" id="address_edit_<?php echo $this->_var['sn']; ?>"><a  href="javascript:AddressEdit(<?php echo $this->_var['consignee_0_84319100_1522460110']['address_id']; ?>);">修改</a> <a  href="javascript:del_Address(<?php echo $this->_var['consignee_0_84319100_1522460110']['address_id']; ?>);" onclick="return confirm('您确认要删除吗？');">删除</a></div>
+<div  class="edit_addr" id="address_edit_<?php echo $this->_var['sn']; ?>"><a  href="javascript:AddressEdit(<?php echo $this->_var['consignee_0_51332800_1522479365']['address_id']; ?>);">修改</a> <a  href="javascript:del_Address(<?php echo $this->_var['consignee_0_51332800_1522479365']['address_id']; ?>);" onclick="return confirm('您确认要删除吗？');">删除</a></div>
 </li>
 <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
 </ul>

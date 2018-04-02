@@ -40,7 +40,7 @@ if (isset($set_modules) && $set_modules == TRUE)
     $modules[$i]['insure']  = '2%';
 
     /* 配送方式是否支持货到付款 */
-    $modules[$i]['cod']     = false;
+    $modules[$i]['cod']     = true;
 
     /* 插件的作者 */
     $modules[$i]['author']  = '蓝色黯然';

@@ -86,20 +86,6 @@ $data = array (
   ),
   6 => 
   array (
-    'cat_id' => '1',
-    'cat_name' => '系统分类',
-    'cat_type' => '2',
-    'keywords' => '',
-    'cat_desc' => '系统保留分类',
-    'sort_order' => '50',
-    'show_in_nav' => '0',
-    'parent_id' => '0',
-    'path_name' => '',
-    'has_children' => '2',
-    'aricle_num' => '0',
-  ),
-  7 => 
-  array (
     'cat_id' => '19',
     'cat_name' => '供货商通知文章',
     'cat_type' => '99',
@@ -112,7 +98,7 @@ $data = array (
     'has_children' => '0',
     'aricle_num' => '2',
   ),
-  8 => 
+  7 => 
   array (
     'cat_id' => '20',
     'cat_name' => '广告354*454',
@@ -126,7 +112,7 @@ $data = array (
     'has_children' => '0',
     'aricle_num' => '5',
   ),
-  9 => 
+  8 => 
   array (
     'cat_id' => '11',
     'cat_name' => '手机促销',
@@ -140,7 +126,7 @@ $data = array (
     'has_children' => '0',
     'aricle_num' => '11',
   ),
-  10 => 
+  9 => 
   array (
     'cat_id' => '17',
     'cat_name' => '广告1210*100',
@@ -153,6 +139,20 @@ $data = array (
     'path_name' => '',
     'has_children' => '0',
     'aricle_num' => '2',
+  ),
+  10 => 
+  array (
+    'cat_id' => '1',
+    'cat_name' => '系统分类',
+    'cat_type' => '2',
+    'keywords' => '',
+    'cat_desc' => '系统保留分类',
+    'sort_order' => '50',
+    'show_in_nav' => '0',
+    'parent_id' => '0',
+    'path_name' => '',
+    'has_children' => '2',
+    'aricle_num' => '0',
   ),
   11 => 
   array (

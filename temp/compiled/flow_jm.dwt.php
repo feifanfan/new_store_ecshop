@@ -493,8 +493,8 @@ else
           
         </script> 
    
-  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_81418900_1522460110');if (count($_from)):
-    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_81418900_1522460110']):
+  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_71552800_1522479683');if (count($_from)):
+    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_71552800_1522479683']):
 ?>
   <form action="flow.php" method="post" name="theForm" id="theForm" onsubmit="return checkConsignee(this)">
     <?php echo $this->fetch('library/consignee.lbi'); ?>
@@ -947,7 +947,7 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
         				<span class="surplus_desc"><input name="surplus" type="text" class="surplus" id="ECS_SURPLUS"  value="0" onblur="changeSurplus(this.value);" />&nbsp;&nbsp;元</span>
             			您当前的可用余额为:<span class="your_surplus"><?php echo empty($this->_var['your_surplus']) ? '0' : $this->_var['your_surplus']; ?> </span>
                         <span id="ECS_SURPLUS_NOTICE_<?php echo $this->_var['key']; ?>" class="notice"></span>
-            			<?php if ($this->_var['is_surplus_open'] == 0): ?><span class="open_surplus">点此<a href="security.php" target="_blank">开启余额安全支付</a></span><?php endif; ?>
+            			
         			</div>
 				<script type="text/javascript">
 				function checkboxOnclick(checkbox){ 

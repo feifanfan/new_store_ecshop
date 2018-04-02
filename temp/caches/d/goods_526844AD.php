@@ -1,13 +1,13 @@
-<?php exit;?>a:3:{s:8:"template";a:26:{i:0;s:54:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/goods.dwt";i:1;s:72:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/pricecut_notice.lbi";i:2;s:70:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/arrive_notice.lbi";i:3;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/page_header.lbi";i:4;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/user_header.lbi";i:5;s:74:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/user_header_right.lbi";i:6;s:67:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/header_tan.lbi";i:7;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/head_nav.lbi";i:8;s:64:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/ur_here.lbi";i:9;s:70:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_gallery.lbi";i:10;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/ziying_info.lbi";i:11;s:67:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_best.lbi";i:12;s:66:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_new.lbi";i:13;s:70:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_related.lbi";i:14;s:71:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_fittings.lbi";i:15;s:69:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/bought_goods.lbi";i:16;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/ad_position.lbi";i:17;s:79:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_package_ecshop68.lbi";i:18;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/my_comments.lbi";i:19;s:69:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/packing_list.lbi";i:20;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/baozhang.lbi";i:21;s:71:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/common_problem.lbi";i:22;s:61:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/help.lbi";i:23;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/page_footer.lbi";i:24;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/site_bar.lbi";i:25;s:66:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/vote_list.lbi";}s:7:"expires";i:1522463647;s:8:"maketime";i:1522460047;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php exit;?>a:3:{s:8:"template";a:26:{i:0;s:54:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/goods.dwt";i:1;s:72:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/pricecut_notice.lbi";i:2;s:70:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/arrive_notice.lbi";i:3;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/page_header.lbi";i:4;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/user_header.lbi";i:5;s:74:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/user_header_right.lbi";i:6;s:67:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/header_tan.lbi";i:7;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/head_nav.lbi";i:8;s:64:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/ur_here.lbi";i:9;s:70:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_gallery.lbi";i:10;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/ziying_info.lbi";i:11;s:67:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_best.lbi";i:12;s:66:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_new.lbi";i:13;s:70:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_related.lbi";i:14;s:71:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_fittings.lbi";i:15;s:69:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/bought_goods.lbi";i:16;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/ad_position.lbi";i:17;s:79:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/goods_package_ecshop68.lbi";i:18;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/my_comments.lbi";i:19;s:69:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/packing_list.lbi";i:20;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/baozhang.lbi";i:21;s:71:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/common_problem.lbi";i:22;s:61:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/help.lbi";i:23;s:68:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/page_footer.lbi";i:24;s:65:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/site_bar.lbi";i:25;s:66:"D:/phpStudy/WWW/xu/themes/68ecshopcom_360buy/library/vote_list.lbi";}s:7:"expires";i:1522482956;s:8:"maketime";i:1522479356;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <base href="http://www.xu.com/" />
 <meta name="Generator" content="HongYuJD v7_2" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="Keywords" content="猕猴桃,水果,奇异果" />
-<meta name="Description" content="万人好评，空运直达，限时抢购，打破底价！每个ID限购2份" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<title>美国西北车厘子 1斤装 进口水果新鲜樱桃水果_进口水果_食品生鲜_鸿宇科技多用户商城</title>
+<title>LOVO 罗莱家纺出品全棉斜纹床品套件四件套 兔斯基_家纺_家纺家居_鸿宇科技多用户商城</title>
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <script type="text/javascript" src="themes/68ecshopcom_360buy/js/common_www_ecshop68_com.js" ></script>
@@ -29,7 +29,7 @@
 </script>
 </head>
 <body>
-<input type="hidden" id="chat_goods_id" value="3" />
+<input type="hidden" id="chat_goods_id" value="137" />
 <div id="bg" class="bg" style="display:none;"></div>
 <script type="text/javascript">
 function showDiv(goods_id)
@@ -102,7 +102,7 @@ function check_notice()
     <tr> 
       <td colspan="2" align=left style="padding:15px 0 15px 0;">
       <div style="background:#FFFDEE ;padding:10px 10px;border:1px dotted #ff3300;height:70px;line-height:150%;">
-      <p style="font-size:15px;font-weight:bold;color:#F52648;padding-bottom:5px;">美国西北车厘子 1斤装 进口水果新鲜樱桃水果</p>
+      <p style="font-size:15px;font-weight:bold;color:#F52648;padding-bottom:5px;">LOVO 罗莱家纺出品全棉斜纹床品套件四件套 兔斯基</p>
       当商品价格低于您设定的价格我们将通知您，通知短信最多发送一次，<br>不会对您造成干扰。
       </div>
       </td> 
@@ -110,7 +110,7 @@ function check_notice()
     <tr> 
       <td valign="top" align="right" width="20%">现价：</td> 
       <td align="left"> <font color=#ff3300>
-			  				29.00 
+			  				399.00 
 			  	
 		</font></td> 
     </tr> 
@@ -128,13 +128,12 @@ function check_notice()
     </tr>     
     <tr> 
       <td colspan="2" align="center" style="padding:20px 0;"> 
-      <input type="hidden" value="3" name="goods_id" id="goods_id">
+      <input type="hidden" value="137" name="goods_id" id="goods_id">
       <input type="image" src="themes/68ecshopcom_360buy/images/pricecut_1.gif"> 
       </td>  
     </tr> </table> 
 </form> 
-</div>
-<script type="text/javascript">
+</div><script type="text/javascript">
 			   function tell_me(goods_id, no_have_val)
 			   {
 			
@@ -183,7 +182,7 @@ function check_notice()
   	<table cellpadding="0" cellspacing="0" width="100%" border="0">
     	<tr>
         <td colspan="2" align="left" style="padding:15px 0 15px 0;"><div style="background:#FFFDEE ;padding:10px 10px;border:1px dotted #ff3300;height:40px;line-height:150%; font-weight:normal">
-            <p style="font-size:15px;color:#F52648;padding-bottom:5px;">美国西北车厘子 1斤装 进口水果新鲜樱桃...</p>
+            <p style="font-size:15px;color:#F52648;padding-bottom:5px;">LOVO 罗莱家纺出品全棉斜纹床品套件四...</p>
             当商品进行补货时，我们将以短信、邮件的形式通知您，最多发送一次，不会对您造成干扰。 </div></td>
       </tr>
     </table>
@@ -202,7 +201,7 @@ function check_notice()
       </tr>
       <tr>
         <td class="td_l">&nbsp;</td>
-        <td align="left" class="td_r"><input type="button" value="提交" onclick="tell_me1(3)" class="tell_btn"/>
+        <td align="left" class="td_r"><input type="button" value="提交" onclick="tell_me1(137)" class="tell_btn"/>
           <input type="reset" value="重置"   class="tell_btn"/></td>
       </tr>
     </table>
@@ -217,8 +216,7 @@ function check_notice()
 						document.getElementById('bg').style.display='none';
 					})
 				})
-                </script> 
-<div id="site-nav"> <script language="javascript">
+                </script><div id="site-nav"> <script language="javascript">
     function resumeerror() {
         return true;
     }
@@ -1774,13 +1772,12 @@ function loginactResponse(result)
 	<div id="JS_side_cat_list_8" class="hideMap Map_positon8"></div>
 </div>
  
- 
  </div>
     </div>
     <ul class="allMenu Left">
   <li><a class="index nav" href="/" title="首页">首页</a></li>
    
-  <li><a href="category.php?id=1"  class="nav current" title="食品生鲜" >食品生鲜</a></li>  
+  <li><a href="category.php?id=1"  class="nav " title="食品生鲜" >食品生鲜</a></li>  
    
   <li><a href="stores.php"  class="nav " title="店铺街" >店铺街</a></li>  
    
@@ -1832,23 +1829,20 @@ $('.search-type li').click(function() {
     $(this).addClass('cur').siblings().removeClass('cur');
     $('#searchtype').val($(this).attr('num'));
 });
-</script>
-  <div class="blank"></div>
+</script>  <div class="blank"></div>
   <div class="w">
-  <div class="breadcrumb"><i></i><a href=".">首页</a> <code>&gt;</code> <a href="category.php?id=1">食品生鲜</a> <code>&gt;</code> <a href="category.php?id=14">进口水果</a> <code>&gt;</code> 美国西北车厘子 1斤装 进口水果新鲜樱桃水果</div>
+  <div class="breadcrumb"><i></i><a href=".">首页</a> <code>&gt;</code> <a href="category.php?id=6">家纺家居</a> <code>&gt;</code> <a href="category.php?id=306">家纺</a> <code>&gt;</code> LOVO 罗莱家纺出品全棉斜纹床品套件四件套 兔斯基</div>
 </div>
-<div class="blank"></div>
-  <div class="w">
+<div class="blank"></div>  <div class="w">
     <div id="product-intro" class="goods_photo"> 
        
       <script type='text/javascript'>var warestatus = 1; </script>
-      <form action="javascript:addToCart(3)" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+      <form action="javascript:addToCart(137)" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
         <div class="clearfix" style="width:591px; min-height:510px;">
           <div class="goods_info">
             <div id="name">
-              <h1>美国西北车厘子 1斤装 进口水果新鲜樱桃水果</h1>
+              <h1>LOVO 罗莱家纺出品全棉斜纹床品套件四件套 兔斯基</h1>
             </div>
-                        <div class="goods_brief"><span>万人好评，空运直达，限时抢购，打破底价！每个ID限购2份</span></div>
                         <div id="summary-price" class="clearfix">
               <div class="mar_l">
                 <p> 
@@ -1858,7 +1852,7 @@ $('.search-type li').click(function() {
                    </p>
               </div>
               <div class="show_price" style="z-index:101"> 
-                                <div class="market_prices_t"> <span class="price">市场价</span><font class="market_price">32.00</font> </div>
+                                <div class="market_prices_t"> <span class="price">市场价</span><font class="market_price">478.79</font> </div>
                  
                  
                                 <div class="rank_prices">
@@ -1883,7 +1877,7 @@ document.getElementById('vip2').style.display="none";
             <ul id="summary1">
                             <li class="padd1">
                 <div class="dt">商品货号</div>
-                <div class="dd"> ECS000003 </div>
+                <div class="dd"> ECS000137 </div>
               </li>
                
                
@@ -1944,7 +1938,7 @@ var myString=new Array();
                     <a class="btn-reduce" href="javascript:;" onclick="goods_cut();changePrice();">减少数量</a>
                     <input name="number" type="text" class="text"  id="number" value="1" onblur="changePrice();"/>
                     <a class="btn-add" href="javascript:;" onclick="goods_add();changePrice();">增加数量</a> 
-                                                                             （库存<font id="shows_number">1000 </font>）
+                                                                             （库存<font id="shows_number">4661 </font>）
                                       </div>
                 </div>
               </li>
@@ -1953,14 +1947,14 @@ var myString=new Array();
             
              <div id="choose-btns1" class="buyNub-buy" style="display:none"> 
                
-                <a onclick="tell_me(3)" class="tell_me"/><i></i>到货通知</a>
+                <a onclick="tell_me(137)" class="tell_me"/><i></i>到货通知</a>
                 
-                <a href="javascript:collect(3)" class="btn-coll ">收藏</a>   
+                <a href="javascript:collect(137)" class="btn-coll ">收藏</a>   
               </div>
      
               <div id="choose-btns" class="buyNub-buy"> 
                  
-                <a href="javascript:addToCart(3,0,1)" name="bi_addToCart" class="u-buy1">立即购买</a> <a href="javascript:addToCart(3)" name="bi_addToCart" class="u-buy2">加入购物车</a> 
+                <a href="javascript:addToCart(137,0,1)" name="bi_addToCart" class="u-buy1">立即购买</a> <a href="javascript:addToCart(137)" name="bi_addToCart" class="u-buy2">加入购物车</a> 
                  
                 
               </div>
@@ -1978,8 +1972,8 @@ var myString=new Array();
           <span class="clr"></span> </div>
       </form>
       <div id="preview">
-        <div  class="goods_img" id="li_3"> <a href="images/201507/source_img/3_P_1437501601434.jpg" class="MagicZoom" id="zoom" rel="zoom-position: right;">
-                    <img  src="images/201507/goods_img/3_P_1437501601546.jpg" class="goodsimg pic_img_3" id="goods_bimg" width="378" height="378" style="border:#DDDDDD 1px solid; width:378px; height:378px;" />
+        <div  class="goods_img" id="li_137"> <a href="images/201507/source_img/137_P_1437528855602.jpg" class="MagicZoom" id="zoom" rel="zoom-position: right;">
+                    <img  src="images/201507/goods_img/137_P_1437528855182.jpg" class="goodsimg pic_img_137" id="goods_bimg" width="378" height="378" style="border:#DDDDDD 1px solid; width:378px; height:378px;" />
                     </a> </div>
         <div style="height:10px; line-height:10px; clear:both;"></div>
          
@@ -1990,13 +1984,8 @@ var myString=new Array();
       <div id="demo1" style="float:left;">
         <ul id="goods_gallery">
                     <li>
-	    <a  href="images/201507/source_img/3_P_1437501601434.jpg" rel="zoom-id: zoom;" rev="images/201507/goods_img/3_P_1437501601546.jpg"   title="" >
-	    <img src="images/201507/thumb_img/3_thumb_P_1437501601744.jpg" alt="美国西北车厘子 1斤装 进口水果新鲜樱桃水果" class="B_blue"  />
-	    </a>
-          </li>
-                    <li>
-	    <a  href="images/201507/source_img/3_P_1437501618052.jpg" rel="zoom-id: zoom;" rev="images/201507/goods_img/3_P_1437501618875.jpg"   title="" >
-	    <img src="images/201507/thumb_img/3_thumb_P_1437501618386.jpg" alt="美国西北车厘子 1斤装 进口水果新鲜樱桃水果" class="B_blue"  />
+	    <a  href="images/201507/source_img/137_P_1437528855602.jpg" rel="zoom-id: zoom;" rev="images/201507/goods_img/137_P_1437528855182.jpg"   title="" >
+	    <img src="images/201507/thumb_img/137_thumb_P_1437528855973.jpg" alt="LOVO 罗莱家纺出品全棉斜纹床品套件四件套 兔斯基" class="B_blue"  />
 	    </a>
           </li>
                   </ul>
@@ -2107,7 +2096,7 @@ var myString=new Array();
  
         
         <div id="short-share">
-          <div id="view-bigimg" class="fl" style="margin-right:20px;"><b></b><a href="javascript:;" onclick="window.open('gallery.php?id=3'); return false;" target="_blank">查看大图</a></div>
+          <div id="view-bigimg" class="fl" style="margin-right:20px;"><b></b><a href="javascript:;" onclick="window.open('gallery.php?id=137'); return false;" target="_blank">查看大图</a></div>
           <div class="share-list fl" style="margin-right:20px;"> 
             
             <div id="bdshare" class="bdshare_b" style="line-height: 12px; "> <img src="http://bdimg.share.baidu.com/static/images/type-button-1.jpg?cdnversion=20120831" /> </div>
@@ -2118,7 +2107,7 @@ var myString=new Array();
 	  </script> 
              
           </div>
-          <div class="fl com-pare"> <a class="compare-btn" data-goods="3" data-type="0" onclick="Compare.add(3,'美国西北车厘子 1斤装 进口水果新鲜樱桃水果','0', 'images/201507/thumb_img/3_thumb_G_1437501601556.jpg', '32.00')"></a> </div>
+          <div class="fl com-pare"> <a class="compare-btn" data-goods="137" data-type="0" onclick="Compare.add(137,'LOVO 罗莱家纺出品全棉斜纹床品套件四件套 兔斯基','0', 'images/201507/thumb_img/137_thumb_G_1437528855059.jpg', '399.00 ')"></a> </div>
           <div class="clb"></div>
         </div>
       </div>
@@ -2154,8 +2143,7 @@ var myString=new Array();
     <dd class="ghs_clear"></dd>
   </dl>
  </div>
-</div>
- 
+</div> 
          
       </div>
        
@@ -2367,18 +2355,19 @@ function slider1_pic() {
 }
 </script>
 </div>
-     <div class="left">
+    <div class="left">
       <div id="related-sorts" class="m m2">
         <div class="mt">
           <h2>相关分类</h2>
         </div>
         <div class="mc">
           <ul class="lh">
-                                    <li><a href="category.php?id=14" title="进口水果">进口水果</a></li>
-                        <li><a href="category.php?id=13" title="糖果巧克力">糖果巧克力</a></li>
-                        <li><a href="category.php?id=9" title="牛奶乳品">牛奶乳品</a></li>
-                        <li><a href="category.php?id=10" title="坚果炒货">坚果炒货</a></li>
-                        <li><a href="category.php?id=12" title="蜜饯果干">蜜饯果干</a></li>
+                                    <li><a href="category.php?id=306" title="家纺">家纺</a></li>
+                        <li><a href="category.php?id=307" title="家具">家具</a></li>
+                        <li><a href="category.php?id=308" title="厨具">厨具</a></li>
+                        <li><a href="category.php?id=309" title="灯具">灯具</a></li>
+                        <li><a href="category.php?id=310" title="家装软饰">家装软饰</a></li>
+                        <li><a href="category.php?id=311" title="生活日用">生活日用</a></li>
                       </ul>
         </div>
       </div>
@@ -2389,7 +2378,15 @@ function slider1_pic() {
         </div>
         <div class="mc">
           <ul class="lh">
-                                  </ul>
+                                    <li><a href="brand.php?id=81" title="慧乐家">慧乐家</a></li>
+                        <li><a href="brand.php?id=83" title="水星家纺">水星家纺</a></li>
+                        <li><a href="brand.php?id=11" title="MISS FACE">MISS FACE</a></li>
+                        <li><a href="brand.php?id=62" title="稻草人">稻草人</a></li>
+                        <li><a href="brand.php?id=48" title="楼兰密语">楼兰密语</a></li>
+                        <li><a href="brand.php?id=6" title="Dior">Dior</a></li>
+                        <li><a href="brand.php?id=78" title="罗莱">罗莱</a></li>
+                        <li><a href="brand.php?id=52" title="猫人">猫人</a></li>
+                      </ul>
         </div>
       </div>
       
@@ -2582,21 +2579,19 @@ $(function(){
 });
 </script> 
 </div>
-  
-    
-  554fcae493e564ee0dc75bdf2ebf94caads|a:3:{s:4:"name";s:3:"ads";s:2:"id";N;s:3:"num";N;}554fcae493e564ee0dc75bdf2ebf94ca 
+     554fcae493e564ee0dc75bdf2ebf94caads|a:3:{s:4:"name";s:3:"ads";s:2:"id";N;s:3:"num";N;}554fcae493e564ee0dc75bdf2ebf94ca 
       <div style="height:8px; line-height:8px;"></div>
        554fcae493e564ee0dc75bdf2ebf94caads|a:3:{s:4:"name";s:3:"ads";s:2:"id";N;s:3:"num";N;}554fcae493e564ee0dc75bdf2ebf94ca  </div>
     
     <div class="right goods_right">       <div id="wrapper" class="m m1">
         <div class="mt" id="main-nav-holder">
           <ul class="tab" id="nav">
-            <li class="boldtit_list h_list" onclick="change_widget(1, this);"><a href="/goods.php?id=3#os_canshu">规格参数</a></li>
-            <li class="boldtit_list" onclick="change_widget(1, this);"><a href="/goods.php?id=3#os_jieshao" >商品介绍</a></li>
-            <li class="boldtit_list" onclick="change_widget(1, this);"><a href="/goods.php?id=3#os_pinglun" >商品评价(0)</a></li>
-            <li class="boldtit_list" onclick="change_widget(1, this);"><a href="/goods.php?id=3#os_shouhou" >售后保障</a></li>
+            <li class="boldtit_list h_list" onclick="change_widget(1, this);"><a href="/goods.php?id=137#os_canshu">规格参数</a></li>
+            <li class="boldtit_list" onclick="change_widget(1, this);"><a href="/goods.php?id=137#os_jieshao" >商品介绍</a></li>
+            <li class="boldtit_list" onclick="change_widget(1, this);"><a href="/goods.php?id=137#os_pinglun" >商品评价(0)</a></li>
+            <li class="boldtit_list" onclick="change_widget(1, this);"><a href="/goods.php?id=137#os_shouhou" >售后保障</a></li>
           </ul>
-          <div style="width:170px;float:right; position:relative;left:0;top:0"> <a href="javascript:addToCart(3)" name="bi_addToCart"  class="right_add" >加入购物车</a>
+          <div style="width:170px;float:right; position:relative;left:0;top:0"> <a href="javascript:addToCart(137)" name="bi_addToCart"  class="right_add" >加入购物车</a>
             <div class="ce_right">
               <ul class="abs_ul">
                 <li class="abs_active"><i></i><span>规格参数</span></li>
@@ -2612,21 +2607,21 @@ $(function(){
         <div id="main_widget_1">
           <div class="mc" id="os_canshu">
             <ul class="detail-list">
-              <li>商品名称：美国西北车厘子 1斤装 进口水果新鲜樱桃水果</li>
-              <li>商品编号：ECS000003</li>
-              <li>品牌：<a href="" ></a></li>
+              <li>商品名称：LOVO 罗莱家纺出品全棉斜纹床品套件四件套 兔斯基</li>
+              <li>商品编号：ECS000137</li>
+              <li>品牌：<a href="brand.php?id=11" >MISS FACE</a></li>
               <li>上架时间：2015-07-22</li>
               <li>商品毛重：0克</li>
                             <li>库存： 
                  
-                1000  
+                4661  
                  
               </li>
                                         </ul>
           </div>
           <div class="mc" id="os_jieshao">
             <div class="blank20"></div>
-            <div class="detail-content"> <h6 style="margin: 0px; padding: 0px; color: rgb(51, 51, 51); white-space: normal;"><span style="font-family:Microsoft YaHei;font-size:medium;">温馨提示</span></h6><h6><p style="font-weight: normal;"><span style="color:#333333;white-space: normal;"><span style="font-family:Microsoft YaHei;font-size:medium;">新西兰绿奇异果软硬适中，为了保证奇异果的新鲜口感，请冷藏保存并尽快食用。</span></span></p><p><span style="font-weight: normal; white-space: normal;"><span style="font-family:Microsoft YaHei;font-size:medium;color:#ff0000;"><strong>净重：单重</strong></span></span><span style="font-family:Microsoft YaHei;font-size:medium;color:#ff0000;"><span style="white-space: normal;">90-100g</span></span><span style="color: rgb(255, 0, 0); font-family: &#39;Microsoft YaHei&#39;;font-size:medium; white-space: normal;">。</span></p><p style="font-weight: normal;"><span style="font-family: &#39;Microsoft YaHei&#39;;font-size:medium; color: rgb(255, 0, 0);"><strong>友情提示：配送范围不包括乡镇村组等地哦~</strong></span></p></h6><p><img src="bdimages/upload1/20150722/1437529633608340.jpg" style="float:none;" title="5440e1f5N3c5e5031.jpg"/></p><p><img src="bdimages/upload1/20150722/1437529633192696.jpg" style="float:none;" title="5440e1f7N46929db2.jpg"/></p><p><img src="bdimages/upload1/20150722/1437529633756929.jpg" style="float:none;" title="5440e1f8Ncdd0bf7d.jpg"/></p><p><img src="bdimages/upload1/20150722/1437529634167135.jpg" style="float:none;" title="5440e1faNa060702d.jpg"/></p><p><br/></p> </div>
+            <div class="detail-content">  </div>
           </div>
           <div class="mc" id="os_pinglun">
             <div class="blank20"></div>
@@ -2653,11 +2648,11 @@ $(function(){
 <div class="blank"></div>
 <div class="my_comment_tab">
 	<ul class="clearfix">
-    	<li id="mct_0" onClick="ShowMyComments(3,0,1)" class="cur">全部评价<span>(0)</span></li>
-    	<li id="mct_1" onClick="ShowMyComments(3,1,1)">好评<span>(0)</span></li>
-    	<li id="mct_2" onClick="ShowMyComments(3,2,1)">中评<span>(0)</span></li>
-    	<li id="mct_3" onClick="ShowMyComments(3,3,1)">差评<span>(0)</span></li>
-    	<li id="mct_4" onClick="ShowMyComments(3,4,1)">用户晒单<span>(0)</span></li>
+    	<li id="mct_0" onClick="ShowMyComments(137,0,1)" class="cur">全部评价<span>(0)</span></li>
+    	<li id="mct_1" onClick="ShowMyComments(137,1,1)">好评<span>(0)</span></li>
+    	<li id="mct_2" onClick="ShowMyComments(137,2,1)">中评<span>(0)</span></li>
+    	<li id="mct_3" onClick="ShowMyComments(137,3,1)">差评<span>(0)</span></li>
+    	<li id="mct_4" onClick="ShowMyComments(137,4,1)">用户晒单<span>(0)</span></li>
     </ul>
 </div>
 <div class="blank"></div>
@@ -2711,8 +2706,7 @@ document.getElementById('mct_0').click();
     <div class="goods_info_con">
   		<img src="themes/68ecshopcom_360buy/images/upgrade_ad/s-package.jpg" alt="我们的优势" width="790"/>
     </div>
-</div>
- </div>
+</div> </div>
           <div class="mc" id="os_shouhou">
             <div class="blank20"></div>
             <div class="my_goods_info">
@@ -2731,8 +2725,7 @@ document.getElementById('mct_0').click();
       </div>
     </div>
   </div>
-</div>
- </div>
+</div> </div>
           <div class="mc" id="os_changjian">
             <div class="blank20"></div>
             <div class="wenti">
@@ -2959,39 +2952,17 @@ function collectResponses(result)
       	 	<img src="themes/68ecshopcom_360buy/images/upgrade_ad/user_head.png" />
         </a>
         <div class="dropdown" style="display: none; opacity: 1; margin-right: 0px;"> 
-                  <form name="formLogin" action="user.php" method="post" onSubmit="return userLogin()">
-          <div class="form">
-            <h2><strong>请登录</strong><span>还没有账号？<a href="register.php" class="right_register">立即注册</a></span></h2>
-            <div class="item"> <span class="label">账号</span>
-              <div>
-                <input name="username" type="text" class="text" value="" tabindex="1"/>
-              </div>
+                 <div class="form">
+            <h2 class="username">hmf1143</h2>
+            <div class="login_right">
+            	<ul class="login-item">
+					<li class="member"><i></i><a href="user.php">会员中心</a></li>
+                    <li class="order"><i></i><a href="user.php?act=order_list">订单中心</a></li>
+					<li class="account"><i></i><a href="user.php?act=account_detail">帐户中心</a></li>
+					<li class="message_list"><i></i><a href="user.php?act=message_list">我的留言</a></li>
+				</ul>
             </div>
-            <div class="item"> <span class="label">密码</span>
-              <div>
-                <input type="password" id="password" name="password" class="text" tabindex="2"/>
-              </div>
-            </div>
-            <div class="item " id="o-authcode"> <span class="label_t">验证码</span>
-              <div>
-                <input type="text" id="authcode" name="captcha" class="text text-1" tabindex="3"/>
-                <label class="img"> <img src="captcha.php?is_login=1&" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </label>
-              </div>
-            </div>
-            <div class="item" id="autoentry">
-              <div class="safety">
-                <input type="checkbox" value="1" name="remember" id="remember" class="checkbox"/>
-                <label for="remember" class="mar-b">记住密码</label>
-                <a class="forget_password" href="findPwd.php">忘记密码？</a>
-            </div>
-            </div>
-            <div class="item">
-              <input type="hidden" name="act" value="act_login" />
-              <input type="hidden" name="back_act"  value=''/>
-              <input type="submit" name="submit" class="btn-img" id="loginsubmit" value="立即登录" />
-            </div>
-          </div>
-        </form>
+         </div> 
                   <span class="cart_arrow" style="background:none;border:none"><b class="arrow-1"></b> <b class="arrow-2"></b></span> 
         </div>
       </div>
@@ -3036,8 +3007,7 @@ function collectResponses(result)
             <h3 class="grid-c-l">在线调查问卷</h3>
           </div>
           <div class="button-bar"> 
-          554fcae493e564ee0dc75bdf2ebf94cavote|a:1:{s:4:"name";s:4:"vote";}554fcae493e564ee0dc75bdf2ebf94ca
- 
+          554fcae493e564ee0dc75bdf2ebf94cavote|a:1:{s:4:"name";s:4:"vote";}554fcae493e564ee0dc75bdf2ebf94ca 
           </div>
           <span class="cart_arrow"><b class="arrow-1"></b> <b class="arrow-2"></b></span></div>
       </div>
@@ -3138,11 +3108,10 @@ return false;
 $("#mod-fold").click(function(){
 $('.sidebar-nav').hasClass('fold') ? $('.sidebar-nav').removeClass('fold') : $('.sidebar-nav').addClass('fold');
 });
-</script>
- </div>
+</script> </div>
 </body>
 <script type="text/javascript">
-var goods_id = 3;
+var goods_id = 137;
 var goodsattr_style = 1;
 var gmt_end_time = 0;
 var day = "天";
@@ -3150,8 +3119,8 @@ var hour = "小时";
 var minute = "分钟";
 var second = "秒";
 var end = "结束";
-var goodsId = 3;
-var now_time = 1522431247;
+var goodsId = 137;
+var now_time = 1522450556;
 var suppid = 0;
 </script>
 <script type="text/javascript" src="js/compare.js"></script>
@@ -3249,7 +3218,7 @@ function toggle_compare_box()
 //changePrice();
 changePriceAll();
 fixpng();
-ShowMyComments(3,0,1);
+ShowMyComments(137,0,1);
 try {onload_leftTime();}
 catch (e) {}
 /**
