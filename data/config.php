@@ -36,6 +36,10 @@ define('AUTH_KEY', 'this is a key');
 
 define('OLD_AUTH_KEY', '');
 
+<<<<<<< HEAD
 define('API_TIME', '2018-04-02 08:34:10');
+=======
+define('API_TIME', '2018-03-31 10:02:27');
+>>>>>>> zmx/master
 
 ?>
