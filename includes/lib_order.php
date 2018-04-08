@@ -891,7 +891,8 @@ function order_fee($order, $goods, $consignee)
 
         // 使用积分支付
         $use_integral            = min($total['amount'], $max_amount, $integral_money); // 实际使用积分支付的金额
-        $total['amount']        -= $use_integral;
+        // $total['amount']        -= $use_integral;
+        $total['amount']         -= $order['integral'];
         $total['integral_money'] = $use_integral;
         $order['integral']       = integral_of_value($use_integral);
     }
@@ -901,7 +902,7 @@ function order_fee($order, $goods, $consignee)
         $order['integral']       = 0;
     }
     $total['integral'] = $order['integral'];
-    $total['integral_formated'] = price_format($total['integral_money'], false);
+    // $total['integral_formated'] = price_format($total['integral_money'], false);
 
     /* 保存订单信息 */
     $_SESSION['flow_order'] = $order;

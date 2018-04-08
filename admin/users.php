@@ -1056,7 +1056,6 @@ elseif ($_REQUEST['act'] == 'tupu')
 	$ecs = $GLOBALS['ecs'];
 	$user_id = htmlspecialchars(trim($_GET['user_id']));
 	$user = tupu($user_id);
-	manage($user_id,1000,$order_id);
 	// $user[0] = $GLOBALS['db']->getRow("SELECT * FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
 	// $user[1] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 1");
 	// $user[2] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 2");

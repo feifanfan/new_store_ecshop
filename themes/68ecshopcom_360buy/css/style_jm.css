@@ -1287,3 +1287,43 @@ a.pop_head_r {
 	margin: 0px 3px;
 	color: #E31939
 }
+
+/*积分支付*/
+.allow_user_integral {
+	margin: 0px 5px
+}
+.allow_user_integral p {
+	float: left;
+	height: 27px;
+	line-height: 27px;
+}
+.is_user_integral {
+	vertical-align: middle;
+	margin-left: 5px;
+	font-size: 14px;
+}
+#allow_user_integral {
+	float: left;
+	margin-left: 20px;
+	display: none
+}
+#allow_user_integral .integral {
+	height: 15px;
+	line-height: 15px;
+	width: 100px;
+	padding: 5px;
+	border: 1px #ddd solid
+}
+#allow_user_integral .integral_desc {
+	margin-right: 15px
+}
+#allow_user_integral .your_integral {
+	color: #E31939
+}
+#allow_user_integral .open_integral {
+	margin-left: 15px
+}
+#allow_user_integral .open_integral a {
+	margin: 0px 3px;
+	color: #E31939
+}

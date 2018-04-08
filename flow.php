@@ -1114,7 +1114,8 @@ elseif ($_REQUEST['step'] == 'checkout')
      * 计算订单的费用
      */
     $total = order_fee($order, $cart_goods, $consignee);
-
+//     echo '<pre>';
+// var_dump($total);die;
     $smarty->assign('total', $total);
     $smarty->assign('shopping_money', sprintf($_LANG['shopping_money'], $total['formated_goods_price']));
     $smarty->assign('market_price_desc', sprintf($_LANG['than_market_price'], $total['formated_market_price'], $total['formated_saving'], $total['save_rate']));
@@ -1290,12 +1291,15 @@ elseif ($_REQUEST['step'] == 'checkout')
     }
 	if($_CFG['use_surplus'] == '1'){
 		$smarty->assign('allow_use_surplus', 1);
+    }
+    if($_CFG['use_integral'] == '1'){
+		$smarty->assign('allow_use_integral', 1);
 	}
 
     /* 如果使用积分，取得用户可用积分及本订单最多可以使用的积分 */
     if ((!isset($_CFG['use_integral']) || $_CFG['use_integral'] == '1')
         && $_SESSION['user_id'] > 0
-        && $user_info['pay_points'] > 0
+        && $user_info['user_point'] > 0
         && ($flow_type != CART_GROUP_BUY_GOODS && $flow_type != CART_EXCHANGE_GOODS))
     {
         // 能使用积分
@@ -1306,8 +1310,26 @@ elseif ($_REQUEST['step'] == 'checkout')
 
         $smarty->assign('allow_use_integral', 1);
         //$smarty->assign('order_max_integral', $keyong);
-        $smarty->assign('your_integral',      $user_info['pay_points']); // 用户积分
+        $smarty->assign('your_integral',      $user_info['user_point']); // 用户积分
     }
+    $smarty->assign('your_integral',      $user_info['user_point']); // 用户积分
+
+    // /* 如果使用积分，取得用户可用积分及本订单最多可以使用的积分 */
+    // if ((!isset($_CFG['use_integral']) || $_CFG['use_integral'] == '1')
+    //     && $_SESSION['user_id'] > 0
+    //     && $user_info['pay_points'] > 0
+    //     && ($flow_type != CART_GROUP_BUY_GOODS && $flow_type != CART_EXCHANGE_GOODS))
+    // {
+    //     // 能使用积分
+    //     $keyong = flow_available_points();// 可用积分
+    //     foreach($keyong as $k=>$v){
+    //         $cart_goods_new[$k]['jifen'] = $v;
+    //     }
+
+    //     $smarty->assign('allow_use_integral', 1);
+    //     //$smarty->assign('order_max_integral', $keyong);
+    //     $smarty->assign('your_integral',      $user_info['pay_points']); // 用户积分
+    // }
 
 	if ((!isset($_CFG['use_bonus']) || $_CFG['use_bonus'] == '1')
         && ($flow_type != CART_GROUP_BUY_GOODS && $flow_type != CART_EXCHANGE_GOODS && $flow_type != CART_PRE_SALE_GOODS))
@@ -1642,7 +1664,7 @@ elseif ($_REQUEST['step'] == 'select_payment')
     include_once('includes/cls_json.php');
     $json = new JSON;
     $result = array('error' => '', 'content' => '', 'need_insure' => 0, 'payment' => 1);
-
+    
     /* 取得购物类型 */
     $flow_type = isset($_SESSION['flow_type']) ? intval($_SESSION['flow_type']) : CART_GENERAL_GOODS;
 
@@ -1684,7 +1706,7 @@ elseif ($_REQUEST['step'] == 'select_payment')
         /* 计算订单的费用 */
         $total = order_fee($order, $cart_goods, $consignee);
         $smarty->assign('total', $total);
-
+// var_dump($total);
         /* 取得可以得到的积分和红包 */
         $smarty->assign('total_integral', cart_amount(false, $flow_type) - $total['bonus'] - $total['integral_money']);
         $smarty->assign('total_bonus',    price_format(get_total_bonus(), false));
@@ -1859,7 +1881,7 @@ elseif ($_REQUEST['step'] == 'change_surplus')
 
     /* 取得订单信息 */
     $order = flow_order_info();
-
+    
     //$surplus_info = (isset($order['surplus_info'])) ? $order['surplus_info'] : array();
 	//$surplus_info[$suppid] = $surplus;
 
@@ -1895,7 +1917,7 @@ elseif ($_REQUEST['step'] == 'change_surplus')
 
             /* 计算订单的费用 */
             $total = order_fee($order, $cart_goods, $consignee);
-
+            
             $smarty->assign('total', $total);
 
             /* 团购标志 */
@@ -1927,6 +1949,7 @@ elseif ($_REQUEST['step'] == 'change_integral')
     include_once('includes/cls_json.php');
 
     $points    = floatval($_GET['points']);
+    
     $result['suppid'] = $suppid		= intval($_GET['suppid']);
     $user_info = user_info($_SESSION['user_id']);
 
@@ -1941,18 +1964,13 @@ elseif ($_REQUEST['step'] == 'change_integral')
     $order['integral_info'] = $integral_info;
 
     $flow_points = flow_available_points();  // 该订单允许使用的积分
-    $user_points = $user_info['pay_points']; // 用户的积分总数
+    $user_points = $user_info['user_point']; // 用户的积分总数
 
     //所有订单的总积分
-    $points_all = array_sum($integral_info);
 
-    if ($points_all > $user_points)
+    if ($points > $user_info['user_point'])
     {
-        $result['error'] = $_LANG['integral_not_enough'];
-    }
-    elseif ($points > $flow_points[$suppid])
-    {
-        $result['error'] = sprintf($_LANG['integral_too_much'], $flow_points[$suppid]);
+        $result['error'] = "企业币不足";
     }
     else
     {
@@ -1966,28 +1984,30 @@ elseif ($_REQUEST['step'] == 'change_integral')
 
         /* 对商品信息赋值 */
         $cart_goods = cart_goods($flow_type); // 取得商品列表，计算合计
-
-        if (empty($cart_goods) || !check_consignee_info($consignee, $flow_type))
-        {
-            $result['error'] = $_LANG['no_goods_in_cart'];
-        }
-        else
-        {
+        $order['integral'] = $points;
             /* 计算订单的费用 */
             $total = order_fee($order, $cart_goods, $consignee);
+            
+            if($total['goods_price_formated']/2<$points){
+                $result['error'] = "使用企业币不得大于总金额的1/2";
+            }
+            // var_dump($total);die;
+            // $total['point'] = $points;
+
+            // if($total['amount_formated'] <= 0){
+			// 	$total['integral'] = $total['amount_formated'] - $points;
+			// }else{
+			// 	$result['integral'] = $points;
+			// }
+			$result['integral'] = $points;
+            // $total['amount_formated'] = $total['amount_formated'] - $points;
+				
             $smarty->assign('total',  $total);
             $smarty->assign('config', $_CFG);
-
-            /* 团购标志 */
-            if ($flow_type == CART_GROUP_BUY_GOODS)
-            {
-                $smarty->assign('is_group_buy', 1);
-            }
-
+ 
             $result['content'] = $smarty->fetch('library/order_total.lbi');
-            $result['error'] = '';
-        }
     }
+    
 
     $json = new JSON();
     die($json->encode($result));
@@ -2421,7 +2441,7 @@ elseif ($_REQUEST['step'] == 'done')
 
 	        // 查询用户有多少积分
 	        $flow_points = flow_available_points();  // 该订单允许使用的积分
-	        $user_points = $user_info['pay_points']; // 用户的积分总数
+	        $user_points = $user_info['user_point']; // 用户的积分总数
 
 	        $order['integral'] = min($order['integral'], $user_points, $flow_points[$ckey]);
 	        if ($order['integral'] < 0)
@@ -2614,8 +2634,8 @@ elseif ($_REQUEST['step'] == 'done')
 	    }
 
 	    $order['integral_money']   = $total['integral_money'];
-	    $order['integral']         = $total['integral'];
-
+	    $order['integral']         = $order_integral;
+// var_dump($total);var_dump(111111111111111111111111);var_dump($order);die;
 	    if ($order['extension_code'] == 'exchange_goods')
 	    {
 	        $order['integral_money']   = 0;
@@ -2677,7 +2697,6 @@ elseif ($_REQUEST['step'] == 'done')
     //组装拆分的子订单数组信息end
 
 
-
     //判断是否拆分为多个订单,多个订单就生成父订单id号
     $del_patent_id = 0;
     if(count($order_info)>1){
@@ -2698,6 +2717,9 @@ elseif ($_REQUEST['step'] == 'done')
     }else{
     	$parent_order_id = 0;
     }
+    //更新users表的积分（user_point）
+    $up_sql = "update ".$GLOBALS['ecs']->table('users')." set user_point=user_point-".$order_integral. " where user_id = ".$_SESSION['user_id'];
+    $GLOBALS['db']->query($up_sql);
 
     $all_order_amount = 0;//记录订单所需支付的总金额
     //用来展示用的数组数据
@@ -2807,7 +2829,7 @@ elseif ($_REQUEST['step'] == 'done')
 		if($order['order_amount'] <=0){//余额全额支付
 			$split_order['suborder_list'][$ok]['order_amount_formated'] = price_format($order['surplus'],false);
 		}else{
-			$split_order['suborder_list'][$ok]['order_amount_formated'] = price_format($order['order_amount'],false);
+			$split_order['suborder_list'][$ok]['order_amount_formated'] = price_format($order['order_amount']-$order_integral,false);
 		}
 
 
@@ -2947,7 +2969,7 @@ elseif ($_REQUEST['step'] == 'done')
     	$sql="delete from ".$GLOBALS['ecs']->table('order_info')." where order_id='$del_patent_id' ";
 		$GLOBALS['db']->query($sql);
     }
-
+// var_dump($split_order);die;
 
 	/* 代码增加_start  By  bbs.hongyuvip.com */
 	//$split_order = split_order($new_order_id);
