@@ -179,10 +179,18 @@ elseif ($_REQUEST['act'] == 'insert')
 	$city = $_POST['city'];
 	$district = $_POST['district'];
 	$address = empty($_POST['address']) ? '' : trim($_POST['address']);
-	$status = $_POST['status'];
+	$user_status = $_POST['user_status'];
 	/* 代码增加2014-12-23 by bbs.hongyuvip.com _end */
 	$users = & init_users();
-	
+	$parent_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_id=".trim($_POST['parent_id']));
+	if($parent_info){
+		$son_num = $GLOBALS['db']->getOne("SELECT COUNT(*) from ".$GLOBALS['ecs']->table('users')." WHERE parent_id = ".$parent_info['user_id']);
+		if($son_num>=2){
+			sys_msg("上级id的子级用户已满", 1);
+		}
+	}else{
+		sys_msg("上级id不存在", 1);
+	}
 	if(! $users->add_user($username, $password, $email))
 	{
 		/* 插入会员数据失败 */
@@ -218,10 +226,10 @@ elseif ($_REQUEST['act'] == 'insert')
 	}
 	
 	/* 注册送积分 */
-	if(! empty($GLOBALS['_CFG']['register_points']))
-	{
-		log_account_change($_SESSION['user_id'], 0, 0, $GLOBALS['_CFG']['register_points'], $GLOBALS['_CFG']['register_points'], $_LANG['register_points']);
-	}
+	// if(! empty($GLOBALS['_CFG']['register_points']))
+	// {
+	// 	log_account_change($_SESSION['user_id'], 0, 0, $GLOBALS['_CFG']['register_points'], $GLOBALS['_CFG']['register_points'], $_LANG['register_points']);
+	// }
 	
 	/* 把新注册用户的扩展信息插入数据库 */
 	$sql = 'SELECT id FROM ' . $ecs->table('reg_fields') . ' WHERE type = 0 AND display = 1 ORDER BY dis_order, id'; // 读出所有扩展字段的id
@@ -258,8 +266,31 @@ elseif ($_REQUEST['act'] == 'insert')
 	$other['qq'] = isset($_POST['extend_field2']) ? htmlspecialchars(trim($_POST['extend_field2'])) : '';
 	$other['office_phone'] = isset($_POST['extend_field3']) ? htmlspecialchars(trim($_POST['extend_field3'])) : '';
 	$other['home_phone'] = isset($_POST['extend_field4']) ? htmlspecialchars(trim($_POST['extend_field4'])) : '';
-	$other['mobile_phone'] = isset($_POST['extend_field5']) ? htmlspecialchars(trim($_POST['extend_field5'])) : '';
+	$other['mobile_phone'] = isset($_POST['mobile_phone']) ? htmlspecialchars(trim($_POST['mobile_phone'])) : '';
 	
+	$id = $GLOBALS['db']->getOne("select user_id from ".$GLOBALS['ecs']->table('users')." where user_name = '$username'");
+	//var_dump($id);die;
+	if($parent_info){
+		$other['parent_id'] = $parent_info['user_id'];
+		$other['id_list'] = $parent_info['id_list'].",".$id;
+		$other['deep'] = $parent_info['deep']+1;
+		$son_num = $GLOBALS['db']->getOne("SELECT COUNT(*) from ".$GLOBALS['ecs']->table('users')." WHERE parent_id = ".$parent_info['user_id']);
+		if($son_num==0){
+			$other['parent_side'] = 1;
+			$other['side_list'] =$parent_info['side_list'].",1";
+		}elseif($son_num==1){
+			$other['parent_side'] = 2;
+		}else{
+			$other['parent_side'] = 1;
+			$other['side_list'] =$parent_info['side_list'].",2";
+		}
+	}else{
+		$other['id_list'] = $id;
+		$other['parent_id'] = 0;
+		$other['parent_side'] = 1;
+		$other['side_list'] = 1;
+		$other['deep'] =1;
+	}
 	$db->autoExecute($ecs->table('users'), $other, 'UPDATE', "user_name = '$username'");
 	/* 代码增加2014-12-23 by bbs.hongyuvip.com _star */
 	if(isset($_FILES['face_card']) && $_FILES['face_card']['tmp_name'] != '')
@@ -321,7 +352,7 @@ elseif ($_REQUEST['act'] == 'edit')
 	/* 检查权限 */
 	admin_priv('users_manage');
 	
-	$sql = "SELECT u.user_name, u.sex, u.birthday, u.pay_points, u.rank_points, u.user_rank , u.user_money, u.frozen_money, u.credit_line, u.parent_id, u2.user_name as parent_username, u.qq, u.msn, u.office_phone, u.home_phone, u.mobile_phone" . " FROM " . $ecs->table('users') . " u LEFT JOIN " . $ecs->table('users') . " u2 ON u.parent_id = u2.user_id WHERE u.user_id='$_GET[id]'";
+	$sql = "SELECT u.user_name, u.sex, u.birthday, u.pay_points, u.rank_points, u.user_rank , u.user_money, u.frozen_money, u.user_cash,u.user_point,u.credit_line, u.parent_id, u2.user_name as parent_username, u.qq, u.msn, u.office_phone, u.home_phone, u.mobile_phone" . " FROM " . $ecs->table('users') . " u LEFT JOIN " . $ecs->table('users') . " u2 ON u.parent_id = u2.user_id WHERE u.user_id='$_GET[id]'"; 
 	
 	$row = $db->GetRow($sql);
 	$row['user_name'] = addslashes($row['user_name']);
@@ -331,7 +362,7 @@ elseif ($_REQUEST['act'] == 'edit')
 
 		
 
-	  $sql = "SELECT u.user_id, u.sex, u.birthday, u.pay_points, u.rank_points, u.user_rank , u.user_money, u.frozen_money, u.credit_line, u.parent_id, u2.user_name as parent_username, u.qq, u.msn,
+	  $sql = "SELECT u.user_id, u.sex, u.birthday, u.pay_points, u.rank_points, u.user_rank , u.user_money, u.frozen_money,u.user_cash,u.user_point, u.credit_line, u.parent_id, u2.user_name as parent_username, u.qq, u.msn,
     u.office_phone, u.home_phone, u.mobile_phone,u.real_name,u.card,u.face_card,u.back_card,u.country,u.province,u.city,u.district,u.address,u.status ".
         " FROM " .$ecs->table('users'). " u LEFT JOIN " . $ecs->table('users') . " u2 ON u.parent_id = u2.user_id WHERE u.user_id='$_GET[id]'";
 
@@ -355,6 +386,8 @@ elseif ($_REQUEST['act'] == 'edit')
 		$user['user_rank'] = $row['user_rank'];
 		$user['user_money'] = $row['user_money'];
 		$user['frozen_money'] = $row['frozen_money'];
+		$user['user_cash'] = $row['user_cash'];
+		$user['user_point'] = $row['user_point'];
 		$user['credit_line'] = $row['credit_line'];
 		$user['formated_user_money'] = price_format($row['user_money']);
 		$user['formated_frozen_money'] = price_format($row['frozen_money']);
@@ -524,7 +557,7 @@ elseif ($_REQUEST['act'] == 'update')
 	$city = $_POST['city'];
 	$district = $_POST['district'];
 	$address = empty($_POST['address']) ? '' : trim($_POST['address']);
-	$status = $_POST['status'];
+	$status = $_POST['user_status'];
 	
 	
 	$users = & init_users();
@@ -588,7 +621,7 @@ elseif ($_REQUEST['act'] == 'update')
 		}
 	}
 	
-	$sql = "update " . $ecs->table('users') . " set `real_name`='$real_name',`card`='$card',`country`='$country',`province`='$province',`city`='$city',`district`='$district',`address`='$address',`status`='$status' where user_name = '" . $username . "'";
+	$sql = "update " . $ecs->table('users') . " set `real_name`='$real_name',`card`='$card',`country`='$country',`province`='$province',`city`='$city',`district`='$district',`address`='$address',`user_status`='$status' where user_name = '" . $username . "'";
 	$db->query($sql);
 	
 	if($face_card != '')
@@ -1019,7 +1052,7 @@ elseif ($_REQUEST['act'] == 'aff_list')
 		
 		if($count)
 		{
-			$sql = "SELECT user_id, user_name, '$i' AS level, email, is_validated, user_money, frozen_money, rank_points, pay_points, reg_time " . " FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id IN($up_uid)" . " ORDER by level, user_id";
+			$sql = "SELECT user_id, user_name, '$i' AS level, email, is_validated, user_money, frozen_money, rank_points,user_cash,user_point,mobile_phone,user_rank, pay_points, reg_time " . " FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id IN($up_uid)" . " ORDER by level, user_id";
 			$user_list['user_list'] = array_merge($user_list['user_list'], $db->getAll($sql));
 		}
 	}

@@ -409,11 +409,11 @@ function add_booking($booking)
  *
  * @return  int
  */
-function insert_user_account($surplus, $amount)
+function insert_user_account($surplus, $amount, $money)
 {
     $sql = 'INSERT INTO ' .$GLOBALS['ecs']->table('user_account').
-           ' (user_id, admin_user, amount, add_time, paid_time, admin_note, user_note, process_type, payment, is_paid)'.
-            " VALUES ('$surplus[user_id]', '', '$amount', '".gmtime()."', 0, '', '$surplus[user_note]', '$surplus[process_type]', '$surplus[payment]', 0)";
+           ' (user_id, admin_user, amount, money, add_time, paid_time, admin_note, user_note, process_type, payment, is_paid)'.
+            " VALUES ('$surplus[user_id]', '', '$amount', '$money', '".gmtime()."', 0, '', '$surplus[user_note]', '$surplus[process_type]', '$surplus[payment]', 0)";
     $GLOBALS['db']->query($sql);
 
     return $GLOBALS['db']->insert_id();
@@ -637,10 +637,13 @@ function get_user_default($user_id)
 	$info['mobile_phone'] = $row['mobile_phone'];
 	$info['email']	= $row['email'];
 	$info['status'] = $row['status'];
+    $info['user_status'] = $row['user_status'];
 	$info['is_validated'] = $row['is_validated'];
 	$info['validated'] = $row['validated'];
 	$info['is_surplus_open'] = $row['is_surplus_open'];
-	$info['status'] = $row['status'];
+    $info['user_money'] = $row['user_money'];
+    $info['user_cash'] = $row['user_cash'];
+    $info['user_point'] = $row['user_point'];
     /*代码增加2014-12-23 by bbs.hongyuvip.com  _end */
     //如果$_SESSION中时间无效说明用户是第一次登录。取当前登录时间。
     $last_time = !isset($_SESSION['last_time']) ? $row['last_login'] : $_SESSION['last_time'];

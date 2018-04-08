@@ -149,7 +149,7 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
             if ($pay_log['order_type'] == PAY_ORDER)
             {
                 /* 取得订单信息 */ //jx
-                $sql = 'SELECT order_id, user_id,supplier_id, order_sn, consignee, address, tel,mobile, shipping_id, extension_code, extension_id, goods_amount ' .
+                $sql = 'SELECT order_id, user_id,supplier_id, order_sn, consignee, address, tel,mobile, shipping_id, extension_code, extension_id, goods_amount,is_pickup,pickup_point ' .
                         'FROM ' . $GLOBALS['ecs']->table('order_info') .
                        " WHERE order_id = '$pay_log[order_id]' OR parent_order_id = '$pay_log[order_id]' ";
                 $orderinfo    = $GLOBALS['db']->getAll($sql);
@@ -171,8 +171,16 @@ function order_paid($log_id, $pay_status = PS_PAYED, $note = '')
 	                       "WHERE order_id = '$order_id'";
 	                $GLOBALS['db']->query($sql);
 	               /*此处调用分配函数*/
+                    //1.首单奖,业绩奖（碰对奖）
+                    //2.管理奖
+                    //3.检查是否是自提订单，是，分配store_self_point
+                    manage($order['user_id'],$order['goods_amount'],$order['order_sn']);
+                    collide_point($order['user_id'],$order['goods_amount'],$order['order_sn']);
+                    if($order['is_pickup']>0){
+                        store_self_bonus($order['user_id'],$order['goods_amount'],$order['order_sn']);
+                    }
 
-                   
+
 	                /* 记录订单操作记录 */
 	                order_action($order_sn, OS_CONFIRMED, SS_UNSHIPPED, $pay_status, $note, $GLOBALS['_LANG']['buyer']);
 	

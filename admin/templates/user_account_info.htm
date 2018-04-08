@@ -18,6 +18,13 @@
           {if $user_surplus.process_type eq 2 || $user_surplus.process_type eq 3 || $action eq "edit"} readonly="true" {/if}/>
         </td>
       </tr>
+	  <tr>
+        <td class="label">金额(扣除手续费后)：</td>
+        <td>
+          <input type="text" name="money" value="{$user_surplus.money}" size="20"
+          {if $user_surplus.process_type eq 2 || $user_surplus.process_type eq 3 || $action eq "edit"} readonly="true" {/if}/>
+        </td>
+      </tr>
       <tr>
         <td class="label">{$lang.pay_mothed}：</td>
         <td>

@@ -35,6 +35,7 @@
     <th><a href="javascript:listTable.sort('add_time', 'DESC'); ">{$lang.add_date}</a>{$sort_add_time}</th>
     <th><a href="javascript:listTable.sort('process_type', 'DESC'); ">{$lang.process_type}</a>{$sort_process_type}</th>
     <th><a href="javascript:listTable.sort('amount', 'DESC'); ">{$lang.surplus_amount}</a>{$sort_amount}</th>
+    <th><a href="javascript:listTable.sort('money', 'DESC'); ">金额(扣除手续费后)</a>{$sort_money}</th>
     <th><a href="javascript:listTable.sort('payment', 'DESC'); ">{$lang.pay_mothed}</a>{$sort_payment}</th>
     <th><a href="javascript:listTable.sort('is_paid', 'DESC'); ">{$lang.status}</a>{$sort_is_paid}</th>
     <th>{$lang.admin_user}</th>
@@ -46,6 +47,7 @@
     <td align="center">{$item.add_date}</td>
     <td align="center">{$item.process_type_name}</td>
     <td align="right">{$item.surplus_amount}</td>
+    <td align="right">{$item.money}</td>
     <td>{if $item.payment}{$item.payment}{else}N/A{/if}</td>
     <td align="center">{if $item.is_paid}{$lang.confirm}{else}{$lang.unconfirm}{/if}</td>
     <td align="center">{$item.admin_user}

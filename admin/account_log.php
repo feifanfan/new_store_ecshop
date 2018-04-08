@@ -51,7 +51,7 @@ if ($_REQUEST['act'] == 'list')
     $smarty->assign('action_link',  array('text' => $_LANG['add_account'], 'href' => 'account_log.php?act=add&user_id=' . $user_id));
     $smarty->assign('full_page',    1);
 
-    $account_list = get_accountlist($user_id, $account_type);
+    $account_list = get_accountlist($user_id, $account_type);var_dump($account_list);die;
     $smarty->assign('account_list', $account_list['account']);
     $smarty->assign('filter',       $account_list['filter']);
     $smarty->assign('record_count', $account_list['record_count']);
@@ -155,10 +155,10 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
     // $rank_points    = floatval($_POST['add_sub_rank_points']) * abs(floatval($_POST['rank_points']));
     // $pay_points     = floatval($_POST['add_sub_pay_points']) * abs(floatval($_POST['pay_points']));
 
-
     $user_money     = floatval($_POST['add_sub_user_money']) * abs(floatval($_POST['user_money']));
     $user_cash     = floatval($_POST['add_sub_user_cash']) * abs(floatval($_POST['user_cash']));
     $user_point     = floatval($_POST['add_sub_user_point']) * abs(floatval($_POST['user_point']));
+	
     //var_dump($user_money."..".$user_cash."..".$user_point);die;
     if ($user_money == 0 && $user_cash == 0 && $user_point == 0)
     {
@@ -167,7 +167,9 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
 
     /* 保存 */
     // log_account_change($user_id, $user_money, $frozen_money, $rank_points, $pay_points, $change_desc, ACT_ADJUSTING);
-     log_account_change_new($user_id, $user_money, $user_cash, $user_point, $change_desc, ACT_ADJUSTING);
+	
+    log_account_change_new($user_id, $user_money, $user_cash, $user_point, $change_desc, ACT_ADJUSTING);
+	 
 	//是否开启余额变动给客户发短信-管理员调节
 	if($_CFG['sms_user_money_change'] == 1)
 	{

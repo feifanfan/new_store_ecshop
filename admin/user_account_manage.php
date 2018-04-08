@@ -65,11 +65,11 @@ if ($_REQUEST['act'] == 'list')
     $account['voucher_amount'] = get_total_amount($start_date, $end_date);//充值总额
     $account['to_cash_amount'] = get_total_amount($start_date, $end_date, 1);//提现总额
 
-    $sql = " SELECT IFNULL(SUM(user_money), 0) AS user_money, IFNULL(SUM(frozen_money), 0) AS frozen_money FROM " .
-           $ecs->table('account_log') . " WHERE `change_time` >= " . $start_date ." AND `change_time` < " .($end_date+86400);
-    $money_list = $db->getRow($sql);
+    // $sql = " SELECT IFNULL(SUM(user_money), 0) AS user_money, IFNULL(SUM(frozen_money), 0) AS frozen_money FROM " .
+           // $ecs->table('account_log') . " WHERE `change_time` >= " . $start_date ." AND `change_time` < " .($end_date+86400);
+    // $money_list = $db->getRow($sql);
     $account['user_money']     = price_format($money_list['user_money']);   //用户可用余额
-    $account['frozen_money']   = price_format($money_list['frozen_money']);   //用户冻结金额
+    // $account['frozen_money']   = price_format($money_list['frozen_money']);   //用户冻结金额
 
     $sql = "SELECT IFNULL(SUM(surplus), 0) AS surplus, IFNULL(SUM(integral_money), 0) AS integral_money FROM ".
            $ecs->table('order_info') ." WHERE 1 AND `add_time` >= " . $start_date ." AND `add_time` < " .($end_date+86400);
