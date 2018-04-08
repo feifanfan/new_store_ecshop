@@ -637,10 +637,13 @@ function get_user_default($user_id)
 	$info['mobile_phone'] = $row['mobile_phone'];
 	$info['email']	= $row['email'];
 	$info['status'] = $row['status'];
+    $info['user_status'] = $row['user_status'];
 	$info['is_validated'] = $row['is_validated'];
 	$info['validated'] = $row['validated'];
 	$info['is_surplus_open'] = $row['is_surplus_open'];
-	$info['status'] = $row['status'];
+    $info['user_money'] = $row['user_money'];
+    $info['user_cash'] = $row['user_cash'];
+    $info['user_point'] = $row['user_point'];
     /*代码增加2014-12-23 by bbs.hongyuvip.com  _end */
     //如果$_SESSION中时间无效说明用户是第一次登录。取当前登录时间。
     $last_time = !isset($_SESSION['last_time']) ? $row['last_login'] : $_SESSION['last_time'];

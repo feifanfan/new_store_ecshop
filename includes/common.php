@@ -64,46 +64,57 @@ function tupu($user_id){
 	}
 	return $user;
 }
+
+//管理奖
 function manage($user_id,$amount,$order_id){
 	$res = $GLOBALS['db']->getRow("SELECT user_name,id_list,user_id,parent_id FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
 	$id_list = explode(',',$res['id_list']);
 	$arr = array_reverse($id_list);
 	for($i = 0; $i < count($arr)-1; $i++){
+
 		$parent_id = $arr[$i+1];
-		$user_rank = $GLOBALS['db']->getRow("SELECT user_name,user_rank,user_id FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".				$parent_id);
-		
-		$cengshu = $i+1;
-		$char = chr($user_rank['user_rank']+96);
-		if(1>=$cengshu || $cengshu<=2){
-			$d = 1;
-		}elseif(3>=$cengshu || $cengshu<=5){
-			$d = 2;
-		}elseif(6>=$cengshu || $cengshu<=8){
-			$d = 3;
-		}elseif(9>=$cengshu || $cengshu<=15){
-			$d = 4;
+		$fengding = is_fengding();
+		if($fengding==-1){
+			continue;
 		}else{
-			return;
+			$user_rank = $GLOBALS['db']->getRow("SELECT user_name,user_rank,user_id FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".				$parent_id);
+			
+			$cengshu = $i+1;
+			$char = chr($user_rank['user_rank']+96);
+			if(1>=$cengshu || $cengshu<=2){
+				$d = 1;
+			}elseif(3>=$cengshu || $cengshu<=5){
+				$d = 2;
+			}elseif(6>=$cengshu || $cengshu<=8){
+				$d = 3;
+			}elseif(9>=$cengshu || $cengshu<=15){
+				$d = 4;
+			}else{
+				return;
+			}
+			$chars = $char."_card_manage_".$d;
+			// $percent = $GLOBALS['db']->getOne("select value from ".$GLOBALS['ecs']->table('shop_config')." where code = ".$chars);
+			$percent = $GLOBALS['db']->getOne("select value from ecs_shop_config where code='$chars'");
+			
+			$zong  = $amount * $percent/100;
+			if($zong>$fengding){
+				$zong  = $fengding;
+			}
+			$user_money = $zong*0.8;
+			$user_cash = $zong * 0.2;
+			$change_desc = '第'.$cengshu.'代'.$user_rank['user_name'].'的管理奖';
+			$change_time = time();
+			$up_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$user_money.",user_cash=user_cash+".$user_cash. " where user_id = ".$parent_id;
+			
+			$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_money,user_cash,change_desc,change_time,user_id,change_type) values ( '$user_money','$user_cash','$change_desc','$change_time','$parent_id','99')";
+			$GLOBALS['db']->query($up_sql);
+			$GLOBALS['db']->query($insert_sql);	
 		}
-		$chars = $char."_card_manage_".$d;
-		// $percent = $GLOBALS['db']->getOne("select value from ".$GLOBALS['ecs']->table('shop_config')." where code = ".$chars);
-		$percent = $GLOBALS['db']->getOne("select value from ecs_shop_config where code='$chars'");
-		
-		$zong  = $amount * $percent/100;
-		$user_money = $zong*0.8;
-		$user_cash = $zong * 0.2;
-		$change_desc = '第'.$cengshu.'代'.$user_rank['user_name'].'的管理奖';
-		$change_time = time();
-		$up_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$user_money.",user_cash=user_cash+".$user_cash. " where user_id = ".$parent_id;
-		
-		$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_money,user_cash,change_desc,change_time,user_id,change_type) values ( '$user_money','$user_cash','$change_desc','$change_time','$parent_id','99')";
-		$GLOBALS['db']->query($up_sql);
-		$GLOBALS['db']->query($insert_sql);	
 		
 	}
 	
 }
-
+//碰对奖
 function collide_point($user_id,$amount,$order_sn){
 	$user_info =$GLOBALS['db']->getRow("select parent_id,deep,user_rank,id_list,side_list from ".$GLOBALS['ecs']->table('users') ." where user_id = ".$user_id);
 	//买主的side_list倒叙数组
@@ -207,14 +218,8 @@ function collide_point($user_id,$amount,$order_sn){
 			$account_log_sql = "insert into ".$GLOBALS['ecs']->table('account_log')."(user_id,user_money,user_cash,change_time,change_desc,change_type) values ( '$parent_id','$send_money','$send_cash','$change_time','$change_desc','99')";
 
 			$GLOBALS['db']->query($account_log_sql);
-			echo "<br>";
-			echo "<br>";
-			echo "<br>";
-			echo "<br>";
-
 
 		}else{
-		echo "插入<br>";
 			//查询相对父亲的首单奖励和次单奖励百分比，根据deep去设置比例
 		$parent_user_rank = $GLOBALS['db']->getOne("select user_rank from ".$GLOBALS['ecs']->table('users')." where user_id = ".$parent_id);
 		echo $parent_id."--".$parent_user_rank."<br>";
@@ -243,6 +248,19 @@ function collide_point($user_id,$amount,$order_sn){
 	}
 }
 
+function store_self_bonus($user_id,$amount,$order_sn){
+	$add_user_id = "SELECT s.user_id from ".$GLOBALS['ecs']->table('supplier')." as s LEFT JOIN ".$GLOBALS['ecs']->table('pickup_point')." as p on s.supplier_id = p.supplier_id LEFT JOIN ".$GLOBALS['ecs']->table('order_info')." as o ON o.pickup_point=p.id WHERE o.order_id=89"
+	$jin = $amount*0.01;
+	$user_money = $jin*0.8;
+	$user_cash = $jin*0.2;
+	$change_desc = "订单".$order_sn."商城消费自提";
+	$change_time = time();
+	$up_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$user_money.",user_cash = user_cash+".$user_cash." where user_id = ".$add_user_id;
+	$insert_sql = "insert into ".$GLOBALS['ecs']->table('account_log')." (user_money,user_cash,change_time,change_desc,change_type,user_id) values ( '$user_money','$user_cash','$change_time','$change_desc','99','$add_user_id')";
+	$GLOBALS['db']->query($up_sql);
+	$GLOBALS['db']->query($insert_sql);
+}
+//检测奖金是否封顶
 function is_fengding($user_id){
 	$now_date = date('Ymd',time());
 	$sql = "select user_rank,fd_num,fd_date from ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id;

@@ -86,20 +86,11 @@ $data = array (
   ),
   6 => 
   array (
+<<<<<<< HEAD
     'cat_id' => '19',
     'cat_name' => '供货商通知文章',
     'cat_type' => '99',
-    'keywords' => '',
-    'cat_desc' => '',
-    'sort_order' => '50',
-    'show_in_nav' => '0',
-    'parent_id' => '0',
-    'path_name' => '',
-    'has_children' => '0',
-    'aricle_num' => '2',
-  ),
-  7 => 
-  array (
+=======
     'cat_id' => '20',
     'cat_name' => '广告354*454',
     'cat_type' => '1',
@@ -112,11 +103,12 @@ $data = array (
     'has_children' => '0',
     'aricle_num' => '5',
   ),
-  8 => 
+  7 => 
   array (
     'cat_id' => '11',
     'cat_name' => '手机促销',
     'cat_type' => '1',
+>>>>>>> zmx/master
     'keywords' => '',
     'cat_desc' => '',
     'sort_order' => '50',
@@ -126,11 +118,39 @@ $data = array (
     'has_children' => '0',
     'aricle_num' => '11',
   ),
-  9 => 
+  7 => 
   array (
     'cat_id' => '17',
     'cat_name' => '广告1210*100',
     'cat_type' => '1',
+    'keywords' => '',
+    'cat_desc' => '',
+    'sort_order' => '50',
+    'show_in_nav' => '0',
+    'parent_id' => '0',
+    'path_name' => '',
+    'has_children' => '0',
+    'aricle_num' => '2',
+  ),
+  8 => 
+  array (
+    'cat_id' => '1',
+    'cat_name' => '系统分类',
+    'cat_type' => '2',
+    'keywords' => '',
+    'cat_desc' => '系统保留分类',
+    'sort_order' => '50',
+    'show_in_nav' => '0',
+    'parent_id' => '0',
+    'path_name' => '',
+    'has_children' => '2',
+    'aricle_num' => '0',
+  ),
+  9 => 
+  array (
+    'cat_id' => '19',
+    'cat_name' => '供货商通知文章',
+    'cat_type' => '99',
     'keywords' => '',
     'cat_desc' => '',
     'sort_order' => '50',
@@ -156,20 +176,6 @@ $data = array (
   ),
   11 => 
   array (
-    'cat_id' => '2',
-    'cat_name' => '网店信息',
-    'cat_type' => '3',
-    'keywords' => '',
-    'cat_desc' => '网店信息分类',
-    'sort_order' => '50',
-    'show_in_nav' => '0',
-    'parent_id' => '1',
-    'path_name' => '',
-    'has_children' => '0',
-    'aricle_num' => '5',
-  ),
-  12 => 
-  array (
     'cat_id' => '3',
     'cat_name' => '网店帮助分类',
     'cat_type' => '4',
@@ -182,35 +188,21 @@ $data = array (
     'has_children' => '5',
     'aricle_num' => '0',
   ),
+  12 => 
+  array (
+    'cat_id' => '2',
+    'cat_name' => '网店信息',
+    'cat_type' => '3',
+    'keywords' => '',
+    'cat_desc' => '网店信息分类',
+    'sort_order' => '50',
+    'show_in_nav' => '0',
+    'parent_id' => '1',
+    'path_name' => '',
+    'has_children' => '0',
+    'aricle_num' => '5',
+  ),
   13 => 
-  array (
-    'cat_id' => '5',
-    'cat_name' => '新手上路 ',
-    'cat_type' => '5',
-    'keywords' => '',
-    'cat_desc' => '',
-    'sort_order' => '50',
-    'show_in_nav' => '0',
-    'parent_id' => '3',
-    'path_name' => '',
-    'has_children' => '0',
-    'aricle_num' => '6',
-  ),
-  14 => 
-  array (
-    'cat_id' => '9',
-    'cat_name' => '关于我们 ',
-    'cat_type' => '5',
-    'keywords' => '',
-    'cat_desc' => '联系我们 ',
-    'sort_order' => '50',
-    'show_in_nav' => '0',
-    'parent_id' => '3',
-    'path_name' => '',
-    'has_children' => '0',
-    'aricle_num' => '6',
-  ),
-  15 => 
   array (
     'cat_id' => '10',
     'cat_name' => '购物指南',
@@ -224,7 +216,7 @@ $data = array (
     'has_children' => '0',
     'aricle_num' => '7',
   ),
-  16 => 
+  14 => 
   array (
     'cat_id' => '7',
     'cat_name' => '配送方式 ',
@@ -238,7 +230,7 @@ $data = array (
     'has_children' => '0',
     'aricle_num' => '6',
   ),
-  17 => 
+  15 => 
   array (
     'cat_id' => '8',
     'cat_name' => '售后服务',
@@ -251,6 +243,34 @@ $data = array (
     'path_name' => '',
     'has_children' => '0',
     'aricle_num' => '7',
+  ),
+  16 => 
+  array (
+    'cat_id' => '5',
+    'cat_name' => '新手上路 ',
+    'cat_type' => '5',
+    'keywords' => '',
+    'cat_desc' => '',
+    'sort_order' => '50',
+    'show_in_nav' => '0',
+    'parent_id' => '3',
+    'path_name' => '',
+    'has_children' => '0',
+    'aricle_num' => '6',
+  ),
+  17 => 
+  array (
+    'cat_id' => '9',
+    'cat_name' => '关于我们 ',
+    'cat_type' => '5',
+    'keywords' => '',
+    'cat_desc' => '联系我们 ',
+    'sort_order' => '50',
+    'show_in_nav' => '0',
+    'parent_id' => '3',
+    'path_name' => '',
+    'has_children' => '0',
+    'aricle_num' => '6',
   ),
 );
 ?>
