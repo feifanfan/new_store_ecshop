@@ -49,7 +49,7 @@
       - {$lang.use_surplus}: <font class="f4_b">{$total.surplus_formated}</font>
       <!-- {/if} -->
       <!-- {if $total.integral > 0} 使用积分 -->
-      - {$lang.use_integral}: <font class="f4_b">{$total.integral}</font>
+      - 使用企业币: <font class="f4_b">{$total.integral}</font>
       <!-- {/if} -->
       <!-- {if $total.bonus > 0} 使用红包 -->
       - {$lang.use_bonus}: <font class="f4_b">{$total.bonus_formated}</font>

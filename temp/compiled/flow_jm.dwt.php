@@ -493,8 +493,8 @@ else
           
         </script> 
    
-  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_74906200_1523669140');if (count($_from)):
-    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_74906200_1523669140']):
+  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_43783200_1523669701');if (count($_from)):
+    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_43783200_1523669701']):
 ?>
   <form action="flow.php" method="post" name="theForm" id="theForm" onsubmit="return checkConsignee(this)">
     <?php echo $this->fetch('library/consignee.lbi'); ?>
@@ -972,11 +972,11 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
             	<div class="allow_user_integral">
         			<p>
                     	<input type="checkbox" id="isintegral" onclick="checksboxOnclick(this)" style="vertical-align:middle; cursor:pointer" />
-                    	<span class="is_user_integral">使用积分支付</span>
+                    	<span class="is_user_integral">使用企业币支付</span>
                     </p>
         			<div id="allow_user_integral">
         				<span class="integral_desc"><input name="integral" type="text" class="integral" id="ECS_INTEGRAL"  value="<?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?>" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;积分</span>
-            			您当前的可用积分为:<span class="your_integral"><?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?> </span>
+            			您当前的可用企业币为:<span class="your_integral"><?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?> </span>
                         <span id="ECS_INTEGRAL_NOTICE" class="notice"></span>
             			</div>
 				<script type="text/javascript">

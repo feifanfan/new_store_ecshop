@@ -132,7 +132,7 @@ function collide_point($user_id,$amount,$order_sn){
 		$info = $GLOBALS['db']->getAll($sql);
 		/*初始化每次循环重复使用的数据*/
 		unset($res);
-		
+				
 		/*****************************/
 		for($i=0;$i<count($info);$i++){
 			$pre_other_side_list = array_reverse(explode(",",$info[$i]['side_list']));

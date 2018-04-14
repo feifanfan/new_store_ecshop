@@ -14,15 +14,15 @@
      <?php $_from = $this->_var['vote']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'title');if (count($_from)):
     foreach ($_from AS $this->_var['title']):
 ?>
-          <?php $_from = $this->_var['title']['options']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_76314600_1523669140');if (count($_from)):
-    foreach ($_from AS $this->_var['item_0_76314600_1523669140']):
+          <?php $_from = $this->_var['title']['options']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_00033400_1523670840');if (count($_from)):
+    foreach ($_from AS $this->_var['item_0_00033400_1523670840']):
 ?>
             <?php if ($this->_var['title']['can_multi'] == 0): ?>
-            <p><input type="checkbox" name="option_id" value="<?php echo $this->_var['item_0_76314600_1523669140']['option_id']; ?>" />
-            <?php echo $this->_var['item_0_76314600_1523669140']['option_name']; ?> (<?php echo $this->_var['item_0_76314600_1523669140']['percent']; ?>%)</p>
+            <p><input type="checkbox" name="option_id" value="<?php echo $this->_var['item_0_00033400_1523670840']['option_id']; ?>" />
+            <?php echo $this->_var['item_0_00033400_1523670840']['option_name']; ?> (<?php echo $this->_var['item_0_00033400_1523670840']['percent']; ?>%)</p>
             <?php else: ?>
-            <p><input type="radio" name="option_id" value="<?php echo $this->_var['item_0_76314600_1523669140']['option_id']; ?>" />
-            <?php echo $this->_var['item_0_76314600_1523669140']['option_name']; ?> (<?php echo $this->_var['item_0_76314600_1523669140']['percent']; ?>%)</p>
+            <p><input type="radio" name="option_id" value="<?php echo $this->_var['item_0_00033400_1523670840']['option_id']; ?>" />
+            <?php echo $this->_var['item_0_00033400_1523670840']['option_name']; ?> (<?php echo $this->_var['item_0_00033400_1523670840']['percent']; ?>%)</p>
             <?php endif; ?>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
             <input type="hidden" name="type" value="<?php echo $this->_var['title']['can_multi']; ?>" />
