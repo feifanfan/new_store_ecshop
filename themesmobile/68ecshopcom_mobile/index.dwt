@@ -81,7 +81,7 @@ $(function() {
 {if $best_goods}
 <section class="index_floor">
   <div class="floor_body1">
-    <h2><em></em>{$lang.best_goods}<div class="geng"> <a href="../search.php?intro=best" >更多</a> <span></span></div></h2>
+    <h2><em></em>{$lang.best_goods}给的股份<div class="geng"> <a href="../search.php?intro=best" >更多</a> <span></span></div></h2>
     <div id="scroll_best" class="scroll_hot">
       <div class="bd">
         <ul>

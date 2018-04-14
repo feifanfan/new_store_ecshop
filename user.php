@@ -320,7 +320,6 @@ function action_default ()
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
 	$user_id = $_SESSION['user_id'];
-	
 	include_once (ROOT_PATH . 'includes/lib_clips.php');
 	if($rank = get_rank_info())
 	{
@@ -1192,14 +1191,14 @@ function action_bd_list ()
 	$action = $GLOBALS['action'];
 	$user_id = $_SESSION['user_id'];
 	
-	$sql = "select COUNT(*) from ecs_users";
+	$sql = "select COUNT(*) from ecs_users where user_id = $user_id";
 	$record_count = $db->getOne($sql);
     $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
 	// 分页函数
 	$pager = get_pager('user.php', array( 'act' => $action ), $record_count, $page);
 
-	// $sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where user_id=$user_id limit $pager[start],$pager[size]";
-	$sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where  id_list like '%$user_id,%'";
+	$sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where id_list like '%$user_id,%' limit $pager[start],$pager[size]";
+	// $sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where  id_list like '%$user_id,%'";
 	$data = $db->getAll($sql);
 	// var_dump($data);die;
 	$smarty->assign('bdlist', $data);
@@ -1222,7 +1221,7 @@ function action_jifen_list ()
 	$user_id = $_SESSION['user_id'];
 	
 	
-	$sql = "select COUNT(*) from ecs_account_log";
+	$sql = "select COUNT(*) from ecs_account_log where user_id = $user_id";
 	$record_count = $db->getOne($sql);
     $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
 	// 分页函数

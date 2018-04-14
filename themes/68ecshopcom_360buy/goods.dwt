@@ -873,7 +873,7 @@ Ajax.call('goods.php', 'act=get_pickup_info&province='+remote_ip_info.province+'
 				get_area_list(res.city_info.province_id, res.city_info.province);
 			}
 
-			
+	
 			document.getElementById('area_label').innerHTML = res.city_info.province + '&nbsp;' + res.city_info.city;
 			get_area_list(res.city_info.city_id, res.city_info.city);
 		}

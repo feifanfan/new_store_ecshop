@@ -900,6 +900,16 @@ else
     }
     </script>
 <!--  {if $allow_use_surplus}
+		var fapiao_con = document.getElementById('ECS_INVCONTENT');
+		if (fapiao_con.value=='0')
+		{
+			document.getElementById('ECS_INVPAYEE').disabled=true;
+		}
+		else
+		{
+			document.getElementById('ECS_INVPAYEE').disabled=false;
+		}
+		</script>
           <tr>
             <td colspan=4 class="tdother2">
               <div class="allow_user_surplus">
@@ -930,36 +940,37 @@ else
           </tr>
   {/if}-->
 
-
+{if $allow_use_integral}
           <tr>
             <td colspan=4 class="tdother2">
-              <div class="allow_user_integral">
-              <p>
-                      <input type="checkbox" id="isintegral" onclick="checksboxOnclick(this)" style="vertical-align:middle; cursor:pointer" />
-                      <span class="is_user_integral">使用企业币支付</span>
+            	<div class="allow_user_integral">
+        			<p>
+                    	<input type="checkbox" id="isintegral" onclick="checksboxOnclick(this)" style="vertical-align:middle; cursor:pointer" />
+                    	<span class="is_user_integral">使用企业币支付</span>
                     </p>
-              <div id="allow_user_integral">
-                <span class="integral_desc"><input name="integral" type="text" class="integral" id="ECS_INTEGRAL"  value="{$your_integral|default:0}" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;积分</span>
-                  您当前的可用企业币为:<span class="your_integral">{$your_integral|default:0} </span>
+        			<div id="allow_user_integral">
+        				<span class="integral_desc"><input name="integral" type="text" class="integral" id="ECS_INTEGRAL"  value="{$your_integral|default:0}" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;积分</span>
+            			您当前的可用企业币为:<span class="your_integral">{$your_integral|default:0} </span>
                         <span id="ECS_INTEGRAL_NOTICE" class="notice"></span>
-                  </div>
-        <script type="text/javascript">
-        function checksboxOnclick(checkbox){ 
-          var integral = {$your_integral|default:0};
+            			</div>
+				<script type="text/javascript">
+				function checksboxOnclick(checkbox){ 
+					var integral = {$your_integral|default:0};
           
-          if ( checkbox.checked == true){
-            document.getElementById("allow_user_integral").style.display = "block";
+					if ( checkbox.checked == true){
+						document.getElementById("allow_user_integral").style.display = "block";
 
-            changeIntegral(integral);
-          }else{
-            document.getElementById("allow_user_integral").style.display = "none";
-            changeIntegral(0);
-          }
-        }
-        </script>
-            </div>
+						changeIntegral(integral);
+					}else{
+						document.getElementById("allow_user_integral").style.display = "none";
+						changeIntegral(0);
+					}
+				}
+				</script>
+        	  </div>
             </td>
           </tr>
+{/if}
 
 
         </table>

@@ -164,6 +164,7 @@ function submit_surplus_form(){
 {/if}
 </head>
 <body>
+
 {if $action eq 'account_security' || $action eq 'order_detail'}
 <!--弹窗start-->
 <div id="popup_window" style="background:#EFEFF4;box-shadow: 0 0 10px #ccc;border: 1px solid #ccc;border-radius: 6px;width:85%;height:auto;margin-left:-43%;margin-top:-20%;left:50%;top:50%;position:fixed;display:none;z-index:9999;">

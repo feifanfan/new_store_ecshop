@@ -75,7 +75,7 @@ function manage($user_id,$amount,$order_id){
 	$arr = array_reverse($id_list);
 	for($i = 0; $i < count($arr)-1; $i++){
 		$parent_id = $arr[$i+1];
-		$fengding = is_fengding();
+		$fengding = is_fengding($parent_id);
 		if($fengding==-1){
 			continue;
 		}else{
@@ -135,7 +135,7 @@ function collide_point($user_id,$amount,$order_sn){
 		$info = $GLOBALS['db']->getAll($sql);
 		/*初始化每次循环重复使用的数据*/
 		unset($res);
-		
+				
 		/*****************************/
 		for($i=0;$i<count($info);$i++){
 			$pre_other_side_list = array_reverse(explode(",",$info[$i]['side_list']));
@@ -191,7 +191,7 @@ function collide_point($user_id,$amount,$order_sn){
 
 			$sons_id = $GLOBALS['db']->getRow("select user_left,user_right,percent from ".$GLOBALS['ecs']->table('user_money_log')." where id = ".$res['id']); 
 			$change_desc = "编号".$sons_id['user_left']."与编号".$sons_id['user_right'].$peng;
-
+			
 			$percent = $sons_id['percent'];
 			$send_jin = $jin*$percent/100;
 
@@ -228,7 +228,7 @@ function collide_point($user_id,$amount,$order_sn){
 		}else{
 			//查询相对父亲的首单奖励和次单奖励百分比，根据deep去设置比例
 		$parent_user_rank = $GLOBALS['db']->getOne("select user_rank from ".$GLOBALS['ecs']->table('users')." where user_id = ".$parent_id);
-		echo $parent_id."--".$parent_user_rank."<br>";
+		// echo $parent_id."--".$parent_user_rank."<br>";
 		$first_char = chr($parent_user_rank+96)."_card_first";
 		$top_char = chr($parent_user_rank+96)."_card_achievement";
 		$is_first = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('user_money_log')." where parent_id = ".$parent_id." and parent_deep = ".$user_info['deep']);

@@ -375,6 +375,57 @@ function changeSurplusResponse(obj) {
 /*******************************************************************************
  * 改变积分
  */
+// function changeIntegral(val) {
+// 	/* 代码增加_start By bbs.hongyuvip.com */
+// 	var con_country = document.forms['theForm'].elements['have_consignee'].value;
+// 	if (con_country == '0') {
+// 		alert('请先选择配送地址！');
+// 		obj.checked = false;
+// 		return;
+// 	}
+// 	/* 代码增加_end By bbs.hongyuvip.com */
+
+// 	if (selectedIntegral == val) {
+// 		// return;
+// 	} else {
+// 		// selectedIntegral = val;
+// 	}
+
+// 	Ajax.call('flow.php?step=change_integral', 'integral=' + val, changeIntegralResponse, 'GET', 'JSON');
+// }
+/*******************************************************************************
+ * 改变积分回调函数
+ */
+// function changeIntegralResponse(obj) {
+// 	if (obj.error) {
+// 		try {
+// 			alert(obj.error);
+// 			document.getElementById('ECS_INTEGRAL').value = '0';
+// 			document.getElementById('ECS_INTEGRAL').focus();
+// 		} catch (ex) {
+// 		}
+// 	} else {
+// 		try {
+// 			alert(document.getElementById('ECS_INTEGRAL').value = obj.integral);
+// 			if(obj.show){
+// 				//如果余额完全支付订单金额
+// 				// $('#pay_div').hide();
+// 				$('#payment_other_input').attr("checked", true).val(pay_balance_id);//默认选择余额支付方式
+// 			}
+// 			// else{
+// 			// 	$('#pay_div').show();
+// 			// 	$("input[type='radio']").attr("checked", false);//将之前选择的支付方式去掉
+// 			// 	$('#payment_other_input').val('0');
+// 			// }
+// 		} catch (ex) {
+// 		}
+// 		orderSelectedResponse(obj.content);
+// 	}
+// }
+
+/*******************************************************************************
+ * 改变积分
+ */
 function changeIntegral(val, suppid) {
 	/* 代码增加_start By bbs.hongyuvip.com */
 	var con_country = document.forms['theForm'].elements['have_consignee'].value;
@@ -390,29 +441,47 @@ function changeIntegral(val, suppid) {
 		selectedIntegral = val;
 	}
 
-	Ajax.call('flow.php?step=change_integral', 'points=' + val + '&suppid=' + suppid, changeIntegralResponse, 'GET', 'JSON');
+	Ajax.call('flow.php?step=change_integral', 'points=' + val + '&suppid=' + suppid, changeIntegralResponse_2, 'GET', 'JSON');
 }
 
 /*******************************************************************************
  * 改变积分回调函数
  */
-function changeIntegralResponse(obj) {
+// function changeIntegralResponse(obj) {
+// 	if (obj.error) {
+// 		try {
+// 			document.getElementById('ECS_INTEGRAL_NOTICE_' + obj.suppid).innerHTML = obj.error;
+// 			document.getElementById('ECS_INTEGRAL_' + obj.suppid).value = '0';
+// 			document.getElementById('ECS_INTEGRAL_' + obj.suppid).focus();
+// 		} catch (ex) {
+// 		}
+// 	} else {
+// 		try {
+// 			document.getElementById('ECS_INTEGRAL_NOTICE_' + obj.suppid).innerHTML = '';
+// 		} catch (ex) {
+// 		}
+// 		orderSelectedResponse(obj.content);
+// 	}
+// }
+function changeIntegralResponse_2(obj){
+	
 	if (obj.error) {
 		try {
-			document.getElementById('ECS_INTEGRAL_NOTICE_' + obj.suppid).innerHTML = obj.error;
-			document.getElementById('ECS_INTEGRAL_' + obj.suppid).value = '0';
-			document.getElementById('ECS_INTEGRAL_' + obj.suppid).focus();
+			alert(obj.error);
+			document.getElementById('ECS_INTEGRAL_NOTICE').innerHTML = obj.error;
+			document.getElementById('ECS_INTEGRAL').value = '0';
+			document.getElementById('ECS_INTEGRAL').focus();
 		} catch (ex) {
 		}
 	} else {
 		try {
-			document.getElementById('ECS_INTEGRAL_NOTICE_' + obj.suppid).innerHTML = '';
+			document.getElementById('ECS_INTEGRAL').value = obj.integral;
+			document.getElementById('ECS_INTEGRAL_NOTICE').innerHTML = '';
 		} catch (ex) {
 		}
 		orderSelectedResponse(obj.content);
 	}
 }
-
 /*******************************************************************************
  * 改变红包
  */
