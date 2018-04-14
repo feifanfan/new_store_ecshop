@@ -1291,7 +1291,6 @@ elseif ($_REQUEST['step'] == 'checkout')
         && $user_info['user_money'] > 0)
     {
         // 能使用余额
-
         $smarty->assign('your_surplus', $user_info['user_money']);
     }
 	if($_CFG['use_surplus'] == '1'){
@@ -1315,26 +1314,10 @@ elseif ($_REQUEST['step'] == 'checkout')
 
         $smarty->assign('allow_use_integral', 1);
         //$smarty->assign('order_max_integral', $keyong);
-        $smarty->assign('your_integral',      $user_info['user_point']); // 用户积分
+        $smarty->assign('your_integral',      $user_info['user_point']); // 用户企业币
     }
-    $smarty->assign('your_integral',      $user_info['user_point']); // 用户积分
+    $smarty->assign('your_integral',$user_info['user_point']); // 用户企业币
 
-    // /* 如果使用积分，取得用户可用积分及本订单最多可以使用的积分 */
-    // if ((!isset($_CFG['use_integral']) || $_CFG['use_integral'] == '1')
-    //     && $_SESSION['user_id'] > 0
-    //     && $user_info['pay_points'] > 0
-    //     && ($flow_type != CART_GROUP_BUY_GOODS && $flow_type != CART_EXCHANGE_GOODS))
-    // {
-    //     // 能使用积分
-    //     $keyong = flow_available_points();// 可用积分
-    //     foreach($keyong as $k=>$v){
-    //         $cart_goods_new[$k]['jifen'] = $v;
-    //     }
-
-    //     $smarty->assign('allow_use_integral', 1);
-    //     //$smarty->assign('order_max_integral', $keyong);
-    //     $smarty->assign('your_integral',      $user_info['pay_points']); // 用户积分
-    // }
 
 	if ((!isset($_CFG['use_bonus']) || $_CFG['use_bonus'] == '1')
         && ($flow_type != CART_GROUP_BUY_GOODS && $flow_type != CART_EXCHANGE_GOODS && $flow_type != CART_PRE_SALE_GOODS))

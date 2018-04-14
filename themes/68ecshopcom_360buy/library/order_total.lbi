@@ -56,6 +56,18 @@
       <!-- {/if} -->    </td>
   </tr>
   <!-- {/if} 使用余额或积分或红包 -->
+
+
+
+
+
+
+
+
+
+
+
+
   <tr>
     <td align="right" bgcolor="#ffffff"> {$lang.total_fee}： <font class="f4_b" style="font-size:18px;font-family:微软雅黑;">{$total.amount_formated}</font>
   {if $is_group_buy}<br />
