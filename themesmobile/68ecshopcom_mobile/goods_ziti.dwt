@@ -28,15 +28,16 @@
       </header>
 <!-- #BeginLibraryItem "/library/up_menu.lbi" --><!-- #EndLibraryItem --> <!--弹出菜单-->  
  <!-----------------------------------自提点--------------------------------------> 
- <div class="pickup_point_wrap">
-<div id="area_list_wrap" >
-                    <div id="area_menu"> <a id="province" href="javascript:void(0);">省</a> <a id="city" href="javascript:void(0);">市</a> <a class="hover" id="district" href="javascript:void(0);">区</a>
-                      <div style="clear:both"></div>
-                    </div>
-                    <ul id="area_list">
-                    </ul>
-                  </div>
-<div style="clear:both"></div>
+<div class="pickup_point_wrap">
+	<div id="area_list_wrap" >
+        <div id="area_menu"> <a id="province" href="javascript:void(0);">省</a> <a id="city" href="javascript:void(0);">市</a> <a class="hover" id="district" href="javascript:void(0);">区</a>
+        <div style="clear:both"></div>
+        </div>
+        <ul id="area_list">
+        </ul>
+	</div>
+	<div style="clear:both"></div>
+</div>
 <div id="pickup_point_list" >
 
 

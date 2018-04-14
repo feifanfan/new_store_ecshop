@@ -444,6 +444,12 @@ function action_register ()
 		if(empty($user_rank)||$user_rank>4||$user_rank<=0){
 			show_message("请选择会员等级");
 		}
+		if($user_parent_phone==''||empty($user_parent_phone)){
+			show_message("请填写推荐人手机号");
+		}
+		if($bd_phone==''||empty($bd_phone)){
+			show_message("请填写报单人手机号");
+		}
 		// 注册类型：email、mobile
 		$register_type = isset($_POST['register_type']) ? trim($_POST['register_type']) : '';
 		
@@ -532,7 +538,7 @@ function action_register ()
 			/* 手机注册时，用户名默认为u+手机号 */
 //			$username = generate_username_by_mobile($mobile_phone);
             //$username = $mobile_phone;
-            $parent_id =$GLOBALS['db']->getOne('select * from'.$GLOBALS['ecs']->table('users').' where mobile_phone='.$user_parent_phone);
+            $parent_id =$GLOBALS['db']->getOne('select user_id from'.$GLOBALS['ecs']->table('users').' where mobile_phone='.$user_parent_phone);
 			$parent_son = $GLOBALS['db']->getOne("select count(user_id) from ".$GLOBALS['ecs']->table('users').' where parent_id = '.$parent_id);
 			if($parent_son>=2){
 				show_message('该推荐人不满足条件', $_LANG['sign_up'], 'register.php', 'error');

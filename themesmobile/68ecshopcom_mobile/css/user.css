@@ -11,7 +11,7 @@
 .com_top dl dd{ float:right;font-size:14px; color:#fff; text-align:right; padding-right:10px; margin-left:-10px;}
 .uer_topnav{ width:100%; height:60px; background:#FFF; border-bottom:1px solid #dddcdc}
 .uer_topnav ul{ width:70%; height:40px; padding-top:10px; float:right}
-.uer_topnav ul li{ width:33%; float:left; line-height:20px; color:#666; text-align:center}
+.uer_topnav ul li{ width:33%; float:right; line-height:20px; color:#666; text-align:center}
 .uer_topnav ul li a{ display:block; width:100%; overflow:hidden;font-size:12px;}
 .uer_topnav ul li span{ display:block; width:100%; height:20px; font-size:16px; line-height:20px; color:#666}
 .bain{ border-right:1px solid #eeeeee;}

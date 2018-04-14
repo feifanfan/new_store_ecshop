@@ -19,6 +19,7 @@ require(dirname(__FILE__) . '/includes/init.php');
 
 if ((DEBUG_MODE & 2) != 2)
 {
+   
     $smarty->caching = true;
 }
 /* 修改 by bbs.hongyuvip.com start */
@@ -40,6 +41,7 @@ if($is_c == 1){
     }
     }
 }
+
 /*------------------------------------------------------ */
 //-- Shopex系统地址转换
 /*------------------------------------------------------ */

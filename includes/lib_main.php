@@ -120,21 +120,22 @@ function get_user_info($id=0)
         $id = $_SESSION['user_id'];
     }
     $time = date('Y-m-d');
-    $sql  = 'SELECT u.user_id, u.email,u.user_rank, u.user_name, u.user_money, u.pay_points'.
+    $sql  = 'SELECT u.user_id, u.email,u.user_rank, u.user_name, u.user_money, u.user_cash, u.user_point'.
             ' FROM ' .$GLOBALS['ecs']->table('users'). ' AS u ' .
             " WHERE u.user_id = '$id'";
     $user = $GLOBALS['db']->getRow($sql);
     $bonus = get_user_bonus($id);
-	if($user['user_rank'] == 0)
-	{
-		 $user['user_rank']    = "非会员";
-	}else
-	{
-		$rank_id = $user['user_rank'];
-		$sql = "SELECT rank_name FROM ".$GLOBALS['ecs']->table('user_rank')."WHERE rank_id='$rank_id'";
-		 $user['user_rank'] = $GLOBALS['db']->getOne($sql);
-	}
+	// if($user['user_rank'] == 0)
+	// {
+	// 	 $user['user_rank']    = "非会员";
+	// }else
+	// {
+	// 	$rank_id = $user['user_rank'];
+	// 	$sql = "SELECT rank_name FROM ".$GLOBALS['ecs']->table('user_rank')."WHERE rank_id='$rank_id'";
+	// 	 $user['user_rank'] = $GLOBALS['db']->getOne($sql);
+	// }
     $user['username']    = $user['user_name'];
+    $user['user_rank']    = $user['user_rank'];
     $user['user_points'] = $user['pay_points'] . $GLOBALS['_CFG']['integral_name'];
     $user['user_money']  = price_format($user['user_money'], false);
     $user['user_bonus']  = price_format($bonus['bonus_value'], false);

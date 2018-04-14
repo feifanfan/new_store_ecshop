@@ -9,6 +9,7 @@
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 <link rel="stylesheet" type="text/css" href="themesmobile/68ecshopcom_mobile/css/public.css"/>
 <link rel="stylesheet" type="text/css" href="themesmobile/68ecshopcom_mobile/css/goods.css"/>  
+<link rel="stylesheet" type="text/css" href="themes/68ecshopcom_360buy/css/goods.css" />
 <script type="text/javascript" src="themesmobile/68ecshopcom_mobile/js/jquery.js"></script>
 {insert_scripts files='jquery.json.js,transport.js'}
 <script type="text/javascript" src="themesmobile/68ecshopcom_mobile/js/touchslider.dev.js"></script>
@@ -95,17 +96,17 @@ document.getElementById("share_form").submit();
               <em>包邮</em> <!-- {/if} --><em>限时促销</em><strong id="leftTime">{$lang.please_waiting}</strong>  </dt>
               <dd><font>价格：{$goods.shop_price_formated}</font>
                <!-- {if $goods.give_integral_2 eq '-1'} 购买此商品赠送积分-->
-                  <p>购买此商品赠送{$goods.give_integral}积分</p>
+                  <!--<p>购买此商品赠送{$goods.give_integral}积分</p>-->
                   <!-- {elseif $goods.give_integral_2 gt 0} -->
-                  <p>购买此商品赠送{$goods.give_integral}积分</p>
+                  <!--<p>购买此商品赠送{$goods.give_integral}积分</p>-->
                 <!-- {/if} -->
                 </dd>
               {else} 
               <dt> <span id="ECS_GOODS_AMOUNT">{$goods.shop_price_formated}</span><font>价格：{$goods.market_price}</font><!-- {if $goods.is_shipping} 为免运费商品则显示--><em>包邮</em><!-- {/if} -->
                 <!-- {if $goods.give_integral_2 eq '-1'} 购买此商品赠送积分-->
-                  <p>购买此商品赠送{$goods.give_integral}积分</p>
+                  <!--<p>购买此商品赠送{$goods.give_integral}积分</p>-->
                   <!-- {elseif $goods.give_integral_2 gt 0} -->
-                  <p>购买此商品赠送{$goods.give_integral}积分</p>
+                  <!--<p>购买此商品赠送{$goods.give_integral}积分</p>-->
                 <!-- {/if} -->
                 </dt>
               {/if}
@@ -118,17 +119,17 @@ document.getElementById("share_form").submit();
               </div>             
 <!---优惠活动--->
  <!-- {if $promotion || $volume_price_list || $cfg.use_integral || $goods.give_integral > 0 || $goods.bonus_money} -->
-<section id="search_ka" class="huodong">
+<!--<section id="search_ka" class="huodong">
 	<div class="subNav"> 
      <div class="att_title">
-     {if $promotion}
+     {if $promotion}-->
       <!-- {foreach from=$promotion item=item key=key name=promotion}-->       
-      {if $smarty.foreach.promotion.iteration < 2}    
+      <!--{if $smarty.foreach.promotion.iteration < 2}    
      <span>惠</span>  
       <p>{$item.act_name}</p>
-      {/if}
+      {/if}-->
       <!-- {/foreach} -->
-{elseif $volume_price_list}
+<!--{elseif $volume_price_list}
       {foreach from=$volume_price_list item=price_list key=price_key name=name}
         {if $smarty.foreach.name.iteration < 2}
            <span>惠</span>
@@ -146,57 +147,57 @@ document.getElementById("share_form").submit();
   {elseif $goods.bonus_money}
    
        <span>惠</span>
-     <p>{$lang.goods_bonus}{$goods.bonus_money}</p>
+     <p>{$lang.goods_bonus}{$goods.bonus_money}</p>-->
 
        <!-- {/if} -->
        
-      </div>
-      </div>
+      <!--</div>
+      </div>-->
 <!---优惠活动列表-->  
-    <div class="navContent"> 
-   <ul class="youhui_list1">
+    <!--<div class="navContent"> 
+   <ul class="youhui_list1">-->
    <!-- {foreach from=$promotion item=item key=key name=promotion}--> 
              <li>
       <!-- {if $item.type eq "favourable"} 优惠活动--> 
-    <a href="activity.php" title="{$lang.favourable}"><img src="themesmobile/68ecshopcom_mobile/images/hui.png"></a>
+    <!--<a href="activity.php" title="{$lang.favourable}"><img src="themesmobile/68ecshopcom_mobile/images/hui.png"></a>-->
       <!-- {/if} -->
-      <a href="{$item.url}" title="{$lang.$item.type} {$item.act_name}{$item.time}">{$item.act_name}</a>
+      <!--<a href="{$item.url}" title="{$lang.$item.type} {$item.act_name}{$item.time}">{$item.act_name}</a>-->
         <!-- {/foreach} -->  
-        </li>
-      </ul>
+       <!-- </li>
+      </ul>-->
 
       
     
-    {if $volume_price_list}
+    <!--{if $volume_price_list}
      <ul class="youhui_list1" style="margin-top:0px;">  
            {foreach from=$volume_price_list item=price_list key=price_key}
           
           <li><img src="themesmobile/68ecshopcom_mobile/images/hui.png">购买{$price_list.number}件&nbsp;优惠价：{$price_list.format_price}</li> 
           {/foreach}
           </ul>
-     {/if}
+     {/if}-->
      
       
        <!-- {if $cfg.use_integral || $goods.give_integral > 0 || $goods.bonus_money} 购买此商品可使用积分-->
-        <ul class="youhui_list1" style="margin-top:0px;"> 
+        <!--<ul class="youhui_list1" style="margin-top:0px;"> 
         {if  $cfg.use_integral}
-      <li><img src="themesmobile/68ecshopcom_mobile/images/hui.png">{$lang.goods_integral}{$goods.integral}{$points_name}</li> 
-      {/if}
+      <li><img src="themesmobile/68ecshopcom_mobile/images/hui.png">{$lang.goods_integral}{$goods.integral}{$points_name}</li>
+      {/if}-->
          <!-- {if $goods.give_integral > 0} 购买此商品赠送积分-->
-         <li><img src="themesmobile/68ecshopcom_mobile/images/hui.png">{$lang.goods_give_integral} {$goods.give_integral}{$points_name}</li> 
+         <!--<li><img src="themesmobile/68ecshopcom_mobile/images/hui.png">{$lang.goods_give_integral} {$goods.give_integral}{$points_name}</li> -->
         <!-- {/if} -->
            <!-- {if $goods.bonus_money} 红包-->
-   <li><img src="themesmobile/68ecshopcom_mobile/images/hui.png">{$lang.goods_bonus}{$goods.bonus_money}</li>
-      </li>
+   <!--<li><img src="themesmobile/68ecshopcom_mobile/images/hui.png">{$lang.goods_bonus}{$goods.bonus_money}</li>
+      </li>-->
       <!-- {/if} -->
       
         
        <!-- {/if} -->
        
        
-   <div class="blank10"></div>
+   <!--<div class="blank10"></div>
        </div>      
-</section>
+</section>-->
 <!---{/if}--->
 
 <!-------商品属性-------->
@@ -248,7 +249,7 @@ document.getElementById("share_form").submit();
 
 <!---{else}---->
 <section id="search_ka">
-<div class="ui-sx bian1"> 
+<div style="border-top:2px solid #eee;" class="ui-sx bian1"> 
 <div class="subNavBox"> 
 	<div class="subNav on"><strong>购买数量</strong></div>
     <ul class="navContent" style="display: block;"> 
@@ -270,7 +271,7 @@ document.getElementById("share_form").submit();
 <!---{/if}---->
 
 <!---会员价格---->
-{if $rank_prices}
+<!--{if $rank_prices}
 
 <section id="search_ka">
 
@@ -293,7 +294,7 @@ document.getElementById("share_form").submit();
 
   
 </section>
-    {/if}
+    {/if}-->
     <script type="text/javascript">
 $(function(){
 	$(".subNav").click(function(){
@@ -345,20 +346,207 @@ for (var i = 0; i<t.parentNode.childNodes.length;i++) {
 changePrice();
 }
 </script> 
+<style>
 
+</style>
 <!---自提点---->
 <div style=" height:8px; background:#eeeeee; margin-top:-1px;"></div>
 <div class="is_scroll">
 <section id="search_ka">
-<div class="ui-sx bian1"> 
-<div class="subNavBox" > 
-<div class="subNav" style=" border:0;"><a href="pocking.php?id={$goods.goods_id}" style=" border:0px;"><strong>自提点</strong></a></div>
-</div>
-</div> 
+  <div class="ui-sx bian1"> 
+    <div class="subNavBox" > 
+      <!--<div class="subNav" style=" border:0;"><a href="pocking.php?id={$goods.goods_id}" style=" border:0px;"><strong>自提点</strong></a></div>-->
+      <div class="subNav on" style=" border:0;"><strong>自提点</strong></div>  
+      <ul class="navContent" style="display: block;"> 
+        <li style="margin-top:10px;">
+          <div class="item1">
+            <div id="pickup_point" onmouseenter="show_list()" onmouseleave="hide_list()">自提点列表</div>
+              <div id="area_label" onmouseenter="show_area()" onmouseleave="hide_area()">所在区域</div>
+              <div id="pickup_point_list" onmouseenter="show_list()" onmouseleave="hide_list()"> </div>
+              <div id="area_list_wrap" onmouseenter="show_area()" onmouseleave="hide_area()">
+              <div id="area_menu"> 
+                  <a id="province" href="javascript:void(0);">省</a> 
+                  <a id="city" href="javascript:void(0);">市</a> 
+                  <a class="hover" id="district" href="javascript:void(0);">区</a>
+                <div style="clear:both"></div>
+              </div>
+              <ul id="area_list">
+              </ul>
+            </div>
+            <div style="clear:both"></div>
+            <!--<script language="javascript" type="text/javascript">  function goods_cut(){  var num_val=document.getElementById('number');  var new_num=num_val.value;  var Num = parseInt(new_num);  if(Num>1)Num=Num-1;  num_val.value=Num;  }  function goods_add(){  var num_val=document.getElementById('number');  var new_num=num_val.value;  var Num = parseInt(new_num);  Num=Num+1;  num_val.value=Num;  } </script>
+            <span class="ui-number">
+              <button type="button" class="decrease" onclick="goods_cut();changePrice();">-</button>
+              <input type="text" class="num" id="number" onblur="changePrice();" name="number" value="1" min="1" max="{$goods.goods_number}"/>
+              <button type="button" class="increase" onclick="goods_add();changePrice();">+</button>
+            </span>-->
+          </div>    
+        </li>
+      </ul>  
+    </div>
+  </div> 
 
   
 </section>
 </div>
+
+<!--自提点js开始-->
+<script>
+var suppid = {$goods.supplier_id};
+Ajax.call('goods.php', 'act=get_pickup_info&province='+remote_ip_info.province+'&city='+remote_ip_info.city+'&district='+remote_ip_info.district+'&suppid='+suppid,
+	function(res){
+		if(res.error == 0) {
+			var result = '<ul>';
+			for(var i=0; i<res.result.length; i++)
+			{
+				result += '<li>店名：'+res.result[i].shop_name+'<br>联系人：'+res.result[i].contact+'&nbsp;&nbsp;联系方式：'+res.result[i].phone + '<br>地址：'+res.result[i].address+'</li>';
+			}
+			result += '</ul>';
+			if(res.result.length > 0){
+				document.getElementById('pickup_point_list').innerHTML = result;
+				
+			}
+			else{
+				document.getElementById('pickup_point_list').innerHTML = '<div style="padding:10px 0;text-align:center;">该地区尚未开放自提点</div>';
+				
+			}
+			hide_area();
+			show_list();
+			document.getElementById('province').innerHTML = res.city_info.province;
+			document.getElementById('province').onclick = function(){
+				get_area_list({$shop_country}, '');
+			}
+			document.getElementById('city').innerHTML = res.city_info.city;
+			document.getElementById('city').onclick = function(){
+				get_area_list(res.city_info.province_id, res.city_info.province);
+			}
+
+			
+			document.getElementById('area_label').innerHTML = res.city_info.province + '&nbsp;' + res.city_info.city;
+			get_area_list(res.city_info.city_id, res.city_info.city);
+		}
+	}, 'GET', 'JSON');
+function show_list()
+{
+	document.getElementById('pickup_point').style.borderTop = "1px solid #fff";
+	document.getElementById('pickup_point_list').style.display = "block";
+}
+function hide_list()
+{
+	document.getElementById('pickup_point').style.borderTop = "1px solid #ccc";
+	document.getElementById('pickup_point_list').style.display = "none";
+}
+function get_area_list(parent_id, name)
+{
+	Ajax.call('goods.php', 'act=get_area_list&parent_id='+parent_id, function(res) {
+		var result = '';
+		for(var i=0; i<res.length; i++)
+		{
+			result += '<li';
+			if(res[i].region_name.length>5)
+				result += ' style="widht:170px;"';
+			result += '><a href="javascript:void(0)" ';
+			if(res[i].region_type == 3)
+				result += 'onclick="get_pickup_point_list('+res[i].region_id+', this)">';
+			else
+				result += 'onclick="get_area_list('+res[i].region_id+', \''+res[i].region_name+'\')">';
+			result+=res[i].region_name+'</a></li>';
+		}
+		result += '';
+		document.getElementById('area_list').innerHTML = result;
+		
+		switch(res[0].region_type)
+		{
+			case '1':
+				document.getElementById('province').onclick = function(){get_area_list(parent_id, name);};
+				document.getElementById('city').innerHTML = '市';
+				document.getElementById('district').innerHTML = '区';
+				switch_hover('province');
+				break;
+			case '2':
+				document.getElementById('city').onclick = function(){get_area_list(parent_id, name);};
+				document.getElementById('province').innerHTML = name;
+				//document.getElementById('city').innerHTML = '市';
+				document.getElementById('district').innerHTML = '区';
+				switch_hover('city');
+				break;
+			case '3':
+				document.getElementById('city').innerHTML = name;
+				document.getElementById('district').innerHTML = '区';
+				switch_hover('district');
+				break;
+		}
+		hide_list();
+		//show_area();
+	}, 'GET', 'JSON');
+}
+
+function switch_hover(sel)
+{
+	if(sel == 'province')
+	{
+		document.getElementById('city').className = '';
+		document.getElementById('district').className = '';
+		document.getElementById('province').className = 'hover';
+	}
+	else if(sel == 'city')
+	{
+		document.getElementById('city').className = 'hover';
+		document.getElementById('district').className = '';
+		document.getElementById('province').className = '';
+	}
+	else
+	{
+		document.getElementById('city').className = '';
+		document.getElementById('district').className = 'hover';
+		document.getElementById('province').className = '';
+	}
+}
+
+function get_pickup_point_list(region_id, obj)
+{
+	var name = obj.innerHTML;
+	document.getElementById('district').innerHTML = name;
+	var label = document.getElementById('province').innerHTML + '&nbsp;' +
+				document.getElementById('city').innerHTML + '&nbsp;' +
+				document.getElementById('district').innerHTML;
+	document.getElementById('area_label').innerHTML = label;
+	
+	Ajax.call('goods.php', 'act=get_pickup_point_list&district_id='+region_id+'&suppid='+suppid, function(res) {
+		var result = '<ul>';
+			if(res.length > 0)
+			{
+				for(var i=0; i<res.length; i++)
+				{
+					result += '<li>'+res[i].shop_name+'&nbsp;&nbsp;地址：'+res[i].address+
+								'<br>联系人：'+res[i].contact+'&nbsp;&nbsp;联系方式：'+res[i].phone + '</li>';
+				}
+				result += '</ul>';
+				document.getElementById('pickup_point_list').innerHTML = result;
+				
+			}
+			else{
+				document.getElementById('pickup_point_list').innerHTML = '<div style="padding:10px 0;text-align:center;">该地区尚未开放自提点</div>';
+				
+			}
+			hide_area();
+			show_list();
+			
+			
+	}, 'GET', 'JSON');
+}
+function show_area()
+{
+	document.getElementById('area_label').style.borderTop = "1px #fff solid";
+	document.getElementById('area_list_wrap').style.display = "block";
+}
+function hide_area()
+{
+	document.getElementById('area_label').style.borderTop = "1px solid #ccc";
+	document.getElementById('area_list_wrap').style.display = "none";
+}
+</script>
+<!--自提点js结束-->
 
 <!-- {if $goods.supplier_id} -->
     <div class="is_scroll">
