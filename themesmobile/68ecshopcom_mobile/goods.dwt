@@ -762,7 +762,7 @@ function goTop(){
  </ul>
  <dl>
  <dd class="flow"><a class="button active_button" href="javascript:addToCart({$goods.goods_id});">加入购物车</a> </dd>
- <dd class="goumai"><a style="display:block;" href="javascript:addToCart1({$goods.goods_id})">立即购买</a> </dd>
+ <dd class="goumai"><a style="display:block;" href="javascript:addToCart({$goods.goods_id})">立即购买</a> </dd>
  </dl>                
 </div>                
 <script type="text/javascript">

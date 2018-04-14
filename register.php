@@ -364,6 +364,14 @@ function action_default ()
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
 	
+	$parent_user_id = trim($_GET['parent_user_id']);//推荐人手机号
+	if($parent_user_id!=''){
+		$parent_info = $GLOBALS['db']->getRow("SELECT * FROM ".$GLOBALS['ecs']->table("users")." where user_id = ".$parent_user_id);
+		//var_dump($parent_info);die;
+		if($parent_info!=''){
+			$smarty->assign('parent_info',$parent_info);
+		}
+	}
 	if((! isset($back_act) || empty($back_act)) && isset($GLOBALS['_SERVER']['HTTP_REFERER']))
 	{
 		$back_act = strpos($GLOBALS['_SERVER']['HTTP_REFERER'], 'user.php') ? './index.php' : $GLOBALS['_SERVER']['HTTP_REFERER'];

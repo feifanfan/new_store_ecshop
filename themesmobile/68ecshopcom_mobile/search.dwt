@@ -70,30 +70,29 @@
 </div>
 </section> 
 
-<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
-<!-- #BeginLibraryItem "/library/footer_nav.lbi" --><!-- #EndLibraryItem -->
+
 </section>
 <script>
 
 function guanzhu(sid){
-	Ajax.call('supplier.php', 'go=other&act=add_guanzhu&suppId=' + sid, selcartResponse, 'GET', 'JSON');
+  Ajax.call('supplier.php', 'go=other&act=add_guanzhu&suppId=' + sid, selcartResponse, 'GET', 'JSON');
 }
 
 function selcartResponse(result){
-	
-	alert(result.info);
+  
+  alert(result.info);
 }
 
    $('.show_type').bind("click", function() {
     if ($('#goods_list').hasClass('openList')){
-	$('#goods_list').removeClass('openList');
-	$(this).removeClass('show_list');
-	}
-	else
-	{
-	$('#goods_list').addClass('openList');	
-	$(this).addClass('show_list');
-	}
+  $('#goods_list').removeClass('openList');
+  $(this).removeClass('show_list');
+  }
+  else
+  {
+  $('#goods_list').addClass('openList');  
+  $(this).addClass('show_list');
+  }
 });
 </script>
 </body>

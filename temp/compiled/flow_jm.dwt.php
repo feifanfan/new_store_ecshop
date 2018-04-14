@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base href="http://www.thefirst.com/" />
+<base href="http://www.xu.com/" />
 <meta name="Generator" content="HongYuJD v7_2" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="Keywords" content="<?php echo $this->_var['keywords']; ?>" />
@@ -109,181 +109,181 @@ var pay_balance_id = <?php echo $this->_var['pay_balance_id']; ?>;//保存余额
     </table>
     
     <script type="text/javascript" charset="utf-8">
-	function chkAll_onclick() 
-	{
-		var obj = document.getElementById('chkAll');
-		var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
-		for (var i=0;i<obj_cartgoods.length;i++)
-		{
-			var e = obj_cartgoods[i];
-			
-			if (e.name != 'chkAll'){
-				e.checked = obj.checked;
-			}
-		}
-		select_cart_goods();
-	}
-	function select_cart_goods()
-	{
-	      var sel_goods = new Array();
-	      var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
-	      var suppid = document.getElementById('supplierid');
-	      var j=0;
-	      var c = true;
-	      for (i=0;i<obj_cartgoods.length;i++)
-	      {
-			if(obj_cartgoods[i].checked == true)
-			{	
-				sel_goods[j] = obj_cartgoods[i].value;
-				j++;
-			}else{
-				c = false;
-			}
-	      }
-	      document.getElementById('chkAll').checked = c;
-	      Ajax.call('flow.php', 'act=selcart&sel_goods=' + sel_goods + '&suppid=' + suppid, selcartResponse, 'GET', 'JSON');
-	}
-	function selcartResponse(res)
-	{
-	  if (res.err_msg.length > 0)
-	  {
+  function chkAll_onclick() 
+  {
+    var obj = document.getElementById('chkAll');
+    var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
+    for (var i=0;i<obj_cartgoods.length;i++)
+    {
+      var e = obj_cartgoods[i];
+      
+      if (e.name != 'chkAll'){
+        e.checked = obj.checked;
+      }
+    }
+    select_cart_goods();
+  }
+  function select_cart_goods()
+  {
+        var sel_goods = new Array();
+        var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
+        var suppid = document.getElementById('supplierid');
+        var j=0;
+        var c = true;
+        for (i=0;i<obj_cartgoods.length;i++)
+        {
+      if(obj_cartgoods[i].checked == true)
+      { 
+        sel_goods[j] = obj_cartgoods[i].value;
+        j++;
+      }else{
+        c = false;
+      }
+        }
+        document.getElementById('chkAll').checked = c;
+        Ajax.call('flow.php', 'act=selcart&sel_goods=' + sel_goods + '&suppid=' + suppid, selcartResponse, 'GET', 'JSON');
+  }
+  function selcartResponse(res)
+  {
+    if (res.err_msg.length > 0)
+    {
             alert(res.err_msg);
-	  }
-	  else
-	  {
-	     document.getElementById('cart_money_info').innerHTML = res.result;
-		 if(document.getElementById('zk_'+res.suppid)){
-	     	document.getElementById('zk_'+res.suppid).innerHTML = res.your_discount;
-		 }
-	  }
-	}
-	function selcart_submit()
-	{
-	      var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
-	      var formobj = document.getElementById('formCart1');
-	      var j=0;
-	      for (i=0;i<obj_cartgoods.length;i++)
-	      {
-			if(obj_cartgoods[i].checked == true)
-			{	
-				j++;
-			}
-	      }
-	      if (j>0)
-	      {
-		
-			formobj.action='flow.php?step=checkout';
-			document.getElementById('actname').value='checkout';
-			formobj.submit();
-			return true;
-	     }
-	     else
-	     {		
-			alert('您还没有选择商品哦！');
-			return false;
-	     }
-	}
-	</script> 
+    }
+    else
+    {
+       document.getElementById('cart_money_info').innerHTML = res.result;
+     if(document.getElementById('zk_'+res.suppid)){
+        document.getElementById('zk_'+res.suppid).innerHTML = res.your_discount;
+     }
+    }
+  }
+  function selcart_submit()
+  {
+        var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
+        var formobj = document.getElementById('formCart1');
+        var j=0;
+        for (i=0;i<obj_cartgoods.length;i++)
+        {
+      if(obj_cartgoods[i].checked == true)
+      { 
+        j++;
+      }
+        }
+        if (j>0)
+        {
+    
+      formobj.action='flow.php?step=checkout';
+      document.getElementById('actname').value='checkout';
+      formobj.submit();
+      return true;
+       }
+       else
+       {    
+      alert('您还没有选择商品哦！');
+      return false;
+       }
+  }
+  </script> 
     
     
     <script>
-	function add_num(rec_id,goods_id,supp_id,is_package)
-	 {
-		 
-		document.getElementById("goods_number_"+rec_id+"").value++;
-		var sel_goods = new Array();
-		var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
-		var j=0;
-	      for (i=0;i<obj_cartgoods.length;i++)
-	      {
-			if(obj_cartgoods[i].checked == true)
-			{	
-				sel_goods[j] = obj_cartgoods[i].value;
-				j++;
-			}
-	      }
-		var number = document.getElementById("goods_number_"+rec_id+"").value;
-		Ajax.call('flow.php', 'step=update_group_cart&sel_goods='+ sel_goods +'&rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id + '&suppid=' + supp_id + '&is_package=' + is_package, changePriceResponse, 'GET', 'JSON');
-	 }
+  function add_num(rec_id,goods_id,supp_id,is_package)
+   {
+     
+    document.getElementById("goods_number_"+rec_id+"").value++;
+    var sel_goods = new Array();
+    var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
+    var j=0;
+        for (i=0;i<obj_cartgoods.length;i++)
+        {
+      if(obj_cartgoods[i].checked == true)
+      { 
+        sel_goods[j] = obj_cartgoods[i].value;
+        j++;
+      }
+        }
+    var number = document.getElementById("goods_number_"+rec_id+"").value;
+    Ajax.call('flow.php', 'step=update_group_cart&sel_goods='+ sel_goods +'&rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id + '&suppid=' + supp_id + '&is_package=' + is_package, changePriceResponse, 'GET', 'JSON');
+   }
 
-	function minus_num(rec_id,goods_id,supp_id,is_package)
-	{
-		if (document.getElementById("goods_number_"+rec_id+"").value>1)
-		{
-			document.getElementById("goods_number_"+rec_id+"").value--;
-		}
-		var sel_goods = new Array();
-		var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
-		var j=0;
-	      for (i=0;i<obj_cartgoods.length;i++)
-	      {
-			if(obj_cartgoods[i].checked == true)
-			{	
-				sel_goods[j] = obj_cartgoods[i].value;
-				j++;
-			}
-	      }
-		var number = document.getElementById("goods_number_"+rec_id+"").value;
-		Ajax.call('flow.php', 'step=update_group_cart&sel_goods='+ sel_goods +'&rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id + '&suppid=' + supp_id + '&is_package=' + is_package, changePriceResponse, 'GET', 'JSON');
-	}
+  function minus_num(rec_id,goods_id,supp_id,is_package)
+  {
+    if (document.getElementById("goods_number_"+rec_id+"").value>1)
+    {
+      document.getElementById("goods_number_"+rec_id+"").value--;
+    }
+    var sel_goods = new Array();
+    var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
+    var j=0;
+        for (i=0;i<obj_cartgoods.length;i++)
+        {
+      if(obj_cartgoods[i].checked == true)
+      { 
+        sel_goods[j] = obj_cartgoods[i].value;
+        j++;
+      }
+        }
+    var number = document.getElementById("goods_number_"+rec_id+"").value;
+    Ajax.call('flow.php', 'step=update_group_cart&sel_goods='+ sel_goods +'&rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id + '&suppid=' + supp_id + '&is_package=' + is_package, changePriceResponse, 'GET', 'JSON');
+  }
 
 function change_price(rec_id,goods_id,is_package)
-{	
-	var r = /^[1-9]+[0-9]*]*$/;
-	var number = document.getElementById("goods_number_"+rec_id+"").value;
-	if (!r.test(number))
-	{
-		alert("您输入的格式不正确！");
-		document.getElementById("goods_number_"+rec_id+"").value=document.getElementById("hidden_"+rec_id+"").value;
-	}
-	else
-	{	
-		var sel_goods = new Array();
-		var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
-		var j=0;
-	      for (i=0;i<obj_cartgoods.length;i++)
-	      {
-			if(obj_cartgoods[i].checked == true)
-			{	
-				sel_goods[j] = obj_cartgoods[i].value;
-				j++;
-			}
-	      }
-		Ajax.call('flow.php','step=update_group_cart&sel_goods='+ sel_goods +'&rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id + '&is_package=' + is_package, changePriceResponse, 'GET', 'JSON');
-	}
+{ 
+  var r = /^[1-9]+[0-9]*]*$/;
+  var number = document.getElementById("goods_number_"+rec_id+"").value;
+  if (!r.test(number))
+  {
+    alert("您输入的格式不正确！");
+    document.getElementById("goods_number_"+rec_id+"").value=document.getElementById("hidden_"+rec_id+"").value;
+  }
+  else
+  { 
+    var sel_goods = new Array();
+    var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
+    var j=0;
+        for (i=0;i<obj_cartgoods.length;i++)
+        {
+      if(obj_cartgoods[i].checked == true)
+      { 
+        sel_goods[j] = obj_cartgoods[i].value;
+        j++;
+      }
+        }
+    Ajax.call('flow.php','step=update_group_cart&sel_goods='+ sel_goods +'&rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id + '&is_package=' + is_package, changePriceResponse, 'GET', 'JSON');
+  }
 }
 
 function changePriceResponse(result)
 {
 if(result.error == 1)
 {
-	alert(result.content);
-	document.getElementById("goods_number_"+result.rec_id+"").value =result.number;
-	document.getElementById("hidden_"+result.rec_id+"").value =result.number;
+  alert(result.content);
+  document.getElementById("goods_number_"+result.rec_id+"").value =result.number;
+  document.getElementById("hidden_"+result.rec_id+"").value =result.number;
 }
 else if (result.error == 999 )
 {
-	if (confirm(result.message))
-	{
-		location.href = 'user.php';
-	}
+  if (confirm(result.message))
+  {
+    location.href = 'user.php';
+  }
 }
 else if (result.error == 888 )
 {
-	alert(result.message);
-	document.getElementById("goods_number_"+result.rec_id+"").value =result.number;
-	document.getElementById("hidden_"+result.rec_id+"").value =result.number;
+  alert(result.message);
+  document.getElementById("goods_number_"+result.rec_id+"").value =result.number;
+  document.getElementById("hidden_"+result.rec_id+"").value =result.number;
 }
 else
 {
-	document.getElementById("sel_cartgoods_"+result.rec_id).checked = true;//被操作商品选中
-	document.getElementById("hidden_"+result.rec_id+"").value =result.number;
-	document.getElementById("goods_price_"+result.rec_id).innerHTML = result.goods_price;//商品价格
-	document.getElementById('subtotal_'+result.rec_id).innerHTML = result.subtotal;//商品总价
-	document.getElementById('cart_money_info').innerHTML = result.market_amount_desc;//购物车商品总价说明
-	document.getElementById('zk_'+result.suppid).innerHTML = result.your_discount;//折扣活动说明
-	show_div_text = "恭喜您！ 商品数量修改成功！ ";
-	showdiv(document.getElementById("goods_number_"+result.rec_id));
+  document.getElementById("sel_cartgoods_"+result.rec_id).checked = true;//被操作商品选中
+  document.getElementById("hidden_"+result.rec_id+"").value =result.number;
+  document.getElementById("goods_price_"+result.rec_id).innerHTML = result.goods_price;//商品价格
+  document.getElementById('subtotal_'+result.rec_id).innerHTML = result.subtotal;//商品总价
+  document.getElementById('cart_money_info').innerHTML = result.market_amount_desc;//购物车商品总价说明
+  document.getElementById('zk_'+result.suppid).innerHTML = result.your_discount;//折扣活动说明
+  show_div_text = "恭喜您！ 商品数量修改成功！ ";
+  showdiv(document.getElementById("goods_number_"+result.rec_id));
 }
 
 }
@@ -450,25 +450,25 @@ else
     </div>
   </div>
   <script type="text/javascript">
-	var hotboxtit = document.getElementById("HotBoxTit");
-	var hotbox = document.getElementById("HotBox");
-	var hottlist = hotboxtit.getElementsByTagName("li");
-	var hotlist = hotbox.getElementsByTagName("ul");
-	var hottlen = hottlist.length;
-	for(var i = 0; i < hottlen; i++)
-	{ 
-		hottlist[i].pai=i;
-		hottlist[i].onmouseover = function(){	
-		for(var j=0; j < hottlen; j++){
-				var _hott = hottlist[j];
-				var _hot =  hotlist[j];
-				var ison  =  j==this.pai;
-				_hott.className=(ison ? "curr" : "");
-				_hot.className= (ison  ?  "curr" : "");
-		}
-		}
-	}
-	</script> 
+  var hotboxtit = document.getElementById("HotBoxTit");
+  var hotbox = document.getElementById("HotBox");
+  var hottlist = hotboxtit.getElementsByTagName("li");
+  var hotlist = hotbox.getElementsByTagName("ul");
+  var hottlen = hottlist.length;
+  for(var i = 0; i < hottlen; i++)
+  { 
+    hottlist[i].pai=i;
+    hottlist[i].onmouseover = function(){ 
+    for(var j=0; j < hottlen; j++){
+        var _hott = hottlist[j];
+        var _hot =  hotlist[j];
+        var ison  =  j==this.pai;
+        _hott.className=(ison ? "curr" : "");
+        _hot.className= (ison  ?  "curr" : "");
+    }
+    }
+  }
+  </script> 
   <?php endif; ?> 
   
   <?php if ($this->_var['step'] == "consignee"): ?> 
@@ -493,8 +493,8 @@ else
           
         </script> 
    
-  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_43783200_1523669701');if (count($_from)):
-    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_43783200_1523669701']):
+  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_67996300_1523674014');if (count($_from)):
+    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_67996300_1523674014']):
 ?>
   <form action="flow.php" method="post" name="theForm" id="theForm" onsubmit="return checkConsignee(this)">
     <?php echo $this->fetch('library/consignee.lbi'); ?>
@@ -549,164 +549,164 @@ else
       </div>
     </div>
     <script type="text/javascript">
-	
-	function AddressEdit(aid)
-	{	
-		if (aid)
-		{
-			document.getElementById('PopAddressTitle').innerHTML='修改地址';
-		}
-		else
-		{
-			document.getElementById('PopAddressTitle').innerHTML='使用新地址';
-		}
-		Ajax.call('flow.php?act=EditAddress', 'address_id=' + aid, AddressEdit_Response, 'GET', 'JSON');
-	}
-	function AddressEdit_Response(result)
-	{
-		var PopAddressCon=document.getElementById('PopAddressCon');
-		PopAddressCon.innerHTML= result.content;
-		document.getElementById('popDiv').style.display='block';
-		document.getElementById('bg').style.display='block';
-	}
+  
+  function AddressEdit(aid)
+  { 
+    if (aid)
+    {
+      document.getElementById('PopAddressTitle').innerHTML='修改地址';
+    }
+    else
+    {
+      document.getElementById('PopAddressTitle').innerHTML='使用新地址';
+    }
+    Ajax.call('flow.php?act=EditAddress', 'address_id=' + aid, AddressEdit_Response, 'GET', 'JSON');
+  }
+  function AddressEdit_Response(result)
+  {
+    var PopAddressCon=document.getElementById('PopAddressCon');
+    PopAddressCon.innerHTML= result.content;
+    document.getElementById('popDiv').style.display='block';
+    document.getElementById('bg').style.display='block';
+  }
 
-	function showPopDiv()
-	{
-		document.getElementById('popDiv').style.display='block';
-		document.getElementById('bg').style.display='block';
-	}
-	function closePopDiv()
-	{
-		document.getElementById('popDiv').style.display='none';
-		document.getElementById('bg').style.display='none';
-	}
+  function showPopDiv()
+  {
+    document.getElementById('popDiv').style.display='block';
+    document.getElementById('bg').style.display='block';
+  }
+  function closePopDiv()
+  {
+    document.getElementById('popDiv').style.display='none';
+    document.getElementById('bg').style.display='none';
+  }
 
-	function showAddressEdit(obj)
-	{
-		if (obj.className!='curr')
-		{
-			obj.className = obj.className == 'xxxxxx' ? '' : 'xxxxxx';
-		}
-	}
-	function selAddress(obj, address_id)
-	{
-		var addrParent = obj.parentNode;
-		var addrYeye = addrParent.parentNode;
-		var addrList = addrYeye.getElementsByTagName('li');
-		for (i=0;i<addrList.length;i++)
-		{
-			addrList[i].className='';
-		}
-		addrParent.className='curr';
-		Ajax.call('flow.php?act=selAddress', 'address_id=' + address_id, selAddress_response, 'GET', 'JSON');
-	}
-	function selAddress_response(result)
-	{
-		top.location.href = top.location.href;
-	}
+  function showAddressEdit(obj)
+  {
+    if (obj.className!='curr')
+    {
+      obj.className = obj.className == 'xxxxxx' ? '' : 'xxxxxx';
+    }
+  }
+  function selAddress(obj, address_id)
+  {
+    var addrParent = obj.parentNode;
+    var addrYeye = addrParent.parentNode;
+    var addrList = addrYeye.getElementsByTagName('li');
+    for (i=0;i<addrList.length;i++)
+    {
+      addrList[i].className='';
+    }
+    addrParent.className='curr';
+    Ajax.call('flow.php?act=selAddress', 'address_id=' + address_id, selAddress_response, 'GET', 'JSON');
+  }
+  function selAddress_response(result)
+  {
+    top.location.href = top.location.href;
+  }
 
-	function del_Address(address_id)
-	{
-		Ajax.call('flow.php?act=delAddress', 'address_id=' + address_id, delAddressResponse, 'GET', 'JSON');
-	}
-	function delAddressResponse(result)
-	{
-		 if (result.message)
-		{
-			alert(result.message);
-		}
+  function del_Address(address_id)
+  {
+    Ajax.call('flow.php?act=delAddress', 'address_id=' + address_id, delAddressResponse, 'GET', 'JSON');
+  }
+  function delAddressResponse(result)
+  {
+     if (result.message)
+    {
+      alert(result.message);
+    }
 
-		if (result.error == 0)
-		{
-			 var layer = document.getElementById('AddressList');
+    if (result.error == 0)
+    {
+       var layer = document.getElementById('AddressList');
 
-			if (layer)
-			{
-				layer.innerHTML = result.content;
-			}
-			if(result.content2)
-			{
-				document.getElementById("shippingBox").innerHTML='<font color="#ff3300">&nbsp;&nbsp;&nbsp;正在重新导入配送区域，请稍候。。。</font>';
-				document.getElementById("shippingBox").innerHTML= '<font style="color:#ff3300">配送区域已经变化，请重新选择物流<br><br></font>'+result.content2;
-			}
-			document.forms['theForm'].elements['have_consignee'].value=result.have_consignee;
-		}
-	}
+      if (layer)
+      {
+        layer.innerHTML = result.content;
+      }
+      if(result.content2)
+      {
+        document.getElementById("shippingBox").innerHTML='<font color="#ff3300">&nbsp;&nbsp;&nbsp;正在重新导入配送区域，请稍候。。。</font>';
+        document.getElementById("shippingBox").innerHTML= '<font style="color:#ff3300">配送区域已经变化，请重新选择物流<br><br></font>'+result.content2;
+      }
+      document.forms['theForm'].elements['have_consignee'].value=result.have_consignee;
+    }
+  }
 
         /**
-	* 提交地址信息
-	*/
-	function submitAddress()
-	{
-	var frm = document.forms['theForm'];
-	var cmt = new Object;
-	cmt.address_id       = frm.elements['address_id'].value;
-	cmt.consignee       = frm.elements['consignee'].value;
-	cmt.address         = frm.elements['address'].value;
-	cmt.email           = frm.elements['email'].value;
-	cmt.zipcode           = frm.elements['zipcode'].value;
-	cmt.country              = 1;//frm.elements['country'].value;
-	cmt.province           = frm.elements['province'].value;
-	cmt.city         =      frm.elements['city'].value;
-	cmt.district         =      frm.elements['district'].value;
-	cmt.tel           =  frm.elements['tel_01'].value + "-" + frm.elements['tel_02'].value + (Utils.isEmpty(frm.elements['tel_03'].value) ? "" :  "-" + frm.elements['tel_03'].value);
-	cmt.mobile         =      frm.elements['mobile'].value;
-	cmt.closediv	   = frm.elements['closediv'].value;
-	cmt.shipping_bian	   = frm.elements['shipping_bian'].value;
-  	cmt.optionlength = frm.elements['district'].length;
+  * 提交地址信息
+  */
+  function submitAddress()
+  {
+  var frm = document.forms['theForm'];
+  var cmt = new Object;
+  cmt.address_id       = frm.elements['address_id'].value;
+  cmt.consignee       = frm.elements['consignee'].value;
+  cmt.address         = frm.elements['address'].value;
+  cmt.email           = frm.elements['email'].value;
+  cmt.zipcode           = frm.elements['zipcode'].value;
+  cmt.country              = 1;//frm.elements['country'].value;
+  cmt.province           = frm.elements['province'].value;
+  cmt.city         =      frm.elements['city'].value;
+  cmt.district         =      frm.elements['district'].value;
+  cmt.tel           =  frm.elements['tel_01'].value + "-" + frm.elements['tel_02'].value + (Utils.isEmpty(frm.elements['tel_03'].value) ? "" :  "-" + frm.elements['tel_03'].value);
+  cmt.mobile         =      frm.elements['mobile'].value;
+  cmt.closediv     = frm.elements['closediv'].value;
+  cmt.shipping_bian    = frm.elements['shipping_bian'].value;
+    cmt.optionlength = frm.elements['district'].length;
 
   if (cmt.consignee.length == 0)
    {
-	alert('收件人不能为空！');
-	return false;
+  alert('收件人不能为空！');
+  return false;
    }
    if(cmt.optionlength > 1)
    {
-	   if (cmt.province == '0' ||  cmt.city == '0'  || cmt.district == '0' )
-	   {
-		alert('所在地区不完整！');
-		return false;
-	   }
+     if (cmt.province == '0' ||  cmt.city == '0'  || cmt.district == '0' )
+     {
+    alert('所在地区不完整！');
+    return false;
+     }
    }
    else
    {
-	   if (cmt.province == '0' ||  cmt.city == '0' )
-	   {
-		alert('所在地区不完整！');
-		return false;
-	   }
+     if (cmt.province == '0' ||  cmt.city == '0' )
+     {
+    alert('所在地区不完整！');
+    return false;
+     }
 
    }
    /* 邮箱不是必填项
    if (cmt.email.length == 0)
    {
-		alert('邮箱地址不能为空');
-		return false;
+    alert('邮箱地址不能为空');
+    return false;
    }
    */
    if (cmt.email.length > 0 && (!Utils.isEmail(cmt.email)))
    {
-		alert('邮箱地址不正确');
-		return false;
+    alert('邮箱地址不正确');
+    return false;
    }
    if (cmt.address.length == 0)
    {
-	alert('街道地址不能为空！');
-	return false;
+  alert('街道地址不能为空！');
+  return false;
    }
    
    if (cmt.mobile.length == 0 && (cmt.tel.length == 0 || cmt.tel == '--' || cmt.tel == '-'))
    {
-	alert('手机号码和固定电话必须填写至少一项！');
-	return false;
+  alert('手机号码和固定电话必须填写至少一项！');
+  return false;
    }
    if (cmt.mobile.length>0)
   {
     var reg = /^1[34578][0-9]\d{8}$/;
     if (!Utils.isMobile(cmt.mobile))
     {
-	alert('手机号码格式不正确！');
-	return false;
+  alert('手机号码格式不正确！');
+  return false;
     }
   }
   if (cmt.tel.length>0 && cmt.tel != '--' && cmt.tel != '-')
@@ -715,7 +715,7 @@ else
     if (!Utils.isTel(cmt.tel))
     {
         alert('固定电话格式不正确！');
-	return false;
+  return false;
     }
   }
 
@@ -730,31 +730,31 @@ else
     {
       alert(result.message);
     }else{
-	top.location.href = top.location.href;
+  top.location.href = top.location.href;
     }
     /*
     if (result.error == 0)
     {
-	var layer = document.getElementById('AddressList');
-	if (layer)
-	{
-		layer.innerHTML = result.content;
-	}
-	if(result.content2)
-	{
-		document.getElementById("shippingBox").innerHTML='<font color="#ff3300">&nbsp;&nbsp;&nbsp;正在重新导入配送区域，请稍候。。。</font>';
-		document.getElementById("shippingBox").innerHTML= '<font style="color:#ff3300">配送区域已经变化，请重新选择物流<br><br></font>'+result.content2;
-	}
-	document.forms['theForm'].elements['have_consignee'].value='1';
-	if (result.closediv == '1')
-	{
-		closePopDiv();
-	}
+  var layer = document.getElementById('AddressList');
+  if (layer)
+  {
+    layer.innerHTML = result.content;
+  }
+  if(result.content2)
+  {
+    document.getElementById("shippingBox").innerHTML='<font color="#ff3300">&nbsp;&nbsp;&nbsp;正在重新导入配送区域，请稍候。。。</font>';
+    document.getElementById("shippingBox").innerHTML= '<font style="color:#ff3300">配送区域已经变化，请重新选择物流<br><br></font>'+result.content2;
+  }
+  document.forms['theForm'].elements['have_consignee'].value='1';
+  if (result.closediv == '1')
+  {
+    closePopDiv();
+  }
     }*/
 
   }
-	
-	</script> 
+  
+  </script> 
     
     <div class="checkBox_jm">
       <div class="title">2 送货时间 <span class="songhuo">送货时间仅作参考，快递公司会尽量满足您的要求</span></div>
@@ -816,7 +816,7 @@ else
     
     <div class="checkBox_jm">
       <div class="title">3 商品清单</div>
-      	<table border=0 cellpadding=0 cellspacing=0 width="100%" class="checkgoods">
+        <table border=0 cellpadding=0 cellspacing=0 width="100%" class="checkgoods">
         <tr>
           <th width='50%' align=left class="tdone">商品</th>
           <th>数量</th>
@@ -895,20 +895,20 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
             <td colspan="4" bgcolor="#ffffff" align=right style="padding:12px 15px 12px 0;"><?php if ($this->_var['goodsinfo']['zhekou']): ?><?php echo $this->_var['goodsinfo']['zhekou']['your_discount']; ?><?php endif; ?></td>
         </tr>
         <?php endif; ?> 
-		<?php if ($this->_var['goodsinfo']['shipping_html']): ?>
+    <?php if ($this->_var['goodsinfo']['shipping_html']): ?>
         <tr>
-			<td colspan=4 bgcolor="#ffffff" align="left" class="shipping_type">
-			<?php echo $this->_var['goodsinfo']['shipping_html']; ?>
-			
-			<span id='picktxt<?php echo $this->_var['key']; ?>'>
-			
-			</span>   
-			
-			<p class="shipping_desc" id="desc_<?php echo $this->_var['key']; ?>">您可以选择离您最近的自提点上门提货：运费5元，满99元免邮</p>
-			<script>selectShipping($('#pay_ship_<?php echo $this->_var['goodsinfo']['goodlist']['0']['supplier_id']; ?>').val(),<?php echo $this->_var['key']; ?>);</script>
-			</td>
-		</tr>
-		<?php endif; ?>
+      <td colspan=4 bgcolor="#ffffff" align="left" class="shipping_type">
+      <?php echo $this->_var['goodsinfo']['shipping_html']; ?>
+      
+      <span id='picktxt<?php echo $this->_var['key']; ?>'>
+      
+      </span>   
+      
+      <p class="shipping_desc" id="desc_<?php echo $this->_var['key']; ?>">您可以选择离您最近的自提点上门提货：运费5元，满99元免邮</p>
+      <script>selectShipping($('#pay_ship_<?php echo $this->_var['goodsinfo']['goodlist']['0']['supplier_id']; ?>').val(),<?php echo $this->_var['key']; ?>);</script>
+      </td>
+    </tr>
+    <?php endif; ?>
         <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
         </table>
         <table border=0 cellpadding=0 cellspacing=0 width="100%" class="checkgoods">
@@ -925,6 +925,17 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
               </div></td>
           </tr>
           <script type="text/javascript">
+    var fapiao_con = document.getElementById('ECS_INVCONTENT');
+    if (fapiao_con.value=='0')
+    {
+      document.getElementById('ECS_INVPAYEE').disabled=true;
+    }
+    else
+    {
+      document.getElementById('ECS_INVPAYEE').disabled=false;
+    }
+    </script>
+<!--  <?php if ($this->_var['allow_use_surplus']): ?>
 		var fapiao_con = document.getElementById('ECS_INVCONTENT');
 		if (fapiao_con.value=='0')
 		{
@@ -935,38 +946,37 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
 			document.getElementById('ECS_INVPAYEE').disabled=false;
 		}
 		</script>
-<!--	<?php if ($this->_var['allow_use_surplus']): ?>
           <tr>
             <td colspan=4 class="tdother2">
-            	<div class="allow_user_surplus">
-        			<p>
-                    	<input type="checkbox" id="issurplus" onclick="checkboxOnclick(this)" style="vertical-align:middle; cursor:pointer" />
-                    	<span class="is_user_surplus">使用账户余额支付</span>
+              <div class="allow_user_surplus">
+              <p>
+                      <input type="checkbox" id="issurplus" onclick="checkboxOnclick(this)" style="vertical-align:middle; cursor:pointer" />
+                      <span class="is_user_surplus">使用账户余额支付</span>
                     </p>
-        			<div id="allow_user_surplus">
-        				<span class="surplus_desc"><input name="surplus" type="text" class="surplus" id="ECS_SURPLUS"  value="0" onblur="changeSurplus(this.value);" />&nbsp;&nbsp;元</span>
-            			您当前的可用余额为:<span class="your_surplus"><?php echo empty($this->_var['your_surplus']) ? '0' : $this->_var['your_surplus']; ?> </span>
+              <div id="allow_user_surplus">
+                <span class="surplus_desc"><input name="surplus" type="text" class="surplus" id="ECS_SURPLUS"  value="0" onblur="changeSurplus(this.value);" />&nbsp;&nbsp;元</span>
+                  您当前的可用余额为:<span class="your_surplus"><?php echo empty($this->_var['your_surplus']) ? '0' : $this->_var['your_surplus']; ?> </span>
                         <span id="ECS_SURPLUS_NOTICE_<?php echo $this->_var['key']; ?>" class="notice"></span>
-            			<?php if ($this->_var['is_surplus_open'] == 0): ?><span class="open_surplus">点此<a href="security.php" target="_blank">开启余额安全支付</a></span><?php endif; ?>
-        			</div>
-				<script type="text/javascript">
-				function checkboxOnclick(checkbox){ 
-					var surplus = <?php echo empty($this->_var['your_surplus']) ? '0' : $this->_var['your_surplus']; ?>;
-					if ( checkbox.checked == true){
-						document.getElementById("allow_user_surplus").style.display = "block";
-						changeSurplus(surplus);
-					}else{
-						document.getElementById("allow_user_surplus").style.display = "none";
-						changeSurplus(0);
-					}
-				}
-				</script>
-        	  </div>
+                  <?php if ($this->_var['is_surplus_open'] == 0): ?><span class="open_surplus">点此<a href="security.php" target="_blank">开启余额安全支付</a></span><?php endif; ?>
+              </div>
+        <script type="text/javascript">
+        function checkboxOnclick(checkbox){ 
+          var surplus = <?php echo empty($this->_var['your_surplus']) ? '0' : $this->_var['your_surplus']; ?>;
+          if ( checkbox.checked == true){
+            document.getElementById("allow_user_surplus").style.display = "block";
+            changeSurplus(surplus);
+          }else{
+            document.getElementById("allow_user_surplus").style.display = "none";
+            changeSurplus(0);
+          }
+        }
+        </script>
+            </div>
             </td>
           </tr>
-	<?php endif; ?>-->
+  <?php endif; ?>-->
 
-<?php if ($this->_var['allow_use_integral']): ?>
+
           <tr>
             <td colspan=4 class="tdother2">
             	<div class="allow_user_integral">
@@ -976,7 +986,7 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
                     </p>
         			<div id="allow_user_integral">
         				<span class="integral_desc"><input name="integral" type="text" class="integral" id="ECS_INTEGRAL"  value="<?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?>" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;积分</span>
-            			您当前的可用企业币为:<span class="your_integral"><?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?> </span>
+            			您当前的可用企业币为:<span class="your_integral"><?php echo $this->_var['your_integral']; ?> </span>
                         <span id="ECS_INTEGRAL_NOTICE" class="notice"></span>
             			</div>
 				<script type="text/javascript">
@@ -996,7 +1006,8 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
         	  </div>
             </td>
           </tr>
-<?php endif; ?>
+
+
 
         </table>
         <div class="blank10"></div>
@@ -1007,15 +1018,15 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
         </table>
       </div>
     <script type="text/javascript">
-	
-	function showCheckoutOther(obj)
-	{
-		var otherParent = obj.parentNode;
-		otherParent.className = (otherParent.className=='checkout_other') ? 'checkout_other2' : 'checkout_other';
-		var spanzi = obj.getElementsByTagName('span')[0];
-		spanzi.innerHTML= spanzi.innerHTML == '+' ? '-' : '+';
-	}
-	
+  
+  function showCheckoutOther(obj)
+  {
+    var otherParent = obj.parentNode;
+    otherParent.className = (otherParent.className=='checkout_other') ? 'checkout_other2' : 'checkout_other';
+    var spanzi = obj.getElementsByTagName('span')[0];
+    spanzi.innerHTML= spanzi.innerHTML == '+' ? '-' : '+';
+  }
+  
       </script> 
     
     <div class="checkBox_jm" id="pay_div">
@@ -1055,53 +1066,53 @@ if ($this->_foreach['payment_list']['total'] > 0):
       </ul>
     </div>
     <script type="text/javascript">
-	
-	function setTimeSh(id)
-	{
-	    for(i=1;i<=4;i++)
-	    {
-		document.getElementById('time_id_'+i).className='';
-	    }
-	    var timeid = document.getElementById('time_id_'+id);
-	    timeid.className = 'curr';
-	}
-	function selTimeSh(obj)
-	{
-		document.getElementById('definetime_input').checked =true;
-		document.getElementById('definetime').innerHTML = "指定送货时间 <font color=#ff3300>"+ obj.name +"</font>";
-		document.getElementById('definetime_input').value = "指定送货时间 "+ obj.name ;
-	}
-	function selPayment(obj)
-	{
-		var con_country = document.forms['theForm'].elements['have_consignee'].value;
-		if ( con_country=='0' )
-		{
-			alert('请先选择配送地址！');
-			obj.checked= false;
-			return ;
-		}
-		var paymentList = obj.getElementsByTagName('input');
-		if (paymentList[0].disabled !=true)
-		{
-		var payParent = obj.parentNode;		
-		var payList = payParent.getElementsByTagName('li');
-		for(i=0;i<payList.length;i++)
-		{
-			payList[i].className='';
-		}
-		obj.className='seled';
-		
-		for (var i=0;i<paymentList.length;i++)
-		{
-			if (paymentList[i].name=='payment' && !paymentList[i].disabled)
-			{
-				paymentList[i].checked= true;
-			}
-		}
-		}
-	}
-	
-	</script>
+  
+  function setTimeSh(id)
+  {
+      for(i=1;i<=4;i++)
+      {
+    document.getElementById('time_id_'+i).className='';
+      }
+      var timeid = document.getElementById('time_id_'+id);
+      timeid.className = 'curr';
+  }
+  function selTimeSh(obj)
+  {
+    document.getElementById('definetime_input').checked =true;
+    document.getElementById('definetime').innerHTML = "指定送货时间 <font color=#ff3300>"+ obj.name +"</font>";
+    document.getElementById('definetime_input').value = "指定送货时间 "+ obj.name ;
+  }
+  function selPayment(obj)
+  {
+    var con_country = document.forms['theForm'].elements['have_consignee'].value;
+    if ( con_country=='0' )
+    {
+      alert('请先选择配送地址！');
+      obj.checked= false;
+      return ;
+    }
+    var paymentList = obj.getElementsByTagName('input');
+    if (paymentList[0].disabled !=true)
+    {
+    var payParent = obj.parentNode;   
+    var payList = payParent.getElementsByTagName('li');
+    for(i=0;i<payList.length;i++)
+    {
+      payList[i].className='';
+    }
+    obj.className='seled';
+    
+    for (var i=0;i<paymentList.length;i++)
+    {
+      if (paymentList[i].name=='payment' && !paymentList[i].disabled)
+      {
+        paymentList[i].checked= true;
+      }
+    }
+    }
+  }
+  
+  </script>
     <div class="flowBox_jm clearfix" style="border:none;padding-bottom:20px;">
       <div  style="float:left;width:40%;padding:8px 0; padding-left:5px;"> <a href="flow.php" class="continue_buy" style="padding:0;">返回修改购物车</a> </div>
       <div style="float:right;width:55%;text-align:right;padding:8px 20px;"> 
@@ -1118,7 +1129,7 @@ if ($this->_foreach['payment_list']['total'] > 0):
   <script>
   
     if(document.getElementById('shipping_<?php echo $this->_var['order']['shipping_id']; ?>')){
-	document.getElementById('shipping_<?php echo $this->_var['order']['shipping_id']; ?>').click();
+  document.getElementById('shipping_<?php echo $this->_var['order']['shipping_id']; ?>').click();
     }
     </script> 
   <?php endif; ?> 
@@ -1358,34 +1369,34 @@ if ($this->_foreach['payment_list']['total'] > 0):
 <?php echo $this->fetch('library/page_footer.lbi'); ?> <?php echo $this->fetch('library/site_bar.lbi'); ?>
 </body>
 <div id="pop" class="pop" style="display:none">
-  					<div class="pop_head">选择自提点</div>
+            <div class="pop_head">选择自提点</div>
                     <a href="javascript:void(0);" onclick="hide('pop')" title="关闭"  class="pop_head_r"></a>
-  					<div class="pop_body" id='pickcontent'></div>
-				</div>
+            <div class="pop_body" id='pickcontent'></div>
+        </div>
 <?php echo $this->smarty_insert_scripts(array('files'=>'order_pickpoint.js')); ?>
 <div class="choose" id="choose" style="display:none"></div>
 <script type="text/javascript">
 function closeCustomer(){
-	$("#choose").hide();
-	}
+  $("#choose").hide();
+  }
 function choose_gift(suppid)
 {
-	var sel_goods = new Array();
-	var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
-	var j = 0;
-	for (i=0;i<obj_cartgoods.length;i++)
-	{
-		if(obj_cartgoods[i].checked == true)
-		{	
-			sel_goods[j] = obj_cartgoods[i].value;
-			j++;
-		}
-	}
-	Ajax.call('flow.php', 'is_ajax=1&suppid=' + suppid + '&sel_goods='+sel_goods, selgiftResponse, 'GET', 'JSON');
+  var sel_goods = new Array();
+  var obj_cartgoods = document.getElementsByName("sel_cartgoods[]");
+  var j = 0;
+  for (i=0;i<obj_cartgoods.length;i++)
+  {
+    if(obj_cartgoods[i].checked == true)
+    { 
+      sel_goods[j] = obj_cartgoods[i].value;
+      j++;
+    }
+  }
+  Ajax.call('flow.php', 'is_ajax=1&suppid=' + suppid + '&sel_goods='+sel_goods, selgiftResponse, 'GET', 'JSON');
 }
 function selgiftResponse(res)
 {
-	$('#choose').html(res.result).show();
+  $('#choose').html(res.result).show();
 }
 </script>
 <script type="text/javascript">

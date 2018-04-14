@@ -32,9 +32,12 @@ box-shadow: 0 0 2px #ccc; }
 
 				<div class="bd">
 					<ul>
-			{foreach from=$wap_index_ad item=ad name=wap_index_ad}
-          <li><a href="{$ad.url}"><img src="{$ad.image}" width="100%" /></a></li>
-          {/foreach}
+
+			 
+			
+			<!--{foreach from=$flash name=myflash item=flash}-->
+          		<li><a href="{$ad.url}"><img src="{$flash.src}" width="100%" /></a></li>
+          	<!-- {/foreach} -->
 					</ul>
 				</div>
 

@@ -79,7 +79,7 @@ function manage($user_id,$amount,$order_id){
 		if($fengding==-1){
 			continue;
 		}else{
-			$user_rank = $GLOBALS['db']->getRow("SELECT user_name,user_rank,user_id FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".				$parent_id);
+			$user_rank = $GLOBALS['db']->getRow("SELECT user_name,user_rank,user_id FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$parent_id);
 			
 			$cengshu = $i+1;
 			$char = chr($user_rank['user_rank']+96);
@@ -120,7 +120,10 @@ function manage($user_id,$amount,$order_id){
 }
 //碰对奖
 function collide_point($user_id,$amount,$order_sn){
+
 	$user_info =$GLOBALS['db']->getRow("select parent_id,deep,user_rank,id_list,side_list from ".$GLOBALS['ecs']->table('users') ." where user_id = ".$user_id);
+	if(empty($user_info)||$user_info=='')
+		return;
 	//买主的side_list倒叙数组
 	$side_list_array = array_reverse(explode(",",$user_info['side_list']));
 	$id_list_array = array_reverse(explode(",",$user_info['id_list']));

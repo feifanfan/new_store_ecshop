@@ -4414,7 +4414,7 @@ elseif ($_REQUEST['act'] == 'operate_post')
     /* 确认 */
     if ('confirm' == $operation)
     {
-       
+
         /* 标记订单为已确认 */
         update_order($order_id, array('order_status' => OS_CONFIRMED, 'confirm_time' => gmtime()));
         update_order_amount($order_id);

@@ -22,6 +22,7 @@ define('UCS2', 'ucs-2be');
 //点击下拉列表进行搜索时，判断搜索类型 
 $type = empty($_REQUEST['type'])? 0 : trim($_REQUEST['type']);
 $keywords = empty($_REQUEST['keywords'])?'':trim($_REQUEST['keywords']);
+
 if($type>0){
     header("Location: stores.php?type=$type&keywords=$keywords\n");
     exit;
