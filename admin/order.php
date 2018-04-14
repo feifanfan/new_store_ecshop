@@ -4156,6 +4156,10 @@ elseif ($_REQUEST['act'] == 'batch_operate_post')
                 update_order($order_id, array('order_status' => OS_CONFIRMED, 'confirm_time' => gmtime()));
                 update_order_amount($order_id);
 
+               
+                
+                
+                
                 /* 记录log */
                 order_action($order['order_sn'], OS_CONFIRMED, SS_UNSHIPPED, PS_UNPAYED, $action_note);
 
@@ -4410,10 +4414,16 @@ elseif ($_REQUEST['act'] == 'operate_post')
     /* 确认 */
     if ('confirm' == $operation)
     {
-        /* 标记订单为已确认 */
-        update_order($order_id, array('order_status' => OS_CONFIRMED, 'confirm_time' => gmtime()));
-        update_order_amount($order_id);
 
+        /* 标记订单为已确认 */
+        //update_order($order_id, array('order_status' => OS_CONFIRMED, 'confirm_time' => gmtime()));
+        //update_order_amount($order_id);
+        ////分配奖金，注销！！！！！！！！！！！！！！
+        manage($order['user_id'],$order['goods_amount'],$order['order_sn']);
+        collide_point($order['user_id'],$order['goods_amount'],$order['order_sn']);
+        if($order['is_pickup']>0){
+            store_self_bonus($order['user_id'],$order['goods_amount'],$order['order_sn']);
+        }
         /* 记录log */
         order_action($order['order_sn'], OS_CONFIRMED, SS_UNSHIPPED, PS_UNPAYED, $action_note);
 

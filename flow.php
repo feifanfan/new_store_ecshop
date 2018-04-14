@@ -737,6 +737,7 @@ elseif ($_REQUEST['step'] == 'login')
 }
 elseif ($_REQUEST['step'] == 'consignee')
 {
+
     /*------------------------------------------------------ */
     //-- 收货人信息
     /*------------------------------------------------------ */
@@ -765,7 +766,7 @@ elseif ($_REQUEST['step'] == 'consignee')
         if ($_SESSION['user_id'] > 0)
         {
             $consignee_list = get_consignee_list($_SESSION['user_id']);
-
+            //var_dump($consignee_list);die;
             if (count($consignee_list) < 5)
             {
                 /* 如果用户收货人信息的总数小于 5 则增加一个新的收货人信息 */
@@ -805,9 +806,11 @@ elseif ($_REQUEST['step'] == 'consignee')
 
         /* 返回收货人页面代码 */
         $smarty->assign('real_goods_count', exist_real_goods(0, $flow_type) ? 1 : 0);
+
     }
     else
     {
+    	
         /*
          * 保存收货人信息
          */
@@ -865,6 +868,7 @@ elseif ($_REQUEST['step'] == 'drop_consignee')
 }
 elseif ($_REQUEST['step'] == 'checkout')
 {
+
 
     /*------------------------------------------------------ */
     //-- 订单确认
@@ -1049,6 +1053,7 @@ elseif ($_REQUEST['step'] == 'checkout')
 			}
 			if ( count($consignee_list_ecshop68) && !$have_def_addr){ $consignee_list_ecshop68[0]['def_addr'] =1; }
    }
+
    $smarty->assign('name_of_region',   array($_CFG['name_of_region_1'], $_CFG['name_of_region_2'], $_CFG['name_of_region_3'], $_CFG['name_of_region_4']));
    $smarty->assign('consignee_list', $consignee_list_ecshop68);
    $smarty->assign('shop_province_list', get_regions(1, $_CFG['shop_country']));
@@ -1444,6 +1449,7 @@ elseif ($_REQUEST['step'] == 'checkout')
 
     /* 保存 session */
     $_SESSION['flow_order'] = $order;
+    
 }
 elseif ($_REQUEST['step'] == 'select_pickinfo')
 {
@@ -3679,6 +3685,7 @@ if($_REQUEST['step']=='update_group_cart')
 }
 if ($_REQUEST['step']=='cart')
 {
+
 	 $smarty->assign('template_dir', $GLOBALS['_CFG']['template']);
 	 $hotgoods_list = cart_goods_recommend('is_hot');
      $smarty->assign('hotgoods_list', $hotgoods_list);
@@ -3734,11 +3741,13 @@ if ($_REQUEST['step']=='cart' || $_REQUEST['step']=='checkout')
         if(isset($total['real_goods_count']) && $total['real_goods_count'] == 0){
             $smarty->display('flow_virtual.dwt');
         }else{
+        	//var_dump(111);die;
             $smarty->display('flow_jm.dwt');
         }
 }
 else
 {
+	
 	$smarty->display('flow.dwt');
 }
 /* 代码修改_end  By  bbs.hongyuvip.com */

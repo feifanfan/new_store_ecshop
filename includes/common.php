@@ -52,13 +52,16 @@ function log_account_change_new($user_id, $user_money = 0, $user_cash = 0, $user
 	}
 function tupu($user_id){
 	$user[0] = $GLOBALS['db']->getRow("SELECT * FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
+
 	$user[1] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 1");
+
 	$user[2] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 2");
-	if($user[1]){
+	//var_dump($user);die;
+	if($user[1]!=''){
 		$user[3] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[1]['user_id'] ." and parent_side = 1");
 		$user[4] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[1]['user_id'] ." and parent_side = 2");
 	}
-	if($user[2]){
+	if($user[2]!=''){
 		$user[5] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[2]['user_id'] ." and parent_side = 1");
 		$user[6] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[2]['user_id'] ." and parent_side = 2");
 	}
@@ -71,13 +74,12 @@ function manage($user_id,$amount,$order_id){
 	$id_list = explode(',',$res['id_list']);
 	$arr = array_reverse($id_list);
 	for($i = 0; $i < count($arr)-1; $i++){
-
 		$parent_id = $arr[$i+1];
 		$fengding = is_fengding();
 		if($fengding==-1){
 			continue;
 		}else{
-			$user_rank = $GLOBALS['db']->getRow("SELECT user_name,user_rank,user_id FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".				$parent_id);
+			$user_rank = $GLOBALS['db']->getRow("SELECT user_name,user_rank,user_id FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$parent_id);
 			
 			$cengshu = $i+1;
 			$char = chr($user_rank['user_rank']+96);
@@ -104,9 +106,11 @@ function manage($user_id,$amount,$order_id){
 			$user_cash = $zong * 0.2;
 			$change_desc = '第'.$cengshu.'代'.$user_rank['user_name'].'的管理奖';
 			$change_time = time();
-			$up_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$user_money.",user_cash=user_cash+".$user_cash. " where user_id = ".$parent_id;
+			$up_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$user_money.",user_cash=user_cash+".$user_cash.",fd_num=fd_num+".$zong." where user_id = ".$parent_id;
 			
 			$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_money,user_cash,change_desc,change_time,user_id,change_type) values ( '$user_money','$user_cash','$change_desc','$change_time','$parent_id','99')";
+
+
 			$GLOBALS['db']->query($up_sql);
 			$GLOBALS['db']->query($insert_sql);	
 		}
@@ -116,7 +120,10 @@ function manage($user_id,$amount,$order_id){
 }
 //碰对奖
 function collide_point($user_id,$amount,$order_sn){
+
 	$user_info =$GLOBALS['db']->getRow("select parent_id,deep,user_rank,id_list,side_list from ".$GLOBALS['ecs']->table('users') ." where user_id = ".$user_id);
+	if(empty($user_info)||$user_info=='')
+		return;
 	//买主的side_list倒叙数组
 	$side_list_array = array_reverse(explode(",",$user_info['side_list']));
 	$id_list_array = array_reverse(explode(",",$user_info['id_list']));
@@ -189,7 +196,6 @@ function collide_point($user_id,$amount,$order_sn){
 			$send_jin = $jin*$percent/100;
 
 			$result = is_fengding($parent_id);
-			$result = is_fengding($parent_id);
 			if($result==0){
 				$change_time = time();
 				$send_money = $send_jin * 0.8;
@@ -213,7 +219,7 @@ function collide_point($user_id,$amount,$order_sn){
 				$change_desc .=",奖金已达到今日最高值,不再享受分配"; 
 			}
 			$change_time = time();
-			$send_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$send_money." ,user_cash = user_cash+".$send_cash." where user_id = ".$parent_id;
+			$send_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$send_money." ,user_cash = user_cash+".$send_cash.",fd_num = fd_num+".$send_jin." where user_id = ".$parent_id;
 			$GLOBALS['db']->query($send_sql);
 			$account_log_sql = "insert into ".$GLOBALS['ecs']->table('account_log')."(user_id,user_money,user_cash,change_time,change_desc,change_type) values ( '$parent_id','$send_money','$send_cash','$change_time','$change_desc','99')";
 
@@ -244,12 +250,12 @@ function collide_point($user_id,$amount,$order_sn){
 		}
 		
 		$parent_id = $GLOBALS['db']->getOne("select parent_id from ".$GLOBALS['ecs']->table('users') ." where user_id = ".$parent_id);
-		echo("<br>");
+		
 	}
 }
 
 function store_self_bonus($user_id,$amount,$order_sn){
-	$add_user_id = "SELECT s.user_id from ".$GLOBALS['ecs']->table('supplier')." as s LEFT JOIN ".$GLOBALS['ecs']->table('pickup_point')." as p on s.supplier_id = p.supplier_id LEFT JOIN ".$GLOBALS['ecs']->table('order_info')." as o ON o.pickup_point=p.id WHERE o.order_id=89"
+	$add_user_id = $GLOBALS['db']->getOne("SELECT s.user_id from ".$GLOBALS['ecs']->table('supplier')." as s LEFT JOIN ".$GLOBALS['ecs']->table('pickup_point')." as p on s.supplier_id = p.supplier_id LEFT JOIN ".$GLOBALS['ecs']->table('order_info')." as o ON o.pickup_point=p.id WHERE o.order_sn=".$order_sn);
 	$jin = $amount*0.01;
 	$user_money = $jin*0.8;
 	$user_cash = $jin*0.2;
@@ -265,20 +271,17 @@ function is_fengding($user_id){
 	$now_date = date('Ymd',time());
 	$sql = "select user_rank,fd_num,fd_date from ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id;
 	$user_info = $GLOBALS['db']->getRow($sql);
-	
+	$rank_word = chr($user_info['user_rank']+96)."_card_top";
+	$card_top = $GLOBALS['db']->getOne("select value from ".$GLOBALS['ecs']->table('shop_config')." where code = '$rank_word'");
 	if($user_info['fd_date']<$now_date){
 		$GLOBALS['db']->query("update ".$GLOBALS['ecs']->table('users')." set fd_num=0, fd_date = ".$now_date." where user_id = ".$user_id);
-		return 0;
+		return $card_top;
 	}elseif ($user_info['fd_date']==$now_date) {
-		$rank_word = chr($user_info['user_rank']+96)."_card_top";
-
-		$card_top = $GLOBALS['db']->getOne("select value from ".$GLOBALS['ecs']->table('shop_config')." where code = '$rank_word'");
 		if($user_info['fd_num']<$card_top){
 			return $card_top - $user_info['fd_num'];
 		}else{
 			return -1;
 		}
 	}
-
 }
 ?>

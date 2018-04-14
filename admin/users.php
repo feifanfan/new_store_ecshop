@@ -182,15 +182,18 @@ elseif ($_REQUEST['act'] == 'insert')
 	$user_status = $_POST['user_status'];
 	/* 代码增加2014-12-23 by bbs.hongyuvip.com _end */
 	$users = & init_users();
-	$parent_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_id=".trim($_POST['parent_id']));
-	if($parent_info){
-		$son_num = $GLOBALS['db']->getOne("SELECT COUNT(*) from ".$GLOBALS['ecs']->table('users')." WHERE parent_id = ".$parent_info['user_id']);
-		if($son_num>=2){
-			sys_msg("上级id的子级用户已满", 1);
+	if(trim($_POST['parent_id'])!=''){
+		$parent_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_id=".trim($_POST['parent_id']));
+		if($parent_info){
+			$son_num = $GLOBALS['db']->getOne("SELECT COUNT(*) from ".$GLOBALS['ecs']->table('users')." WHERE parent_id = ".$parent_info['user_id']);
+			if($son_num>=2){
+				sys_msg("上级id的子级用户已满", 1);
+			}
+		}else{
+			sys_msg("上级id不存在", 1);
 		}
-	}else{
-		sys_msg("上级id不存在", 1);
 	}
+	
 	if(! $users->add_user($username, $password, $email))
 	{
 		/* 插入会员数据失败 */
@@ -280,8 +283,6 @@ elseif ($_REQUEST['act'] == 'insert')
 			$other['side_list'] =$parent_info['side_list'].",1";
 		}elseif($son_num==1){
 			$other['parent_side'] = 2;
-		}else{
-			$other['parent_side'] = 1;
 			$other['side_list'] =$parent_info['side_list'].",2";
 		}
 	}else{
@@ -1089,7 +1090,7 @@ elseif ($_REQUEST['act'] == 'tupu')
 	$ecs = $GLOBALS['ecs'];
 	$user_id = htmlspecialchars(trim($_GET['user_id']));
 	$user = tupu($user_id);
-	manage($user_id,1000,$order_id);
+	//manage($user_id,1000,$order_id);
 	// $user[0] = $GLOBALS['db']->getRow("SELECT * FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
 	// $user[1] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 1");
 	// $user[2] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 2");
