@@ -294,27 +294,39 @@ function action_check_user_parent(){
 	$smarty = $GLOBALS['smarty'];
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
-	$user_parent_mobile = empty($_POST['user_parent_mobile']) ? '' : trim($_POST['user_parent_mobile']);
-	if(is_numeric($user_parent_mobile)){
-		$result = check_mobile($user_parent_mobile);
+	$user_parent = empty($_POST['user_parent']) ? '' : trim($_POST['user_parent']);
+	if(is_numeric($user_parent)){
+		$result = $GLOBALS['db']->getOne("select user_name from ".$GLOBALS['ecs']->table("users")." where user_id = ".$user_parent);
 		if($result){
-			echo $result['user_name'];
+			echo $result;
 		}else{
 			echo "false";
 		}
 	}
 }
-function action_check_bd_parent(){
+function action_check_user_node(){
+	$user_node = empty($_POST['user_node'])?'':trim($_POST['user_node']);
+	if($user_node>0){
+		$result = $GLOBALS['db']->getOne("select user_name from ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_node);
+		$count = $GLOBALS['db']->getOne("select count(*) from ".$GLOBALS['ecs']->table('users')." where node_id = ".$user_node);
+		if($count<=1&&$result){
+			echo $result;
+		}else{
+			echo "false";
+		}
+	}
+}
+function action_check_bd_id(){
 	$_LANG = $GLOBALS['_LANG'];
 	$_CFG = $GLOBALS['_CFG'];
 	$smarty = $GLOBALS['smarty'];
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
-	$user_parent_mobile = empty($_POST['user_parent_mobile']) ? '' : trim($_POST['user_parent_mobile']);
-	if(is_numeric($user_parent_mobile)){
-		$result = check_mobile($user_parent_mobile);
-		if($result){
-			echo $result['user_name'];
+	$bd_id = trim($_POST['bd_id']);
+	if(!empty($bd_id)){
+		$user_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_id = ".$bd_id);
+		if($user_info['bd_status']){
+			echo $user_info['user_name'];
 		}else{
 			echo "false";
 		}
@@ -446,17 +458,21 @@ function action_register ()
 		$sel_question = empty($_POST['sel_question']) ? '' : compile_str($_POST['sel_question']);
 		$passwd_answer = isset($_POST['passwd_answer']) ? compile_str(trim($_POST['passwd_answer'])) : '';
 		$mobile_phone =isset($_POST['mobile_phone'])?trim($_POST['mobile_phone']):'';
-		$user_parent_phone = isset($_POST['user_parent'])?trim($_POST['user_parent']):'';
-		$bd_phone = isset($_POST['bd_phone'])?trim($_POST['bd_phone']):'';
+		$user_parent = isset($_POST['user_parent'])?trim($_POST['user_parent']):'';
+		$user_bd = isset($_POST['user_bd'])?trim($_POST['user_bd']):'';
 		$user_rank = isset($_POST['user_rank'])?trim($_POST['user_rank']):'';
+		$user_node = isset($_POST['user_node'])?trim($_POST['user_node']):'';
 		if(empty($user_rank)||$user_rank>4||$user_rank<=0){
 			show_message("请选择会员等级");
 		}
-		if($user_parent_phone==''||empty($user_parent_phone)){
+		if($user_parent==''||empty($user_parent)){
 			show_message("请填写推荐人手机号");
 		}
-		if($bd_phone==''||empty($bd_phone)){
+		if($user_bd==''||empty($user_bd)){
 			show_message("请填写报单人手机号");
+		}
+		if($user_node==''||empty($user_node)){
+			show_message("请填写节点人");
 		}
 		// 注册类型：email、mobile
 		$register_type = isset($_POST['register_type']) ? trim($_POST['register_type']) : '';
@@ -519,37 +535,15 @@ function action_register ()
 			
 			$record = get_validate_record($mobile_phone);
 			
-			//$session_mobile_phone = $_SESSION[VT_MOBILE_REGISTER];
-			
-			/* 手机验证码检查 */
-			/**************delect 验证码
-			// if(empty($mobile_code))
-			// {
-			// 	show_message($_LANG['msg_mobile_phone_blank'], $_LANG['sign_up'], 'register.php', 'error');
-			// }
-			// // 检查发送短信验证码的手机号码和提交的手机号码是否匹配
-			// else if($session_mobile_phone != $mobile_phone)
-			// {
-			// 	show_message($_LANG['mobile_phone_changed'], $_LANG['sign_up'], 'register.php', 'error');
-			// }
-			// // 检查验证码是否正确
-			// else if($record['record_code'] != $mobile_code)
-			// {
-			// 	show_message($_LANG['invalid_mobile_phone_code'], $_LANG['sign_up'], 'register.php', 'error');
-			// }
-			// // 检查过期时间
-			// else if($record['expired_time'] < time())
-			// {
-			// 	show_message($_LANG['invalid_mobile_phone_code'], $_LANG['sign_up'], 'register.php', 'error');
-			// }
-			*////////////////
-			/* 手机注册时，用户名默认为u+手机号 */
-//			$username = generate_username_by_mobile($mobile_phone);
-            //$username = $mobile_phone;
-            $parent_id =$GLOBALS['db']->getOne('select user_id from'.$GLOBALS['ecs']->table('users').' where mobile_phone='.$user_parent_phone);
-			$parent_son = $GLOBALS['db']->getOne("select count(user_id) from ".$GLOBALS['ecs']->table('users').' where parent_id = '.$parent_id);
-			if($parent_son>=2){
-				show_message('该推荐人不满足条件', $_LANG['sign_up'], 'register.php', 'error');
+           	//1.检测该节点是否满足
+           	$node = $GLOBALS['db']->getOne("select count(*) from ".$GLOBALS['ecs']->table('users')." where node_id = ".$user_node);
+           	if($node>=2){
+           		show_message("节点人不满足");
+           	}
+			//2.检测父亲是否存在
+			$parent = $GLOBALS['db']->getOne("select user_name from ".$GLOBALS['ecs']->table("users")." where user_id= ".$user_parent);
+			if(empty($parent)){
+				show_message("推荐人不存在");
 			}
 			/* 手机注册 */
 			$result = register_by_mobile($username, $password, $mobile_phone, $other);
@@ -571,33 +565,53 @@ function action_register ()
 		
 		if($result)
 		{
+			$user_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_name = '$username'");
+			// $user_parent = isset($_POST['user_parent'])?trim($_POST['user_parent']):'';
+			// $user_bd = isset($_POST['bd_phone'])?trim($_POST['bd_phone']):'';
+			// $user_rank = isset($_POST['user_rank'])?trim($_POST['user_rank']):'';
+			// $user_node = isset($_POST['user_node'])?trim($_POST['user_node']):'';
+			$node_son = $GLOBALS['db']->getOne("select count(*) from ".$GLOBALS['ecs']->table('users')." where node_id = ".$user_node);
+			$node_info =$GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_node);
 
-			/*推荐关系*/
-			$parent_sql ='select * from'.$GLOBALS['ecs']->table('users').' where mobile_phone='.$user_parent_phone;
-			$parent = $GLOBALS['db']->getRow($parent_sql);
-			//var_dump($parent);die;
-			$parent_id = $parent['user_id'];
-			if(!empty($parent)){
-				$id_list = $parent['id_list'].",".$_SESSION['user_id'];
+			$node_id = $user_node;//上级节点
+			if($node_info){
+				if($node_son==0){
+					$side_list = $node_info['side_list'].",1";
+					$parent_side = 1;
+				}elseif($node_son==1){
+					$side_list = $node_info['side_list'].",2";
+					$parent_side = 2;
+				}
+				$node_list = $node_info['node_list'].",".$user_info['user_id'];
+				$deep = $node_info['deep']+1;
 			}else{
-				$id_list=$_SESSION['user_id'];
+				if($node_son==0){
+					$side_list = 1;
+					$parent_side = 1;
+				}elseif($node_son==1){
+					$side_list = 2;
+					$parent_side = 2;
+				}
+				$node_list = $user_info['user_id'];
+				$deep = 1;
 			}
-			$parent_son = $GLOBALS['db']->getOne("select count(*) from ".$GLOBALS['ecs']->table('users').'  where parent_id = '.$parent_id);
-			if($parent_son==0){
-				$parent_side = 1;
-			}else if($parent_son==1){
-				$parent_side = 2;
-			}
-			if($parent['side_list']==''){
-				$side_list = $parent_side;
+			if($user_bd){
+				$bd_id = $user_bd;
 			}else{
-				$side_list = $parent['side_list'].','.$parent_side;
+				$bd_id = 0;
 			}
-			$bd_id =$GLOBALS['db']->getOne('select user_id from'.$GLOBALS['ecs']->table('users').' where mobile_phone='.$bd_phone);
-			$deep = $parent['deep']+1;
-			$sql = "UPDATE " .$GLOBALS['ecs']->table('users')."SET parent_id='$parent_id',id_list='$id_list',parent_side = '$parent_side',side_list = '$side_list',deep = '$deep',user_rank='$user_rank',bd_id='$bd_id' where user_id = ".$_SESSION['user_id'];
+
+
+			$parent_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table("users")." where user_id = ".$user_parent);
+			if(empty($parent_info)){
+				$parent_id = 0;
+				$parent_list = 0;
+			}else{
+				$parent_id = $user_parent;
+				$parent_list = $parent_info['parent_list'].",".$user_info['user_id'];
+			}
+			$sql = "UPDATE ".$GLOBALS['ecs']->table("users")." set parent_id = '$parent_id',parent_list='$parent_list',node_id='$node_id',node_list='$node_list',parent_side='$parent_side',side_list='$side_list',bd_id='$bd_id',deep='$deep' where user_id = ".$user_info['user_id'];
 			$GLOBALS['db']->query($sql);
-
 			/* 把新注册用户的扩展信息插入数据库 */
 			$sql = 'SELECT id FROM ' . $ecs->table('reg_fields') . ' WHERE type = 0 AND display = 1 ORDER BY dis_order, id'; // 读出所有自定义扩展字段的id
 			$fields_arr = $db->getAll($sql);

@@ -1077,7 +1077,11 @@ elseif ($_REQUEST['act'] == 'aff_list')
 	$smarty->display('affiliate_list.htm');
 }
 elseif ($_REQUEST['act'] == 'tupu1') {
-	collide_point(177,3000,12544512);
+	jiandian(28,1000);
+
+	//duipeng(28,1000);
+	//collide_point(29,3000,12544512);
+	//team_total(28,100);
 }
 elseif ($_REQUEST['act'] == 'tupu')
 {
@@ -1092,18 +1096,7 @@ elseif ($_REQUEST['act'] == 'tupu')
 	collide_point($user_id,1000,12544511);
 	// manage($user_id,1000,$order_id);
 	$user = tupu($user_id);
-	//manage($user_id,1000,$order_id);
-	// $user[0] = $GLOBALS['db']->getRow("SELECT * FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
-	// $user[1] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 1");
-	// $user[2] = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user_id ." and parent_side = 2");
-	// if($user[1]){
-	// 	$user[3] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[1]['user_id'] ." and parent_side = 1");
-	// 	$user[4] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[1]['user_id'] ." and parent_side = 2");
-	// }
-	// if($user[2]){
-	// 	$user[5] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[2]['user_id'] ." and parent_side = 1");
-	// 	$user[6] =  $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users') ." where parent_id = ".$user[2]['user_id'] ." and parent_side = 2");
-	// }
+
 	$smarty->assign('user',$user);
 	$smarty->display('user_tupu.htm');
 }

@@ -1197,7 +1197,7 @@ function action_bd_list ()
 	// 分页函数
 	$pager = get_pager('user.php', array( 'act' => $action ), $record_count, $page);
 
-	$sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where id_list like '%$user_id,%' limit $pager[start],$pager[size]";
+	$sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where bd_id = ".$user_id;
 	// $sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where  id_list like '%$user_id,%'";
 	$data = $db->getAll($sql);
 	// var_dump($data);die;

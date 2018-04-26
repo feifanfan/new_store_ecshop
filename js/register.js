@@ -220,44 +220,66 @@ function checkuser_parent(user_parent,callback){
 		user_parent = user_parentObj.val();
 	}
 	if(user_parent==''){
-		document.getElementById('user_parent_notice').innerHTML = '请输入推荐人手机号';
+		document.getElementById('user_parent_notice').innerHTML = '请输入推荐人ID';
 		document.getElementById('user_parent_notice').style.color = '#900';
 	}else{
 		$.post('register.php?act=check_user_parent', {
-		user_parent_mobile: user_parent
+		user_parent: user_parent
 		}, 
 		function(result) {
 			if(result=='false'){
 				document.getElementById('user_parent_notice').innerHTML = '没有找到该推荐人';
 				document.getElementById('user_parent_notice').style.color = '#900';
 			}else{
-				console.log(result);
 				document.getElementById('user_parent_notice').innerHTML = '推荐人用户名为：'+result;
 				document.getElementById('user_parent_notice').style.color = '#093';
 			}
 		});
 	}
 }
-function checkbd_phone(user_parent,callback){
+function checkuser_node(user_parent,callbacl){
+	var user_parentObj = null;
+		if(typeof(user_parent)=='object'){
+			user_parentObj = $(user_parent);
+			user_parent = user_parentObj.val();
+		}
+	if(user_parent==''){
+		document.getElementById('user_node_notice').innerHTML = '请输入节点人ID';
+		document.getElementById('user_node_notice').style.color = '#900';
+	}else{
+		$.post('register.php?act=check_user_node', {
+			user_node:user_parent
+		},function(result) {
+			if(result=='false'){
+				document.getElementById('user_node_notice').innerHTML = '没有找到该节点或者节点不满足';
+				document.getElementById('user_node_notice').style.color = '#900';
+			}else{
+				document.getElementById('user_node_notice').innerHTML = '报单人用户名为：'+result;
+				document.getElementById('user_node_notice').style.color = '#093';
+			}
+		});
+	}
+}
+function checkbd_id(user_parent,callback){
 var user_parentObj = null;
 	if(typeof(user_parent)=='object'){
 		user_parentObj = $(user_parent);
 		user_parent = user_parentObj.val();
 	}
 	if(user_parent==''){
-		document.getElementById('bd_phone_notice').innerHTML = '请输入推荐人手机号';
-		document.getElementById('bd_phone_notice').style.color = '#900';
+		document.getElementById('bd_id_notice').innerHTML = '请输入报单人ID';
+		document.getElementById('bd_id_notice').style.color = '#900';
 	}else{
-		$.post('register.php?act=check_bd_parent', {
-		user_parent_mobile: user_parent
+		$.post('register.php?act=check_bd_id', {
+			bd_id:user_parent
 		},function(result) {
+			console.log(result);
 			if(result=='false'){
-				document.getElementById('bd_phone_notice').innerHTML = '没有找到该报单人';
-				document.getElementById('bd_phone_notice').style.color = '#900';
+				document.getElementById('bd_id_notice').innerHTML = '没有找到该报单人或者该人不满足报单条件';
+				document.getElementById('bd_id_notice').style.color = '#900';
 			}else{
-				console.log(result);
-				document.getElementById('bd_phone_notice').innerHTML = '报单人用户名为：'+result;
-				document.getElementById('bd_phone_notice').style.color = '#093';
+				document.getElementById('bd_id_notice').innerHTML = '报单人用户名为：'+result;
+				document.getElementById('bd_id_notice').style.color = '#093';
 			}
 		});
 	}

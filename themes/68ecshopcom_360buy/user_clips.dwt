@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -53,7 +54,7 @@
               <li class="third">
                 <div class="title"><span>企业币</span></div>
                 <div class="pic"><i class="user_bg"></i></div>
-                <p><span class="_goldAccount">{$info.user_point}</span></p>
+                <p><span class="_goldAccount">{$info.user_rank}</span></p>
               </li>
             </ul>
           </div>
