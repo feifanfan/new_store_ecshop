@@ -622,6 +622,7 @@ function get_user_default($user_id)
     $sql = "SELECT * FROM " .$GLOBALS['ecs']->table('users'). " WHERE user_id = '$user_id'";
 /*代码修改2014-12-23 by bbs.hongyuvip.com  _end */
     $row = $GLOBALS['db']->getRow($sql);
+
     /* 代码增加_start By bbs.hongyuvip.com */
     $_SESSION['user_name'] =$row['user_name'];
     /* 代码增加_end By bbs.hongyuvip.com */

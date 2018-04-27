@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost_3306
 Source Server Version : 50553
 Source Host           : localhost:3306
-Source Database       : suo
+Source Database       : xu
 
 Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-03-17 10:36:31
+Date: 2018-04-17 13:31:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,15 +22,20 @@ DROP TABLE IF EXISTS `ecs_users`;
 CREATE TABLE `ecs_users` (
   `user_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   `parent_id` mediumint(9) unsigned DEFAULT '0' COMMENT '推荐人ID',
+  `node_id` int(10) DEFAULT NULL,
+  `bd_id` int(10) DEFAULT NULL COMMENT '报单中心id',
   `id_list` text COMMENT '用户ID链',
   `parent_side` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '父节点的左右边 1左边2右边',
+  `parent_list` text COMMENT '推荐人链',
   `side_list` text COMMENT '所在边的链',
   `deep` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '相对于最高层的深度',
   `user_name` varchar(60) NOT NULL DEFAULT '' COMMENT '用户名称',
   `password` varchar(32) NOT NULL DEFAULT '' COMMENT '密码',
-  `user_money` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '奖金币',
-  `user_cash` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '电子币',
-  `user_point` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户的购物积分',
+  `user_money` float(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '奖金(收益)',
+  `user_cash` float(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '重销',
+  `user_point` float(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '企业币',
+  `user_upgrade` float(10,2) NOT NULL DEFAULT '0.00' COMMENT '升级币',
+  `user_voucher` float(10,0) NOT NULL DEFAULT '0' COMMENT '代金币',
   `sex` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `mobile_phone` varchar(20) NOT NULL COMMENT '手机号',
   `id_card` varchar(20) DEFAULT NULL COMMENT '身份证号',
@@ -40,15 +45,9 @@ CREATE TABLE `ecs_users` (
   `khxm` varchar(64) DEFAULT NULL COMMENT '开户人姓名',
   `acid` varchar(64) DEFAULT NULL COMMENT '银行卡号',
   `team_total` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '团队业绩',
-  `area_total` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '小区业绩(小区业绩是时刻变化的，可能用不到这个字段）',
   `alipay` varchar(128) DEFAULT NULL COMMENT '支付宝账号',
-  `flag` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '账号状态 1注册用户 2报单会员 3服务中心',
-  `bd_level` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '报单会员等级',
-  `fw_level` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '服务中心等级',
   `install_price` tinyint(1) NOT NULL DEFAULT '0',
   `son_num` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '直系推荐数量 最大为2',
-  `lft_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '左边用户数量',
-  `rgt_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '右边用户数量',
   `email` varchar(60) NOT NULL DEFAULT '',
   `birthday` date NOT NULL DEFAULT '0000-00-00',
   `reg_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '注册时间',
@@ -98,20 +97,35 @@ CREATE TABLE `ecs_users` (
   `district` int(11) NOT NULL,
   `address` int(11) NOT NULL,
   `is_surplus_open` tinyint(1) NOT NULL,
-  `buy_status` tinyint(1) NOT NULL DEFAULT '0',
+  `user_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '用户是否激活',
+  `bd_status` tinyint(1) NOT NULL DEFAULT '0',
+  `fd_num` int(10) NOT NULL DEFAULT '0',
+  `fd_date` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`),
   KEY `email` (`email`),
-  KEY `parent_id` (`parent_id`),
-  KEY `flag` (`flag`)
-) ENGINE=MyISAM AUTO_INCREMENT=154 DEFAULT CHARSET=utf8;
+  KEY `parent_id` (`parent_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ecs_users
 -- ----------------------------
-INSERT INTO `ecs_users` VALUES ('38', '35', '35,38', '2', '2', '2', 'num3', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0', '0', '', null, null, null, null, null, null, '20030.00', '0.00', null, '0', '0', '0', '0', '0', '0', '0', '111111@qq.com', '1957-01-01', '1512347101', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '0', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0');
-INSERT INTO `ecs_users` VALUES ('39', '37', '35,37,39', '1', '1,1', '3', 'num4', '2f4db1b39a223cc93a2146cddc0ef5f1', '0.00', '30.00', '20', '0', '', null, null, null, null, null, null, '11995.00', '0.00', null, '0', '9', '0', '0', '0', '0', '0', '22222@qq.com', '1957-01-01', '1512347169', '1516728788', '127.0.0.1', '0000-00-00 00:00:00', '7', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '50', '0.00', '0', '16', '0', '0', '7932', '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '1');
-INSERT INTO `ecs_users` VALUES ('40', '37', '35,37,40', '2', '1,2', '3', 'num5', '2f3d9eb3ed6e4476dbab03c4a1f92e86', '0.00', '0.00', '0', '0', '', null, null, null, null, null, null, '8030.00', '0.00', null, '0', '9', '0', '0', '0', '0', '0', '333333@qq.com', '1957-01-01', '1512347234', '1512409068', '127.0.0.1', '0000-00-00 00:00:00', '1', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '17', '0', '0', '9395', '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '1');
-INSERT INTO `ecs_users` VALUES ('41', '40', '35,37,40,41', '1', '1,2,1', '4', 'num6', '00653abad7fc100c94c495ccd6d4d361', '0.00', '0.00', '0', '0', '', null, null, null, null, null, null, '4015.00', '0.00', null, '0', '9', '0', '0', '0', '0', '0', '44444@qq.com', '1957-01-01', '1512347287', '1512347580', '127.0.0.1', '0000-00-00 00:00:00', '1', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '14', '0', '0', '5538', '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0');
-INSERT INTO `ecs_users` VALUES ('42', '38', '35,38,42', '1', '2,1', '3', 'num7', 'cff10f1cdd2e004b6c357e4a341dc7af', '0.00', '0.00', '0', '0', '', null, null, null, null, null, null, '4015.00', '0.00', null, '0', '9', '0', '0', '0', '0', '0', '666666@qq.com', '1957-01-01', '1512347368', '1516238932', '127.0.0.1', '0000-00-00 00:00:00', '2', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '18', '0', '0', '6253', '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '1');
-INSERT INTO `ecs_users` VALUES ('43', '38', '35,38,43', '2', '2,2', '3', 'num8', '1da877c381bee7977fe394c6d346c751', '0.00', '0.00', '0', '0', '', null, null, null, null, null, null, '16015.00', '0.00', null, '0', '9', '0', '0', '0', '0', '0', '77777@qq.com', '1957-01-01', '1512347403', '1512433257', '127.0.0.1', '0000-00-00 00:00:00', '3', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '19', '0', '0', '8685', '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '1');
+INSERT INTO `ecs_users` VALUES ('1', '0', null, null, '1', '1', null, '1', '1', 'abcd11', '822fda9ba8094fb75b85b45b87da4d69', '4.75', '1.19', '0.00', '0.00', '0', '0', '18888888811', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231451', '1523842954', '127.0.0.1', '0000-00-00 00:00:00', '283', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '3', '0', '0', '7827', '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '6', '20180416');
+INSERT INTO `ecs_users` VALUES ('2', '1', null, null, '1,2', '1', null, '1,1', '2', 'abcd21', 'de473ae6e91a11d6e1c8f017df2f339e', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888821', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231496', '1523838290', '127.0.0.1', '0000-00-00 00:00:00', '2', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '15', '2', '0', '2683', '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('3', '1', null, '1', '1,3', '2', null, '1,2', '2', 'abcd22', '6a0d54f35ada170c3c7fe91d23a821ff', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888822', null, null, null, null, null, null, '0.00', null, '0', '0', '', '0000-00-00', '1523231568', '1523579508', '192.168.1.122', '0000-00-00 00:00:00', '19', '', '2', null, null, null, null, null, null, null, null, null, null, null, null, '', '', '0', '0.00', '0', '0', '1', '0', '6855', '0', '', '', '', '', '0', '0.00', null, null, '1', '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('4', '2', null, null, '1,2,4', '1', null, '1,1,1', '3', 'abcd31', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888831', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231628', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '4', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('5', '2', null, null, '1,2,5', '2', null, '1,1,2', '3', 'abcd32', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888832', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231690', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '2', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('6', '3', null, null, '1,3,6', '1', null, '1,2,1', '3', 'abcd33', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888833', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231726', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '1', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('7', '3', null, null, '1,3,7', '2', null, '1,2,2', '3', 'abcd34', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888834', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231760', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '4', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('8', '4', null, null, '1,2,4,8', '1', null, '1,1,1,1', '4', 'abcd41', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888841', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231800', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '3', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('9', '4', null, null, '1,2,4,9', '2', null, '1,1,1,2', '4', 'abcd42', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888842', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231835', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '4', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('10', '5', null, null, '1,2,5,10', '1', null, '1,1,2,1', '4', 'abcd43', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888843', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231875', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '1', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '1', '0', '0');
+INSERT INTO `ecs_users` VALUES ('11', '6', null, null, '1,3,6,11', '1', null, '1,2,1,1', '4', 'abcd44', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888844', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231909', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '1', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('12', '6', null, null, '1,3,6,12', '2', null, '1,2,1,2', '4', 'abcd45', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888845', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523231968', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '2', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('13', '7', null, null, '1,3,7,13', '1', null, '1,2,2,1', '4', 'abcd46', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888846', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523232017', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '4', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('14', '8', null, null, '1,2,4,8,14', '1', null, '1,1,1,1,1', '5', 'abcd51', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888851', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523232064', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '3', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('15', '8', null, null, '1,2,4,8,15', '2', null, '1,1,1,1,2', '5', 'abcd52', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888852', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523232108', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '1', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('16', '9', null, null, '1,2,4,9,16', '1', null, '1,1,1,2,1', '5', 'abcd53', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888853', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523232391', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '2', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('17', '11', null, null, '1,3,6,11,17', '1', null, '1,2,1,1,1', '5', 'abcd54', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888854', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523232446', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '3', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('18', '11', '17', null, '1,3,6,11,18', '2', null, '1,2,1,1,2', '5', 'abcd55', '66507c9a61b47aa0d31f65816b8d3f22', '0.00', '0.00', '100.00', '0.00', '0', '0', '18888888855', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523232483', '1523669158', '127.0.0.1', '0000-00-00 00:00:00', '270', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '16', '2', '0', '7877', '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `ecs_users` VALUES ('19', '13', '16', null, '1,3,7,13,19', '1', null, '1,2,2,1,1', '5', 'abcd56', '96e79218965eb72c92a549dd5a330112', '0.00', '0.00', '0.00', '0.00', '0', '0', '18888888856', null, null, null, null, null, null, '0.00', null, '0', '0', '', '1958-01-01', '1523232522', '0', '', '0000-00-00 00:00:00', '0', '', '2', null, null, null, null, '0', '0', '0', null, null, null, null, null, '', '', '0', '0.00', '0', '0', '1', '0', null, '0', '', '', '', '', '0', '0.00', null, null, null, '0', 'pc', '', '', '', '', '0', '0', '0', '1', '0', '0', '0');

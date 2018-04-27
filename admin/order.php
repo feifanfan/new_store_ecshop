@@ -4432,22 +4432,22 @@ elseif ($_REQUEST['act'] == 'operate_post')
         {
             change_order_goods_storage($order_id, true, SDT_PLACE);
         }
-
+        //$msg = '确认成功';
         /* 发送邮件 */
-        $cfg = $_CFG['send_confirm_email'];
-        if ($cfg == '1')
-        {
-            $tpl = get_mail_template('order_confirm');
-            $smarty->assign('order', $order);
-            $smarty->assign('shop_name', $_CFG['shop_name']);
-            $smarty->assign('send_date', local_date($_CFG['date_format']));
-            $smarty->assign('sent_date', local_date($_CFG['date_format']));
-            $content = $smarty->fetch('str:' . $tpl['template_content']);
-            if (!send_mail($order['consignee'], $order['email'], $tpl['template_subject'], $content, $tpl['is_html']))
-            {
-                $msg = $_LANG['send_mail_fail'];
-            }
-        }
+        // $cfg = $_CFG['send_confirm_email'];
+        // if ($cfg == '1')
+        // {
+        //     $tpl = get_mail_template('order_confirm');
+        //     $smarty->assign('order', $order);
+        //     $smarty->assign('shop_name', $_CFG['shop_name']);
+        //     $smarty->assign('send_date', local_date($_CFG['date_format']));
+        //     $smarty->assign('sent_date', local_date($_CFG['date_format']));
+        //     $content = $smarty->fetch('str:' . $tpl['template_content']);
+        //     if (!send_mail($order['consignee'], $order['email'], $tpl['template_subject'], $content, $tpl['is_html']))
+        //     {
+        //         $msg = $_LANG['send_mail_fail'];
+        //     }
+        // }
     }
     /* 付款 */
     elseif ('pay' == $operation)
