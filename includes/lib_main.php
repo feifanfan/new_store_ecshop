@@ -52,48 +52,48 @@ function update_user_info()
 	$_SESSION['headimg'] = $row['headimg'];
 
         /*判断是否是特殊等级，可能后台把特殊会员组更改普通会员组*/
-        if($row['user_rank'] >0)
-        {
-            $sql="SELECT special_rank from ".$GLOBALS['ecs']->table('user_rank')."where rank_id='$row[user_rank]'";
-            if($GLOBALS['db']->getOne($sql)==='0' || $GLOBALS['db']->getOne($sql)===null)
-            {   
-                $sql="update ".$GLOBALS['ecs']->table('users')."set user_rank='0' where user_id='$_SESSION[user_id]'";
-                $GLOBALS['db']->query($sql);
-                $row['user_rank']=0;
-            }
-        }
+        // if($row['user_rank'] >0)
+        // {
+            // $sql="SELECT special_rank from ".$GLOBALS['ecs']->table('user_rank')."where rank_id='$row[user_rank]'";
+            // if($GLOBALS['db']->getOne($sql)==='0' || $GLOBALS['db']->getOne($sql)===null)
+            // {   
+                // $sql="update ".$GLOBALS['ecs']->table('users')."set user_rank='0' where user_id='$_SESSION[user_id]'";
+                // $GLOBALS['db']->query($sql);
+                // $row['user_rank']=0;
+            // }
+        // }
 
         /* 取得用户等级和折扣 */
-        if ($row['user_rank'] == 0)
-        {
-            // 非特殊等级，根据等级积分计算用户等级（注意：不包括特殊等级）
-            $sql = 'SELECT rank_id, discount FROM ' . $GLOBALS['ecs']->table('user_rank') . " WHERE special_rank = '0' AND min_points <= " . intval($row['rank_points']) . ' AND max_points > ' . intval($row['rank_points']);
-            if ($row = $GLOBALS['db']->getRow($sql))
-            {
-                $_SESSION['user_rank'] = $row['rank_id'];
-                $_SESSION['discount']  = $row['discount'] / 100.00;
-            }
-            else
-            {
-                $_SESSION['user_rank'] = 0;
-                $_SESSION['discount']  = 1;
-            }
-        }
-        else
-        {
-            // 特殊等级
-            $sql = 'SELECT rank_id, discount FROM ' . $GLOBALS['ecs']->table('user_rank') . " WHERE rank_id = '$row[user_rank]'";
-            if ($row = $GLOBALS['db']->getRow($sql))
-            {
-                $_SESSION['user_rank'] = $row['rank_id'];
-                $_SESSION['discount']  = $row['discount'] / 100.00;
-            }
-            else
-            {
-                $_SESSION['user_rank'] = 0;
-                $_SESSION['discount']  = 1;
-            }
-        }
+        // if ($row['user_rank'] == 0)
+        // {
+            // // 非特殊等级，根据等级积分计算用户等级（注意：不包括特殊等级）
+            // $sql = 'SELECT rank_id, discount FROM ' . $GLOBALS['ecs']->table('user_rank') . " WHERE special_rank = '0' AND min_points <= " . intval($row['rank_points']) . ' AND max_points > ' . intval($row['rank_points']);
+            // if ($row = $GLOBALS['db']->getRow($sql))
+            // {
+                // $_SESSION['user_rank'] = $row['rank_id'];
+                // $_SESSION['discount']  = $row['discount'] / 100.00;
+            // }
+            // else
+            // {
+                // $_SESSION['user_rank'] = 0;
+                // $_SESSION['discount']  = 1;
+            // }
+        // }
+        // else
+        // {
+            // // 特殊等级
+            // $sql = 'SELECT rank_id, discount FROM ' . $GLOBALS['ecs']->table('user_rank') . " WHERE rank_id = '$row[user_rank]'";
+            // if ($row = $GLOBALS['db']->getRow($sql))
+            // {
+                // $_SESSION['user_rank'] = $row['rank_id'];
+                // $_SESSION['discount']  = $row['discount'] / 100.00;
+            // }
+            // else
+            // {
+                // $_SESSION['user_rank'] = 0;
+                // $_SESSION['discount']  = 1;
+            // }
+        // }
     }
 
     /* 更新登录时间，登录次数及登录ip */

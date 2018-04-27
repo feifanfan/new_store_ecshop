@@ -14,27 +14,15 @@
      <?php $_from = $this->_var['vote']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'title');if (count($_from)):
     foreach ($_from AS $this->_var['title']):
 ?>
-<<<<<<< HEAD
-          <?php $_from = $this->_var['title']['options']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_67406800_1523687952');if (count($_from)):
-    foreach ($_from AS $this->_var['item_0_67406800_1523687952']):
+          <?php $_from = $this->_var['title']['options']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_68278000_1524812945');if (count($_from)):
+    foreach ($_from AS $this->_var['item_0_68278000_1524812945']):
 ?>
             <?php if ($this->_var['title']['can_multi'] == 0): ?>
-            <p><input type="checkbox" name="option_id" value="<?php echo $this->_var['item_0_67406800_1523687952']['option_id']; ?>" />
-            <?php echo $this->_var['item_0_67406800_1523687952']['option_name']; ?> (<?php echo $this->_var['item_0_67406800_1523687952']['percent']; ?>%)</p>
+            <p><input type="checkbox" name="option_id" value="<?php echo $this->_var['item_0_68278000_1524812945']['option_id']; ?>" />
+            <?php echo $this->_var['item_0_68278000_1524812945']['option_name']; ?> (<?php echo $this->_var['item_0_68278000_1524812945']['percent']; ?>%)</p>
             <?php else: ?>
-            <p><input type="radio" name="option_id" value="<?php echo $this->_var['item_0_67406800_1523687952']['option_id']; ?>" />
-            <?php echo $this->_var['item_0_67406800_1523687952']['option_name']; ?> (<?php echo $this->_var['item_0_67406800_1523687952']['percent']; ?>%)</p>
-=======
-          <?php $_from = $this->_var['title']['options']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_93433000_1523676328');if (count($_from)):
-    foreach ($_from AS $this->_var['item_0_93433000_1523676328']):
-?>
-            <?php if ($this->_var['title']['can_multi'] == 0): ?>
-            <p><input type="checkbox" name="option_id" value="<?php echo $this->_var['item_0_93433000_1523676328']['option_id']; ?>" />
-            <?php echo $this->_var['item_0_93433000_1523676328']['option_name']; ?> (<?php echo $this->_var['item_0_93433000_1523676328']['percent']; ?>%)</p>
-            <?php else: ?>
-            <p><input type="radio" name="option_id" value="<?php echo $this->_var['item_0_93433000_1523676328']['option_id']; ?>" />
-            <?php echo $this->_var['item_0_93433000_1523676328']['option_name']; ?> (<?php echo $this->_var['item_0_93433000_1523676328']['percent']; ?>%)</p>
->>>>>>> zmx/master
+            <p><input type="radio" name="option_id" value="<?php echo $this->_var['item_0_68278000_1524812945']['option_id']; ?>" />
+            <?php echo $this->_var['item_0_68278000_1524812945']['option_name']; ?> (<?php echo $this->_var['item_0_68278000_1524812945']['percent']; ?>%)</p>
             <?php endif; ?>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
             <input type="hidden" name="type" value="<?php echo $this->_var['title']['can_multi']; ?>" />

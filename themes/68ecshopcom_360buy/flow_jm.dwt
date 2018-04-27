@@ -956,7 +956,7 @@ else
 				<script type="text/javascript">
 				function checksboxOnclick(checkbox){ 
 					var integral = {$your_integral|default:0};
-          
+         alert($your_integral);
 					if ( checkbox.checked == true){
 						document.getElementById("allow_user_integral").style.display = "block";
 

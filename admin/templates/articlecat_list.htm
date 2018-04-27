@@ -37,7 +37,7 @@
     <td width="10%" class="nowrap" valign="top"><img src="images/{if $cat.show_in_nav eq '1'}yes{else}no{/if}.gif" onclick="listTable.toggle(this, 'toggle_show_in_nav', {$cat.cat_id})" /></td>
     <td width="24%" align="right" class="nowrap" valign="top">
       <a href="articlecat.php?act=edit&amp;id={$cat.cat_id}">{$lang.edit}</a>
-      {if $cat.cat_type neq 2 and $cat.cat_type neq 3 and $cat.cat_type neq 4}|
+      {if $cat.cat_type neq 2 and $cat.cat_type neq 3 and $cat.cat_type neq 4 and $cat.cat_id neq 99}|
       <a href="javascript:;" onclick="listTable.remove({$cat.cat_id}, '{$lang.drop_confirm}')" title="{$lang.remove}">{$lang.remove}</a>
       {/if}
     </td>

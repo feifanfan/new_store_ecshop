@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base href="http://www.xu.com/" />
+<base href="http://www.thefirst.com/" />
 <meta name="Generator" content="HongYuJD v7_2" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="Keywords" content="<?php echo $this->_var['keywords']; ?>" />
@@ -493,8 +493,8 @@ else
           
         </script> 
    
-  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_67996300_1523674014');if (count($_from)):
-    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_67996300_1523674014']):
+  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_73086700_1524731629');if (count($_from)):
+    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_73086700_1524731629']):
 ?>
   <form action="flow.php" method="post" name="theForm" id="theForm" onsubmit="return checkConsignee(this)">
     <?php echo $this->fetch('library/consignee.lbi'); ?>
@@ -985,14 +985,14 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
                     	<span class="is_user_integral">使用企业币支付</span>
                     </p>
         			<div id="allow_user_integral">
-        				<span class="integral_desc"><input name="integral" type="text" class="integral" id="ECS_INTEGRAL"  value="<?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?>" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;积分</span>
-            			您当前的可用企业币为:<span class="your_integral"><?php echo $this->_var['your_integral']; ?> </span>
+        				<span class="integral_desc"><input name="integral" type="text" class="integral" id="ECS_INTEGRAL"  value="<?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?>" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;企业币</span>
+            			您当前的可用企业币为:<span class="your_integral"><?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?> </span>
                         <span id="ECS_INTEGRAL_NOTICE" class="notice"></span>
             			</div>
 				<script type="text/javascript">
 				function checksboxOnclick(checkbox){ 
 					var integral = <?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?>;
-          
+         alert($your_integral);
 					if ( checkbox.checked == true){
 						document.getElementById("allow_user_integral").style.display = "block";
 

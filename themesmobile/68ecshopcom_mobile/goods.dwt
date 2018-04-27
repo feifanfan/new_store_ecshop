@@ -346,7 +346,23 @@ for (var i = 0; i<t.parentNode.childNodes.length;i++) {
 changePrice();
 }
 </script> 
-
+<style>
+  #pickup_point {font-size:16px;color:#666;margin: 0;border: 1px solid #ccc;cursor: pointer;width: 90px;text-align: center;background-color: #fff;z-index: 3;position: relative;float: left;}
+  #area_label {font-size:16px;color:#666;float: left;border: 1px solid #ccc;border-left: none;padding:0px 20px 0px 5px;position: relative;margin-left: 0px;z-index: 4;background: url(../images/angle_bracket_1.png) no-repeat 95% #fff;}
+  #pickup_point_list,#area_list_wrap {position: absolute;bottom:-61px;left:0;border: 1px solid #ccc;width: 350px;height:300px;text-align: left;background-color: #fff;z-index: 1;display: none;}
+  #area_menu {line-height: 24px;height: 26px;margin: 5px;border-bottom: 2px solid #edd28b;}
+  #area_menu a {margin: 0 5px;padding: 0 15px;cursor: pointer;background: url(../images/angle_bracket.png) 90% no-repeat;text-decoration: none;line-height: 26px;background-color: #fff;float: left;display: block;}
+  #province,#district,#city{color:#666;border:none;font-size:16px;}
+  #choose A {DISPLAY: block;WHITE-SPACE: nowrap;TEXT-DECORATION: none;}
+  a {color: #666666;outline: medium none;text-decoration: none;}
+  #area_menu a:hover {color: #C6BC06;}
+  #area_menu a.hover {border: 2px solid #edd28b;border-bottom: none;}
+  #pickup_point_list ul {height:260px;overflow-y: scroll;background:#fff;}
+  #pickup_point_list ul li {color:#666;z-index: 3;font-size:16px;display: list-item;text-align: -webkit-match-parent;}
+  #area_list{height:260px;overflow-y: scroll;background:#fff;}
+  #area_list li{width:25%;border:none;float:left;z-index: 3;display: list-item;}
+  #area_list li a{border:none;color:#666;font-size:16px;padding-left:18px;}
+</style>
 <!---自提点---->
 <div style=" height:8px; background:#eeeeee; margin-top:-1px;"></div>
 <div class="is_scroll">
@@ -372,12 +388,6 @@ changePrice();
               </ul>
             </div>
             <div style="clear:both"></div>
-            <!--<script language="javascript" type="text/javascript">  function goods_cut(){  var num_val=document.getElementById('number');  var new_num=num_val.value;  var Num = parseInt(new_num);  if(Num>1)Num=Num-1;  num_val.value=Num;  }  function goods_add(){  var num_val=document.getElementById('number');  var new_num=num_val.value;  var Num = parseInt(new_num);  Num=Num+1;  num_val.value=Num;  } </script>
-            <span class="ui-number">
-              <button type="button" class="decrease" onclick="goods_cut();changePrice();">-</button>
-              <input type="text" class="num" id="number" onblur="changePrice();" name="number" value="1" min="1" max="{$goods.goods_number}"/>
-              <button type="button" class="increase" onclick="goods_add();changePrice();">+</button>
-            </span>-->
           </div>    
         </li>
       </ul>  
@@ -388,6 +398,9 @@ changePrice();
 </section>
 </div>
 
+
+
+<!--
 <div style="height:40px;line-height:40px; background:#eee;padding:0px 10px;color:#666;font-size:16px;">
   <p>
     <input type="checkbox" id="isintegral" onclick="checksboxOnclick(this)" style="vertical-align:middle; cursor:pointer" />
@@ -401,7 +414,7 @@ changePrice();
 </div>
 <script type="text/javascript">
 				function checksboxOnclick(checkbox){ 
-          
+          alert($your_integral);
 					var integral = {$your_integral|default:0};
           
 					if ( checkbox.checked == true){
@@ -413,13 +426,13 @@ changePrice();
 						changeIntegral(0);
 					}
 				}
-				</script>
+</script>-->
       
 <!--自提点js开始-->
 <script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js" type="text/javascript"></script>
 <script>
 var suppid = {$goods.supplier_id};
-alert(remote_ip_info.province);
+
 Ajax.call('goods.php', 'act=get_pickup_info&province='+remote_ip_info.province+'&city='+remote_ip_info.city+'&district='+remote_ip_info.district+'&suppid='+suppid,
 	function(res){
 		if(res.error == 0) {
@@ -574,6 +587,34 @@ function hide_area()
 }
 </script>
 <!--自提点js结束-->
+
+<!--{insert_scripts files='common.js,utils.js,shopping_flow.js'}
+<div class="allow_user_integral">
+        			<p>
+                    	<input type="checkbox" id="isintegral" onclick="checksboxOnclick(this)" style="vertical-align:middle; cursor:pointer" />
+                    	<span class="is_user_integral">使用企业币支付</span>
+                    </p>
+        			<div id="allow_user_integral">
+        				<span class="integral_desc"><input name="integral" type="text" class="integral" id="ECS_INTEGRAL"  value="{$your_integral|default:0}" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;企业币</span>
+            			您当前的可用企业币为:<span class="your_integral">{$your_integral|default:0} </span>
+                        <span id="ECS_INTEGRAL_NOTICE" class="notice"></span>
+            			</div>
+				<script type="text/javascript">
+				function checksboxOnclick(checkbox){ 
+					var integral = {$your_integral|default:0};
+          alert(integral);
+					if ( checkbox.checked == true){
+						document.getElementById("allow_user_integral").style.display = "block";
+
+						changeIntegral(integral);
+					}else{
+						document.getElementById("allow_user_integral").style.display = "none";
+						changeIntegral(0);
+					}
+				}
+				</script>
+        	  </div>-->
+
 
 <!-- {if $goods.supplier_id} -->
     <div class="is_scroll">

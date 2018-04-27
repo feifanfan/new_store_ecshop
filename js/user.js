@@ -1076,6 +1076,25 @@ function submitSurplus() {
 
 	return true;
 }
+/*******************************************************************************
+ * 报单中心升级
+ */
+function submitBdlist(){
+	var frm = document.forms['formBdlist'];
+	var xianjin = frm.elements['xianjin'].value;
+	var shengjibi = frm.elements['shengjibi'].value;
+	var payment_id = 0;
+	var msg = '';
+
+	if (xianjin.length == 0) {
+		msg += xianjin_empty + "\n";
+	} else {
+		var reg = /^[\.0-9]+/;
+		if (!reg.test(xianjin)) {
+			msg += xianjin_error + '\n';
+		}
+	}
+}
 
 /*******************************************************************************
  * 处理用户添加一个红包

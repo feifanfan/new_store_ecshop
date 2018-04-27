@@ -101,6 +101,7 @@ if(empty($_SESSION['user_id']) && $action != 're_validate_email' && $action != '
 			show_message($_LANG['require_login'], array(
 				'</br>登录', '</br>返回首页'
 			), array(
+				
 				'user.php?act=login', $ecs->url()
 			), 'error', false);
 		}
@@ -1197,7 +1198,7 @@ function action_bd_list ()
 	// 分页函数
 	$pager = get_pager('user.php', array( 'act' => $action ), $record_count, $page);
 
-	$sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where id_list like '%$user_id,%' limit $pager[start],$pager[size]";
+	$sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where bd_id=$user_id limit $pager[start],$pager[size]";
 	// $sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where  id_list like '%$user_id,%'";
 	$data = $db->getAll($sql);
 	// var_dump($data);die;
@@ -3693,6 +3694,8 @@ function action_account_log ()
 			$account_log[$k]['relmoney'] = 	$rows['relmoney'];
 	}
 	// 模板赋值
+	// var_dump($surplus_amount);echo '111';
+	// var_dump($account_log);echo '222';var_dump($surplus_yue);
 	$smarty->assign('surplus_amount',$surplus_amount);
 	$smarty->assign('account_log', $account_log);
 	$smarty->assign('surplus_yue', $surplus_yue);
@@ -3714,7 +3717,7 @@ function action_act_account ()
 	include_once (ROOT_PATH . 'includes/lib_clips.php');
 	include_once (ROOT_PATH . 'includes/lib_order.php');
 	$amount = isset($_POST['amount']) ? floatval($_POST['amount']) : 0;
-	
+	// echo'66666666666';die;
 	if($amount <= 0)
 	{
 		show_message($_LANG['amount_gt_zero']);
