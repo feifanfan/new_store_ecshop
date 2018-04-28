@@ -729,23 +729,24 @@ function close_gift(suitId){
               .allow_user_integral p{float:left;height:27px;line-height:27px;}
               .allow_user_integral{vertical-align:middle;margin-left:5px;font-size:14px;}
               #allow_user_integral{float:left;margin-left:20px; display:none}
-              #allow_user_integral .surplus{height:15px;line-height:15px;width:100px;padding:5px;border:1px #ddd solid}
-              #allow_user_integral .surplus_desc{margin-right:15px}
-              #allow_user_integral .your_surplus{color:#E31939}
-              #allow_user_integral .open_surplus{margin-left:15px}
-              #allow_user_integral .open_surplus a{margin:0px 3px;color:#E31939}
+              #allow_user_integral .integral{height:15px;line-height:15px;width:100px;padding:5px;border:1px #ddd solid}
+              #allow_user_integral .integral_desc{margin-right:15px}
+              #allow_user_integral .your_integral{color:#E31939}
+              #allow_user_integral .open_integral{margin-left:15px}
+              #allow_user_integral .open_integral a{margin:0px 3px;color:#E31939}
             </style>
             <p><input type="checkbox" class="b_checkbox" id="ispoint" onclick="checkboxOnclick(this)" style="vertical-align:middle; cursor:pointer" /><span class="is_user_surplus">使用企业币支付</span></p>
            <div class="clearfix"></div>
             <div id="allow_user_integral">
-                    <span class="surplus_desc"><input name="surplus" type="text" class="surplus" id="ECS_SURPLUS"  value="0" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;元</span>
+                    <span class="integral_desc"><input name="integral" type="text" class="integral" id="ECS_INTEGRAL"  value="0" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;企业币</span>
                   <br>
-                您当前的可用企业币为:<span class="your_integral" style="font-size:14px; font-weight:700;">{$your_integral|default:0}</span><span id="ECS_SURPLUS_NOTICE_{$key}" class="notice"></span><br>
+                您当前的可用企业币为:<span class="your_integral" style="font-size:14px; font-weight:700;">{$your_integral|default:0}</span><span id="ECS_INTEGRAL_NOTICE_{$key}" class="notice"></span><br>
                 
             </div>
     <script type="text/javascript">
     $('#ispoint').attr('checked',false);
-    function checkboxOnclick(checkbox){ 
+    function checkboxOnclick(checkbox){
+      
             var integral = {$your_integral|default:0};
             if ( checkbox.checked == true){
                     document.getElementById("allow_user_integral").style.display = "block";

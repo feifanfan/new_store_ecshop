@@ -645,8 +645,9 @@ function get_user_default($user_id)
     $info['user_money'] = $row['user_money'];
     $info['user_cash'] = $row['user_cash'];
     $info['user_point'] = $row['user_point'];
+    $info['user_upgrade'] = $row['user_upgrade'];
     $info['user_rank'] = $row['user_rank'];
-    //var_dump($row);die;
+    $info['user_id'] = $row['user_id'];
     /*代码增加2014-12-23 by bbs.hongyuvip.com  _end */
     //如果$_SESSION中时间无效说明用户是第一次登录。取当前登录时间。
     $last_time = !isset($_SESSION['last_time']) ? $row['last_login'] : $_SESSION['last_time'];

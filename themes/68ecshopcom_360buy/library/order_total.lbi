@@ -5,17 +5,18 @@
 <table width="99%" align="center" border="0" cellpadding="1" cellspacing="1" bgcolor="#ffffff">
 {* 代码修改_end  By  bbs.hongyuvip.com  *}
   <!-- {if $smarty.session.user_id > 0 and ($config.use_integral or $config.use_bonus)} -->
-  <tr>
+  <!--<tr>
     <td align="right" bgcolor="#ffffff">
-    {$lang.complete_acquisition} 
+    {$lang.complete_acquisition} -->
       <!-- {if $config.use_integral} 是否使用积分-->
-      <font class="f4_b">{$total.will_get_integral}</font>积分 {$points_name}
+      <!--<font class="f4_b">{$total.will_get_integral}</font>积分 {$points_name}-->
       <!-- {/if} -->
-      <!-- {if $config.use_integral and $config.use_bonus} 是否同时使用积分红包-->，{$lang.with_price}  <!-- {/if} -->
+      <!-- {if $config.use_integral and $config.use_bonus} 是否同时使用积分红包-->   <!-- {/if} -->
       <!-- {if $config.use_bonus} 是否使用红包-->
-       <font class="f4_b">{$total.will_get_bonus}</font>{$lang.de}{$lang.bonus}。
-      <!-- {/if} -->    </td>
-  </tr>
+       <!--<font class="f4_b">{$total.will_get_bonus}</font>{$lang.de}{$lang.bonus}。-->
+      <!-- {/if} -->    
+      <!--</td>
+  </tr>-->
   <!-- {/if} -->
   <tr>
     <td align="right" bgcolor="#ffffff">

@@ -340,8 +340,9 @@ elseif ($_REQUEST['act'] == 'action')
     $account = array();
     $account = $db->getRow("SELECT * FROM " .$ecs->table('user_account'). " WHERE id = '$id'");
     $amount  = $account['amount'];
+    
 	$money   = str_replace('-', '', $account['money']);
-
+    
     //如果状态为未确认
     if ($account['is_paid'] == 0)
     {
@@ -351,17 +352,20 @@ elseif ($_REQUEST['act'] == 'action')
             $user_account = get_user_surplus($account['user_id']);
 			
             $fmt_amount   = str_replace('-', '', $amount);
-
+            
             //如果扣除的余额多于此会员拥有的余额，提示
             if ($fmt_amount > $user_account)
             {
                 $link[] = array('text' => $_LANG['go_back'], 'href'=>'javascript:history.back(-1)');
                 sys_msg($_LANG['surplus_amount_error'], 0, $link);
             }
-
+            
             update_user_account($id, $amount, $admin_note, $is_paid);
 
             //更新会员余额数量
+            $shouxufei = $GLOBALS['db']->getOne("select value from ecs_shop_config where code='charge'");
+            $chaer = $amount*$shouxufei/100;
+            $amount = $amount + $chaer;
             log_account_change($account['user_id'], $amount, 0, 0, 0, $_LANG['surplus_type_1'], ACT_DRAWING);
 			//是否开启余额变动给客户发短信 -提现
 			if($_CFG['sms_user_money_change'] == 1)
@@ -461,7 +465,7 @@ elseif ($_REQUEST['act'] == 'remove')
  */
 function get_user_surplus($user_id)
 {
-    $sql = "SELECT SUM(user_money) FROM " .$GLOBALS['ecs']->table('account_log').
+    $sql = "SELECT SUM(user_money) FROM " .$GLOBALS['ecs']->table('users').
            " WHERE user_id = '$user_id'";
 
     return $GLOBALS['db']->getOne($sql);

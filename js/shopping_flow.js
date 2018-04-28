@@ -428,6 +428,7 @@ function changeSurplusResponse(obj) {
  */
 function changeIntegral(val, suppid) {
 	/* 代码增加_start By bbs.hongyuvip.com */
+	alert(val);
 	var con_country = document.forms['theForm'].elements['have_consignee'].value;
 	if (con_country == '0') {
 		alert('请先选择配送地址！');

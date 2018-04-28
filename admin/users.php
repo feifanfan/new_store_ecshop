@@ -48,7 +48,6 @@ if ($_REQUEST['act'] == 'list')
 	));
 	
 	$user_list = user_list();
-	
 	$smarty->assign('user_list', $user_list['user_list']);
 	$smarty->assign('filter', $user_list['filter']);
 	$smarty->assign('record_count', $user_list['record_count']);

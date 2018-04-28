@@ -3247,7 +3247,9 @@ function updateEndTime(){
               </tr>
               <tr>
                 <td bgcolor="#ffffff">{$lang.process_notic}:</td>
-                <td bgcolor="#ffffff" align="left"><textarea name="user_note" cols="55" rows="6" style="border:1px solid #ddd;">{$order.user_note|escape}</textarea></td>
+                <td bgcolor="#ffffff" align="left">
+                <textarea name="user_note" cols="55" rows="6" style="border:1px solid #ddd;">{$order.user_note|escape}</textarea>
+                </td>
               </tr>
               <tr>
                 <td bgcolor="#ffffff" colspan="2" align="center"><input type="hidden" name="surplus_type" value="1" />
