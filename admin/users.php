@@ -19,6 +19,7 @@ define('IN_ECS', true);
 require (dirname(__FILE__) . '/includes/init.php');
 /* 代码增加2014-12-23 by bbs.hongyuvip.com _star */
 include_once (ROOT_PATH . '/includes/cls_image.php');
+include_once (ROOT_PATH . '/includes/lib_main.php');
 $image = new cls_image($_CFG['bgcolor']);
 $exc = new exchange($ecs->table('users'), $db, 'user_id', 'user_name');
 
@@ -39,16 +40,8 @@ if ($_REQUEST['act'] == 'list')
 	
 	/* 检查权限 */
 	admin_priv('users_manage');
-	$sql = "SELECT rank_id, rank_name, min_points FROM " . $ecs->table('user_rank') . " ORDER BY min_points ASC ";
-	$rs = $db->query($sql);
+
 	
-	$ranks = array();
-	while($row = $db->FetchRow($rs))
-	{
-		$ranks[$row['rank_id']] = $row['rank_name'];
-	}
-	
-	$smarty->assign('user_ranks', $ranks);
 	$smarty->assign('ur_here', $_LANG['03_users_list']);
 	$smarty->assign('action_link', array(
 		'text' => $_LANG['04_users_add'],'href' => 'users.php?act=add'
@@ -142,6 +135,79 @@ elseif ($_REQUEST['act'] == 'add')
 	
 	assign_query_info();
 	$smarty->display('user_info.htm');
+}
+/* ------------------------------------------------------ */
+// -- 会员报单
+/* ------------------------------------------------------ */
+elseif ($_REQUEST['act'] == 'baodan')
+{
+	$user = $GLOBALS['user'];
+	$_CFG = $GLOBALS['_CFG'];
+	$_LANG = $GLOBALS['_LANG'];
+	$smarty = $GLOBALS['smarty'];
+	$db = $GLOBALS['db'];
+	$ecs = $GLOBALS['ecs'];
+	$smarty = $GLOBALS['smarty'];
+
+	$page = !empty($_POST['page'])?trim($_POST['page']):1;
+
+	$filter['record_count'] = $GLOBALS['db']->getOne("SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('bd_log'));
+	
+	/* 分页大小 */
+	$filter = page_and_size($filter);
+	
+	$sql = "SELECT * "." FROM " . $GLOBALS['ecs']->table('bd_log') . " ORDER by bd_time " . " LIMIT " . $filter['start'] . ',' . $filter['page_size'];
+	
+	set_filter($filter, $sql);
+	
+	$user_list = $GLOBALS['db']->getAll($sql);
+	foreach ($user_list as $key => $value) {
+		$user_list[$key]['user_name'] = $GLOBALS['db']->getOne("select user_name from ".$GLOBALS['ecs']->table('users')." where user_id = ".$value['user_id']);
+		$user_list[$key]['bd_name'] = $GLOBALS['db']->getOne("select user_name from ".$GLOBALS['ecs']->table('users')." where user_id = ".$value['bd_id']);
+		$user_list[$key]['bd_time'] =date("Y-m-d",$value['bd_time']);
+	}
+	$filter['record_count'] = count($user_list);
+	
+	$arr = array(
+		'user_list' => $user_list, 'filter' => $filter, 'page_count' => $filter['page_count'], 'record_count' => $filter['record_count']
+	);
+	$smarty->assign('user_list',$arr['user_list']);
+	$smarty->assign('filter', $arr['filter']);
+	$smarty->assign('record_count', $arr['record_count']);
+	$smarty->assign('page_count', $arr['page_count']);
+    $smarty->display('user_baodan.htm');
+}
+elseif ($_REQUEST['act'] == 'dobaodan')
+{
+	$user = $GLOBALS['user'];
+	$_CFG = $GLOBALS['_CFG'];
+	$_LANG = $GLOBALS['_LANG'];
+	$smarty = $GLOBALS['smarty'];
+	$db = $GLOBALS['db'];
+	$ecs = $GLOBALS['ecs'];
+	$smarty = $GLOBALS['smarty'];
+	if(empty($_REQUEST['id']))
+		sys_msg("参数错误");
+	$id = trim($_REQUEST['id']);
+	$info = $db->getRow("select * from ".$ecs->table('bd_log')." where id = ".$id);
+	$user_info = $db->getRow("select * from ".$ecs->table('users')." where user_id = ".$info['user_id']);
+	if(empty($user_info)){
+		sys_msg("用户不存在");
+	}
+	if($user_info['user_status']==1){
+		sys_msg("您已经审核过了");
+	}else{
+		$user_rank_word=chr($user_info['user_rank']+96)."_card_buynum";
+		$num =  $db->getOne("select value from ".$ecs->table('shop_config')." where code = '$user_rank_word'");
+		$time = time();
+		$sql1= "update ".$ecs->table('users')." set user_upgrade = user_upgrade+".$num." where user_id = ".$user_info['user_id'];
+		$sql2 = "update ".$ecs->table('bd_log')." set bd_status=1,admin_time = ".$time." where id = ".$id;
+		$db->query($sql1);
+		$db->query($sql2);
+		sys_msg("审核成功");
+	}
+
+
 }
 
 /* ------------------------------------------------------ */
@@ -1093,7 +1159,7 @@ elseif ($_REQUEST['act'] == 'tupu')
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
 	$user_id = htmlspecialchars(trim($_GET['user_id']));
-	collide_point($user_id,1000,12544511);
+	//collide_point($user_id,1000,12544511);
 	// manage($user_id,1000,$order_id);
 	$user = tupu($user_id);
 
@@ -1162,7 +1228,7 @@ function user_list ()
 		// $sql = "SELECT user_id, user_name, email, is_validated,
 		// validated,status,user_money, frozen_money, rank_points, pay_points,
 		// reg_time ".
-		$sql = "SELECT user_id, user_name, email, mobile_phone, is_validated, validated, user_money, user_cash, user_point, pay_points, status, reg_time, froms,user_rank,user_status "." FROM " . $GLOBALS['ecs']->table('users') . $ex_where . " ORDER by " . $filter['sort_by'] . ' ' . $filter['sort_order'] . " LIMIT " . $filter['start'] . ',' . $filter['page_size'];
+		$sql = "SELECT user_id, user_name, email, mobile_phone, is_validated, validated, user_money, user_cash, user_point,user_upgrade, pay_points, status, reg_time, froms,user_rank,user_status "." FROM " . $GLOBALS['ecs']->table('users') . $ex_where . " ORDER by " . $filter['sort_by'] . ' ' . $filter['sort_order'] . " LIMIT " . $filter['start'] . ',' . $filter['page_size'];
 		
 		$filter['keywords'] = stripslashes($filter['keywords']);
 		set_filter($filter, $sql);

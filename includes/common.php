@@ -29,13 +29,17 @@ function ismobile(){
 
 	}
 	}
-function log_account_change_new($user_id, $user_money = 0, $user_cash = 0, $user_point = 0, $change_desc = '', $change_type = ACT_OTHER){
+function log_account_change_new($user_id, $user_money = 0, $user_cash = 0, $user_point = 0, $user_upgrade=0,$pay_points = 0,$change_desc = '', $change_type = ACT_OTHER){
 	    /* 插入帐户变动记录 */
 	    $account_log = array(
 	        'user_id'       => $user_id,
 	        'user_money'    => $user_money,
+	        'act_user_money' => $user_money,
+	        '$act_user_cash' =>$user_cash,
 	        'user_cash'  => $user_cash,
 	        'user_point'   => $user_point,
+	        'pay_points'=>$pay_points,
+	        'upgrade_point'=>$user_upgrade,
 	        'change_time'   => gmtime(),
 	        'change_desc'   => $change_desc,
 	        'change_type'   => $change_type
@@ -46,8 +50,11 @@ function log_account_change_new($user_id, $user_money = 0, $user_cash = 0, $user
 	    $sql = "UPDATE " . $GLOBALS['ecs']->table('users') .
 	            " SET user_money = user_money + ('$user_money')," .
 	            " user_cash = user_cash + ('$user_cash')," .
-	            " user_point = user_point + ('$user_point')" .
+	            " user_point = user_point + ('$user_point')," .
+	            "user_upgrade = user_upgrade+('$user_upgrade'),".
+	            "pay_points = pay_points+('$pay_points')".
 	            " WHERE user_id = '$user_id' LIMIT 1";
+	         //var_dump($sql);die;
 	    $GLOBALS['db']->query($sql);
 	}
 function tupu($user_id){
