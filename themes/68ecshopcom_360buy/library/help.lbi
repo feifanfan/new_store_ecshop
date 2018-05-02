@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 {if $helps}
-<div class="site-footer" style="border-top:1px solid #dfdfdf">
+<!-- <div class="site-footer" style="border-top:1px solid #dfdfdf">
   <div class="wrapper">
 <div class="footer-links clearfix"> 
       <!-- {foreach from=$helps item=help_cat name=no} -->
@@ -18,5 +18,5 @@
         <a rel="nofollow" class="btn2 btn-primary btn-small" href="javascript:void(0);" style="color:#fff">24小时在线客服</a> </div>
     </div>
   </div>
-</div>
+</div> -->
 {/if}

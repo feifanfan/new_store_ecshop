@@ -247,10 +247,17 @@ elseif ($_REQUEST['act'] == 'insert')
 	$user_status = $_POST['user_status'];
 	/* 代码增加2014-12-23 by bbs.hongyuvip.com _end */
 	$users = & init_users();
+
 	if(trim($_POST['parent_id'])!=''){
 		$parent_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_id=".trim($_POST['parent_id']));
-		if($parent_info){
-			$son_num = $GLOBALS['db']->getOne("SELECT COUNT(*) from ".$GLOBALS['ecs']->table('users')." WHERE parent_id = ".$parent_info['user_id']);
+		if(empty($parent_info)){
+			sys_msg("推荐人不存在", 1);
+		}
+	}
+	if(trim($_POST['node_id'])!=''){
+		$node_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_id=".trim($_POST['node_id']));
+		if($node_info){
+			$son_num = $GLOBALS['db']->getOne("SELECT COUNT(*) from ".$GLOBALS['ecs']->table('users')." WHERE node_id = ".$node_info['user_id']);
 			if($son_num>=2){
 				sys_msg("上级id的子级用户已满", 1);
 			}
@@ -338,25 +345,33 @@ elseif ($_REQUEST['act'] == 'insert')
 	
 	$id = $GLOBALS['db']->getOne("select user_id from ".$GLOBALS['ecs']->table('users')." where user_name = '$username'");
 	//var_dump($id);die;
-	if($parent_info){
-		$other['parent_id'] = $parent_info['user_id'];
-		$other['id_list'] = $parent_info['id_list'].",".$id;
-		$other['deep'] = $parent_info['deep']+1;
-		$son_num = $GLOBALS['db']->getOne("SELECT COUNT(*) from ".$GLOBALS['ecs']->table('users')." WHERE parent_id = ".$parent_info['user_id']);
+	if($node_info){
+		$other['node_id'] = $node_info['user_id'];
+		$other['node_list'] = $node_info['node_list'].",".$id;
+		$other['deep'] = $node_info['deep']+1;
+		$son_num = $GLOBALS['db']->getOne("SELECT COUNT(*) from ".$GLOBALS['ecs']->table('users')." WHERE parent_id = ".$node_info['user_id']);
 		if($son_num==0){
 			$other['parent_side'] = 1;
-			$other['side_list'] =$parent_info['side_list'].",1";
+			$other['side_list'] =$node_info['side_list'].",1";
 		}elseif($son_num==1){
 			$other['parent_side'] = 2;
-			$other['side_list'] =$parent_info['side_list'].",2";
+			$other['side_list'] =$node_info['side_list'].",2";
 		}
 	}else{
-		$other['id_list'] = $id;
-		$other['parent_id'] = 0;
+		$other['node_list'] = $id;
+		$other['node_id'] = 0;
 		$other['parent_side'] = 1;
 		$other['side_list'] = 1;
 		$other['deep'] =1;
 	}
+	if($parent_info){
+		$other['parent_id'] = $parent_info['user_id'];
+		$other['parent_list'] = $parent_info['parent_list'].",".$id;
+	}else{
+		$other['parent_id'] = 0;
+		$other['parent_list'] = $id;
+	}
+	$other['user_status'] = $user_status;
 	$db->autoExecute($ecs->table('users'), $other, 'UPDATE', "user_name = '$username'");
 	/* 代码增加2014-12-23 by bbs.hongyuvip.com _star */
 	if(isset($_FILES['face_card']) && $_FILES['face_card']['tmp_name'] != '')

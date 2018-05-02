@@ -1,0 +1,1246 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$page_title}</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="themes/68ecshopcom_360buy/usercenter/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="themes/68ecshopcom_360buy/usercenter/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="themes/68ecshopcom_360buy/usercenter/css/amazeui.min.css" />
+    <link rel="stylesheet" href="themes/68ecshopcom_360buy/usercenter/css/admin.css">
+    <link rel="stylesheet" href="themes/68ecshopcom_360buy/usercenter/css/app.css">
+    <script src="themes/68ecshopcom_360buy/usercenter/js/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header class="am-topbar am-topbar-inverse admin-header">
+        <div class="am-topbar-brand">
+            <a href="javascript:;" class="tpl-logo">
+                <img src="themes/68ecshopcom_360buy/usercenter/img/logo.png" alt="">
+            </a>
+        </div>
+        <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+        </div>
+
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+                <!--<li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>-->
+                <li class="am-hide-sm-only"><a id="admin-fullscreen" class="tpl-header-list-link"><span class="admin-fullText">ID号</span>&nbsp;<span class="am-badge tpl-badge-success am-round">{$info.user_id}</span></a></li>
+                <li class="am-hide-sm-only"><a id="admin-fullscreen" class="tpl-header-list-link"><span class="admin-fullText"></span>&nbsp;<span class="am-badge tpl-badge-danger am-round">{if $info.user_rank eq 1}普卡{elseif $info.user_rank eq 2}银卡{elseif $info.user_rank eq 3}金卡{elseif $info.user_rank eq 4}钻卡{/if} </span></a></li>
+                
+                <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+                    <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
+                        <span class="tpl-header-list-user-nick">{$smarty.session.user_name}</span><span class="tpl-header-list-user-ico"> <img src="{if $smarty.session.headimg}{$smarty.session.headimg}{else}themes/68ecshopcom_360buy/images/shengji_ad/peopleicon_01.gif{/if}"></span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <!--<li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
+                        <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>-->
+                        <li><a href="usercenter.php?act=logout"><span class="am-icon-power-off"></span> 退出</a></li>
+                    </ul>
+                </li>
+                <li><a href="/usercenter.php" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+            </ul>
+        </div>
+    </header>
+
+
+
+
+
+
+
+    <div class="tpl-page-container tpl-page-header-fixed">
+
+
+        <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                会员中心
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php" class="nav-link {if $action eq 'default'} active {/if}">
+                            <i class="am-icon-home"></i>
+                            <span>首页</span>
+                        </a>
+                    </li>
+                    {if $info.user_status eq 0}
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=jihuo" class="nav-link {if $action eq 'jihuo'} active {/if}">
+                            <i class="am-icon-key"></i>
+                            <span>激活</span>
+
+                        </a>
+                    </li>
+                    {/if}
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=bd_list" class="nav-link {if $action eq 'bd_list'} active {/if} {if $action eq 'edit_list'} active {/if}">
+                            <i class="am-icon-wpforms"></i>
+                            <span>报单中心</span>
+                            <i class="tpl-left-nav-content tpl-badge-danger"></i>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=jifen_list" class="nav-link {if $action eq 'jifen_list'} active {/if}">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>积分变动</span>
+                            <i class="tpl-left-nav-content tpl-badge-danger"></i>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=zijin" class="nav-link {if $action eq 'zijin'} active {/if} {if $action eq 'account_raply'} active {/if} {if $action eq 'account_detail'} active {/if}">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>资金管理</span>
+                            <i class="tpl-left-nav-content tpl-badge-danger"></i>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=jifen_huizong" class="nav-link {if $action eq 'jifen_huizong'} active {/if}">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>日期汇总</span>
+                            <i class="tpl-left-nav-content tpl-badge-danger"></i>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=exchange" class="nav-link {if $action eq 'exchange'} active {/if}">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>转化积分</span>
+                            <i class="tpl-left-nav-content tpl-badge-danger"></i>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=shengji" class="nav-link {if $action eq 'shengji'} active {/if}">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>升级等级</span>
+                            <i class="tpl-left-nav-content tpl-badge-danger"></i>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=gonggao" class="nav-link {if $action eq 'gonggao'} active {/if}{if $action eq 'gonggao_list'} active {/if}">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>公告列表</span>
+                            <i class="tpl-left-nav-content tpl-badge-danger"></i>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=login" class="nav-link">
+                            <i class="am-icon-key"></i>
+                            <span>登录</span>
+
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        {if $action eq 'default'}
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                会员中心
+            </div>
+            <div class="row">
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat blue">
+                        <div class="visual">
+                            <i class="am-icon-comments-o"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number"> {$info.user_money} </div>
+                            <div class="desc"> 收益 </div>
+                        </div>
+                        <a class="more" href="#">&nbsp;</a>
+                    </div>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat red">
+                        <div class="visual">
+                            <i class="am-icon-bar-chart-o"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number"> {$info.user_cash} </div>
+                            <div class="desc"> 重销 </div>
+                        </div>
+                        <a class="more">&nbsp;</a>
+                    </div>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat green">
+                        <div class="visual">
+                            <i class="am-icon-apple"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number"> {$info.user_point} </div>
+                            <div class="desc"> 企业币 </div>
+                        </div>
+                        <a class="more" href="#">&nbsp;</a>
+                    </div>
+                </div>
+                <!--<div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat purple">
+                        <div class="visual">
+                            <i class="am-icon-android"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number"> 
+                                {if $rank eq 1}普卡
+                                {elseif $rank eq 2}银卡
+                                {elseif $rank eq 3}金卡
+                                {elseif $rank eq 4}钻卡
+                                {/if} 
+                            </div>
+                            <div class="desc"> 等级 </div>
+                        </div>
+                        <a class="more">&nbsp;</a>
+                    </div>
+                </div>-->
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat purple">
+                        <div class="visual">
+                            <i class="am-icon-android"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number"> {$info.user_upgrade} </div>
+                            <div class="desc"> 升级币 </div>
+                        </div>
+                        <a class="more">&nbsp;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/if}
+
+        <!-- 激活 -->
+        {if $info.user_status eq 0}
+        {if $action eq 'jihuo'}
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                激活列表
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="input-icon right">
+                            <span style="color:#666;">您当前激活币为： {$info.user_upgrade}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tpl-block ">
+                    <form name="formJihuo" method="post" action="usercenter.php" class="am-form am-form-horizontal" onSubmit="return submitJihuo()">
+                            
+                       <div style="text-align:center;margin-top:30px;">
+                           <input type="submit" name="submit" value="激活"  class="am-btn am-btn-primary"/>
+                       </div>
+                        <input type="hidden" name="act" value="ji_huo" />
+                    </form>
+                </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        <script>
+            function submitJihuo(){
+                var frm = document.forms['formJihuo'];
+                var jh = {$info.user_upgrade};
+                if({$info.user_rank} == 1){
+                    if(jh < {$pu}){
+                        alert('激活普卡的激活币不足');return false;
+                    }
+                }else if({$info.user_rank} == 2){
+                    if(jh < {$yin}){
+                         alert('激活银卡的激活币不足');return false;                   
+                    }
+                }else if({$info.user_rank} == 3){
+                    if(jh < {$jin}){
+                        alert('激活金卡的激活币不足');return false;
+                    }
+                }else if({$info.user_rank} == 4){
+                    if(jh < {$zuan}){
+                        alert('激活钻卡的激活币不足');return false;
+                    }
+                }
+                
+                
+            }
+        </script>
+        {/if}
+        {/if}
+
+        <!-- 报单中心 -->
+        {if $action eq 'bd_list'}
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                报单中心
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                </div>
+                <div class="tpl-block">
+                    
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <!--<form class="am-form" action="usercenter.php" method="post">-->
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th width="10%" class="table-id">ID</th>
+                                            <th width="10%" class="table-id">父ID</th>
+                                            <th width="15%" class="table-title">用户名</th>
+                                            <th width="20%" class="table-type">手机号</th>
+                                            <th width="20%" class="table-author">会员级别</th>
+                                            <th width="15%" class="table-date">状态</th>
+                                            <th width="10%">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {foreach from=$bdlist item=item}
+                                            <tr>
+                                                <td>{$item.user_id}</td>
+                                                <td>{$item.parent_id}</td>
+                                                <td>{$item.user_name}</td>
+                                                <td>{$item.mobile_phone}</td>
+                                                <td>
+                                                    {if $item.user_rank eq 1}普卡
+                                                    {elseif $item.user_rank eq 2}银卡
+                                                    {elseif $item.user_rank eq 3}金卡
+                                                    {elseif $item.user_rank eq 4}钻卡
+                                                    {/if}
+                                                </td>
+                                                <td>{if $item.user_status eq 0}未激活{elseif $item.user_status eq 1}已激活{/if}</td>
+                                                <td>
+                                                <div class="am-btn-toolbar">
+                                                    <div class="am-btn-group am-btn-group-xs">
+                                                    <a href="usercenter.php?act=edit_list&id={$item.user_id}" title="{$lang.edit}">
+                                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                    </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            </tr>
+                                        {/foreach}
+                                    </tbody>
+                                </table>
+                                <style>
+                                    .xm-pagenavi .numbers{height:38px !important;}
+                                </style>
+                                <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+                                <hr>
+                            <!--</form>-->
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        
+        {/if}
+        
+        {if $action eq 'edit_list'}
+            <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                修改报单中心
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                </div>
+                <div class="tpl-block ">
+
+                    <div class="am-g tpl-amazeui-form">
+
+
+                        <div class="am-u-sm-12 am-u-md-9">
+                            <form name="formBdlist" method="post" action="usercenter.php" class="am-form am-form-horizontal" onSubmit="return submitBdlist()">
+                                <div class="am-form-group">
+                                    <label for="user-name" class="am-u-sm-3 am-form-label">父ID</label>
+                                    <div class="am-u-sm-9">
+                                        <!--<span style="line-height:40px;font-size:16px;color:#999;">{$data.parent_id}</span>-->
+                                        <input type="text" id="user-name" value="{$data.parent_id}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-email" class="am-u-sm-3 am-form-label">用户名</label>
+                                    <div class="am-u-sm-9">
+                                        <input type="email" id="user-email" value="{$data.user_name}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-phone" class="am-u-sm-3 am-form-label">手机号</label>
+                                    <div class="am-u-sm-9">
+                                        <input type="tel" id="user-phone" value="{$data.mobile_phone}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-QQ" class="am-u-sm-3 am-form-label">会员级别</label>
+                                    <div class="am-u-sm-9">
+                                        <input type="tel" id="user-phone" value="{if $data.user_rank eq 1}普卡
+                                                    {elseif $data.user_rank eq 2}银卡
+                                                    {elseif $data.user_rank eq 3}金卡
+                                                    {elseif $data.user_rank eq 4}钻卡
+                                                    {/if}" readonly>
+                                        <!--<input type="number" pattern="[0-9]*" id="user-QQ" placeholder="输入你的QQ号码">-->
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-weibo" class="am-u-sm-3 am-form-label">状态</label>
+                                    <div class="am-u-sm-9">
+                                        {if $data.user_status eq 0}
+                                        <input type="text" value="未激活" readonly>
+                                        {elseif $data.user_status eq 1}
+                                        <input style="background:#03D303;" type="text" value="已激活" readonly>
+                                        {/if}
+                                    </div>
+                                </div>
+                                {if $exist eq 1}
+                                <div class="am-form-group">
+                                    <label for="user-phone" class="am-u-sm-3 am-form-label">现金</label>
+                                    <div class="am-u-sm-9">
+                                        <input type="text" name="xianjin" id="xianjin" placeholder="请输入你要使用的现金数额">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-phone" class="am-u-sm-3 am-form-label">升级币</label>
+                                    <div class="am-u-sm-9">
+                                        <input type="text" name="shengjibi" id="shengjibi" placeholder="请输入你要使用的升级币">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <input type="submit" name="submit" value="提交申请"  class="am-btn am-btn-primary"/>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="act" value="act_bd_check" />
+                                <input type="hidden" name="uid" value="{$data.user_id}" />
+                                {/if}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        <script>
+            function submitBdlist(){
+                var frm = document.forms['formBdlist'];
+                var xianjin = frm.elements['xianjin'].value;
+                var shengjibi = frm.elements['shengjibi'].value;
+            
+                if (xianjin.length == 0) {
+                    alert('请输入您要使用的现金数量');return false;
+                } else {
+                    var reg = /^([1-9]\d*|0)(\.\d{1,2})?$/;
+                    if (!reg.test(xianjin)) {
+                        alert('您输入的现金格式不正确');return false;
+                    }
+                }
+                if (shengjibi.length == 0) {
+                    alert('请输入您要使用的升级币数量');return false;
+                } else {
+                    var reg = /^([1-9]\d*|0)(\.\d{1,2})?$/;
+                    if (!reg.test(shengjibi)) {
+                        alert('您输入的升级币格式不正确');return false;
+                    }
+                }
+                if (shengjibi > {$res.user_upgrade}){
+                    alert('升级币数量不足');
+                    document.getElementById("shengjibi").value=0;return false;
+                }
+                if({$data.user_rank} == 1){
+                    if(eval(shengjibi)+eval(xianjin) != {$pu}){
+                        alert('您填写的金额不正确');return false;
+                    }
+                }else if({$data.user_rank} == 2){
+                    if(eval(shengjibi)+eval(xianjin) != {$yin}){
+                        alert('您填写的金额不正确');return false;
+                    }
+                }else if({$data.user_rank} == 3){
+                    if(eval(shengjibi)+eval(xianjin) != {$jin}){
+                        alert('您填写的金额不正确');return false;
+                    }
+                }else if({$data.user_rank} == 4){
+                    if(eval(shengjibi)+eval(xianjin) != {$zuan}){
+                        alert('您填写的金额不正确');return false;
+                    }
+                }
+            }
+        </script>
+        {/if}
+
+        <!--升级等级-->
+        {if $action eq 'shengji'}
+            <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                升级等级
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                </div>
+                <div class="tpl-block ">
+                    <div class="am-g tpl-amazeui-form">
+                        <div class="am-u-sm-12 am-u-md-9">
+                            <form name="formLevel" method="post" action="usercenter.php" class="am-form am-form-horizontal" onSubmit="return submitlevel()">
+                                {if $level.user_rank neq 4}
+                                <div style="margin-top:20px;" class="am-form-group">
+                                    <label for="user-phone" class="am-u-sm-3 am-form-label">升级等级</label>
+                                    <div class="am-u-sm-4">
+                                    
+                                        <div class="am-form-group">
+                                            {if $level.user_rank eq 1}
+                                                <select name="level" data-am-selected="{btnSize: 'sm'}">
+                                                    <option value="0">请选择</option>
+                                                    <option value="2">银卡</option>
+                                                    <option value="3">金卡</option>
+                                                    <option value="4">钻卡</option>
+                                                </select>
+                                            {elseif $level.user_rank eq 2}
+                                                <select name="level" data-am-selected="{btnSize: 'sm'}">
+                                                    <option value="0">请选择</option>
+                                                    <option value="3">金卡</option>
+                                                    <option value="4">钻卡</option>
+                                                </select>
+                                            {elseif $level.user_rank eq 3}
+                                                <select name="level" data-am-selected="{btnSize: 'sm'}">
+                                                    <option value="0">请选择</option>
+                                                    <option value="4">钻卡</option>
+                                                </select>
+                                            {/if}
+                                        </div>
+                                    </div>
+                                    <span style="line-height:34px;font-size:16px;color:#999;">
+                                        您当前可用升级币为 {$level.user_upgrade} 个
+                                    </span>
+                                </div>
+                                <div style="padding-top:60px;" class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <input type="submit" name="submit" value="确定升级"  class="am-btn am-btn-primary"/>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="curlevel" value="{$level.user_rank}" />
+                                <input type="hidden" name="upgrade" value="{$level.user_upgrade}" />
+                                <input type="hidden" name="act" value="act_level" />
+                                {else}
+                                    <span style="padding-left:390px;line-height:34px;font-size:20px;color:#999;">
+                                        您没有可升级的等级
+                                    </span>
+                                {/if}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        <script>
+            function submitlevel(){
+                var frm = document.forms['formLevel'];
+                var level = frm.elements['level'].value;
+                var grade = {$level.user_upgrade};
+                var cur = {$level.user_rank};
+                if(level == 0){
+                    alert('请选择等级');return false;
+                }
+                if(cur == 1){
+                    if(level == 2){
+                        if(grade < {$yin}-{$pu}){
+                            alert('升级到银卡的升级币不足');return false;
+                        }
+                    }else if(level == 3){
+                        if(grade < {$jin}-{$pu}){
+                            alert('升级到金卡的升级币不足');return false;
+                        }
+                    }else if(level == 4){
+                        if(grade < {$zuan}-{$pu}){
+                            alert('升级到钻卡的升级币不足');return false;
+                        }
+                    }
+                }else if(cur == 2){
+                    if(level == 3){
+                        if(grade < {$jin}-{$yin}){
+                            alert('升级到金卡的升级币不足');return false;
+                        }
+                    }else if(level == 4){
+                        if(grade < {$zuan}-{$yin}){
+                            alert('升级到钻卡的升级币不足');return false;
+                        }
+                    }
+                }else if(cur == 3){
+                    if(level == 4){
+                        if(grade < {$zuan}-{$jin}){
+                            alert('升级到钻卡的升级币不足');return false;
+                        }
+                    }
+                }
+
+                
+            }
+        </script>
+        {/if}
+
+        <!-- 积分变动 -->
+        {if $action eq 'jifen_list'}
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                积分变动
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                </div>
+                <div class="tpl-block">
+                    
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <form class="am-form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th width="11%" class="table-id">收益</th>
+                                            <th width="11%" class="table-id">重销</th>
+                                            <th width="11%" class="table-title">企业币</th>
+                                            <th width="12%" class="table-title">升级币</th>
+                                            <th width="15%" class="table-type">类型</th>
+                                            <th width="20%" class="table-author">时间</th>
+                                            <th width="20%" class="table-date">理由</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {foreach from=$jifenlist item=item}
+                                            <tr>
+                                                <td>{$item.user_money}</td>
+                                                <td>{$item.user_cash}</td>
+                                                <td>{$item.user_point}</td>
+                                                <td>{$item.upgrade_point}</td>
+                                                <td>
+                                                    {if $item.change_type eq 99}自定义
+                                                    {elseif $item.change_type eq 1}提现
+                                                    {/if}
+                                                </td>
+                                                <td>{$item.change_time|time}</td>
+                                                <td>{$item.change_desc}</td>
+                                            </tr>
+                                        {/foreach}
+                                    </tbody>
+                                </table>
+                                <style>
+                                    .xm-pagenavi .numbers{height:38px !important;}
+                                </style>
+                                <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+                                
+                                <hr>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        {/if}
+
+        <!-- 资金管理 -->
+        {if $action eq 'zijin'}
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                资金管理
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                    <style>
+                        .f6{color:#F52648;font-size:14px;}
+                        .f6:hover{color:#E31939;}
+                    </style>
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="input-icon right">
+                            <a href="usercenter.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | 
+                            <a href="usercenter.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | 
+                            <a href="usercenter.php?act=zijin" class="f6">{$lang.view_application}</a>
+			            </div>
+                    </div>
+                </div>
+                <div class="tpl-block">
+                    
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <form class="am-form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th width="10%" class="table-id">操作时间</th>
+                                            <th width="10%" class="table-id">类型</th>
+                                            <th width="15%" class="table-title">金额</th>
+                                            <th width="15%" class="table-title">会员备注</th>
+                                            <th width="15%" class="table-type">管理员备注</th>
+                                            <th width="15%" class="table-author">状态</th>
+                                            <th width="10%" class="table-date">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {foreach from=$zijinlist item=item}
+                                    <tr>
+                                    <td>{$item.add_time|time}</td>
+                                    <td>
+                                        {if $item.process_type eq 0}充值
+                                        {elseif $item.process_type eq 1}提现
+                                        {/if}
+                                    </td>
+                                    <td>{$item.amount}</td>
+                                    <td>{$item.user_note}</td>
+                                    <td>{$item.admin_note}</td>
+                                    <td>
+                                        {if $item.is_paid eq 0}未确认
+                                        {elseif $item.is_paid eq 1}已完成
+                                        {/if}
+                                    </td>
+                                    <td>
+                                        {if $item.is_paid eq 0}
+                                            <a href="usercenter.php?act=cancel&id={$item.id}" onclick="if (!confirm('{$lang.confirm_remove_account}')) return false;">{$lang.is_cancel}</a> 
+                                        {/if}
+                                    </td>
+                                    </tr>
+                                    {/foreach}
+                                    <tr>
+                                    <td colspan="7" align="right" bgcolor="#ffffff">您当前消费的金额为：{$xiaofei}</td>
+                                    </tr>
+                                    <!--资金管理余额-->
+                                    <tr>
+                                    <td colspan="7" align="right" bgcolor="#ffffff">您当前的可用资金为：￥{$info.user_money}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <style>
+                                    .xm-pagenavi .numbers{height:38px !important;}
+                                </style>
+                                <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+                                
+                                <hr>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        {/if}
+
+        <!-- 查看账户明细 -->
+        {if $action eq 'account_detail'}
+            <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                资金管理
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                    <style>
+                        .f6{color:#F52648;font-size:14px;}
+                        .f6:hover{color:#E31939;}
+                    </style>
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="input-icon right">
+                            <a href="usercenter.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | 
+                            <a href="usercenter.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | 
+                            <a href="usercenter.php?act=zijin" class="f6">{$lang.view_application}</a>
+			            </div>
+                    </div>
+                </div>
+                <div class="tpl-block">
+                    
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <form class="am-form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th width="25%" class="table-id">操作时间</th>
+                                            <th width="25%" class="table-id">类型</th>
+                                            <th width="25%" class="table-title">金额</th>
+                                            <th width="25%" class="table-title">备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {foreach from=$account_log item=item}
+                                    <tr>
+                                    <td>{$item.change_time}</td>
+                                    <td>{$item.type}</td>
+                                    <td>{$item.amount}</td>
+                                    <td>&nbsp;&nbsp;{$item.short_change_desc}</td>
+                                    </tr>
+                                    {/foreach}
+                                    <tr>
+                                    <td colspan="7" align="right" bgcolor="#ffffff">您当前消费的金额为：{$xiaofei}</td>
+                                    </tr>
+                                    <!--资金管理余额-->
+                                    <tr>
+                                    <td colspan="7" align="right" bgcolor="#ffffff">您当前的可用资金为：￥{$info.user_money}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <style>
+                                    .xm-pagenavi .numbers{height:38px !important;}
+                                </style>
+                                <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+                                
+                                <hr>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        {/if}
+
+        <!-- 提现 -->
+        {if $action eq 'account_raply'}
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                提现列表
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="input-icon right">
+                            <span style="color:#666;">温馨提示：提现手续费 {$shouxufei}%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tpl-block ">
+                    {if $info.user_status eq 0}
+                       <div style="text-align:center;font-size:20px;line-height:50px;color:red;font-weoght:normal;">
+                            您暂未激活
+                       </div>
+                       <div style="text-align:center;margin-top:30px;">
+                           <a href="usercenter.php?act=jihuo"><button class="am-btn am-btn-primary">去激活</button></a>
+                       </div>
+                    {else}
+                    <div class="am-g tpl-amazeui-form">
+
+                        <div class="am-u-sm-12 am-u-md-9">
+                            <form name="formTixian" method="post" action="usercenter.php" class="am-form am-form-horizontal" onSubmit="return submitTixian()">
+                                
+                                <div class="am-form-group">
+                                    <label for="user-phone" class="am-u-sm-3 am-form-label">提现金额</label>
+                                    <div class="am-u-sm-5">
+                                        <input type="text" id="amount" name="amount" class="inputBg" size="30" />
+                                    </div>
+                                    <span style="line-height:34px;font-size:16px;color:#999;">
+                                        您当前余额为 {$info.user_money}
+                                    </span>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-phone" class="am-u-sm-3 am-form-label">会员备注</label>
+                                    <div class="am-u-sm-7">
+                                        <textarea name="user_note" class="" rows="5"></textarea>
+                                    </div>
+                                    <span style="line-height:34px;font-size:16px;color:#999;">
+                                    </span>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <input type="hidden" name="act" value="chuli_tixian" />
+                                        <input type="hidden" name="shouxufei" value="{$shouxufei}" />
+                                        <input type="submit" name="submit" value="确认提现"  class="am-btn am-btn-primary"/>
+                                        <input type="reset" name="reset" value="{$lang.button_reset}"  class="am-btn am-btn-primary"/>
+                                    </div>
+                                </div>   
+                            </form>
+                        </div>
+                    </div>
+                    {/if}
+
+                </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        <script>
+            function submitTixian(){
+                var frm = document.forms['formTixian'];
+                var amount = frm.elements['amount'].value;
+                var user_note = frm.elements['user_note'].value;
+                var chaer = {$info.user_money}*{$shouxufei}/100;
+
+                if (amount == '') {
+                    alert('请输入您要提现的金额');return false;
+                } else {
+                    var reg = /^([1-9]\d*|0)(\.\d{1,2})?$/;
+                    if (!reg.test(amount)) {
+                        alert('您输入的格式不正确');return false;
+                    }
+                }
+                if (amount > {$info.user_money}-chaer){
+                    alert('余额不足');
+                    document.getElementById("amount").value=0;return false;
+                }
+                if (user_note == '') {
+                    alert('请输入备注');return false;
+                }
+                
+            }
+        </script>
+        {/if}
+
+        <!-- 公告列表 -->
+        {if $action eq 'gonggao'}
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                公告列表
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                </div>
+                <div class="tpl-block">
+                    
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th width="20%" class="table-id">标题</th>
+                                            <th width="25%" class="table-id">作者</th>
+                                            <th width="25%" class="table-title">关键词</th>
+                                            <th width="20%" class="table-author">时间</th>
+                                            <th width="10%">操作</th>
+                                                
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {foreach from=$gonggaolist item=item}
+                                            <tr>
+                                                <td>{$item.title}</td>
+                                                <td>{$item.author}</td>
+                                                <td>{$item.keywords}</td>
+                                                <td>{$item.add_time|time}</td>
+                                                <td>
+                                                    <div class="am-btn-toolbar">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                        <a href="usercenter.php?act=gonggao_list&id={$item.article_id}" title="查看">
+                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 查看</button>
+                                                        </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {/foreach}
+                                    </tbody>
+                                </table>
+                                <style>
+                                    .xm-pagenavi .numbers{height:38px !important;}
+                                </style>
+                                <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+                                
+                                <hr>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        {/if}
+
+        <!-- 查看公告 -->
+        {if $action eq 'gonggao_list'}
+            <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                查看公告
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                </div>
+                <div class="tpl-block ">
+
+                    <div class="am-g tpl-amazeui-form">
+                        <div class="am-u-sm-12 am-u-md-12">
+                            <form name="formBdlist" method="post" action="usercenter.php" class="am-form am-form-horizontal" onSubmit="return submitBdlist()">
+                                
+                                <h2 style="text-align:center;font-size:18px;font-weight:normal 600;color:#999;" class="am-u-sm-12">{$data.title}</h2>    
+                                <span style="text-align:center;font-size:14px;font-weight:normal 600;color:#999;" class="am-u-sm-12">{$data.author} &nbsp;&nbsp;&nbsp; {$data.add_time}</span>    
+                                <span style="font-size:14px;font-weight:normal 600;color:#999;" class="am-u-sm-12">{$data.content}</span>    
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        {/if}
+
+        <!-- 积分按日期汇总 -->
+        {if $action eq 'jifen_huizong'} 
+        <script src="themes/68ecshopcom_360buy/usercenter/laydate/laydate.js"></script> <!--引入日期插件 -->
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                积分汇总
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div> 
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                    <form  name="formBdlist" method="post" action="usercenter.php" class="am-form am-form-horizontal" onsubmit="return checktime(this)">
+                        <a href="usercenter.php?act=jifen_huizong"><button title="搜索" class="search"><i class="am-icon-search"></i></button></a>
+                        <input id="begintime" class="layui-input begintime" name="begintime" {if $time.status}value="{$time.begintime}"{/if} placeholder="结束时间" readonly/>
+                        <span style="float:right;margin-top:10px;color:#aaa;">——</span>
+                        <input id="endtime" class="layui-input begintime" name="endtime" {if $time.status}value="{$time.endtime}"{/if} placeholder="开始时间" readonly/>
+                        
+                        <input type="hidden" name="act" value="jifen_huizong" />
+                    </form> 
+                    </div>     
+                </div>
+                <style>
+                    .begintime{width: 120px;float:right; height: 25px;margin: 10px 10px;border:1px solid #e0e0e0;color:#666;padding: 0px 10px;}
+                    .search{width:25px;float:right; height:25px;margin: 10px 10px;border-radius:10px;}
+                </style>
+                    
+                <div class="tpl-block">   
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <form class="am-form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th width="20%" class="table-id">收益</th>
+                                            <th width="20%" class="table-id">重销</th>
+                                            <th width="20%" class="table-title">企业币</th>
+                                            <th width="20%" class="table-title">升级币</th>
+                                            <th width="20%" class="table-author">时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {foreach from=$datas item=item}
+                                            <tr>
+                                                <td>{$item.user_money}</td>
+                                                <td>{$item.user_cash}</td>
+                                                <td>{$item.user_point}</td>
+                                                <td>{$item.upgrade_point}</td>
+                                                <td>{$item.day}</td>
+                                            </tr>
+                                        {/foreach}
+                                    </tbody>
+                                </table>
+                                <style>
+                                    .xm-pagenavi .numbers{height:38px !important;}
+                                </style>
+                                <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+                                
+                                <hr>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        <script>
+            laydate.render({
+                elem: '#endtime', //指定元素
+                type: 'date'
+            });
+            laydate.render({
+                elem: '#begintime', //指定元素
+                type: 'date'
+            });
+        </script>
+        <script>
+            function checktime(form){
+                if(form.begintime.value == '' || form.endtime.value ==''){
+                    alert('请输入开始时间和结束时间！！！');
+                    form.begintime.focus();
+                    form.endtime.focus();
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        {/if}
+
+        <!-- 企业币、重销转为商城积分 -->
+        {if $action eq 'exchange'}
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                转化积分
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                </div>
+                <div class="tpl-block ">
+
+                    <div class="am-g tpl-amazeui-form">
+
+                        <div class="am-u-sm-12 am-u-md-9">
+                            <form name="formExchange" method="post" action="usercenter.php" class="am-form am-form-horizontal" onSubmit="return submitExchange()">
+                                
+                                <div class="am-form-group">
+                                    <label for="user-phone" class="am-u-sm-3 am-form-label">重销</label>
+                                    <div class="am-u-sm-5">
+                                        <input type="text" name="cash" id="cash" placeholder="请输入你要转化的数量">
+                                    </div>
+                                    <span style="line-height:34px;font-size:16px;color:#999;">
+                                        您当前可用重销币为 {$info.user_cash} 个
+                                    </span>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label for="user-phone" class="am-u-sm-3 am-form-label">企业币</label>
+                                    <div class="am-u-sm-5">
+                                        <input type="text" name="qiyebi" id="qiyebi" placeholder="请输入你要转化的数量">
+                                    </div>
+                                    <span style="line-height:34px;font-size:16px;color:#999;">
+                                        您当前可用企业币为 {$info.user_point} 个
+                                    </span>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <input type="submit" name="submit" value="确认转化"  class="am-btn am-btn-primary"/>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="act" value="act_exchange_check" />
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        <script>
+            function submitExchange(){
+                var frm = document.forms['formExchange'];
+                var cash = frm.elements['cash'].value;
+                var qiyebi = frm.elements['qiyebi'].value;
+                if (cash == '') {
+                    alert('请输入您要使用的重销币数量');return false;
+                } else {
+                    var reg = /^([1-9]\d*|0)(\.\d{1,2})?$/;
+                    if (!reg.test(cash)) {
+                        alert('您输入的格式不正确');return false;
+                    }
+                }
+                if (cash > {$info.user_cash}){
+                    alert('重销币不足');
+                    document.getElementById("cash").value=0;return false;
+                }
+                if (qiyebi == '') {
+                    alert('请输入您要使用的企业币数量');return false;
+                } else {
+                    var reg = /^([1-9]\d*|0)(\.\d{1,2})?$/;
+                    if (!reg.test(qiyebi)) {
+                        alert('您输入的格式不正确');return false;
+                    }
+                }
+                if (qiyebi > {$info.user_point}){
+                    alert('企业币不足');
+                    document.getElementById("qiyebi").value=0;return false;
+                }
+                
+            }
+        </script>
+        {/if}
+
+        {if $action eq 'login'}
+        
+            <!--<div class="am-g myapp-login">
+                <div class="myapp-login-logo-block  tpl-login-max">
+                    <div class="myapp-login-logo-text">
+                        <div class="myapp-login-logo-text">
+                            Amaze UI<span> Login</span> <i class="am-icon-skyatlas"></i>
+                            
+                        </div>
+                    </div>
+
+                    <div class="login-font">
+                        <i>Log In </i> or <span> Sign Up</span>
+                    </div>
+                    <div class="am-u-sm-10 login-am-center">
+                        <form class="am-form">
+                            <fieldset>
+                                <div class="am-form-group">
+                                    <input type="email" class="" id="doc-ipt-email-1" placeholder="输入电子邮件">
+                                </div>
+                                <div class="am-form-group">
+                                    <input type="password" class="" id="doc-ipt-pwd-1" placeholder="设置个密码吧">
+                                </div>
+                                <p><button type="submit" class="am-btn am-btn-default">登录</button></p>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>-->
+        {/if}
+    
+    
+    
+    <script src="themes/68ecshopcom_360buy/usercenter/js/amazeui.min.js"></script>
+    <script src="themes/68ecshopcom_360buy/usercenter/js/iscroll.js"></script>
+    <script src="themes/68ecshopcom_360buy/usercenter/js/app.js"></script>
+    <script src="themes/68ecshopcom_360buy/usercenter/js/echarts.min.js"></script>
+</body>
+
+</html>

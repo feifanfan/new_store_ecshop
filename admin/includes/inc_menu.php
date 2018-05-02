@@ -122,7 +122,7 @@ $modules['07_content']['shop_info'] = 'shopinfo.php?act=list'; // 网店信息
 $modules['08_members']['03_users_list'] = 'users.php?act=list';
 // $modules['08_members']['04_users_export'] = 'users_export.php';
 $modules['08_members']['04_users_add'] = 'users.php?act=add';
-$modules['08_members']['05_user_rank_list'] = 'user_rank.php?act=list';
+// $modules['08_members']['05_user_rank_list'] = 'user_rank.php?act=list';
 // $modules['08_members']['06_list_integrate'] = 'integrate.php?act=list';
 // $modules['08_members']['08_unreply_msg'] = 'user_msg.php?act=list_all';
 $modules['08_members']['09_user_account'] = 'user_account.php?act=list';
@@ -132,8 +132,8 @@ $modules['08_members']['09_user_account'] = 'user_account.php?act=list';
 $modules['10_priv_admin']['admin_logs'] = 'admin_logs.php?act=list';
 $modules['10_priv_admin']['admin_list'] = 'privilege.php?act=list';
 $modules['10_priv_admin']['admin_role'] = 'role.php?act=list';
-$modules['10_priv_admin']['agency_list'] = 'agency.php?act=list';
-$modules['10_priv_admin']['suppliers_list'] = 'suppliers.php?act=list'; // 供货商
+// $modules['10_priv_admin']['agency_list'] = 'agency.php?act=list';
+// $modules['10_priv_admin']['suppliers_list'] = 'suppliers.php?act=list'; // 供货商
 
 $modules['11_system']['01_shop_config'] = 'shop_config.php?act=list_edit';
 //$modules['11_system']['shop_authorized'] = 'license.php?act=list_edit'; //授权证书

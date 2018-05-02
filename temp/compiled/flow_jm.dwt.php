@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base href="http://www.thefirst.com/" />
+<base href="http://www.xu.com/" />
 <meta name="Generator" content="HongYuJD v7_2" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="Keywords" content="<?php echo $this->_var['keywords']; ?>" />
@@ -493,8 +493,8 @@ else
           
         </script> 
    
-  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_73086700_1524731629');if (count($_from)):
-    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_73086700_1524731629']):
+  <?php $_from = $this->_var['consignee_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('sn', 'consignee_0_91871700_1524885161');if (count($_from)):
+    foreach ($_from AS $this->_var['sn'] => $this->_var['consignee_0_91871700_1524885161']):
 ?>
   <form action="flow.php" method="post" name="theForm" id="theForm" onsubmit="return checkConsignee(this)">
     <?php echo $this->fetch('library/consignee.lbi'); ?>
@@ -909,9 +909,70 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
       </td>
     </tr>
     <?php endif; ?>
+        <?php if (( $this->_var['allow_use_bonus'] || $this->_var['allow_use_integral'] ) && $this->_var['goodsinfo']['goodlist']): ?>
+        <tr>
+            <td colspan="4" bgcolor="#ffffff" align=left style="padding:12px 0 12px 30px;"><div class="checkout_other"> <a class="jmbag" href="javascript:void(0);" onclick="showCheckoutOther(this);"><span>+</span>使用积分支付</a>
+              <table class="subbox_other sub_bonus" width="100%">
+                <?php if ($this->_var['allow_use_bonus']): ?>
+                <tr>
+                <!--   <td  align=right width="120">使用积分积分</td> -->
+                  <!-- <td><select name="bonus[<?php echo $this->_var['key']; ?>]" onchange="changeBonus(this.value,<?php echo $this->_var['key']; ?>)" id="ECS_BONUS_<?php echo $this->_var['key']; ?>" class="otherinput">
+                      <option value="0" <?php if ($this->_var['order']['bonus_id'] == 0): ?>selected<?php endif; ?>><?php echo $this->_var['lang']['please_select']; ?></option>
+                      <?php $_from = $this->_var['goodsinfo']['redbag']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'bonus');if (count($_from)):
+    foreach ($_from AS $this->_var['bonus']):
+?>
+                      <option value="<?php echo $this->_var['bonus']['bonus_id']; ?>" <?php if ($this->_var['order']['bonus_id_info'] [ $this->_var['key'] ] == $this->_var['bonus']['bonus_id']): ?>selected<?php endif; ?>><?php echo $this->_var['bonus']['type_name']; ?>[<?php echo $this->_var['bonus']['bonus_money_formated']; ?>]</option>
+                      <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
+                      
+                    </select></td>
+                  <td>&nbsp; 或 &nbsp;<a href="javascript:void(0);" onclick="javascript:document.getElementById('Bonus_span_<?php echo $this->_var['key']; ?>').style.display='block';document.getElementById('Bonus_a_<?php echo $this->_var['key']; ?>').style.display='none';" class="a_other1_h" id="Bonus_a_<?php echo $this->_var['key']; ?>">直接输入优惠券号</a></td> -->
+                  <td><label id="Bonus_span_<?php echo $this->_var['key']; ?>" style="display:none;">
+                      <input name="bonus_sn[<?php echo $this->_var['key']; ?>]" id="bonus_sn_<?php echo $this->_var['key']; ?>" type="text"  size="15" value="<?php if ($this->_var['order']['bonus_sn_info'] [ $this->_var['key'] ]): ?><?php echo $this->_var['order']['bonus_sn_info'][$this->_var['key']]; ?><?php else: ?>输入优惠券<?php endif; ?>" onfocus="if (value =='输入优惠券'){value =''}" onblur="if (value ==''){value='输入优惠券'}" style="height:22px;" />
+                      <input name="validate_bonus" type="button" value="使用" onclick="validateBonus(document.getElementById('bonus_sn_<?php echo $this->_var['key']; ?>').value,<?php echo $this->_var['key']; ?>)" class="BonusButton" />
+                    </label></td>
+                </tr>
+                <?php endif; ?> 
+                
+                <tr>
+                  <td  align=right width="80">使用积分：</td>
+                  <td ><input name="integral[<?php echo $this->_var['key']; ?>]" type="text" class="otherinput2" id="ECS_INTEGRAL_<?php echo $this->_var['key']; ?>" onblur="changeIntegral(this.value,<?php echo $this->_var['key']; ?>)" value="<?php echo empty($this->_var['order']['integral_info'][$this->_var['key']]) ? '0' : $this->_var['order']['integral_info'][$this->_var['key']]; ?>"  /></td>
+                  <td colspan=2><span id="ECS_INTEGRAL_NOTICE_<?php echo $this->_var['key']; ?>" class="notice"></span></td>
+                </tr>
+                
+              </table>
+            </div></td>
+        </tr>
+        <?php endif; ?> 
         <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
         </table>
         <table border=0 cellpadding=0 cellspacing=0 width="100%" class="checkgoods">
+
+          <?php if ($this->_var['how_oos_list']): ?>
+          <tr>
+            <td colspan=4 class="tdother2">
+              <div class="checkout_other" > 
+                <a class="jmbag" href="javascript:void(0);" onclick="showCheckoutOther(this);"><span>+</span>缺货处理</a> 
+                <table class="subbox_other" width="100%">
+                  
+                  <tbody width="100%" cellpadding="5" cellspacing="0">
+                    <tr>
+                      <td align=right width="100">缺货处理：</td>
+                      <td colspan='4'><?php $_from = $this->_var['how_oos_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('how_oos_id', 'how_oos_name');if (count($_from)):
+    foreach ($_from AS $this->_var['how_oos_id'] => $this->_var['how_oos_name']):
+?>
+                        
+                        <label>
+                          <input name="how_oos" type="radio" value="<?php echo $this->_var['how_oos_id']; ?>" <?php if ($this->_var['order']['how_oos'] == $this->_var['how_oos_id']): ?>checked<?php endif; ?> onclick="changeOOS(this)" />
+                          <?php echo $this->_var['how_oos_name']; ?></label>
+                        
+                        <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <?php endif; ?>
           <tr>
             <td colspan=4 class="tdother2"><div class="checkout_other" > <a class="jmbag" href="javascript:void(0);" onclick="showCheckoutOther(this);"><span>+</span>订单附言</a>
                 <table class="subbox_other" width="100%">
@@ -935,17 +996,7 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
       document.getElementById('ECS_INVPAYEE').disabled=false;
     }
     </script>
-<!--  <?php if ($this->_var['allow_use_surplus']): ?>
-		var fapiao_con = document.getElementById('ECS_INVCONTENT');
-		if (fapiao_con.value=='0')
-		{
-			document.getElementById('ECS_INVPAYEE').disabled=true;
-		}
-		else
-		{
-			document.getElementById('ECS_INVPAYEE').disabled=false;
-		}
-		</script>
+  <?php if ($this->_var['allow_use_surplus']): ?>
           <tr>
             <td colspan=4 class="tdother2">
               <div class="allow_user_surplus">
@@ -974,41 +1025,7 @@ if ($this->_foreach['package_goods_list']['total'] > 0):
             </div>
             </td>
           </tr>
-  <?php endif; ?>-->
-
-
-          <tr>
-            <td colspan=4 class="tdother2">
-            	<div class="allow_user_integral">
-        			<p>
-                    	<input type="checkbox" id="isintegral" onclick="checksboxOnclick(this)" style="vertical-align:middle; cursor:pointer" />
-                    	<span class="is_user_integral">使用企业币支付</span>
-                    </p>
-        			<div id="allow_user_integral">
-        				<span class="integral_desc"><input name="integral" type="text" class="integral" id="ECS_INTEGRAL"  value="<?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?>" onblur="changeIntegral(this.value);" />&nbsp;&nbsp;企业币</span>
-            			您当前的可用企业币为:<span class="your_integral"><?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?> </span>
-                        <span id="ECS_INTEGRAL_NOTICE" class="notice"></span>
-            			</div>
-				<script type="text/javascript">
-				function checksboxOnclick(checkbox){ 
-					var integral = <?php echo empty($this->_var['your_integral']) ? '0' : $this->_var['your_integral']; ?>;
-         alert($your_integral);
-					if ( checkbox.checked == true){
-						document.getElementById("allow_user_integral").style.display = "block";
-
-						changeIntegral(integral);
-					}else{
-						document.getElementById("allow_user_integral").style.display = "none";
-						changeIntegral(0);
-					}
-				}
-				</script>
-        	  </div>
-            </td>
-          </tr>
-
-
-
+  <?php endif; ?>
         </table>
         <div class="blank10"></div>
         <table cellpadding=0 cellspacing=0 width="100%" >
