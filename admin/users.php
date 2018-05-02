@@ -1173,7 +1173,6 @@ elseif ($_REQUEST['act'] == 'tupu')
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
 	$user_id = htmlspecialchars(trim($_GET['user_id']));
-	//collide_point($user_id,1000,12544511);
 	// manage($user_id,1000,$order_id);
 	$user = tupu($user_id);
 

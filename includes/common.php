@@ -57,6 +57,7 @@ function log_account_change_new($user_id, $user_money = 0, $user_cash = 0, $user
 	         //var_dump($sql);die;
 	    $GLOBALS['db']->query($sql);
 	}
+	
 function tupu($user_id){
 	$user[0] = $GLOBALS['db']->getRow("SELECT * FROM ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
 

@@ -37,7 +37,7 @@ $not_login_arr = array(
 /* 显示页面的action列表 */
 $ui_arr = array(
 	'login', 'profile', 'order_list', 'order_detail', 'address_list', 'collection_list', 'follow_shop', 'message_list', 'tag_list', 'get_password', 'reset_password', 'booking_list', 'add_booking', 'account_raply', 'account_deposit', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy', 'group_buy_detail', 'affiliate', 'comment_list', 'validate_email', 'track_packages', 'transform_points', 'qpassword_name', 'get_passwd_question', 'check_answer', 'check_register', 'back_order', 'back_list', 'back_order_detail', 'back_order_act', 'back_replay', 'my_comment', 'my_comment_send', 'shaidan_send', 'shaidan_sale', 'account_security', 'act_identity', 'check_phone', 'update_password', 're_binding', 'update_phone', 'update_email', 'act_update_email', 
-	're_binding_email', 'ch_email', 'ck_email', 'step_1', 'forget_password', 'back_order_detail', 'del_back_order', 'back_order_detail_edit', 'add_huan_goods','bd_list','jifen_list','edit_list','shengji','jifen_huizong','exchange','gonggao','gonggao_list','zijin','jihuo',
+	're_binding_email', 'ch_email', 'ck_email', 'step_1', 'forget_password', 'back_order_detail', 'del_back_order', 'back_order_detail_edit', 'add_huan_goods','bd_list','jifen_list','edit_list','shengji','jifen_huizong','exchange','gonggao','gonggao_list','zijin','jihuo','tupu',
 /*余额额支付密码_更改_START_bbs.hongyuvip.com*/
 'act_forget_pass', 're_pass', 'auction_list', 'forget_surplus_password', 'act_forget_surplus_password', 'update_surplus_password', 'act_update_surplus_password', 'verify_reset_surplus_email', 'get_verify_code'
 ); // 代码修改
@@ -1205,6 +1205,33 @@ function action_bd_list ()
 	$smarty->assign('pager', $pager);
 	$smarty->display('user_center.dwt');
 	
+}
+
+//显示图谱
+function action_tupu(){
+	// 全局变量
+	// 获取全局变量
+	$user = $GLOBALS['user'];
+	$_CFG = $GLOBALS['_CFG'];
+	$_LANG = $GLOBALS['_LANG'];
+	$smarty = $GLOBALS['smarty'];
+	$db = $GLOBALS['db'];
+	$ecs = $GLOBALS['ecs'];
+	$action = $GLOBALS['action'];
+	
+	if($_GET['user_id'] == NULL){
+		$user_id = $_SESSION['user_id'];
+	}else{
+		$user_id = htmlspecialchars(trim($_GET['user_id']));
+	}
+	
+	// collide_point($user_id,1000,12544511);
+	// manage($user_id,1000,$order_id);
+	include_once (ROOT_PATH . 'includes/lib_clips.php');
+	$smarty->assign('info', get_user_default($user_id));
+	$user = tupu($user_id);
+	$smarty->assign('user',$user);
+	$smarty->display('user_center.dwt');
 }
 
 function action_edit_list(){

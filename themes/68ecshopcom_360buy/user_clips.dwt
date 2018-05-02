@@ -42,20 +42,19 @@
           <div class="money">
             <ul class="clearfix">
               <li class="first">
-                <div class="title"><span>收益</span></div>
-                <div class="pic"><a href="user.php?act=account_log"><i class="user_bg"></i></a></div>
-                <p><a href="user.php?act=account_log" class="_capitalAccount">{$info.user_money}</a></p>
+                <div class="title"><span>积分</span></div>
+                <div class="pic"><a><i class="user_bg"></i></a></div>
+                <p><a class="_capitalAccount">{$info.pay_points}</a></p>
               </li>
-              <li class="second">
-                <div class="title"><span>重销</span></div>
-                <div class="pic"><a href="user.php?act=bonus"><i class="user_bg"></i></a></div>
-                <p><a href="user.php?act=bonus" class="_backAccount">{$info.user_cash}</a></p>
+              <li style="width:460px;height:110px;">
+                <div class="pic"></div>
+                <p><a href="usercenter.php" class="_backAccount">管理中心</a></p>
               </li>
-              <li class="third">
+              <!--<li class="third">
                 <div class="title"><span>企业币</span></div>
                 <div class="pic"><i class="user_bg"></i></div>
                 <p><span class="_goldAccount">{$info.user_rank}</span></p>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="security">
