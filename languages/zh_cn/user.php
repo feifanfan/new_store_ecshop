@@ -430,6 +430,7 @@ $_LANG['email_changed'] = '系统检测到您发送邮箱验证码的邮箱地�
 $_LANG['login_success'] = '登录成功';
 $_LANG['confirm_login'] = '确认登录';
 $_LANG['profile_lnk'] = '查看我的个人信息';
+$_LANG['manage_center'] = '管理中心';
 $_LANG['login_failure'] = '用户名或密码错误';
 $_LANG['relogin_lnk'] = '重新登录';
 

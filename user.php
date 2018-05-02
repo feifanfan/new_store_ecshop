@@ -84,6 +84,7 @@ if(empty($_SESSION['user_id']) && $action != 're_validate_email' && $action != '
 			 * {}
 			 */
 			$query_string = $_SERVER['QUERY_STRING'];
+			
 			if(! empty($query_string))
 			{
 				if(strpos($query_string, 'findPwd.php') != false)
@@ -817,8 +818,7 @@ function action_login ()
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
 	$user_id = $_SESSION['user_id'];
-	$back_act = $GLOBALS['back_act'];
-	
+	$back_act = $GLOBALS['back_act'];	
 	if(empty($back_act))
 	{
 		if(empty($back_act) && isset($GLOBALS['_SERVER']['HTTP_REFERER']))
@@ -973,10 +973,11 @@ function action_act_login ()
 		recalculate_price();
 		
 		$ucdata = isset($user->ucdata) ? $user->ucdata : '';
+		 
 		show_message($_LANG['login_success'] . $ucdata, array(
-			$_LANG['back_up_page'], $_LANG['profile_lnk']
+			$_LANG['back_up_page'], $_LANG['manage_center'], $_LANG['profile_lnk']
 		), array(
-			$back_act, 'user.php'
+			$back_act, 'usercenter.php', 'user.php'
 		), 'info');
 	}
 	else

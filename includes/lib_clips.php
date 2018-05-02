@@ -647,6 +647,7 @@ function get_user_default($user_id)
     $info['user_point'] = $row['user_point'];
     $info['user_upgrade'] = $row['user_upgrade'];
     $info['user_rank'] = $row['user_rank'];
+    $info['pay_points'] = $row['pay_points'];
     $info['user_id'] = $row['user_id'];
     /*代码增加2014-12-23 by bbs.hongyuvip.com  _end */
     //如果$_SESSION中时间无效说明用户是第一次登录。取当前登录时间。

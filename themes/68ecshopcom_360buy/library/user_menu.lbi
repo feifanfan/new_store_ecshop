@@ -9,7 +9,7 @@
          -->
         <a href="security.php" class="item {if $is_security eq 'true'}curs{/if}"><span>账户安全</span><i></i></a>     
         <a href="user.php?act=address_list" class="item {if $action eq 'address_list'}curs{/if}"><span>{$lang.label_address}</span><i></i></a>
-        <a href="user.php?act=account_log" class="item {if $action eq 'account_log'}curs{/if}"><span>{$lang.label_user_surplus}</span><i></i></a>
+        <!--<a href="user.php?act=account_log" class="item {if $action eq 'account_log'}curs{/if}"><span>{$lang.label_user_surplus}</span><i></i></a>-->
         <!--{if $show_transform_points}--> 
         <a href="user.php?act=transform_points" class="item {if $action eq 'transform_points'}curs{/if}"><span>{$lang.label_transform_points}</span><i></i></a>
         <!--{/if}--> 
@@ -24,8 +24,8 @@
         <a href="user.php?act=collection_list" class="item {if $action eq 'collection_list'}curs{/if}"><span>商品收藏</span><i></i></a> 
         <a href="user.php?act=follow_shop" class="item {if $action eq 'follow_shop'}curs{/if}" title="关注的店铺"><span>店铺关注</span><i></i></a> 
         <a href="user.php?act=auction_list" class="item {if $action eq 'auction_list'}curs{/if}"><span>我的竞拍</span><i></i></a> 
-        <a href="user.php?act=bd_list" class="item {if $action eq 'bd_list'}curs{/if}"><span>报单中心</span><i></i></a> 
-        <a href="user.php?act=jifen_list" class="item {if $action eq 'jifen_list'}curs{/if}"><span>积分变动</span><i></i></a> 
+        <!--<a href="user.php?act=bd_list" class="item {if $action eq 'bd_list'}curs{/if}"><span>报单中心</span><i></i></a> 
+        <a href="user.php?act=jifen_list" class="item {if $action eq 'jifen_list'}curs{/if}"><span>积分变动</span><i></i></a>--> 
         <a href="user.php?act=tg_login" class="item {if $action eq 'tg_login'}curs{/if}"><span>{$lang.takegoods}</span><i></i></a> 
         <a href="user.php?act=tg_order" class="item {if $action eq 'tg_order'}curs{/if}"><span>{$lang.takegoods_order}</span><i></i></a>
       </div>
