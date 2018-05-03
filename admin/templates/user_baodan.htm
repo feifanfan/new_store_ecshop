@@ -1,0 +1,84 @@
+{include file="pageheader.htm"} {insert_scripts files="../js/utils.js,listtable.js,placeholder.js"}
+
+<form method="POST" action="" name="listForm" onsubmit="return confirm_bath()">
+	<!-- start users list -->
+	<div class="list-div" id="listDiv">
+		<!--用户列表部分-->
+		<table cellpadding="3" cellspacing="1">
+		<tr>
+			<th>
+				<input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox">
+				<a href="javascript:listTable.sort('user_id'); ">{$lang.record_id}</a>
+				{$sort_user_id}
+			</th>
+			<th>会员名称</th>
+			<th>报单中心名称</th>
+			<th>现金</th>
+			<th>升级币</th>
+			<th>报单状态</th>
+			<th>报单时间</th>
+			<th>操作</th>
+		</tr>
+			
+			{foreach from=$user_list item=user}
+			<tr>
+				<td>{$user.id}</td>
+				<td>{$user.user_name}</td>
+				<td>{$user.bd_id}</td>
+				<td>{$user.bd_money}</td>
+				<td>{$user.bd_upgrade}</td>
+				<td>{if $user.bd_status eq 1}通过{else if $user_bd_status eq 0}等待审核{/if}</td>
+				<td>{$user.bd_time}</td>
+				<td>{if $user.bd_status eq 0}<a href="users.php?act=dobaodan&id={$user.id}">审核{else if $user_bd_status eq 1}已审核{/if}</a></td>
+			</tr>
+			{/foreach}
+
+		<tr>
+			<td align="right" nowrap="true" colspan="11">
+				<div id="turn-page">
+				  {$lang.total_records} <span id="totalRecords">{$record_count}</span>
+				  {$lang.total_pages} <span id="totalPages">{$page_count}</span>
+				  {$lang.page_current} <span id="pageCurrent">{$filter.page}</span>
+				  {$lang.page_size} <input type='text' size='3' id='pageSize' value="{$filter.page_size}" onkeypress="return listTable.changePageSize(event)" />
+				  <span id="page-link">
+				    {literal}<a href="javascript:gotoPage(1)">{/literal}{$lang.page_first}</a>
+				    {literal}<a href="javascript:gotoPage(-1)">{/literal}{$lang.page_prev}</a>
+				    {literal}<a href="javascript:gotoPage('next')">{/literal}{$lang.page_next}</a>
+				    {literal}<a href="javascript:gotoPage({$page_count})">{/literal}{$lang.page_last}</a>
+				    <select id="gotoPage" onchange="javascript:gotoPage(this.value)">
+				      {create_pages count=$page_count page=$filter.page}
+				    </select>
+				  </span>
+				</div>
+			</td>
+		</tr>
+		</table>
+ 
+</div>
+</form>
+<script type="text/javascript" language="JavaScript">
+	var page = 0;
+	var page_current = {$filter.page};
+	var page_count ={$page_count};
+	function gotoPage(arg){
+		if(arg<0){
+			var m_page = page_current-1;
+			if(m_page>0){
+				gopage(m_page);
+			}
+		}else if(arg=='next'){
+			var m_page = page_current+1;
+			if(m_page<=page_count){
+				gopage(m_page);
+			}
+		}else{
+			gopage(arg);
+		}
+	}
+	function gopage(page){
+		 var args = "?act=baodan&page="+page;
+		 var url = location.href.lastIndexOf("?") == -1 ? location.href.substring((location.href.lastIndexOf("/")) + 1) : location.href.substring((location.href.lastIndexOf("/")) + 1, location.href.lastIndexOf("?"));
+		 window.location.href=url+args;
+		
+	}
+</script>

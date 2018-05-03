@@ -1773,7 +1773,7 @@ function value_of_integral($integral)
 function integral_of_value($value)
 {
     $scale = floatval($GLOBALS['_CFG']['integral_scale']);
-
+   // var_dump($scale > 0 ? round($value / $scale * 100) : 0);die;
     return $scale > 0 ? round($value / $scale * 100) : 0;
 }
 

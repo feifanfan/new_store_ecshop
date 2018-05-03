@@ -29,13 +29,17 @@ function ismobile(){
 
 	}
 	}
-function log_account_change_new($user_id, $user_money = 0, $user_cash = 0, $user_point = 0, $change_desc = '', $change_type = ACT_OTHER){
+function log_account_change_new($user_id, $user_money = 0, $user_cash = 0, $user_point = 0, $user_upgrade=0,$pay_points = 0,$change_desc = '', $change_type = ACT_OTHER){
 	    /* 插入帐户变动记录 */
 	    $account_log = array(
 	        'user_id'       => $user_id,
 	        'user_money'    => $user_money,
+	        'act_user_money' => $user_money,
+	        '$act_user_cash' =>$user_cash,
 	        'user_cash'  => $user_cash,
 	        'user_point'   => $user_point,
+	        'pay_points'=>$pay_points,
+	        'upgrade_point'=>$user_upgrade,
 	        'change_time'   => gmtime(),
 	        'change_desc'   => $change_desc,
 	        'change_type'   => $change_type
@@ -46,8 +50,11 @@ function log_account_change_new($user_id, $user_money = 0, $user_cash = 0, $user
 	    $sql = "UPDATE " . $GLOBALS['ecs']->table('users') .
 	            " SET user_money = user_money + ('$user_money')," .
 	            " user_cash = user_cash + ('$user_cash')," .
-	            " user_point = user_point + ('$user_point')" .
+	            " user_point = user_point + ('$user_point')," .
+	            "user_upgrade = user_upgrade+('$user_upgrade'),".
+	            "pay_points = pay_points+('$pay_points')".
 	            " WHERE user_id = '$user_id' LIMIT 1";
+	         //var_dump($sql);die;
 	    $GLOBALS['db']->query($sql);
 	}
 	
@@ -275,11 +282,11 @@ function duipeng($user_id,$amount){
 				//var_dump($parent_node_list);
 		$sql = "select user_id,side_list,deep from ".$GLOBALS['ecs']->table('users')." where deep = $user_info[deep] and node_list LIKE '%".$node_id."%' and node_list LIKE '".$node_list_array[count($side_list_array)]."%'";//√查询出所有该层的成员
 		$info = $GLOBALS['db']->getAll($sql);
-		echo "相对父亲：";
+		//echo "相对父亲：";
 		var_dump($node_id);echo "<br>";
 		$node_parent_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table("users"). " where user_id = ".$node_id);
-		echo "相对父亲的层数：".$node_parent_info;
-		echo "<br>";
+		//echo "相对父亲的层数：".$node_parent_info;
+		//echo "<br>";
 		//var_dump($info);
 		// echo "<br>";
 		//查出此时相对的父亲和边的另一边的业绩
@@ -301,15 +308,15 @@ function duipeng($user_id,$amount){
 		}else{
 			$amount = $amount;
 		}
-		echo "此次配对的金额".$amount;
+		//echo "此次配对的金额".$amount;
 		if($amount<=0)
 			return;
 		
 
-		echo "要查询的儿子：".$son['user_id'];
-		echo "<br>";
-		echo "报单人的层：".$user_info['deep'];
-		echo "<br>";
+		// echo "要查询的儿子：".$son['user_id'];
+		// echo "<br>";
+		// echo "报单人的层：".$user_info['deep'];
+		// echo "<br>";
 		//1.据此查询数据库，判断相对该父亲是否在该层有过配对，有过则只分配对碰（然后分配管理奖给该人的parent_id）；未有，则分配层碰+对碰（和管理奖）
 		//2.依据前条件，判断查询该父亲的对碰或者层碰+对碰的奖金百分比
 		echo "报单人相对该父亲的层数：".($user_info['deep']-$node_parent_info['deep']);echo "<br>";
@@ -329,14 +336,14 @@ function duipeng($user_id,$amount){
 		//查出该父亲的等级对应的字母
 		
 		$rank_word = chr($node_parent_info['user_rank']+96);
-		echo "父亲等级对应的字母：".$rank_word;echo "<br>";
+		//echo "父亲等级对应的字母：".$rank_word;echo "<br>";
 
 		$addtime = time();
 		if($have){//如果已经存在配对，则说明只能对碰
 			$achievement_word = $rank_word."_card_achievement";
 			//查询出对碰百分比
 			$achievement_per = $GLOBALS['db']->getOne("select value from ".$GLOBALS['ecs']->table('shop_config')." where code = '$achievement_word'");
-			echo "对碰百分比：".$achievement_per;
+			//echo "对碰百分比：".$achievement_per;
 			$achievement_amount_money = $amount*$achievement_per*0.8/100;
 			$achievement_amount_cash = $amount*$achievement_per*0.2/100;
 
@@ -356,14 +363,14 @@ function duipeng($user_id,$amount){
 			//对碰奖
 			//插入配对表sql
 			$insert_achievement_sql = "insert into".$GLOBALS['ecs']->table("user_money_log")." (user_left,user_right,amount,parent_id,parent_deep,percent,addtime) values (".$user_left.",".$user_right.",".$amount.",".$node_id.",".$relative_num.",".$achievement_per.",".$addtime.")";
-			echo $insert_achievement_sql."<br>";
+			//echo $insert_achievement_sql."<br>";
 			//更新用户表sql
 			$update_achievement_sql = "update ".$GLOBALS['ecs']->table("users")." set user_money = user_money+".$achievement_amount_money.",user_cash=user_cash+".$achievement_amount_cash.",fd_num = fd_num+".$manage_amount." where user_id = ".$node_id;
-			echo $update_achievement_sql."<br>";
+			//echo $update_achievement_sql."<br>";
 			//插入资金记录表的sql
 			$change_desc = "用户".$user_id."与市场".$son['user_id']."的对碰奖";
 			$insert_achievement_account_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,user_money,act_user_money,user_cash,act_user_cash,change_time,change_desc,change_type) values (".$node_id.",".$achievement_amount_money.",".$act_achievement_amount_money.",".$achievement_amount_cash.",".$act_achievement_amount_cash.",".$addtime.",'$change_desc',99)";
-			echo $insert_achievement_account_sql."<br>";
+			//echo $insert_achievement_account_sql."<br>";
 
 			//执行sql
 			$GLOBALS['db']->query($insert_achievement_sql);
@@ -378,15 +385,15 @@ function duipeng($user_id,$amount){
 			//查询出对碰百分比
 			$achievement_per = $GLOBALS['db']->getOne("select value from ".$GLOBALS['ecs']->table('shop_config')." where code = '$achievement_word'");
 			$first_per = $GLOBALS['db']->getOne("select value from ".$GLOBALS['ecs']->table('shop_config')." where code = '$first_word'");
-			echo "对碰百分比：".$achievement_per;
+			//echo "对碰百分比：".$achievement_per;
 			$achievement_amount_money = $amount*$achievement_per*0.8/100;
 			$achievement_amount_cash = $amount*$achievement_per*0.2/100;
-			echo "层碰百分比：".$first_per;
+			//echo "层碰百分比：".$first_per;
 			//应该插入的金额
 			$first_amount_money = $amount*$first_per*0.8/100;
 			$first_amount_cash = $amount*$first_per*0.2/100;
 
-			echo "<br>";
+			//echo "<br>";
 			//每次插入之前都要调用is_fengding
 			//(1)插入user_money_log表记录
 			//(2)更新用户金额
@@ -408,11 +415,11 @@ function duipeng($user_id,$amount){
 			echo $insert_first_sql."<br>";
 			$fd_num = $first_amount_money+$first_amount_cash;
 			$update_first_sql = "update ".$GLOBALS['ecs']->table("users")." set user_money = user_money+".$first_amount_money.",user_cash=user_cash+".$first_amount_cash.",fd_num = fd_num+".$fd_num." where user_id = ".$node_id;
-			echo $update_first_sql."<br>";
+			//echo $update_first_sql."<br>";
 
 			$change_desc = "用户".$user_id."与市场".$son['user_id']."的层碰奖";
 			$insert_first_account_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,user_money,act_user_money,user_cash,act_user_cash,change_time,change_desc,change_type) values (".$node_id.",".$first_amount_money.",".$act_first_amount_money.",".$first_amount_cash.",".$act_first_amount_cash.",".$addtime.",'$change_desc',99)";
-			echo $insert_first_account_sql."<br>";
+			//echo $insert_first_account_sql."<br>";
 			//以上为层碰奖，此时要执行各条sql
 			$GLOBALS['db']->query($insert_first_sql);//插入配对表
 			$GLOBALS['db']->query($update_first_sql);//更新用户金额
@@ -432,15 +439,15 @@ function duipeng($user_id,$amount){
 			}
 			//对碰奖
 			$insert_achievement_sql = "insert into".$GLOBALS['ecs']->table("user_money_log")." (user_left,user_right,amount,parent_id,parent_deep,percent,addtime) values (".$user_left.",".$user_right.",".$amount.",".$node_id.",".$relative_num.",".$achievement_per.",".$addtime.")";
-			echo $insert_achievement_sql."<br>";
+			//echo $insert_achievement_sql."<br>";
 
 			$manage_amount = $achievement_amount_money+$achievement_amount_cash;
 			$update_achievement_sql = "update ".$GLOBALS['ecs']->table("users")." set user_money = user_money+".$achievement_amount_money.",user_cash=user_cash+".$achievement_amount_cash.",fd_num = fd_num+".$manage_amount." where user_id = ".$node_id;
-			echo $update_achievement_sql."<br>";
+			//echo $update_achievement_sql."<br>";
 
 			$change_desc = "用户".$user_id."与市场".$son['user_id']."的对碰奖";
 			$insert_achievement_account_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,user_money,act_user_money,user_cash,act_user_cash,change_time,change_desc,change_type) values (".$node_id.",".$achievement_amount_money.",".$act_achievement_amount_money.",".$achievement_amount_cash.",".$act_achievement_amount_cash.",".$addtime.",'$change_desc',99)";
-			echo $insert_achievement_account_sql."<br>";
+			//echo $insert_achievement_account_sql."<br>";
 
 
 			//执行sql
@@ -452,8 +459,6 @@ function duipeng($user_id,$amount){
 			manage($node_id,$manage_amount);
 		}
 
-		echo "<br>";
-		echo "<br>";
 		//$son和$user_id都要减去业绩
 		$son_sub_sql = "update ".$GLOBALS['ecs']->table("users")." set team_total = team_total-".$amount." where user_id = ".$son['user_id'];
 		$user_sub_sql = "update ".$GLOBALS['ecs']->table("users")." set team_total = team_total-".$amount." where user_id = ".$user_id;

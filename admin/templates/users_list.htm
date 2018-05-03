@@ -43,9 +43,11 @@
 					{$sort_mobile_phone}
 				</th>
 				<!-- #代码增加2014-12-23 by bbs.hongyuvip.com  _end -->
+				<th>等级</th>
 				<th>收益</th>
 				<th>重消</th>
 				<th>企业币</th>
+				<th>升级币</th>
 				<!-- <th>{$lang.pay_points}</th> -->
 				<th>
 					<a href="javascript:listTable.sort('reg_time'); ">{$lang.reg_date}</a>
@@ -78,9 +80,11 @@
 					{/if}{/if} -->
 					<span onclick="listTable.edit(this, 'edit_mobile_phone', {$user.user_id})">{$user.mobile_phone}</span>
 				</td>
+				<td>{if $user.user_rank eq 1}普卡{elseif $user.user_rank eq 2}银卡{elseif $user.user_rank eq 3}金卡{else if$user.user_rank eq 4}钻卡{/if}</td>
 				<td>{$user.user_money}</td>
 				<td>{$user.user_cash}</td>
 				<td>{$user.user_point}</td>
+				<td>{$user.user_upgrade}</td>
 				<!-- <td>{$user.pay_points}</td> -->
 				<td align="center">{$user.reg_time}</td>
 				<td id="user_status_{$user.user_id}">

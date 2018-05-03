@@ -568,7 +568,7 @@ function action_register ()
 			$user_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_name = '$username'");
 			// $user_parent = isset($_POST['user_parent'])?trim($_POST['user_parent']):'';
 			// $user_bd = isset($_POST['bd_phone'])?trim($_POST['bd_phone']):'';
-			// $user_rank = isset($_POST['user_rank'])?trim($_POST['user_rank']):'';
+			 $user_rank = isset($_POST['user_rank'])?trim($_POST['user_rank']):'';
 			// $user_node = isset($_POST['user_node'])?trim($_POST['user_node']):'';
 			$node_son = $GLOBALS['db']->getOne("select count(*) from ".$GLOBALS['ecs']->table('users')." where node_id = ".$user_node);
 			$node_info =$GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_node);
@@ -610,7 +610,7 @@ function action_register ()
 				$parent_id = $user_parent;
 				$parent_list = $parent_info['parent_list'].",".$user_info['user_id'];
 			}
-			$sql = "UPDATE ".$GLOBALS['ecs']->table("users")." set parent_id = '$parent_id',parent_list='$parent_list',node_id='$node_id',node_list='$node_list',parent_side='$parent_side',side_list='$side_list',bd_id='$bd_id',deep='$deep' where user_id = ".$user_info['user_id'];
+			$sql = "UPDATE ".$GLOBALS['ecs']->table("users")." set parent_id = '$parent_id',parent_list='$parent_list',node_id='$node_id',node_list='$node_list',parent_side='$parent_side',side_list='$side_list',bd_id='$bd_id',deep='$deep',user_rank='$user_rank' where user_id = ".$user_info['user_id'];
 			$GLOBALS['db']->query($sql);
 			/* 把新注册用户的扩展信息插入数据库 */
 			$sql = 'SELECT id FROM ' . $ecs->table('reg_fields') . ' WHERE type = 0 AND display = 1 ORDER BY dis_order, id'; // 读出所有自定义扩展字段的id

@@ -23,7 +23,7 @@ class cls_session
     var $db             = NULL;
     var $session_table  = '';
 
-    var $max_life_time  = 1800; // SESSION 杩囨湡鏃堕棿
+    var $max_life_time  = 6400; // SESSION 杩囨湡鏃堕棿
 
     var $session_name   = '';
     var $session_id     = '';
@@ -107,6 +107,7 @@ class cls_session
 
         if ($this->session_id)
         {
+            
             $this->load_session();
         }
         else

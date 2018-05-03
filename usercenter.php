@@ -320,9 +320,7 @@ function action_default ()
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
 	$user_id = $_SESSION['user_id'];
-	var_dump($user_id);
 	include_once (ROOT_PATH . 'includes/lib_clips.php');
-	var_dump(get_user_default($user_id));die;
 	if($rank = get_rank_info())
 	{
 		$smarty->assign('rank_name', sprintf($_LANG['your_level'], $rank['rank_name']));
@@ -1415,7 +1413,10 @@ function action_ji_huo(){
 	}
 	$sql = "update " . $ecs->table('users') . " set user_status = 1,user_point = user_point+".$num.",user_upgrade = user_upgrade-".$num." where user_id='$user_id' ";
 	$res = $db->query($sql);
-
+	team_total($user_id,$num);//业绩插入
+	//执行分配奖金的算法
+	duipeng($user_id,$num);//碰对奖和管理奖
+	jiandian($user_id,$num);//见点奖
 	$change_desc = $log['user_name'].'用了'.$num.'的激活币';
 	$change_time = time();
 	$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,upgrade_point) values ( '$user_id','$change_time','$change_desc','99','-$num')";
@@ -1614,6 +1615,11 @@ function action_act_level(){
 	$log = $db->getOne($sqls);
 
 	$change_desc = $log.'用了'.$num.'的升级币';
+	team_total($user_id,$num);//业绩插入
+	//执行分配奖金的算法
+	duipeng($user_id,$num);//碰对奖和管理奖
+	jiandian($user_id,$num);//见点奖
+
 	$change_time = time();
 	$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,upgrade_point) values ( '$user_id','$change_time','$change_desc','99','-$num')";
 	$db->getOne($insert_sql);
