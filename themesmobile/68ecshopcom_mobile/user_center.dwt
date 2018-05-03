@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{$page_title}</title>
-    <meta name="description" content="这是一个 index 页面">
+    <meta name="description" content="">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
@@ -51,7 +51,7 @@
                         <li><a href="usercenter.php?act=logout"><span class="am-icon-power-off"></span> 退出</a></li>
                     </ul>
                 </li>
-                <li><a href="/usercenter.php" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+                <li><a href="user.php?act=logout" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
             </ul>
         </div>
     </header>
@@ -90,6 +90,13 @@
                         <a href="usercenter.php?act=bd_list" class="nav-link {if $action eq 'bd_list'} active {/if} {if $action eq 'edit_list'} active {/if}">
                             <i class="am-icon-wpforms"></i>
                             <span>报单中心</span>
+                            <i class="tpl-left-nav-content tpl-badge-danger"></i>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="usercenter.php?act=tupu" class="nav-link {if $action eq 'tupu'} active {/if}">
+                            <i class="am-icon-wpforms"></i>
+                            <span>图谱</span>
                             <i class="tpl-left-nav-content tpl-badge-danger"></i>
                         </a>
                     </li>
@@ -136,13 +143,13 @@
                         </a>
                     </li>
 
-                    <li class="tpl-left-nav-item">
+                    <!--<li class="tpl-left-nav-item">
                         <a href="usercenter.php?act=login" class="nav-link">
                             <i class="am-icon-key"></i>
                             <span>登录</span>
 
                         </a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>
@@ -350,6 +357,82 @@
                     </div>
                 </div>
                 <div class="tpl-alert"></div>
+            </div>  
+        </div>
+        
+        {/if}
+
+        <!-- 图谱 -->
+        {if $action eq 'tupu'}
+        <div class="tpl-content-wrapper">
+            <div style="margin-bottom:8px;" class="tpl-content-page-title">
+                图谱
+            </div>
+                <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        <span class="am-icon-code"></span> 列表
+                    </div>
+                </div>
+                <div class="tpl-block">
+                    
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <style type="text/css">
+                                .content{margin:0 auto;width: 60%;height: 600px;}
+                                .lspan{width: 100%;height: 100px;float: left;}
+                                .llspan{width: 50%;height: 100px;float: left;}
+                                .first{width: 100%;float: left;text-align: center;}
+                                .second{width:50%;float: left;text-align: center;}
+                                .third{width:25%;float: left;text-align: center;}
+                                button{color: #fff;width: 100px;height: 30px;background-color: #CCCCCC;}
+                            </style>
+                            <div style="width: 100%;float: left;height: auto;">
+                                <div class="content">
+                                    <div class="first">
+                                        <button {if $user[0]['user_status']}style="border:1;border-color:#6495ED;background-color:#6495ED"{else}style="border:0;"{/if}>{$user[0][user_name]}</button>
+                                    </div>
+
+                                    <span class="lspan"><img src="images/tupu_line.png" style="width: 100%;height: 100px;"></span>
+
+                                    <div class="second">
+                                        <button {if $user[1] eq null} style="border:0;background-color: #fff"{/if}{if $user[1]['user_status']}style="border:1;border-color:#6495ED;background-color:#6495ED"{else}style="border:0;"{/if}{if $user[1] neq null} onclick="window.location='usercenter.php?act=tupu&user_id={$user[1][user_id]}'"{/if}>{$user[1][user_name]}</button>
+                                    </div>
+
+                                    <div class="second">
+                                        <button {if $user[2] eq null} style="border:0;background-color: #fff"{/if}{if $user[2]['user_status']}style="border:1;border-color:#6495ED;background-color:#6495ED"{else}style="border:0;"{/if}{if $user[2] neq null} onclick="window.location='usercenter.php?act=tupu&user_id={$user[2][user_id]}'"{/if}>{$user[2][user_name]}</button>
+                                    </div>
+
+                                    <span class="lspan">
+                                        <span class="llspan">
+                                            <img src="images/tupu_line.png" style="width: 100%;height: 100px;">
+                                        </span>
+                                        <span class="llspan">
+                                            <img src="images/tupu_line.png" style="width: 100%;height: 100px;">
+                                        </span>
+                                    </span>
+
+                                    <div class="third">
+                                        <button {if $user[3] eq null} style="border:0;background-color: #fff" {/if}{if $user[3]['user_status']}style="border:1;border-color:#6495ED;background-color:#6495ED"{else}style="border:0;"{/if}{if $user[3] eq null} {if $user[3][user_id] neq ''} onclick="window.location='usercenter.php?act=tupu&user_id={$user[3][user_id]}'"{/if}{/if}>{$user[3][user_name]}</button>
+                                    </div>
+
+                                    <div class="third">
+                                        <button {if $user[4] eq null} style="border:0;background-color: #fff"{/if}{if $user[4]['user_status']}style="border:1;border-color:#6495ED;background-color:#6495ED"{else}style="border:0;"{/if}{if $user[4] eq null} {if $user[4][user_id] neq ''} onclick="window.location='usercenter.php?act=tupu&user_id={$user[4][user_id]}'"{/if}{/if}>{$user[4][user_name]}</button>
+                                    </div>
+
+                                    <div class="third">
+                                        <button {if $user[5] eq null} style="border:0;background-color: #fff"{/if}{if $user[5]['user_status']}style="border:1;border-color:#6495ED;background-color:#6495ED"{else}style="border:0;"{/if}{if $user[5] neq null} {if $user[5][user_id] neq ''} onclick="window.location='usercenter.php?act=tupu&user_id={$user[5][user_id]}'"{/if}{/if}>{$user[5][user_name]}</button>
+                                    </div>
+
+                                    <div class="third">
+                                        <button {if $user[6] eq null} style="border:0;background-color: #fff"{/if}{if $user[6]['user_status']}style="border:1;border-color:#6495ED;background-color:#6495ED"{else}style="border:0;"{/if}{if $user[6] neq null} {if $user[6][user_id] neq ''} onclick="window.location='usercenter.php?act=tupu&user_id={$user[6][user_id]}'"{/if}{/if}>{$user[6][user_name]}</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>  
         </div>
         
@@ -693,7 +776,7 @@
                             <a href="usercenter.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | 
                             <a href="usercenter.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | 
                             <a href="usercenter.php?act=zijin" class="f6">{$lang.view_application}</a>
-			            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="tpl-block">
@@ -783,7 +866,7 @@
                             <a href="usercenter.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | 
                             <a href="usercenter.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | 
                             <a href="usercenter.php?act=zijin" class="f6">{$lang.view_application}</a>
-			            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="tpl-block">

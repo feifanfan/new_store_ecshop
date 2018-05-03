@@ -295,6 +295,7 @@ $_LANG['03_users_list'] = '会员列表';
 $_LANG['04_users_export'] = '会员导出'; // 代码增加 By bbs.hongyuvip.com
 
 $_LANG['04_users_add'] = '添加会员';
+$_LANG['03_users_baodan']='会员报单';
 $_LANG['04_users_meeting'] = '会员会员补贴查询';
 $_LANG['05_user_rank_list'] = '会员等级';
 $_LANG['06_list_integrate'] = '会员整合';

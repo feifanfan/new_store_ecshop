@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{$page_title}</title>
-    <meta name="description" content="这是一个 index 页面">
+    <meta name="description" content="">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
@@ -51,7 +51,7 @@
                         <li><a href="usercenter.php?act=logout"><span class="am-icon-power-off"></span> 退出</a></li>
                     </ul>
                 </li>
-                <li><a href="/usercenter.php" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+                <li><a href="user.php?act=logout" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
             </ul>
         </div>
     </header>
@@ -776,7 +776,7 @@
                             <a href="usercenter.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | 
                             <a href="usercenter.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | 
                             <a href="usercenter.php?act=zijin" class="f6">{$lang.view_application}</a>
-			            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="tpl-block">
@@ -866,7 +866,7 @@
                             <a href="usercenter.php?act=account_raply" class="f6">{$lang.surplus_type_1}</a> | 
                             <a href="usercenter.php?act=account_detail" class="f6">{$lang.add_surplus_log}</a> | 
                             <a href="usercenter.php?act=zijin" class="f6">{$lang.view_application}</a>
-			            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="tpl-block">

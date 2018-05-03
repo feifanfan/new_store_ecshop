@@ -48,7 +48,7 @@
               </li>
               <li style="width:460px;height:110px;">
                 <div class="pic"></div>
-                <p><a href="usercenter.php" class="_backAccount">管理中心</a></p>
+                <p><a href="usercenter.php" class="_backAccount"><img src="images/m_c.png" style="margin:-10px 5px"><span id="m_c" style="line-height:50px;font-size:18px;height:32px;margin-top: -10px;">&nbsp;管理中心</span></a></p>
               </li>
               <!--<li class="third">
                 <div class="title"><span>企业币</span></div>
