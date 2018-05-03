@@ -46,9 +46,16 @@
                 <div class="pic"><a><i class="user_bg"></i></a></div>
                 <p><a class="_capitalAccount">{$info.pay_points}</a></p>
               </li>
-              <li style="width:460px;height:110px;">
-                <div class="pic"></div>
-                <p><a href="usercenter.php" class="_backAccount">管理中心</a></p>
+              <style>
+                .money li .pics {
+                    height: 32px;
+                    display: inline-block;
+                }
+              </style>
+              <li style="width:460px;">
+              <div class="pics"><img src="images/m_c.png"></div>
+                <a href="usercenter.php"><span id="m_c" style="line-height:110px;font-size:18px;">管理中心</span></a>
+               
               </li>
               <!--<li class="third">
                 <div class="title"><span>企业币</span></div>

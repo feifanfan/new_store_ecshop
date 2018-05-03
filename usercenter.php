@@ -320,7 +320,9 @@ function action_default ()
 	$db = $GLOBALS['db'];
 	$ecs = $GLOBALS['ecs'];
 	$user_id = $_SESSION['user_id'];
+	var_dump($user_id);
 	include_once (ROOT_PATH . 'includes/lib_clips.php');
+	var_dump(get_user_default($user_id));die;
 	if($rank = get_rank_info())
 	{
 		$smarty->assign('rank_name', sprintf($_LANG['your_level'], $rank['rank_name']));
@@ -845,7 +847,7 @@ function action_login ()
 	}
 	
 	$smarty->assign('back_act', $back_act);
-	$smarty->display('user_login.dwt');
+	$smarty->display('user_passport.dwt');
 }
 
 // 代码增加--68ecshop--侧边栏登录 判断登录是否开启验证码
@@ -1399,20 +1401,25 @@ function action_ji_huo(){
 	$jin = $GLOBALS['db']->getOne("select value from ecs_shop_config where code='c_card_buynum'");
 	$zuan = $GLOBALS['db']->getOne("select value from ecs_shop_config where code='d_card_buynum'");
 	
-	$sqls = "select user_rank from ecs_users where user_id =$user_id";
-	$log = $db->getOne($sqls);
+	$sqls = "select user_rank,user_name from ecs_users where user_id =$user_id";
+	$log = $db->getRow($sqls);
 
-	if($log == 1){
+	if($log['user_rank'] == 1){
 		$num = $pu;
-	}elseif($log == 2){
+	}elseif($log['user_rank'] == 2){
 		$num = $yin;
-	}elseif($log == 3){
+	}elseif($log['user_rank'] == 3){
 		$num = $jin;
-	}elseif($log == 4){
+	}elseif($log['user_rank'] == 4){
 		$num = $zuan;
 	}
 	$sql = "update " . $ecs->table('users') . " set user_status = 1,user_point = user_point+".$num.",user_upgrade = user_upgrade-".$num." where user_id='$user_id' ";
 	$res = $db->query($sql);
+
+	$change_desc = $log['user_name'].'用了'.$num.'的激活币';
+	$change_time = time();
+	$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,upgrade_point) values ( '$user_id','$change_time','$change_desc','99','-$num')";
+	$db->query($insert_sql);
 	
 	if($res){
 		show_message('激活成功', '返回上一页', 'usercenter.php');
@@ -1552,15 +1559,15 @@ function action_act_exchange_check(){
 	if($res){
 		if($cash !=0 && $qiyebi !=0){
 			$change_desc = $log.'用了'.$cash.'的重销币和'.$qiyebi.'企业币转为了商城积分';
-			$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,user_cash,user_point,pay_points) values ( '$user_id','$change_time','$change_desc','99','$cash','$qiyebi','$zong')";
+			$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,user_cash,user_point,pay_points) values ( '$user_id','$change_time','$change_desc','99','-$cash','-$qiyebi','$zong')";
 			$db->getOne($insert_sql);
 		}elseif($cash != 0){
 			$change_desc = $log.'用了'.$cash.'的重销币转为了商城积分';
-			$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,user_cash,pay_points) values ( '$user_id','$change_time','$change_desc','99','$cash','$zong')";
+			$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,user_cash,pay_points) values ( '$user_id','$change_time','$change_desc','99','-$cash','$zong')";
 			$db->getOne($insert_sql);
 		}elseif($qiyebi != 0){
 			$change_desc = $log.'用了'.$qiyebi.'的企业币转为了商城积分';
-			$insert_sqls = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,user_point,pay_points) values ( '$user_id','$change_time','$change_desc','99','$qiyebi','$zong')";
+			$insert_sqls = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,user_point,pay_points) values ( '$user_id','$change_time','$change_desc','99','-$qiyebi','$zong')";
 			$db->getOne($insert_sqls);
 		}
 		
@@ -1608,7 +1615,7 @@ function action_act_level(){
 
 	$change_desc = $log.'用了'.$num.'的升级币';
 	$change_time = time();
-	$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,upgrade_point) values ( '$user_id','$change_time','$change_desc','99','$num')";
+	$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,upgrade_point) values ( '$user_id','$change_time','$change_desc','99','-$num')";
 	$db->getOne($insert_sql);
 
 	if($res){
@@ -2245,7 +2252,7 @@ function action_qpassword_name ()
 	$user_id = $_SESSION['user_id'];
 	
 	// 显示输入要找回密码的账号表单
-	$smarty->display('user_login.dwt');
+	$smarty->display('user_passport.dwt');
 }
 
 /* 密码找回-->根据注册用户名取得密码提示问题界面 */
@@ -2292,7 +2299,7 @@ function action_get_passwd_question ()
 	}
 	
 	$smarty->assign('passwd_question', $_LANG['passwd_questions'][$user_question_arr['passwd_question']]);
-	$smarty->display('user_login.dwt');
+	$smarty->display('user_passport.dwt');
 }
 
 /* 密码找回-->根据提交的密码答案进行相应处理 */
@@ -2339,7 +2346,7 @@ function action_check_answer ()
 		unset($_SESSION['temp_user_name']);
 		$smarty->assign('uid', $_SESSION['user_id']);
 		$smarty->assign('action', 'reset_password');
-		$smarty->display('user_login.dwt');
+		$smarty->display('user_passport.dwt');
 	}
 }
 
