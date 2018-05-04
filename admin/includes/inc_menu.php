@@ -137,6 +137,7 @@ $modules['10_priv_admin']['admin_role'] = 'role.php?act=list';
 // $modules['10_priv_admin']['suppliers_list'] = 'suppliers.php?act=list'; // 供货商
 
 $modules['11_system']['01_shop_config'] = 'shop_config.php?act=list_edit';
+$modules['11_system']['shop_config_bcb'] = 'shop_config.php?act=bcb';
 //$modules['11_system']['shop_authorized'] = 'license.php?act=list_edit'; //授权证书
 $modules['11_system']['02_payment_list'] = 'payment.php?act=list';
 $modules['11_system']['03_shipping_list'] = 'shipping.php?act=list';

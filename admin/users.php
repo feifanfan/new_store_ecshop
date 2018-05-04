@@ -1157,9 +1157,8 @@ elseif ($_REQUEST['act'] == 'aff_list')
 	$smarty->display('affiliate_list.htm');
 }
 elseif ($_REQUEST['act'] == 'tupu1') {
-	jiandian(28,1000);
 
-	//duipeng(28,1000);
+	duipeng(28,1000);
 	//collide_point(29,3000,12544512);
 	//team_total(28,100);
 }

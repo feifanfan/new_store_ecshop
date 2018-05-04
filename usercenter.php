@@ -354,6 +354,8 @@ function action_default ()
 	                                                // print_r(get_user_reminding($user_id));
 	$smarty->assign('user_notice', $_CFG['user_notice']);
 	$smarty->assign('prompt', get_user_prompt($user_id)); // 获取用户参与活动信息
+	$host = $_SERVER['HTTP_HOST'];
+	$smarty->assign('host',$host);
 	$smarty->display('user_center.dwt');
 }
 
@@ -1417,6 +1419,7 @@ function action_ji_huo(){
 	//执行分配奖金的算法
 	duipeng($user_id,$num);//碰对奖和管理奖
 	jiandian($user_id,$num);//见点奖
+	baodan($user_id,$num);
 	$change_desc = $log['user_name'].'用了'.$num.'的激活币';
 	$change_time = time();
 	$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,change_time,change_desc,change_type,upgrade_point) values ( '$user_id','$change_time','$change_desc','99','-$num')";

@@ -266,8 +266,7 @@ function collide_point($user_id,$amount,$order_sn){
 }
 //cengpeng
 function duipeng($user_id,$amount){
-
-
+	$ys_amount = $amount;
 	$user_info =$GLOBALS['db']->getRow("select parent_id,node_id,deep,user_rank,node_list,side_list from ".$GLOBALS['ecs']->table('users') ." where user_id = ".$user_id);
 	if(empty($user_info)||$user_info=='')
 		return;
@@ -283,7 +282,7 @@ function duipeng($user_id,$amount){
 		$sql = "select user_id,side_list,deep from ".$GLOBALS['ecs']->table('users')." where deep = $user_info[deep] and node_list LIKE '%".$node_id."%' and node_list LIKE '".$node_list_array[count($side_list_array)]."%'";//√查询出所有该层的成员
 		$info = $GLOBALS['db']->getAll($sql);
 		//echo "相对父亲：";
-		var_dump($node_id);echo "<br>";
+		//var_dump($node_id);echo "<br>";
 		$node_parent_info = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table("users"). " where user_id = ".$node_id);
 		//echo "相对父亲的层数：".$node_parent_info;
 		//echo "<br>";
@@ -300,20 +299,26 @@ function duipeng($user_id,$amount){
 
 
 		$son = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table("users")." where node_id = ".$node_id." and parent_side=".$mb_son_side);
-
+		
 		$son_team_total = $GLOBALS['db']->getOne("select team_total from ".$GLOBALS['ecs']->table("users")." where user_id = ".$son['user_id']);
-
+		$my_team_total = $GLOBALS['db']->getOne("select team_total from ".$GLOBALS['ecs']->table("users")." where user_id = ".$user_id);
+		if($my_team_total<=$ys_amount){
+			$amount = $my_team_total;
+		}
+		
 		if($amount >=$son_team_total){
 			$amount = $son_team_total;
 		}else{
 			$amount = $amount;
 		}
+		if($amount<=0){
+			$amount = $ys_amount;
+			$node_id = $GLOBALS['db']->getOne("select node_id from ".$GLOBALS['ecs']->table('users') ." where user_id = ".$node_id);
+			continue;
+		}
 		//echo "此次配对的金额".$amount;
-		if($amount<=0)
-			return;
 		
-
-		// echo "要查询的儿子：".$son['user_id'];
+		echo "要查询的儿子：".$son['user_id'];
 		// echo "<br>";
 		// echo "报单人的层：".$user_info['deep'];
 		// echo "<br>";
@@ -365,11 +370,11 @@ function duipeng($user_id,$amount){
 			$insert_achievement_sql = "insert into".$GLOBALS['ecs']->table("user_money_log")." (user_left,user_right,amount,parent_id,parent_deep,percent,addtime) values (".$user_left.",".$user_right.",".$amount.",".$node_id.",".$relative_num.",".$achievement_per.",".$addtime.")";
 			//echo $insert_achievement_sql."<br>";
 			//更新用户表sql
-			$update_achievement_sql = "update ".$GLOBALS['ecs']->table("users")." set user_money = user_money+".$achievement_amount_money.",user_cash=user_cash+".$achievement_amount_cash.",fd_num = fd_num+".$manage_amount." where user_id = ".$node_id;
+			$update_achievement_sql = "update ".$GLOBALS['ecs']->table("users")." set user_money = user_money+".$achievement_amount_money.",user_cash=user_cash+".$achievement_amount_cash.",fd_num = fd_num+".$manage_amount.",jiandian=jiandian+".$manage_amount." where user_id = ".$node_id;
 			//echo $update_achievement_sql."<br>";
 			//插入资金记录表的sql
-			$change_desc = "用户".$user_id."与市场".$son['user_id']."的对碰奖";
-			$insert_achievement_account_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,user_money,act_user_money,user_cash,act_user_cash,change_time,change_desc,change_type) values (".$node_id.",".$achievement_amount_money.",".$act_achievement_amount_money.",".$achievement_amount_cash.",".$act_achievement_amount_cash.",".$addtime.",'$change_desc',99)";
+			$change_desc = "用户".$user_id."与".$node_id."的小市场的对碰奖";
+			$insert_achievement_account_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,user_money,act_user_money,user_cash,act_user_cash,change_time,change_desc,change_type) values (".$node_id.",".$achievement_amount_money.",".$act_achievement_amount_money.",".$achievement_amount_cash.",".$act_achievement_amount_cash.",".$addtime.",'$change_desc',96)";
 			//echo $insert_achievement_account_sql."<br>";
 
 			//执行sql
@@ -412,13 +417,13 @@ function duipeng($user_id,$amount){
 				$act_first_amount_cash = $first_amount_cash;
 			}
 			$insert_first_sql = "insert into".$GLOBALS['ecs']->table("user_money_log")." (user_left,user_right,amount,parent_id,parent_deep,percent,addtime) values (".$user_left.",".$user_right.",".$amount.",".$node_id.",".$relative_num.",".$first_per.",".$addtime.")";
-			echo $insert_first_sql."<br>";
+			//echo $insert_first_sql."<br>";
 			$fd_num = $first_amount_money+$first_amount_cash;
-			$update_first_sql = "update ".$GLOBALS['ecs']->table("users")." set user_money = user_money+".$first_amount_money.",user_cash=user_cash+".$first_amount_cash.",fd_num = fd_num+".$fd_num." where user_id = ".$node_id;
+			$update_first_sql = "update ".$GLOBALS['ecs']->table("users")." set user_money = user_money+".$first_amount_money.",user_cash=user_cash+".$first_amount_cash.",fd_num = fd_num+".$fd_num.",jiandian=jiandian+".$fd_num." where user_id = ".$node_id;
 			//echo $update_first_sql."<br>";
 
-			$change_desc = "用户".$user_id."与市场".$son['user_id']."的层碰奖";
-			$insert_first_account_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,user_money,act_user_money,user_cash,act_user_cash,change_time,change_desc,change_type) values (".$node_id.",".$first_amount_money.",".$act_first_amount_money.",".$first_amount_cash.",".$act_first_amount_cash.",".$addtime.",'$change_desc',99)";
+			$change_desc = "用户".$user_id."与".$node_id."的小市场的层碰奖";
+			$insert_first_account_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,user_money,act_user_money,user_cash,act_user_cash,change_time,change_desc,change_type) values (".$node_id.",".$first_amount_money.",".$act_first_amount_money.",".$first_amount_cash.",".$act_first_amount_cash.",".$addtime.",'$change_desc',95)";
 			//echo $insert_first_account_sql."<br>";
 			//以上为层碰奖，此时要执行各条sql
 			$GLOBALS['db']->query($insert_first_sql);//插入配对表
@@ -442,19 +447,18 @@ function duipeng($user_id,$amount){
 			//echo $insert_achievement_sql."<br>";
 
 			$manage_amount = $achievement_amount_money+$achievement_amount_cash;
-			$update_achievement_sql = "update ".$GLOBALS['ecs']->table("users")." set user_money = user_money+".$achievement_amount_money.",user_cash=user_cash+".$achievement_amount_cash.",fd_num = fd_num+".$manage_amount." where user_id = ".$node_id;
+			$update_achievement_sql = "update ".$GLOBALS['ecs']->table("users")." set user_money = user_money+".$achievement_amount_money.",user_cash=user_cash+".$achievement_amount_cash.",fd_num = fd_num+".$manage_amount.",jiandian=jiandian+".$manage_amount." where user_id = ".$node_id;
 			//echo $update_achievement_sql."<br>";
 
 			$change_desc = "用户".$user_id."与市场".$son['user_id']."的对碰奖";
-			$insert_achievement_account_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,user_money,act_user_money,user_cash,act_user_cash,change_time,change_desc,change_type) values (".$node_id.",".$achievement_amount_money.",".$act_achievement_amount_money.",".$achievement_amount_cash.",".$act_achievement_amount_cash.",".$addtime.",'$change_desc',99)";
+			$insert_achievement_account_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_id,user_money,act_user_money,user_cash,act_user_cash,change_time,change_desc,change_type) values (".$node_id.",".$achievement_amount_money.",".$act_achievement_amount_money.",".$achievement_amount_cash.",".$act_achievement_amount_cash.",".$addtime.",'$change_desc',96)";
 			//echo $insert_achievement_account_sql."<br>";
 
 
 			//执行sql
 			$GLOBALS['db']->query($insert_achievement_sql);
 			$GLOBALS['db']->query($update_achievement_sql);
-			$GLOBALS['db']->query($insert_achievement_account_sql);
-
+			$GLOBALS['db']->query($insert_achievement_account_sql); 
 			//碰对完成，管理奖
 			manage($node_id,$manage_amount);
 		}
@@ -506,9 +510,9 @@ function manage($user_id,$amount){
 		$user_cash = $zong * 0.2;
 		$change_desc = '第'.$cengshu.'代'.$user_rank['user_name'].'的管理奖';
 		$change_time = time();
-		$up_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$user_money.",user_cash=user_cash+".$user_cash.",fd_num=fd_num+".$zong." where user_id = ".$parent_id;
+		$up_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$user_money.",user_cash=user_cash+".$user_cash.",fd_num=fd_num+".$zong.",jiandian=jiandian+".$zong." where user_id = ".$parent_id;
 		
-		$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_money,act_user_money,user_cash,act_user_cash,change_desc,change_time,user_id,change_type) values ( '$user_money','$act_user_money','$user_cash','$act_user_cash','$change_desc','$change_time','$parent_id','99')";
+		$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_money,act_user_money,user_cash,act_user_cash,change_desc,change_time,user_id,change_type) values ( '$user_money','$act_user_money','$user_cash','$act_user_cash','$change_desc','$change_time','$parent_id','97')";
 		$GLOBALS['db']->query($up_sql);
 		$GLOBALS['db']->query($insert_sql);	
 		$parent_id = $GLOBALS['db']->getOne("select parent_id from ".$GLOBALS['ecs']->table('users')." where user_id=".$parent_id);
@@ -526,7 +530,29 @@ function minus_team_total($user_id,$amount){
 	$sql = "update ".$GLOBALS['ecs']->table('users')." set team_total = team_total-".$amount." where user_id = ".$user_id;
 		$GLOBALS['db']->query($sql);
 }
+function baodan($user_id,$amount){
+	$bd_id = $GLOBALS['db']->getOne("select bd_id from ".$GLOBALS['ecs']->table('users')." where user_id = ".$user_id);
+	$zong  = $amount*5/100;
+	$act_user_money = $zong * 0.8;
+	$act_user_cash = $zong * 0.2;
+	$fengding = is_fengding($user_id);
+	if($zong>$fengding){
+			$zong  = $fengding;
+		}else{
+			$zong=$zong;
+		}
+	$user_money = $zong*0.8;
+	$user_cash = $zong*0.2;
 
+	if($bd_id){
+		$change_desc='用户ID'.$user_id."提供的报单费";
+		$change_time = time();
+		$up_sql="update ".$GLOBALS['ecs']->table('users') ." set user_money = user_money+".$user_money.",user_cash=user_cash+".$user_cash." ,fd_num=fd_num+".$zong.",jiandian=jiandian+".$zong." where user_id = ".$bd_id;
+		$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_money,act_user_money,user_cash,act_user_cash,change_desc,change_time,user_id,change_type) values ( '$user_money','$act_user_money','$user_cash','$act_user_cash','$change_desc','$change_time','$bd_id','94')";
+		$GLOBALS['db']->query($up_sql);
+		$GLOBALS['db']->query($insert_sql);
+	}
+}
 
 function store_self_bonus($user_id,$amount,$order_sn){
 	$add_user_id = $GLOBALS['db']->getOne("SELECT s.user_id from ".$GLOBALS['ecs']->table('supplier')." as s LEFT JOIN ".$GLOBALS['ecs']->table('pickup_point')." as p on s.supplier_id = p.supplier_id LEFT JOIN ".$GLOBALS['ecs']->table('order_info')." as o ON o.pickup_point=p.id WHERE o.order_sn=".$order_sn);
@@ -571,7 +597,7 @@ function jiandian($user_id,$amount){
 	for ($i=1; $i <count($node_list_array); $i++) { 
 
 		if($i>20){return;}		
-		$zong = $amount*0.05;
+		$zong = $amount*0.005;
 		$act_money = $zong*0.8;
 		$act_cash = $zong*0.2;
 
@@ -595,7 +621,7 @@ function jiandian($user_id,$amount){
 			$up_sql = "update ".$GLOBALS['ecs']->table('users')." set user_money = user_money+".$money.",user_cash=user_cash+".$cash.",fd_num=fd_num+".$zong.",jiandian=jiandian + " .$zong." where user_id = ".$node_list_array[$i];
 			$change_time = time();
 			$desc = $user_id.'提供的第'.$i."层见点奖";
-			$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_money,act_user_money,user_cash,act_user_cash,change_desc,change_time,user_id,change_type) values ( '$money','$act_money','$cash','$act_cash','$desc','$change_time','$node_list_array[$i]','99')";
+			$insert_sql = "insert into ".$GLOBALS['ecs']->table("account_log")." (user_money,act_user_money,user_cash,act_user_cash,change_desc,change_time,user_id,change_type) values ( '$money','$act_money','$cash','$act_cash','$desc','$change_time','$node_list_array[$i]','98')";
 			$GLOBALS['db']->query($up_sql);
 			$GLOBALS['db']->query($insert_sql);
 		}

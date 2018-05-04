@@ -1,0 +1,49 @@
+<!-- $Id: group_buy_info.htm 14216 2015-02-10 02:27:21Z derek $ -->
+{include file="pageheader.htm"} {insert_scripts files="../js/utils.js"}
+
+<style type="text/css">
+label.error {
+	color: red;
+	background: url(./images/warning_small.gif) no-repeat;
+	padding-left: 18px;
+}
+
+label.success {
+	background: url(./images/yes.gif) no-repeat;
+	padding-left: 18px;
+}
+
+#btn_visit{
+	background: #24a0d6 none repeat scroll 0 0;
+    border: medium none;
+    color: #fff;
+    cursor: pointer;
+    margin: 2px;
+    padding: 7px 15px;
+}
+</style>
+	<div class="main-div">
+		<table id="group-table" cellspacing="1" cellpadding="3" width="100%">
+			<tr>
+				<td class="label">收入</td>
+				<td>
+					{$shouru}
+				</td>
+			</tr>
+			<tr>
+				<td class="label">奖金支出</td>
+				<td>
+					{$bc}
+				</td>
+			</tr>
+			<tr>
+				<td class="label">拨出率</td>
+				<td>
+					{$per}%
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+{include file="pagefooter.htm"}

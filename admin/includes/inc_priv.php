@@ -105,6 +105,7 @@ $purview['third_customer'] = 'third_customer'; // 三方客服
                                                      
 // 商店设置权限
 $purview['01_shop_config'] = 'shop_config';
+$purview['shop_config_bcb'] = 'shop_config';
 $purview['shop_authorized'] = 'shop_authorized';
 $purview['shp_webcollect'] = 'webcollect_manage';
 $purview['02_payment_list'] = 'payment';

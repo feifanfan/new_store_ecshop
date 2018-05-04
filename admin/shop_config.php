@@ -307,6 +307,20 @@ elseif ($_REQUEST['act'] == 'del')
     sys_msg($_LANG['save_success'], 0);
 
 }
+elseif ($_REQUEST['act'] == 'bcb') {
+    /* 检查权限 */
+    admin_priv('shop_config');
+    $shouru = $GLOBALS['db']->getOne("SELECT sum(bd_money)+sum(bd_upgrade) FROM ".$GLOBALS['ecs']->table('bd_log'));
+    $bc = $GLOBALS['db']->getOne("SELECT sum(user_cash)+SUM(user_money) FROM ".$GLOBALS['ecs']->table('account_log')."WHERE change_type>90");
+    $per = $bc/$shouru*100;
+
+    $smarty->assign('shouru',$shouru);
+    $smarty->assign('bc',$bc);
+    $smarty->assign('per',$per);
+    $smarty->assign('ur_here', "拨出率");
+    $smarty->assign('cfg', $arr[5]['vars']);
+    $smarty->display('shop_config_bcb.htm');
+}
 
 /**
  * 设置系统设置

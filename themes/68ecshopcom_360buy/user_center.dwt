@@ -103,7 +103,7 @@
                     <li class="tpl-left-nav-item">
                         <a href="usercenter.php?act=jifen_list" class="nav-link {if $action eq 'jifen_list'} active {/if}">
                             <i class="am-icon-bar-chart"></i>
-                            <span>积分变动</span>
+                            <span>奖金明细</span>
                             <i class="tpl-left-nav-content tpl-badge-danger"></i>
                         </a>
                     </li>
@@ -159,6 +159,23 @@
             <div style="margin-bottom:8px;" class="tpl-content-page-title">
                 会员中心
             </div>
+             <div class="row">
+                <div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
+                    <div class="dashboard-stat blue">
+                        <div style="height: 50px;line-height: 50px;">
+                            推广链接：<input type="text"  id="text" value="http://{$host}/register.php?parent_user_id={$info.user_id}" style="width: 50%;" /><button style="padding-left: 10px;margin-left:20px;"  onclick="copytxt()"> 复制</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function copytxt(){  
+                    var d = document.getElementById("text");  
+                    d.select();  
+                    document.execCommand("Copy");  
+                    alert("复制成功！");  
+                } 
+            </script>
             <div class="row">
                 <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
                     <div class="dashboard-stat blue">

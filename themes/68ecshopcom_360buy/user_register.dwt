@@ -91,7 +91,7 @@ function erweima1(obj, sType) { var oDiv = document.getElementById(obj); if (sTy
 							</div>
 							<!-- 推荐人 -->
 							<div class="item">
-								<input name="user_parent" type="text" id="user_parent" placeholder="请填写推荐人ID" {if $parent_info.mobile_phone neq ''} value="{$parent_info.mobile_phone}" {/if} onblur="checkuser_parent(this)"   class="text" />
+								<input name="user_parent" type="text" id="user_parent" placeholder="请填写推荐人ID" {if $parent_info.mobile_phone neq ''} value="{$parent_info.user_id}" {/if} onblur="checkuser_parent(this)"   class="text" />
 								<i class="i-phone"></i>
 								<div>
 									<span class="label" id="user_parent_notice">{if $parent_info.mobile_phone neq ''}<span style="color: rgb(0, 153, 51); ">推荐人用户名为：{$parent_info.user_name}</span> {/if}</span>

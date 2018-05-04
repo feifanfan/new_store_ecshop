@@ -240,6 +240,12 @@ elseif ($_REQUEST['act']=='update')
   $sql = "select s.supplier_id,s.add_time,s.status,u.* from " . $ecs->table('supplier') . " as s left join ". $ecs->table('users') .
   		 " as u on s.user_id=u.user_id where s.supplier_id=".$supplier_id;
   $supplier_old = $db->getRow($sql);
+  if($supplier_old['user_id']){
+	$bd_status = $GLOBALS['db']->getOne("select bd_status from ".$GLOBALS['ecs']->table('users')." where user_id = ".$supplier_old['user_id']);
+	if($bd_status==0){
+		$GLOBALS['db']->query("update ".$GLOBALS['ecs']->table('users')." set bd_status=1 where user_id=".$supplier_old['user_id']);
+	}
+	}
   if (empty($supplier_old['supplier_id']))
   {
         sys_msg('该供货商信息不存在！');
