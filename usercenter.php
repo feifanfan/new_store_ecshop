@@ -1194,11 +1194,11 @@ function action_bd_list ()
 	include_once (ROOT_PATH . 'includes/lib_clips.php');
 	$smarty->assign('info', get_user_default($user_id));
 	
-	$sql = "select COUNT(*) from ecs_users where user_id = $user_id";
+	$sql = "select COUNT(*) from ecs_users where bd_id = $user_id";
 	$record_count = $db->getOne($sql);
     $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
 	// 分页函数
-	$pager = get_pager('user.php', array( 'act' => $action ), $record_count, $page);
+	$pager = get_pager('usercenter.php', array( 'act' => $action ), $record_count, $page);
 
 	$sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where bd_id =$user_id limit $pager[start],$pager[size]";
 	// $sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where  id_list like '%$user_id,%'";

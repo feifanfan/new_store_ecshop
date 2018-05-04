@@ -462,6 +462,44 @@ function action_register ()
 		$user_bd = isset($_POST['user_bd'])?trim($_POST['user_bd']):'';
 		$user_rank = isset($_POST['user_rank'])?trim($_POST['user_rank']):'';
 		$user_node = isset($_POST['user_node'])?trim($_POST['user_node']):'';
+		$sons = $GLOBALS['db']->getAll("select user_id,node_list from ".$GLOBALS['ecs']->table('users')." where parent_id=25");
+		//var_dump($user_node);
+		$node_id_id[0] = $user_node;
+		$flag = true;
+		$x = 0;
+		while ($flag) {		
+			$node_id_id[$x+1] = $GLOBALS['db']->getOne("select user_id from ".$GLOBALS['ecs']->table('users')." where node_id = ".$node_id_id[$x]);
+			//var_dump($node_id_id[$x+1]);
+			if(!empty($node_id_id[$x+1])){
+				$flag=true;
+			}else{
+				$flag=false;
+			}
+			$x++;
+		}
+		// var_dump($node_id_id[count($node_id_id)-2]);
+		// $b = array_reverse(explode(",",$node_id_id));
+		$b =$node_id_id[count($node_id_id)-2];
+		//var_dump($b);
+		//var_dump($sons);
+		if($sons){
+			foreach ($sons as $key => $value) {
+				$a =  array_reverse(explode(",",$value['node_list']));
+				//var_dump(in_array($user_node, $a));die;
+				if(in_array($user_node, $a)){
+					$user_node = $user_node;
+					break;
+				}else{
+					$user_node = $b;
+					continue;
+				}
+			}
+		}else{
+			$user_node = $b;
+		}
+
+		//var_dump($user_node);die;
+
 		if(empty($user_rank)||$user_rank>4||$user_rank<=0){
 			show_message("请选择会员等级");
 		}
