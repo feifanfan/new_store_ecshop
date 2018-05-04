@@ -48,7 +48,7 @@
                     <ul class="am-dropdown-content">
                         <!--<li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
                         <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>-->
-                        <li><a href="usercenter.php?act=logout"><span class="am-icon-power-off"></span> 退出</a></li>
+                        <li><a href="user.php?act=logout"><span class="am-icon-power-off"></span> 退出</a></li>
                     </ul>
                 </li>
                 <li><a href="user.php?act=logout" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
@@ -748,6 +748,11 @@
                                                 <td>
                                                     {if $item.change_type eq 99}自定义
                                                     {elseif $item.change_type eq 1}提现
+                                                    {elseif $item.change_type eq 98}见点奖
+                                                    {elseif $item.change_type eq 97}管理奖
+                                                    {elseif $item.change_type eq 96}小区业绩奖
+                                                    {elseif $item.change_type eq 95}层奖
+                                                    {elseif $item.change_type eq 94}报单费
                                                     {/if}
                                                 </td>
                                                 <td>{$item.change_time|time}</td>
@@ -1159,21 +1164,27 @@
                                 <table class="am-table am-table-striped am-table-hover table-main">
                                     <thead>
                                         <tr>
-                                            <th width="20%" class="table-id">收益</th>
-                                            <th width="20%" class="table-id">重销</th>
-                                            <th width="20%" class="table-title">企业币</th>
-                                            <th width="20%" class="table-title">升级币</th>
-                                            <th width="20%" class="table-author">时间</th>
+                                            <th width="12.5%" class="table-id">ID号</th>
+                                            <th width="12.5%" class="table-id">日期</th>
+                                            <th width="12.5%" class="table-title">报单费</th>
+                                            <th width="12.5%" class="table-title">见点奖</th>
+                                            <th width="12.5%" class="table-author">层奖</th>
+                                            <th width="12.5%" class="table-author">小区业绩奖</th>
+                                            <th width="12.5%" class="table-author">重复消费</th>
+                                            <th width="12.5%" class="table-author">实发</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {foreach from=$datas item=item}
                                             <tr>
-                                                <td>{$item.user_money}</td>
-                                                <td>{$item.user_cash}</td>
-                                                <td>{$item.user_point}</td>
-                                                <td>{$item.upgrade_point}</td>
+                                                <td>{$item.user_id}</td>
                                                 <td>{$item.day}</td>
+                                                <td>{$item.baodanfei}</td>
+                                                <td>{$item.jiandian}</td>
+                                                <td>{$item.cengjiang}</td>
+                                                <td>{$item.duipeng}</td>
+                                                <td>{$item.user_cash}</td>
+                                                <td>{$item.user_money}</td>
                                             </tr>
                                         {/foreach}
                                     </tbody>

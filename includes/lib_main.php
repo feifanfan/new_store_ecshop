@@ -43,7 +43,7 @@ function update_user_info()
             " WHERE u.user_id = '$_SESSION[user_id]'";
     if ($row = $GLOBALS['db']->getRow($sql))
     {
-        var_dump($row['user_rank']);
+        
         /* 更新SESSION */
         $_SESSION['last_time']   = $row['last_login'];
         $_SESSION['last_ip']     = $row['last_ip'];
