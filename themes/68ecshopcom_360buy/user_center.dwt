@@ -1153,7 +1153,7 @@
                     </div>     
                 </div>
                 <style>
-                    .begintime{width: 120px;float:right; height: 25px;margin: 10px 10px;border:1px solid #e0e0e0;color:#666;padding: 0px 10px;}
+                    .begintime{width: 170px;float:right; height: 25px;margin: 10px 10px;border:1px solid #e0e0e0;color:#666;padding: 0px 10px;}
                     .search{width:25px;float:right; height:25px;margin: 10px 10px;border-radius:10px;}
                 </style>
                     
@@ -1207,11 +1207,11 @@
         <script>
             laydate.render({
                 elem: '#endtime', //指定元素
-                type: 'date'
+                type: 'datetime'
             });
             laydate.render({
                 elem: '#begintime', //指定元素
-                type: 'date'
+                type: 'datetime'
             });
         </script>
         <script>

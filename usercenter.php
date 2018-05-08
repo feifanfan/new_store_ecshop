@@ -1181,7 +1181,6 @@ function action_logout ()
 // 报单中心（显示页面）
 function action_bd_list ()
 {
-	
 	// 获取全局变量
 	$user = $GLOBALS['user'];
 	$_CFG = $GLOBALS['_CFG'];
@@ -1194,15 +1193,17 @@ function action_bd_list ()
 	include_once (ROOT_PATH . 'includes/lib_clips.php');
 	$smarty->assign('info', get_user_default($user_id));
 	
-	$sql = "select COUNT(*) from ecs_users where user_id = $user_id";
+	$sql = "select COUNT(*) from ecs_users where bd_id = $user_id";
 	$record_count = $db->getOne($sql);
+	// var_dump($record_count);
     $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
 	// 分页函数
-	$pager = get_pager('user.php', array( 'act' => $action ), $record_count, $page);
+	$pager = get_pager('usercenter.php', array( 'act' => $action ), $record_count, $page);
 
 	$sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where bd_id =$user_id limit $pager[start],$pager[size]";
 	// $sql = "select user_id,parent_id,user_name,user_rank,mobile_phone,user_status from ecs_users where  id_list like '%$user_id,%'";
 	$data = $db->getAll($sql);
+	// echo '<pre>';var_dump($data);die;
 	$smarty->assign('bdlist', $data);
 	$smarty->assign('pager', $pager);
 	$smarty->display('user_center.dwt');
@@ -1707,7 +1708,7 @@ function action_jifen_huizong ()
 		(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=96 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as duipeng,
 		(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=95 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as cengjiang,
 		(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=94 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as baodanfei
-		 from ecs_account_log AS a where a.change_time >= {$endtime} and a.change_time <= {$begintime} and user_id = $user_id GROUP BY day order by day desc limit $pager[start],$pager[size]";
+		 from ecs_account_log AS a where a.change_time >= {$endtime} and a.change_time <= {$begintime} and a.user_id = $user_id GROUP BY day order by day desc limit $pager[start],$pager[size]";
 		$data = $db->getAll($sqls);
 		$smarty->assign('time', ['status'=>true, 'begintime'=>$begin, 'endtime'=>$end]);
 		
@@ -1725,7 +1726,7 @@ function action_jifen_huizong ()
 				(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=96 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as duipeng,
 				(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=95 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as cengjiang,
 				(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=94 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as baodanfei
-		 		from ecs_account_log AS a where user_id = $user_id GROUP BY day order by day desc limit $pager[start],$pager[size]";
+		 		from ecs_account_log AS a where a.user_id = $user_id GROUP BY day order by day desc limit $pager[start],$pager[size]";
 		$data = $db->getAll($sql);
 	}
 	
