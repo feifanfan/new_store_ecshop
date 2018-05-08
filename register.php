@@ -462,7 +462,7 @@ function action_register ()
 		$user_bd = isset($_POST['user_bd'])?trim($_POST['user_bd']):'';
 		$user_rank = isset($_POST['user_rank'])?trim($_POST['user_rank']):'';
 		$user_node = isset($_POST['user_node'])?trim($_POST['user_node']):'';
-		$sons = $GLOBALS['db']->getAll("select user_id,node_list from ".$GLOBALS['ecs']->table('users')." where parent_id=25");
+		$sons = $GLOBALS['db']->getAll("select user_id,node_list from ".$GLOBALS['ecs']->table('users')." where parent_id=".$user_node);
 		//var_dump($user_node);
 		$node_id_id[0] = $user_node;
 		$flag = true;

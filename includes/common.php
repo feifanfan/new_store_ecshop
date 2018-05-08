@@ -540,10 +540,10 @@ function baodan($user_id,$amount){
 	$act_user_cash = $zong * 0.2;
 	$fengding = is_fengding($user_id);
 	if($zong>$fengding){
-			$zong  = $fengding;
-		}else{
-			$zong=$zong;
-		}
+		$zong  = $fengding;
+	}else{
+		$zong=$zong;
+	}
 	$user_money = $zong*0.8;
 	$user_cash = $zong*0.2;
 
