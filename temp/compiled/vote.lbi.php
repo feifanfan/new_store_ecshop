@@ -14,6 +14,7 @@
      <?php $_from = $this->_var['vote']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'title');if (count($_from)):
     foreach ($_from AS $this->_var['title']):
 ?>
+<<<<<<< HEAD
           <?php $_from = $this->_var['title']['options']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_43097700_1525759473');if (count($_from)):
     foreach ($_from AS $this->_var['item_0_43097700_1525759473']):
 ?>
@@ -23,6 +24,17 @@
             <?php else: ?>
             <p><input type="radio" name="option_id" value="<?php echo $this->_var['item_0_43097700_1525759473']['option_id']; ?>" />
             <?php echo $this->_var['item_0_43097700_1525759473']['option_name']; ?> (<?php echo $this->_var['item_0_43097700_1525759473']['percent']; ?>%)</p>
+=======
+          <?php $_from = $this->_var['title']['options']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'item_0_64071400_1525423077');if (count($_from)):
+    foreach ($_from AS $this->_var['item_0_64071400_1525423077']):
+?>
+            <?php if ($this->_var['title']['can_multi'] == 0): ?>
+            <p><input type="checkbox" name="option_id" value="<?php echo $this->_var['item_0_64071400_1525423077']['option_id']; ?>" />
+            <?php echo $this->_var['item_0_64071400_1525423077']['option_name']; ?> (<?php echo $this->_var['item_0_64071400_1525423077']['percent']; ?>%)</p>
+            <?php else: ?>
+            <p><input type="radio" name="option_id" value="<?php echo $this->_var['item_0_64071400_1525423077']['option_id']; ?>" />
+            <?php echo $this->_var['item_0_64071400_1525423077']['option_name']; ?> (<?php echo $this->_var['item_0_64071400_1525423077']['percent']; ?>%)</p>
+>>>>>>> zmx/master
             <?php endif; ?>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
             <input type="hidden" name="type" value="<?php echo $this->_var['title']['can_multi']; ?>" />

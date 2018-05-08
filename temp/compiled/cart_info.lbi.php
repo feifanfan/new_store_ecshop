@@ -13,6 +13,7 @@
     <div class="cart_goods">
     <div class="cart_goods_list">
     <ul class="unstyled">
+<<<<<<< HEAD
      <?php $_from = $this->_var['goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_33437700_1525421349');$this->_foreach['goods'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['goods']['total'] > 0):
     foreach ($_from AS $this->_var['goods_0_33437700_1525421349']):
@@ -21,6 +22,16 @@ if ($this->_foreach['goods']['total'] > 0):
       <li><a href="<?php echo $this->_var['goods_0_33437700_1525421349']['url']; ?>"><img src="<?php if ($this->_var['goods_0_33437700_1525421349']['goods_thumb'] == 'package_img'): ?>themes/68ecshopcom_360buy/images/jmpic/ico_cart_package.gif<?php else: ?><?php echo $this->_var['goods_0_33437700_1525421349']['goods_thumb']; ?><?php endif; ?>">
         <h4><?php echo $this->_var['goods_0_33437700_1525421349']['short_name']; ?></h4>
         <span><?php echo $this->_var['goods_0_33437700_1525421349']['goods_price']; ?><strong style="margin:0 7px;">×</strong><?php echo $this->_var['goods_0_33437700_1525421349']['goods_number']; ?></span></a> <i class="del-btn" title="删除" onClick="deleteCartGoods(<?php echo $this->_var['goods_0_33437700_1525421349']['rec_id']; ?>)">×</i></li>
+=======
+     <?php $_from = $this->_var['goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_88191200_1525418010');$this->_foreach['goods'] = array('total' => count($_from), 'iteration' => 0);
+if ($this->_foreach['goods']['total'] > 0):
+    foreach ($_from AS $this->_var['goods_0_88191200_1525418010']):
+        $this->_foreach['goods']['iteration']++;
+?>
+      <li><a href="<?php echo $this->_var['goods_0_88191200_1525418010']['url']; ?>"><img src="<?php if ($this->_var['goods_0_88191200_1525418010']['goods_thumb'] == 'package_img'): ?>themes/68ecshopcom_360buy/images/jmpic/ico_cart_package.gif<?php else: ?><?php echo $this->_var['goods_0_88191200_1525418010']['goods_thumb']; ?><?php endif; ?>">
+        <h4><?php echo $this->_var['goods_0_88191200_1525418010']['short_name']; ?></h4>
+        <span><?php echo $this->_var['goods_0_88191200_1525418010']['goods_price']; ?><strong style="margin:0 7px;">×</strong><?php echo $this->_var['goods_0_88191200_1525418010']['goods_number']; ?></span></a> <i class="del-btn" title="删除" onClick="deleteCartGoods(<?php echo $this->_var['goods_0_88191200_1525418010']['rec_id']; ?>)">×</i></li>
+>>>>>>> zmx/master
      <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
     </ul>
     </div>

@@ -299,7 +299,10 @@ function duipeng($user_id,$amount){
 
 
 		$son = $GLOBALS['db']->getRow("select * from ".$GLOBALS['ecs']->table("users")." where node_id = ".$node_id." and parent_side=".$mb_son_side);
-		
+		if(!$son){
+			$node_id = $GLOBALS['db']->getOne("select node_id from ".$GLOBALS['ecs']->table('users') ." where user_id = ".$node_id);
+			continue;
+		}
 		$son_team_total = $GLOBALS['db']->getOne("select team_total from ".$GLOBALS['ecs']->table("users")." where user_id = ".$son['user_id']);
 		$my_team_total = $GLOBALS['db']->getOne("select team_total from ".$GLOBALS['ecs']->table("users")." where user_id = ".$user_id);
 		if($my_team_total<=$ys_amount){
@@ -327,7 +330,7 @@ function duipeng($user_id,$amount){
 		echo "报单人相对该父亲的层数：".($user_info['deep']-$node_parent_info['deep']);echo "<br>";
 		$relative_num = $user_info['deep']-$node_parent_info['deep'];
 
-		$have_sql = "select * from ".$GLOBALS['ecs']->table("user_money_log")." where parent_id = ".$node_id." and parent_deep = ".$relative_num;
+		$have_sql = "select * from ".$GLOBALS['ecs']->table("user_money_log")." where node_id = ".$node_id." and parent_deep = ".$relative_num;
 
 		$have = $GLOBALS['db']->getRow($have_sql);
 		//var_dump($have);echo "<br>";
