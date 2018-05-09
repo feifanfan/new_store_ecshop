@@ -1701,14 +1701,16 @@ function action_jifen_huizong ()
 		$page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
 		// 分页函数
 		$pager = get_pager('usercenter.php', array( 'act' => $action ), $record_count, $page);
-		// $sqls = "select SUM(user_money) as user_money,SUM(user_point) as user_point,SUM(user_cash) as user_cash,SUM(upgrade_point)as upgrade_point,SUM(act_user_money)as act_user_money,SUM(act_user_cash)as act_user_cash,FROM_UNIXTIME(change_time, '%Y-%m-%d') as day from ecs_account_log where change_time >= {$endtime} and change_time <= {$begintime} and  user_id=$user_id GROUP BY day order by change_time desc limit $pager[start],$pager[size]";
-		$sqls = "SELECT a.user_id,sum(a.user_cash) as user_cash,sum(a.user_money) as user_money,FROM_UNIXTIME(a.change_time,'%Y-%m-%d') as day,
-		(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=98 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as jiandian, 
-		(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=97 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as guanli,
-		(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=96 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as duipeng,
-		(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=95 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as cengjiang,
-		(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=94 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as baodanfei
-		 from ecs_account_log AS a where a.change_time >= {$endtime} and a.change_time <= {$begintime} and a.user_id = $user_id GROUP BY day order by day desc limit $pager[start],$pager[size]";
+		
+		$sqls = "SELECT
+		user_id,FROM_UNIXTIME(change_time,'%Y-%m-%d') ctime,sum(user_cash) user_cash,sum(user_money) user_money,
+		SUM(CASE WHEN change_type = 94 THEN (user_money + user_cash) ELSE 0 END) baodanfei,
+		SUM(CASE WHEN change_type = 95 THEN (user_money + user_cash) ELSE 0 END) cengjiang,
+		SUM(CASE WHEN change_type = 96 THEN (user_money + user_cash) ELSE 0 END) duipeng,
+		SUM(CASE WHEN change_type = 97 THEN (user_money + user_cash) ELSE 0 END) guanli,
+		SUM(CASE WHEN change_type = 98 THEN (user_money + user_cash) ELSE 0 END) jiandian
+		FROM ecs_account_log where change_time >= {$endtime} and change_time <= {$begintime} and user_id = $user_id GROUP BY user_id,ctime order by ctime desc limit $pager[start],$pager[size]";
+		
 		$data = $db->getAll($sqls);
 		$smarty->assign('time', ['status'=>true, 'begintime'=>$begin, 'endtime'=>$end]);
 		
@@ -1720,13 +1722,16 @@ function action_jifen_huizong ()
 		// 分页函数
 		$pager = get_pager('usercenter.php', array( 'act' => $action ), $record_count, $page);
 		// $sql = "select SUM(user_money) as user_money,SUM(user_point) as user_point,SUM(user_cash) as user_cash,SUM(upgrade_point)as upgrade_point,SUM(act_user_money)as act_user_money,SUM(act_user_cash)as act_user_cash,FROM_UNIXTIME(change_time, '%Y-%m-%d') as day from ecs_account_log where user_id=$user_id GROUP BY day order by change_time desc limit $pager[start],$pager[size]";
-		$sql = "SELECT a.user_id,sum(a.user_cash) as user_cash,sum(a.user_money) as user_money,FROM_UNIXTIME(a.change_time,'%Y-%m-%d') as day,
-				(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=98 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as jiandian, 
-				(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=97 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as guanli,
-				(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=96 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as duipeng,
-				(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=95 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as cengjiang,
-				(SELECT sum(user_money+user_cash) FROM ecs_account_log WHERE change_type=94 and FROM_UNIXTIME(change_time,'%Y-%m-%d')=day ) as baodanfei
-		 		from ecs_account_log AS a where a.user_id = $user_id GROUP BY day order by day desc limit $pager[start],$pager[size]";
+		
+		$sql = "SELECT
+				user_id,FROM_UNIXTIME(change_time,'%Y-%m-%d') ctime,sum(user_cash) user_cash,sum(user_money) user_money,
+				SUM(CASE WHEN change_type = 94 THEN (user_money + user_cash) ELSE 0 END) baodanfei,
+				SUM(CASE WHEN change_type = 95 THEN (user_money + user_cash) ELSE 0 END) cengjiang,
+				SUM(CASE WHEN change_type = 96 THEN (user_money + user_cash) ELSE 0 END) duipeng,
+				SUM(CASE WHEN change_type = 97 THEN (user_money + user_cash) ELSE 0 END) guanli,
+				SUM(CASE WHEN change_type = 98 THEN (user_money + user_cash) ELSE 0 END) jiandian
+				FROM
+				ecs_account_log where user_id = $user_id GROUP BY user_id,ctime order by ctime desc limit $pager[start],$pager[size]";
 		$data = $db->getAll($sql);
 	}
 	

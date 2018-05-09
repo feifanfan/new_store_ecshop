@@ -1178,7 +1178,7 @@
                                         {foreach from=$datas item=item}
                                             <tr>
                                                 <td>{$item.user_id}</td>
-                                                <td>{$item.day}</td>
+                                                <td>{$item.ctime}</td>
                                                 <td>{$item.baodanfei}</td>
                                                 <td>{$item.jiandian}</td>
                                                 <td>{$item.cengjiang}</td>
